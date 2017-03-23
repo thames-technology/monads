@@ -1,0 +1,11 @@
+dependencies:
+  pre:
+    - npm install yarn -g
+  override:
+    - yarn
+
+test:
+  pre:
+    - ./bin/compile-src.sh
+  override:
+    - ./bin/test-src.sh

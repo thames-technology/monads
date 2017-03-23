@@ -1,0 +1,30 @@
+{
+  "name": "tsp-monads",
+  "version": "1.0.3",
+  "description": "Option and Result types for JavaScript; TypeScript first",
+  "keywords": [
+    "option",
+    "result",
+    "type",
+    "threestup"
+  ],
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/threestup/monads.git"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.8",
+    "@types/sinon": "^1.16.35",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^2.0.0",
+    "typescript": "^2.2.1"
+  }
+}
