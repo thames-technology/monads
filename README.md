@@ -12,23 +12,36 @@ yarn add tsp-monads
 
 ## Basic Usage
 
-```javascript
+```typescript
 import { Option, Some, None } from 'tsp-monads'
 
-let a:Option<number>;
+function getFullYear(date:Option<Date>):number {
+    return date.match({
+        some: (_) => _.getFullYear(),
+        none: () => 1994
+    });
+}
 
-a = Some(1);
-a = None;
-...
+console.log(getFullYear(Some(new Date()))); // 2017
+console.log(getFullYear(None)); // 1994
 ```
 
-```javascript
+```typescript
 import { Result, Ok, Err } from 'tsp-monads'
 
-let a:Result<string, string>;
+function getIndex(values:string[], value:string):Result<number, string> {
+    const index = values.indexOf(value);
+    
+    switch (index) {
+        case -1:
+            return Err('Value not found');
+       default:
+            return Ok(index);
+    }
+}
 
-a = Ok('a');
-a = Err('b');
+console.log(getIndex([1], 1)); // _Ok(_: 0)
+console.log(getIndex([1], 10)); // _Err(_: "Value not found")
 ...
 ```
 
