@@ -1,6 +1,6 @@
 {
   "name": "tsp-monads",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Option and Result types for JavaScript; TypeScript first",
   "license": "MIT",
   "keywords": [
@@ -18,8 +18,7 @@
     "type": "git",
     "url": "https://github.com/threestup/monads.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
