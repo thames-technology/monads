@@ -1,5 +1,6 @@
 dependencies:
   pre:
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
     - npm install yarn -g
   override:
     - yarn
@@ -9,3 +10,9 @@ test:
     - ./bin/compile-src.sh
   override:
     - ./bin/test-src.sh
+
+deployment:
+  npm:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    commands:
+      - npm publish

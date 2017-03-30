@@ -2,13 +2,16 @@
   "name": "tsp-monads",
   "version": "1.0.3",
   "description": "Option and Result types for JavaScript; TypeScript first",
+  "license": "MIT",
   "keywords": [
     "option",
     "result",
     "type",
     "threestup"
   ],
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "repository": {
