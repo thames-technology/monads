@@ -43,7 +43,15 @@ export class _Some<T> implements Option<T> {
     }
 
     map<U>(fn:(_:T) => U):Option<U> {
-        return Some(fn(this._));
+        let newVal:Option<U>;
+
+        try {
+            newVal = Some(fn(this._));
+        } catch (e) {
+            newVal = None;
+        }
+
+        return newVal;
     }
 
     unwrap():T {

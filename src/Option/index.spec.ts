@@ -286,6 +286,26 @@ describe("Option", () => {
                 expect(subject).to.equal(initialValue);
             });
         });
+
+        describe("map", () => {
+            it("returns transformed Some when method applied to a value that exists", () => {
+                const arr = [1, 2, 3];
+
+                const subject = Some(arr[0])
+                    .map(_ => _.toString());
+
+                expect(is_some(subject) ? subject.unwrap() : undefined).to.equal('1');
+            });
+
+            it("returns None when method applied to a value that does not exist", () => {
+                const arr = [1, 2, 3];
+
+                const subject = Some(arr[arr.length + 1])
+                    .map(_ => _.toString());
+
+                expect(subject.is_none()).to.equal(true);
+            });
+        });
     });
 });
 
