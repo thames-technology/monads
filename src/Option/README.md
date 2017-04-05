@@ -11,7 +11,7 @@ You could consider using `Option` for:
 `Option`s are commonly paired with pattern matching to query the presence of a value and take action, always accounting for the `None` case.
 
 ```typescript
-const divide = (numerator:number, denominator:number):Option<number> => {
+const divide = (numerator: number, denominator: number): Option<number> => {
     if (denominator === 0) {
         return None
     } else {
@@ -23,7 +23,7 @@ const divide = (numerator:number, denominator:number):Option<number> => {
 const result = divide(2.0, 3.0);
 
 // Pattern match to retrieve the value
-const message:string = result.match({
+const message = result.match({
     some: _ => `Result: ${_}`,
     none: "Cannot divide by 0",
 });
