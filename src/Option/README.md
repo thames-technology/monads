@@ -71,6 +71,10 @@ Moves the value `v` out of the `Option<T>` if it is `Some(v)`.
 
 In general, because this function may throw, its use is discouraged. Instead, prefer to use pattern matching and handle the `None` case explicitly.
 
+#### Throws
+
+Throws a `ReferenceError` if the option is `None`.
+
 #### Examples
 
 ```typescript
@@ -118,10 +122,19 @@ console.log(y.is_none()); // true
 console.log(y.unwrap_or("N/A")); // "N/A"
 ```
 
-### `match<S, N>(p: { some: (_: T) => S; none: () => N; }) => S | N`
+### `match<S, N>(p: MatchPattern<T, S, N>):S | N;`
+
+```typescript
+type Resolver<T> = () => T;
+
+interface MatchPattern<T, S, N> {
+    some:(_:T) => S;
+    none:Resolver<N> | N;
+}
+```
 
 Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
-return, a value if `Option` is `None`.
+return, a fallback value if `Option` is `None`.
 
 #### Examples
 
