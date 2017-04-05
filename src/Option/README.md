@@ -1,99 +1,147 @@
-# Rust-inspired Option type
+# Rust-inspired `Option` type
 
-Consider this an attempt to eliminate `undefined` and `null` from our code.
+`Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
 
-**NOTE:** Only works with TypeScript 2.1+ and `"strictNullChecks": true`
+You could consider using `Option` for:
 
-## Basic Usage
+- Nullable pointers (`null` and/or `undefined`)
+- Return value for otherwise reporting simple errors, where None is returned on error
+- Optional function arguments
 
-```typescript
-import { User } from './models/user'
-import { Option } from './lib/utils'
-
-export const getUserName = (user:Option<User>):string => {
-    return user.match({
-        some: (_) => `Your name is ${_.name}`,
-        none: () => `Loading...`
-    });
-}
-```
+`Option`s are commonly paired with pattern matching to query the presence of a value and take action, always accounting for the `None` case.
 
 ```typescript
-import { Some } from './lib/utils'
+const divide = (numerator:number, denominator:number):Option<number> => {
+    if (denominator === 0) {
+        return None
+    } else {
+        return Some(numerator / denominator)
+    }
+};
 
-export const getValue = (val?:{a:string}):string => {
-    return Some(val).match({
-        some: (_) => `The value is ${_.a}`,
-        none: () => `N/A`
-    });
-}
+// The return value of the function is an option
+let result = divide(2.0, 3.0);
+
+// Pattern match to retrieve the value
+result.match({
+    some: _ => `Result: ${_}`,
+    none: "Cannot divide by 0",
+});
 ```
 
 ## Documentation
 
-### `Some`
+### `is_some() => bool`
 
-You can wrap a value of any type in a `Some`:
+Returns `true` if the option is a `Some` value.
+
+#### Examples
 
 ```typescript
-// Explicit
-let x = Some(typeof 42);
-let y = Some(7);
+let x: Option<number> = Some(2);
+console.log(x.is_some()); // true
 
-// Assigned
-let x:Option<boolean>;
-x = Some(false);
-
-// When values are possibly undefined
-function getValueByIndex(arr:string[], index:number):Option<string> {
-    return Some(arr[index]);
-}
+x = None;
+console.log(x.is_some()); // false
 ```
 
-**NOTE:** Try to avoid constructing `Some` with explicit `null` or `undefined`, it kind of defies the point:
+### `is_none() => bool`
+
+Returns `true` if the option is a `None` value.
+
+#### Examples
+
+```typescript
+let x: Option<number> = Some(2);
+console.log(x.is_none()); // false
+
+x = None;
+console.log(x.is_some()); // true
+```
+
+### `unwrap() => T`
+
+Moves the value `v` out of the `Option<T>`` if it is `Some(v)`.
+
+In general, because this function may throw, its use is discouraged. Instead, prefer to use pattern matching and handle the `None` case explicitly.
+
+#### Examples
+
+```typescript
+let x = Some("air");
+console.log(x.unwrap()); // "air"
+```
+
+```typescript
+let x: Option<string> = None;
+console.log(x.unwrap()); // fails, throws an Exception
+```
+
+### `unwrap_or(def:T) => T`
+
+Returns the contained value or a default.
+
+#### Examples
+
+```typescript
+console.log(Some("car").unwrap_or("bike")); // "car"
+console.log(None.unwrap_or("bike")) // "bike"
+```
+
+### `map<U>(fn:(_:T) => U) => Option<U>`
+
+Maps an Option<T> to Option<U> by applying a function to a contained value.
+
+#### Examples
+
+```typescript
+let x: Option<number> = Some(123);
+let y: Option<string> = x.map(_ => _.toString());
+console.log(y.is_some()); // true
+console.log(y.is_none()); // false
+console.log(y.unwrap_or("N/A")); // "123"
+```
+
+```typescript
+let x: Option<number> = None;
+let y: Option<string> = x.map(_ => _.toString());
+console.log(y.is_some()); // false
+console.log(y.is_none()); // true
+console.log(y.unwrap_or("N/A")); // "N/A"
+```
+
+### `match<S, N>(p:{some:(_:T) => S; none:() => N;}) => S|N`
+
+Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
+return, a value if `Option` is `None`.
+
+#### Examples
+
+```typescript
+const getDate = (date:Option<Date>):number => {
+    return date.match({
+        some: (_) => _.getFullYear(),
+        none: 1994 // () => 1994 is also valid
+    });
+}
+
+let x: Option<Date> = Some(new Date());
+let y: Option<Date> = None;
+
+console.log(getDate(x)); // 2017
+console.log(y); // 1994
+```
+
+### Appendix
+
+#### Try to avoid constructing `Some` with explicit `null` or `undefined`
 
 ```typescript
 let x = Some(undefined); // Compiles, but meh.. don't use this please
 let y = Some(null); // Compiles, but meh.. don't use this please
 ```
 
-### `None`
-
-```typescript
-// Explicit
-let x = None;
-
-// Assigned
-let x:Option<string>;
-x = None;
-
-// Invalid / Error examples
-let x = None("Value"); // Error: Supplied parameters do not match any signature of call target.
-```
-
-### Using values inside an `Option`
-
-You can access and use the value inside `Option` after you've _either_:
-
-* [Pattern Matched](https://github.com/slavomirvojacek/TypeScriptUtils/tree/master/src/Option#using-match)
-* [Provided a "fallback" value](https://github.com/slavomirvojacek/TypeScriptUtils/tree/master/src/Option#using-unwrap_or)
-* [Performed an explicit check determining that an Option is a Some](https://github.com/slavomirvojacek/TypeScriptUtils/tree/master/src/Option#using-unwrap)
-
-#### Using `match()`
-
-```typescript
-function getFullYear(date:Option<Date>):number {
-    return date.match({
-        some: (_) => _.getFullYear(),
-        none: () => 1994
-    });
-}
-
-console.log(getFullYear(Some(new Date()))); // 2017
-console.log(getFullYear(None)); // 1994
-```
-
-Typing in action:
+#### Typing in action
 
 ```typescript
 function getFullYear(date:Option<Date>):number {
@@ -103,45 +151,6 @@ function getFullYear(date:Option<Date>):number {
     });
 }
 ```
-
-#### Using `unwrap_or()`
-
-```typescript
-const
-    a = Some("a"),
-    b = None;
-
-let x:string, y:number;
-
-x = a.unwrap_or("b"); // Ok
-x = a.unwrap_or(1); // Error: Argument of type 'number' is not assignable to parameter of type 'string'.
-
-y = b.unwrap_or(42); // Ok
-y = b.unwrap_or("Something Else"); // Error: Argument of type 'string' is not assignable to parameter of type 'number'.
-```
-
-#### Using `unwrap()`
-
-Because with `unwrap()` we don't explicitly provide any "fallback" value, we have to check if an `Option`
-is a `Some` (e.g. it holds a value):
-
-```typescript
-function getSomethingUpper(val:Option<string>):string {
-    let x:string;
-
-    if (is_some(val)) {
-        x = val.unwrap();
-    } else {
-        x = "Something Else";
-    }
-
-    return x.toUpperCase();
-}
-```
-
-**NOTE:** You cannot use `unwrap()` without the `is_some()` check.
-
-### Appendix
 
 #### React examples
 

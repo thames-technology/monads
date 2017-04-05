@@ -1,15 +1,17 @@
+export type Resolver<T> = () => T;
+
 export interface MatchPattern<T, S, N> {
     some:(_:T) => S;
-    none:() => N;
+    none:Resolver<N> | N;
 }
 
 export interface Option<T> {
     is_some():boolean;
     is_none():boolean;
-    match<S, N>(p:MatchPattern<T, S, N>):S|N;
+    match<S, N>(p:MatchPattern<T, S, N>):S | N;
     map<U>(fn:(_:T) => U):Option<U>;
-    unwrap_or(_:T):T;
-    unwrap?():T;
+    unwrap_or(def:T):T;
+    unwrap():T | undefined;
 }
 
 export const assert_none = (_:any) => (_ == null);
@@ -48,6 +50,7 @@ export class _Some<T> implements Option<T> {
         try {
             newVal = Some(fn(this._));
         } catch (e) {
+            console.log(e);
             newVal = None;
         }
 
@@ -56,15 +59,15 @@ export class _Some<T> implements Option<T> {
 
     unwrap():T {
         if (assert_none(this._)) {
-            throw new ReferenceError("Cannot use 'null' or 'undefined' as parameter when calling unwrap_or()");
+            throw new ReferenceError("Cannot unwrap 'null' or 'undefined'");
         }
 
         return this._;
     }
 
-    unwrap_or(_:T):T {
-        if (assert_none(_)) {
-            throw new ReferenceError("Cannot use 'null' or 'undefined' as parameter when calling unwrap_or()");
+    unwrap_or(def:T):T {
+        if (assert_none(def)) {
+            throw new ReferenceError("Cannot use 'null' or 'undefined' as default parameter when calling unwrap_or()");
         }
 
         return this._;
@@ -81,23 +84,31 @@ export class _None<T> implements Option<any> {
     }
 
     match<S, N>(p:MatchPattern<T, S, N>):N {
-        return p.none();
+        if (typeof p.none === 'function') {
+            return p.none();
+        } else {
+            return p.none;
+        }
     }
 
     map<U>(fn:(_:T) => U):Option<U> {
         return new _None<U>();
     }
 
-    unwrap_or(_:T):T {
-        if (assert_none(_)) {
-            throw new ReferenceError("Cannot use 'null' or 'undefined' as parameter when calling unwrap_or()");
+    unwrap():undefined {
+        throw new ReferenceError("Cannot unwrap None");
+    }
+
+    unwrap_or(def:T):T {
+        if (assert_none(def)) {
+            throw new ReferenceError("Cannot use 'null' or 'undefined' as default parameter when calling unwrap_or()");
         }
 
-        return _;
+        return def;
     }
 }
 
-export function Some<T>(_:T|null|undefined):_Some<T>|_None<T> {
+export function Some<T>(_:T | null | undefined):_Some<T> | _None<T> {
     return assert_some(_) ? new _Some(_ as T) : new _None<T>();
 }
 

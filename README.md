@@ -19,7 +19,7 @@ import { Option, Some, None } from 'tsp-monads'
 function getFullYear(date:Option<Date>):number {
     return date.match({
         some: (_) => _.getFullYear(),
-        none: () => 1994
+        none: 1994
     });
 }
 

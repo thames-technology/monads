@@ -144,7 +144,7 @@ describe("Option", () => {
             };
             const outOfBoundProperty = 'z';
 
-            const scenarios:IScenario<undefined|null>[] = [
+            const scenarios:IScenario<undefined | null>[] = [
                 {value: undefined},
                 {value: null},
                 {value: array[outOfBoundIndex]},
@@ -161,7 +161,7 @@ describe("Option", () => {
 
                     expect(subject.is_none()).to.equal(true);
                     expect(subject.is_some()).to.equal(false);
-                    expect((subject as any).unwrap).to.be.undefined;
+                    expect(() => subject.unwrap()).to.throw;
                 });
             };
 
@@ -174,7 +174,7 @@ describe("Option", () => {
 
                 const subject = string.match({
                     some: (_) => _.toUpperCase(),
-                    none: () => 'OTHER STRING'
+                    none: 'OTHER STRING'
                 });
 
                 expect(subject).to.equal('STRING');
@@ -186,7 +186,7 @@ describe("Option", () => {
 
                 const subject = maybeNumber.match({
                     some: (_) => _ * 2,
-                    none: () => NaN
+                    none: NaN
                 });
 
                 expect(subject).to.deep.equal(NaN);
@@ -232,7 +232,7 @@ describe("Option", () => {
             it("correctly matches None and returns fallback value", () => {
                 const subject = None.match({
                     some: (_) => 'something',
-                    none: () => 'nothing'
+                    none: 'nothing'
                 });
 
                 expect(subject).to.equal('nothing');
@@ -262,7 +262,7 @@ describe("Option", () => {
 
                 const subject = a.match({
                     some: (_) => _.getFullYear(),
-                    none: () => 1994
+                    none: 1994
                 });
 
                 expect(subject).to.equal(date.getFullYear());
@@ -280,10 +280,21 @@ describe("Option", () => {
 
                 const subject = a.match({
                     some: (_) => !_,
-                    none: () => initialValue
+                    none: initialValue
                 });
 
                 expect(subject).to.equal(initialValue);
+            });
+
+            it("correctly matches None and returns fallback value when method provided to none branch", () => {
+                let a:Option<string> = None;
+
+                const subject = a.match({
+                    some: (_) => _,
+                    none: () => 'N/A'
+                });
+
+                expect(subject).to.equal('N/A');
             });
         });
 
