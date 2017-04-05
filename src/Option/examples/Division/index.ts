@@ -1,6 +1,6 @@
 import { None, Option, Some } from '../..';
 
-const divide = (numerator:number, denominator:number):Option<number> => {
+export const divide = (numerator:number, denominator:number):Option<number> => {
     if (denominator === 0) {
         return None
     } else {
