@@ -20,18 +20,20 @@ const divide = (numerator:number, denominator:number):Option<number> => {
 };
 
 // The return value of the function is an option
-let result = divide(2.0, 3.0);
+const result = divide(2.0, 3.0);
 
 // Pattern match to retrieve the value
-result.match({
+const message:string = result.match({
     some: _ => `Result: ${_}`,
     none: "Cannot divide by 0",
 });
+
+console.log(message); // Result: 0.6666666666666666
 ```
 
 ## Documentation
 
-### `is_some() => bool`
+### `is_some() => boolean`
 
 Returns `true` if the option is a `Some` value.
 
@@ -40,12 +42,14 @@ Returns `true` if the option is a `Some` value.
 ```typescript
 let x: Option<number> = Some(2);
 console.log(x.is_some()); // true
+```
 
-x = None;
+```typescript
+let x: Option<number> = None;
 console.log(x.is_some()); // false
 ```
 
-### `is_none() => bool`
+### `is_none() => boolean`
 
 Returns `true` if the option is a `None` value.
 
@@ -54,14 +58,16 @@ Returns `true` if the option is a `None` value.
 ```typescript
 let x: Option<number> = Some(2);
 console.log(x.is_none()); // false
+```
 
-x = None;
-console.log(x.is_some()); // true
+```typescript
+let x: Option<number> = None;
+console.log(x.is_none()); // true
 ```
 
 ### `unwrap() => T`
 
-Moves the value `v` out of the `Option<T>`` if it is `Some(v)`.
+Moves the value `v` out of the `Option<T>` if it is `Some(v)`.
 
 In general, because this function may throw, its use is discouraged. Instead, prefer to use pattern matching and handle the `None` case explicitly.
 
