@@ -87,6 +87,19 @@ let x = None;
 console.log(x.unwrap()); // fails, throws an Exception
 ```
 
+Alternatively, you can choose to use `is_some()` to check whether the option is `Some`.
+This will enable you to use `unwrap()` in the `true` / success branch.
+
+```typescript
+const getName = (name: Option<string>): string => {
+    if (is_some(name)) {
+        return name.unwrap();
+    } else {
+        return 'N/A';
+    }
+};
+```
+
 ### `unwrap_or(def:T) => T`
 
 Returns the contained value or a default.
