@@ -181,7 +181,7 @@ let y = Some(null); // Compiles, but meh.. don't use this please
 function getFullYear(date: Option<Date>):number {
     return date.match({
         some: (_) => _.getFullYear(),
-        none: () => '1994' // Error: Type 'string | number' is not assignable to type 'number'.
+        none: '1994' // Error: Type 'string | number' is not assignable to type 'number'.
     });
 }
 ```
