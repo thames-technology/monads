@@ -1,6 +1,6 @@
 import { None, Option, Some } from '../..';
 
-export const divide = (numerator:number, denominator:number):Option<number> => {
+const divide = (numerator:number, denominator:number):Option<number> => {
     if (denominator === 0) {
         return None
     } else {
@@ -9,11 +9,12 @@ export const divide = (numerator:number, denominator:number):Option<number> => {
 };
 
 // The return value of the function is an option
-let result = divide(2.0, 3.0);
+const result = divide(2.0, 3.0);
 
 // Pattern match to retrieve the value
-result.match({
-    some: _ => console.log(`Result: ${_}`),
-    none: () => console.log("Cannot divide by 0"),
+const message = result.match({
+    some: _ => `Result: ${_}`,
+    none: "Cannot divide by 0",
 });
 
+console.log(message); // Result: 0.6666666666666666
