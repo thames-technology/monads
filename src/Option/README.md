@@ -98,7 +98,7 @@ console.log(Some("car").unwrap_or("bike")); // "car"
 console.log(None.unwrap_or("bike")) // "bike"
 ```
 
-### `map<U>(fn:(_:T) => U) => Option<U>`
+### `map<U>(fn: (_: T) => U) => Option<U>`
 
 Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
@@ -128,7 +128,7 @@ console.log(y.unwrap_or("N/A")); // "N/A"
 type Resolver<T> = () => T;
 
 interface MatchPattern<T, S, N> {
-    some:(_:T) => S;
+    some:(_: T) => S;
     none:Resolver<N> | N;
 }
 ```
