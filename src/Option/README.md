@@ -79,7 +79,7 @@ console.log(x.unwrap()); // "air"
 ```
 
 ```typescript
-let x: Option<string> = None;
+let x = None;
 console.log(x.unwrap()); // fails, throws an Exception
 ```
 
@@ -96,7 +96,7 @@ console.log(None.unwrap_or("bike")) // "bike"
 
 ### `map<U>(fn:(_:T) => U) => Option<U>`
 
-Maps an Option<T> to Option<U> by applying a function to a contained value.
+Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
 #### Examples
 
@@ -109,14 +109,15 @@ console.log(y.unwrap_or("N/A")); // "123"
 ```
 
 ```typescript
-let x: Option<number> = None;
-let y: Option<string> = x.map(_ => _.toString());
+const x: Option<number> = None,
+      y: Option<string> = x.map(_ => _.toString());
+
 console.log(y.is_some()); // false
 console.log(y.is_none()); // true
 console.log(y.unwrap_or("N/A")); // "N/A"
 ```
 
-### `match<S, N>(p:{some:(_:T) => S; none:() => N;}) => S|N`
+### `match<S, N>(p: { some: (_: T) => S; none: () => N; }) => S | N`
 
 Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
 return, a value if `Option` is `None`.
@@ -124,7 +125,7 @@ return, a value if `Option` is `None`.
 #### Examples
 
 ```typescript
-const getDate = (date:Option<Date>):number => {
+const getDate = (date: Option<Date>): number => {
     return date.match({
         some: (_) => _.getFullYear(),
         none: 1994 // () => 1994 is also valid

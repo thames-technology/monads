@@ -17,4 +17,9 @@ result.match({
     none: () => console.log("Cannot divide by 0"),
 });
 
+const x:Option<number> = None,
+      y:Option<string> = x.map(_ => _.toString());
 
+console.log(y.is_some()); // false
+console.log(y.is_none()); // true
+console.log(y.unwrap_or("N/A")); // "N/A"
