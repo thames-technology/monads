@@ -101,8 +101,9 @@ Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 #### Examples
 
 ```typescript
-let x: Option<number> = Some(123);
-let y: Option<string> = x.map(_ => _.toString());
+const x: Option<number> = Some(123),
+      y: Option<string> = x.map(_ => _.toString());
+
 console.log(y.is_some()); // true
 console.log(y.is_none()); // false
 console.log(y.unwrap_or("N/A")); // "123"
