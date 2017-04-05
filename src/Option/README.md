@@ -100,7 +100,7 @@ const getName = (name: Option<string>): string => {
 };
 ```
 
-### `unwrap_or(def:T) => T`
+### `unwrap_or(def: T) => T`
 
 Returns the contained value or a default.
 
@@ -178,7 +178,7 @@ let y = Some(null); // Compiles, but meh.. don't use this please
 #### Typing in action
 
 ```typescript
-function getFullYear(date:Option<Date>):number {
+function getFullYear(date: Option<Date>):number {
     return date.match({
         some: (_) => _.getFullYear(),
         none: () => '1994' // Error: Type 'string | number' is not assignable to type 'number'.
