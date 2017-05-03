@@ -168,8 +168,8 @@ console.log(getDate(y)); // 1994
 
 ### `get_in<T>(obj: Object, key: string): Option<T>;`
 
-Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
-return, a fallback value if `Option` is `None`.
+Retrieves value `T` and converts it to `Option<T>` if key leads to this value, otherwise returns `None`.
+It is highly recommended to cast the type `T` (`get_in<T>`) explicitly, as seen in examples below.
 
 #### Examples
 
