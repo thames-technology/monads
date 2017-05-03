@@ -135,7 +135,7 @@ console.log(y.is_none()); // true
 console.log(y.unwrap_or("N/A")); // "N/A"
 ```
 
-### `match<S, N>(p: MatchPattern<T, S, N>):S | N;`
+### `match<S, N>(p: MatchPattern<T, S, N>): S | N;`
 
 ```typescript
 type Resolver<T> = () => T;
@@ -164,6 +164,27 @@ let y: Option<Date> = None;
 
 console.log(getDate(x)); // 2017
 console.log(y); // 1994
+```
+
+### `get_in<T>(obj: Object, key: string): Option<T>;`
+
+Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
+return, a fallback value if `Option` is `None`.
+
+#### Examples
+
+```typescript
+const value = get_in<string>({a: {b: 'c'}}, 'a.b');
+
+console.log(value.is_some()); // true
+console.log(value.unwrap_or('N/A')); // 'c'
+```
+
+```typescript
+const value = get_in<string>({a: {b: 'c'}}, 'a.b.c');
+
+console.log(value.is_none()); // true
+console.log(value.unwrap_or('N/A')); // 'N/A'
 ```
 
 ### Appendix

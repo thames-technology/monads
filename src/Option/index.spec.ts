@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Option, Some, None, is_some, is_none, _Some, _None } from ".";
+import { Option, Some, None, is_some, is_none, _Some, _None, get_in } from ".";
 
 describe("Option", () => {
     interface IScenario<T> {
@@ -404,5 +404,32 @@ describe("is_none", () => {
 
         expect(is_none(subject)).to.equal(true);
         expect(a).to.equal("Correct");
+    });
+});
+
+describe("get_in", () => {
+    it("correctly returns a Some if key found in nested object", () => {
+        const o = {
+            a: {
+                b: 'c'
+            }
+        };
+
+        const subject = get_in<string>(o, 'a.b');
+
+        expect(subject.is_some()).to.equal(true);
+        expect(subject.unwrap_or('')).to.equal('c');
+    });
+
+    it("correctly returns a None if key not found in nested object", () => {
+        const o = {
+            a: {
+                b: 'c'
+            }
+        };
+
+        const subject = get_in<string>(o, 'a.b.c');
+
+        expect(subject.is_none()).to.equal(true);
     });
 });
