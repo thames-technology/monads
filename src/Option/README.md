@@ -163,7 +163,7 @@ let x: Option<Date> = Some(new Date());
 let y: Option<Date> = None;
 
 console.log(getDate(x)); // 2017
-console.log(y); // 1994
+console.log(getDate(y)); // 1994
 ```
 
 ### `get_in<T>(obj: Object, key: string): Option<T>;`
