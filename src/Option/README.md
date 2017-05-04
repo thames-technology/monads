@@ -169,7 +169,7 @@ console.log(getDate(y)); // 1994
 ### `get_in<T>(obj: Object, key: string): Option<T>;`
 
 Retrieves value `T` and converts it to `Option<T>` if key leads to this value, otherwise returns `None`.
-It is highly recommended to cast the type `T` (`get_in<T>`) explicitly, as seen in examples below.
+It is highly recommended to cast the return type to `Option<T>` explicitly, as seen in examples below.
 
 #### Examples
 
