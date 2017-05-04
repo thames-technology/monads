@@ -178,7 +178,7 @@ const obj = {a: {b: 'val'}};
 const value: Option<string> = get_in(obj, 'a.b');
 
 console.log(value.is_some()); // true
-console.log(value.unwrap_or('N/A')); // 'c'
+console.log(value.unwrap_or('N/A')); // 'val'
 ```
 
 ```typescript
