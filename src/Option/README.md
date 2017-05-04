@@ -183,8 +183,6 @@ const y = None;
 console.log(x.or(y)); // Returns: None
 ```
 
-```
-
 ### `match<S, N>(p: MatchPattern<T, S, N>): S | N;`
 
 ```typescript
