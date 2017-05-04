@@ -25,7 +25,7 @@ export function is_none<T>(_:Option<T>):_ is _None<T> {
     return _.is_none();
 }
 
-export function get_in(obj: Object, key: string):Option<any> {
+export function get_in(obj: Object | undefined | null, key: string):Option<any> {
     try {
         const val = key.split('.').reduce((o, x) => o == null ? o : (o as any)[x], obj);
         return Some(val);

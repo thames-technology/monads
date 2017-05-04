@@ -422,4 +422,10 @@ describe("get_in", () => {
 
         expect(subject.is_none()).to.equal(true);
     });
+
+    it("correctly returns a None if object itself undefined", () => {
+        const subject: Option<string> = get_in(undefined, 'a.b.c.d');
+
+        expect(subject.is_none()).to.equal(true);
+    });
 });
