@@ -135,6 +135,56 @@ console.log(y.is_none()); // true
 console.log(y.unwrap_or("N/A")); // "N/A"
 ```
 
+### `and_then<U>(fn: (_: T) => Option<U>) => Option<U>`
+
+Returns `None` if the option is `None`, otherwise calls `fn` with the wrapped value and returns the result.
+
+Some languages call this operation `flatmap`.
+
+#### Examples
+
+```typescript
+const sq = (x: number): Option<number> => Some(x * x);
+const nope = (_: number): Option<number> => None;
+
+console.log(Some(2).and_then(sq).and_then(sq)); // Returns: Some(16)
+console.log(Some(2).and_then(sq).and_then(nope)); // Returns: None
+console.log(Some(2).and_then(nope).and_then(sq)); // Returns: None
+console.log(None.and_then(sq).and_then(sq)); // Returns: None
+```
+
+### `or(optb: Option<T>) => Option<T>`
+
+Returns the option if it contains a value, otherwise returns `optb`.
+
+#### Examples
+
+```typescript
+const x = Some(2);
+const y = None;
+console.log(x.or(y)); // Returns: Some(2)
+```
+
+```typescript
+const x = None;
+const y = Some(100);
+console.log(x.or(y)); // Returns: Some(100)
+```
+
+```typescript
+const x = Some(2);
+const y = Some(100);
+console.log(x.or(y)); // Returns: Some(2)
+```
+
+```typescript
+const x: Option<number> = None;
+const y = None;
+console.log(x.or(y)); // Returns: None
+```
+
+```
+
 ### `match<S, N>(p: MatchPattern<T, S, N>): S | N;`
 
 ```typescript

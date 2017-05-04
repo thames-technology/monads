@@ -10,6 +10,8 @@ export interface Option<T> {
     is_none():boolean;
     match<S, N>(p:MatchPattern<T, S, N>):S | N;
     map<U>(fn:(_:T) => U):Option<U>;
+    and_then<U>(fn:(_:T) => Option<U>):Option<U>;
+    or(optb:Option<T>):Option<T>;
     unwrap_or(def:T):T;
     unwrap():T | undefined;
 }
@@ -59,11 +61,28 @@ export class _Some<T> implements Option<T> {
         try {
             newVal = Some(fn(this._));
         } catch (e) {
-            console.log(e);
+            console.log(`Error: ${e}`);
             newVal = None;
         }
 
         return newVal;
+    }
+
+    and_then<U>(fn:(_:T) => Option<U>):Option<U> {
+        let newVal:Option<U>;
+
+        try {
+            newVal = fn(this._);
+        } catch (e) {
+            console.log(`Error: ${e}`);
+            newVal = None;
+        }
+
+        return newVal;
+    }
+
+    or(optb:Option<T>):Option<T> {
+        return Some(this._);
     }
 
     unwrap():T {
@@ -102,6 +121,14 @@ export class _None<T> implements Option<any> {
 
     map<U>(fn:(_:T) => U):Option<U> {
         return new _None<U>();
+    }
+
+    and_then<U>(fn:(_:T) => Option<U>):Option<U> {
+        return new _None<U>();
+    }
+
+    or(optb:Option<T>):Option<T> {
+        return optb;
     }
 
     unwrap():undefined {

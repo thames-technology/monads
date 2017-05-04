@@ -429,3 +429,96 @@ describe("get_in", () => {
         expect(subject.is_none()).to.equal(true);
     });
 });
+
+describe("and_then", () => {
+    interface Contact { name: Option<string> }
+    interface Driver { contact: Option<Contact> }
+    interface Truck { driver: Option<Driver> }
+
+    let contact: Contact;
+    let driver: Driver;
+    let truck: Truck;
+
+    beforeEach(() => {
+        contact = { name: None };
+        driver = { contact: None };
+        truck = { driver: None };
+    });
+
+    it("correctly returns the name as a Some if all properties are Some", () => {
+        contact.name = Some('Name');
+        driver.contact = Some(contact);
+        truck.driver = Some(driver);
+
+        const subject = truck.driver
+                             .and_then(_ => _.contact)
+                             .and_then(_ => _.name);
+
+        expect(subject.is_some()).to.equal(true);
+        expect(subject.unwrap_or('')).to.equal('Name');
+    });
+
+    it("correctly returns None if 'contact.name' is None", () => {
+        driver.contact = Some(contact);
+        truck.driver = Some(driver);
+
+        const subject = truck.driver
+                             .and_then(_ => _.contact)
+                             .and_then(_ => _.name);
+
+        expect(subject.is_none()).to.equal(true);
+    });
+
+    it("correctly returns None if 'contact' is None", () => {
+        contact.name = Some('Name');
+        driver.contact = None;
+        truck.driver = Some(driver);
+
+        const subject = truck.driver
+                             .and_then(_ => _.contact)
+                             .and_then(_ => _.name);
+
+        expect(subject.is_none()).to.equal(true);
+    });
+
+    it("correctly returns None if 'driver' is None", () => {
+        contact.name = Some('Name');
+        driver.contact = Some(contact);
+        truck.driver = None;
+
+        const subject = truck.driver
+                             .and_then(_ => _.contact)
+                             .and_then(_ => _.name);
+
+        expect(subject.is_none()).to.equal(true);
+    });
+});
+
+describe("or", () => {
+    it("correctly returns Some(a) if 'a' is Some and 'b' is None", () => {
+        const a = Some(123), b = None;
+        const subject = a.or(b);
+        expect(subject.is_some()).to.equal(true);
+        expect(subject.unwrap_or(0)).to.equal(123);
+    });
+
+    it("correctly returns Some(b) if 'a' is None and 'b' is Some", () => {
+        const a = None, b = Some(456);
+        const subject = a.or(b);
+        expect(subject.is_some()).to.equal(true);
+        expect(subject.unwrap_or(0)).to.equal(456);
+    });
+
+    it("correctly returns Some(a) if 'a' is Some and 'b' is Some", () => {
+        const a = Some(11), b = Some(12);
+        const subject = a.or(b);
+        expect(subject.is_some()).to.equal(true);
+        expect(subject.unwrap_or(0)).to.equal(11);
+    });
+
+    it("correctly returns None if 'a' is None and 'b' is None", () => {
+        const a = None, b = None;
+        const subject = a.or(b);
+        expect(subject.is_none()).to.equal(true);
+    });
+});
