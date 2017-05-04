@@ -409,26 +409,16 @@ describe("is_none", () => {
 
 describe("get_in", () => {
     it("correctly returns a Some if key found in nested object", () => {
-        const o = {
-            a: {
-                b: 'c'
-            }
-        };
-
-        const subject = get_in<string>(o, 'a.b');
+        const obj = {a: {b: 'val'}};
+        const subject: Option<string> = get_in(obj, 'a.b');
 
         expect(subject.is_some()).to.equal(true);
-        expect(subject.unwrap_or('')).to.equal('c');
+        expect(subject.unwrap_or('')).to.equal('val');
     });
 
     it("correctly returns a None if key not found in nested object", () => {
-        const o = {
-            a: {
-                b: 'c'
-            }
-        };
-
-        const subject = get_in<string>(o, 'a.b.c');
+        const obj = {a: {b: 'val'}};
+        const subject: Option<string> = get_in(obj, 'a.nonExistentKey');
 
         expect(subject.is_none()).to.equal(true);
     });

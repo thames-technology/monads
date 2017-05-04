@@ -174,14 +174,16 @@ It is highly recommended to cast the type `T` (`get_in<T>`) explicitly, as seen 
 #### Examples
 
 ```typescript
-const value = get_in<string>({a: {b: 'c'}}, 'a.b');
+const obj = {a: {b: 'val'}};
+const value: Option<string> = get_in(obj, 'a.b');
 
 console.log(value.is_some()); // true
 console.log(value.unwrap_or('N/A')); // 'c'
 ```
 
 ```typescript
-const value = get_in<string>({a: {b: 'c'}}, 'a.b.c');
+const obj = {a: {b: 'val'}};
+const value: Option<string> = get_in(obj, 'a.nonExistentKey');
 
 console.log(value.is_none()); // true
 console.log(value.unwrap_or('N/A')); // 'N/A'
