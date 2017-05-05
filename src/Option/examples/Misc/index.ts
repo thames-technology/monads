@@ -6,3 +6,9 @@ export const getName = (first: Option<string>, last: Option<string>):Option<stri
     none: fN
   }));
 };
+
+export interface FullName { firstName: string, lastName: string }
+
+export const getFullName = (first: Option<string>, last: Option<string>):Option<FullName> => {
+  return first.and_then(firstName => last.map(lastName => ({ firstName, lastName })));
+};
