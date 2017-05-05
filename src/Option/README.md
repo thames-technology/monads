@@ -111,7 +111,7 @@ console.log(Some("car").unwrap_or("bike")); // "car"
 console.log(None.unwrap_or("bike")) // "bike"
 ```
 
-### `map<U>(fn: (_: T) => U) => Option<U>`
+### `map(fn: (_: T) => U) => Option<U>`
 
 Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
@@ -135,7 +135,7 @@ console.log(y.is_none()); // true
 console.log(y.unwrap_or("N/A")); // "N/A"
 ```
 
-### `and_then<U>(fn: (_: T) => Option<U>) => Option<U>`
+### `and_then(fn: (_: T) => Option<U>) => Option<U>`
 
 Returns `None` if the option is `None`, otherwise calls `fn` with the wrapped value and returns the result.
 
@@ -200,7 +200,7 @@ const y = None;
 console.log(x.or(y)); // Returns: None
 ```
 
-### `match<S, N>(p: MatchPattern<T, S, N>): S | N;`
+### `match(p: MatchPattern<T, S, N>): S | N;`
 
 ```typescript
 type Resolver<T> = () => T;
@@ -254,16 +254,16 @@ console.log(getDriverName({driver: {contact: {}}})); // Returns: None
 console.log(getDriverName({driver: {contact: {name: 'John'}}})); // Returns: Some('John')
 ```
 
-### Appendix
+## Appendix
 
-#### Try to avoid constructing `Some` with explicit `null` or `undefined`
+### Try to avoid constructing `Some` with explicit `null` or `undefined`
 
 ```typescript
 let x = Some(undefined); // Compiles, but meh.. don't use this please
 let y = Some(null); // Compiles, but meh.. don't use this please
 ```
 
-#### Typing in action
+### Typing in action
 
 ```typescript
 function getFullYear(date: Option<Date>):number {
@@ -274,49 +274,28 @@ function getFullYear(date: Option<Date>):number {
 }
 ```
 
-#### React examples
+### React examples
 
 ```typescript
-import { gt, is } from 'ramda'
 import * as React from 'react'
-import { Option, Some, None } from './lib/utils'
+import { Option } from 'tsp-monads'
 
-interface IEmployment {
-    yearFrom?:number;
-    yearTo?:number;
-    title?:string;
-    employer?:string;
-    description:string;
+interface User {
+    id: string;
+    firstName: Option<string>;
+    lastName: Option<string>;
 }
 
-function hyphenate(...args:Option<string|number>[]):Option<string> {
-    const vals = args
-            .map(_ => _.match({
-                some: (_) => _.toString().trim(),
-                none: () => undefined
-            }))
-            .filter(_ => is(String, _));
+const getName = (first: Option<string>, last: Option<string>):Option<string> => {
+    return first.map(fN => last.match({
+        some: lN => `${fN} ${lN}`,
+        none: fN
+    }));
+};
 
-    return gt(vals.length, 0) ? Some(vals.join(' – ')) : None;
-}
-
-const EmploymentComponent = (item:IEmployment) => (
-    <section>
-        {hyphenate(Some(item.yearFrom), Some(item.yearTo)).match({
-            some: (_) => <small>{_}</small>,
-            none: () => null
-        })}
-        
-        <strong>
-            {hyphenate(
-                Some(item.title),
-                Some(item.employer)                                        
-            ).unwrap_or('N/A')}
-        </strong>
-        
-        <p>{item.description}</p>
-    </section>
+const NameComponent = (user: User) => (
+    <strong>{getName(user.firstName, user.lastName).unwrap_or('N/A')}</strong>
 );
 
-export default EmploymentComponent;
+export default NameComponent;
 ```

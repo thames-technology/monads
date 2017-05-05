@@ -16,15 +16,16 @@ yarn add tsp-monads
 ```typescript
 import { Option, Some, None } from 'tsp-monads'
 
-function getFullYear(date:Option<Date>):number {
-    return date.match({
-        some: (_) => _.getFullYear(),
-        none: 1994
-    });
-}
+const getFullYear = (date:Option<Date>):number => date.match({
+    some: _ => _.getFullYear(),
+    none: 1994
+});
 
-console.log(getFullYear(Some(new Date()))); // 2017
-console.log(getFullYear(None)); // 1994
+const someDate = Some(new Date());
+const noDate = None;
+
+console.log(getFullYear(someDate)); // 2017
+console.log(getFullYear(noDate)); // 1994
 ```
 
 ```typescript
