@@ -217,18 +217,16 @@ return, a fallback value if `Option` is `None`.
 #### Examples
 
 ```typescript
-const getDate = (date: Option<Date>): number => {
-    return date.match({
-        some: (_) => _.getFullYear(),
-        none: 1994 // () => 1994 is also valid
-    });
-}
+const getFullYear = (date:Option<Date>):number => date.match({
+    some: _ => _.getFullYear(),
+    none: 1994
+});
 
-let x: Option<Date> = Some(new Date());
-let y: Option<Date> = None;
+const someDate = Some(new Date());
+const noDate = None;
 
-console.log(getDate(x)); // 2017
-console.log(getDate(y)); // 1994
+console.log(getFullYear(someDate)); // 2017
+console.log(getFullYear(noDate)); // 1994
 ```
 
 ### `get_in(obj: Object, key: string): Option<T>;`
