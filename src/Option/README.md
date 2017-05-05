@@ -153,6 +153,23 @@ console.log(Some(2).and_then(nope).and_then(sq)); // Returns: None
 console.log(None.and_then(sq).and_then(sq)); // Returns: None
 ```
 
+```typescript
+interface Vehicle {
+  driver: Option<{ contact: Option<{ name: Option<string> }> }>
+}
+
+const getDriverName = (vehicle: Vehicle): Option<string> => {
+  return vehicle.driver
+                .and_then(_ => _.contact)
+                .and_then(_ => _.name);
+};
+
+console.log(getDriverName({driver: Some({contact: Some({name: Some('John')})})})); // Returns: Some('John')
+console.log(getDriverName({driver: Some({contact: Some({name: None})})})); // Returns: None
+console.log(getDriverName({driver: Some({contact: None})})); // Returns: None
+console.log(getDriverName({driver: None})); // Returns: None
+```
+
 ### `or(optb: Option<T>) => Option<T>`
 
 Returns the option if it contains a value, otherwise returns `optb`.
@@ -214,7 +231,7 @@ console.log(getDate(x)); // 2017
 console.log(getDate(y)); // 1994
 ```
 
-### `get_in<T>(obj: Object, key: string): Option<T>;`
+### `get_in(obj: Object, key: string): Option<T>;`
 
 Retrieves value `T` and converts it to `Option<T>` if key leads to this value, otherwise returns `None`.
 It is highly recommended to cast the return type to `Option<T>` explicitly, as seen in examples below.
@@ -222,19 +239,19 @@ It is highly recommended to cast the return type to `Option<T>` explicitly, as s
 #### Examples
 
 ```typescript
-const obj = {a: {b: 'val'}};
-const value: Option<string> = get_in(obj, 'a.b');
+interface Car {
+  driver?: {
+    contact?: {
+      name?: string
+    }
+  }
+}
 
-console.log(value.is_some()); // true
-console.log(value.unwrap_or('N/A')); // 'val'
-```
+const getDriverName = (car: Car): Option<string> => get_in(car, 'driver.contact.name');
 
-```typescript
-const obj = {a: {b: 'val'}};
-const value: Option<string> = get_in(obj, 'a.nonExistentKey');
-
-console.log(value.is_none()); // true
-console.log(value.unwrap_or('N/A')); // 'N/A'
+console.log(getDriverName({driver: {}})); // Returns: None
+console.log(getDriverName({driver: {contact: {}}})); // Returns: None
+console.log(getDriverName({driver: {contact: {name: 'John'}}})); // Returns: Some('John')
 ```
 
 ### Appendix
