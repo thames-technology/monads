@@ -6,7 +6,8 @@ You could consider using `Option` for:
 
 - Nullable pointers (`null` and/or `undefined`)
 - Return value for otherwise reporting simple errors, where None is returned on error
-- Optional function arguments
+- Default values and/or properties
+- Nested optional object properties
 
 `Option`s are commonly paired with pattern matching to query the presence of a value and take action, always accounting for the `None` case.
 
