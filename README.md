@@ -1,9 +1,16 @@
-# Rust-inspired Option and Result type
+# Type safe Option and Result type
+
+Inspired by Rust
 
 [![CircleCI](https://circleci.com/gh/Threestup/monads.svg?style=svg)](https://circleci.com/gh/Threestup/monads)
 [![npm version](https://badge.fury.io/js/tsp-monads.svg)](https://badge.fury.io/js/tsp-monads)
 
 **NOTE:** Only works with TypeScript 2.1+. Enabling `strictNullChecks` is strongly recommended.
+
+## Documentation
+
+- [Option Type](https://github.com/threestup/monads/tree/master/src/Option)
+- [Result Type](https://github.com/threestup/monads/tree/master/src/Result)
 
 ## Install
 
@@ -30,7 +37,7 @@ const result = divide(2.0, 3.0);
 // Pattern match to retrieve the value
 const message = result.match({
     some: _ => `Result: ${_}`,
-    none: "Cannot divide by 0",
+    none: 'Cannot divide by 0',
 });
 
 console.log(message); // 'Result: 0.6666666666666666'
