@@ -42,7 +42,7 @@ function getIndex(values: string[], value: string): Result<number, string> {
     }
 }
 
-console.log(getIndex([1, 2 , 3], 3)); // Ok(1)
+console.log(getIndex([1, 2, 3], 2)); // Ok(1)
 console.log(getIndex(['a', 'b', 'c'], 'd')); // Err('Value not found')
 ...
 ```
