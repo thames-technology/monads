@@ -16,7 +16,7 @@ yarn add tsp-monads
 ```typescript
 import { Option, Some, None } from 'tsp-monads'
 
-const getFullYear = (date:Option<Date>):number => date.match({
+const getFullYear = (date: Option<Date>): number => date.match({
     some: _ => _.getFullYear(),
     none: 1994
 });
@@ -31,7 +31,7 @@ console.log(getFullYear(noDate)); // 1994
 ```typescript
 import { Result, Ok, Err } from 'tsp-monads'
 
-function getIndex(values:string[], value:string):Result<number, string> {
+function getIndex(values: string[], value: string): Result<number, string> {
     const index = values.indexOf(value);
     
     switch (index) {
@@ -42,8 +42,8 @@ function getIndex(values:string[], value:string):Result<number, string> {
     }
 }
 
-console.log(getIndex([1], 1)); // _Ok(_: 0)
-console.log(getIndex([1], 10)); // _Err(_: "Value not found")
+console.log(getIndex([1, 2 , 3], 3)); // Ok(1)
+console.log(getIndex(['a', 'b', 'c'], 'd')); // Err('Value not found')
 ...
 ```
 

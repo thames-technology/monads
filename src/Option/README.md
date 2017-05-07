@@ -217,7 +217,7 @@ return, a fallback value if `Option` is `None`.
 #### Examples
 
 ```typescript
-const getFullYear = (date:Option<Date>):number => date.match({
+const getFullYear = (date: Option<Date>):number => date.match({
     some: _ => _.getFullYear(),
     none: 1994
 });
@@ -264,7 +264,7 @@ let y = Some(null); // Compiles, but meh.. don't use this please
 ### Typing in action
 
 ```typescript
-function getFullYear(date: Option<Date>):number {
+function getFullYear(date: Option<Date>): number {
     return date.match({
         some: (_) => _.getFullYear(),
         none: '1994' // Error: Type 'string | number' is not assignable to type 'number'.
@@ -284,7 +284,7 @@ interface User {
     lastName: Option<string>;
 }
 
-const getName = (first: Option<string>, last: Option<string>):Option<string> => {
+const getName = (first: Option<string>, last: Option<string>): Option<string> => {
     return first.map(fN => last.match({
         some: lN => `${fN} ${lN}`,
         none: fN
