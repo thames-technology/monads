@@ -1,6 +1,6 @@
 # Rust-inspired `Option` type
 
-`Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
+Type `Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
 
 You could consider using `Option` for:
 
@@ -28,7 +28,7 @@ const message = result.match({
     none: "Cannot divide by 0",
 });
 
-console.log(message); // Result: 0.6666666666666666
+console.log(message); // 'Result: 0.6666666666666666'
 ```
 
 ## Documentation
@@ -69,7 +69,8 @@ console.log(x.is_none()); // true
 
 Moves the value `v` out of the `Option<T>` if it is `Some(v)`.
 
-In general, because this function may throw, its use is discouraged. Instead, prefer to use pattern matching and handle the `None` case explicitly.
+In general, because this function may throw, its use is discouraged.
+Instead, try to use `match` and handle the `None` case explicitly.
 
 #### Throws
 
@@ -200,7 +201,7 @@ const y = None;
 console.log(x.or(y)); // Returns: None
 ```
 
-### `match(p: MatchPattern<T, S, N>): S | N;`
+### `match(p: MatchPattern<T, S, N>): S | N`
 
 ```typescript
 type Resolver<T> = () => T;
@@ -264,12 +265,10 @@ let y = Some(null); // Compiles, but meh.. don't use this please
 ### Typing in action
 
 ```typescript
-function getFullYear(date: Option<Date>): number {
-    return date.match({
-        some: (_) => _.getFullYear(),
-        none: '1994' // Error: Type 'string | number' is not assignable to type 'number'.
-    });
-}
+const getFullYear = (date: Option<Date>):number => date.match({
+    some: _ => _.getFullYear(),
+    none: '1994' // Error: Type 'string | number' is not assignable to type 'number'.
+});
 ```
 
 ### React examples
