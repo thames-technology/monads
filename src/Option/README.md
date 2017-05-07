@@ -1,6 +1,6 @@
 # Rust-inspired `Option` type
 
-Type `Option` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
+Type `Option<T>` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
 
 You could consider using `Option` for:
 

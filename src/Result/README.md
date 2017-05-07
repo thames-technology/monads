@@ -94,7 +94,7 @@ console.log(x.err()); // Some('Nothing here')
 Unwraps a result, yielding the content of an `Ok`.
 
 In general, because this function may throw, its use is discouraged.
-Instead, try to use `match` and handle the `Err` case explicitly.
+Instead, try to use `match` and handle the `Ok` and `Err` cases explicitly.
 
 #### Throws
 
@@ -112,7 +112,7 @@ let x = Err('Panic!');
 console.log(x.unwrap()); // fails, throws an Exception
 ```
 
-Alternatively, you can choose to use `is_ok()` to check whether the result is `Ok`.
+**NOTE:** You can use `is_ok()` to check whether the result is an `Ok`.
 This will enable you to use `unwrap()` in the `true` / success branch.
 
 ```typescript
@@ -121,6 +121,42 @@ const printIndex = (index: Result<string, string>): string => {
         return index.unwrap();
     } else {
         return index.unwrap_err();
+    }
+};
+```
+
+### `unwrap_err() => E`
+
+Unwraps a result, yielding the content of an `Err`.
+
+In general, because this function may throw, its use is discouraged.
+Instead, try to use `match` and handle the `Ok` and `Err` cases explicitly.
+
+#### Throws
+
+Throws a `ReferenceError` if the result is `Ok`.
+
+#### Examples
+
+```typescript
+let x = Err('Expected error');
+console.log(x.unwrap_err()); // 'Expected error'
+```
+
+```typescript
+let x = Ok('Panic!');
+console.log(x.unwrap_err()); // fails, throws an Exception
+```
+
+**NOTE:** You can use `is_err()` to check whether the result is an `Err`.
+This will enable you to use `unwrap_err()` in the `true` / success branch.
+
+```typescript
+const printIndex = (index: Result<string, string>): string => {
+    if (is_err(index)) {
+        return index.unwrap_err();
+    } else {
+        return index.unwrap();
     }
 };
 ```
