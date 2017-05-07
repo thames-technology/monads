@@ -16,6 +16,8 @@ describe('Result', () => {
         expect(subject.is_ok()).to.equal(true);
         expect(subject.is_err()).to.equal(false);
 
+        expect(() => subject.unwrap_err()).to.throw();
+
         if (is_ok(subject)) {
           expect(typeof (subject.unwrap())).to.equal(type.toLowerCase());
           expect(subject.unwrap()).to.deep.equal(scenario.value);
@@ -35,6 +37,8 @@ describe('Result', () => {
 
         expect(subject.is_ok()).to.equal(false);
         expect(subject.is_err()).to.equal(true);
+
+        expect(() => subject.unwrap()).to.throw();
 
         if (is_err(subject)) {
           expect(typeof (subject.unwrap_err())).to.equal(type.toLowerCase());

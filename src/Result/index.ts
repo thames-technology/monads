@@ -10,8 +10,8 @@ export interface Result<O, E> {
   is_err(): boolean;
   match<T, U>(p: MatchPattern<O, E, T, U>): T | U;
   map<T>(fn: (_: O | E) => T): Result<T, E>;
-  unwrap?(): O;
-  unwrap_err?(): E;
+  unwrap(): O;
+  unwrap_err(): E;
   ok(): Option<O | E>;
   err(): Option<E | O>;
 }
@@ -51,6 +51,10 @@ export class _Ok<O> implements Result<O, any> {
     return this._;
   }
 
+  unwrap_err (): never {
+    throw new ReferenceError('Cannot call unwrap_err() on an instance of Ok');
+  }
+
   ok (): Option<O> {
     return Some(this._);
   }
@@ -81,6 +85,10 @@ export class _Err<E> implements Result<any, E> {
 
   map<U> (fn: (_: E) => U): _Err<E> {
     return this;
+  }
+
+  unwrap (): never {
+    throw new ReferenceError('Cannot call unwrap() on an instance of Err');
   }
 
   unwrap_err (): E {

@@ -131,7 +131,7 @@ export class _None<T> implements Option<any> {
     return optb;
   }
 
-  unwrap (): undefined {
+  unwrap (): never {
     throw new ReferenceError('Cannot unwrap None');
   }
 
