@@ -1,14 +1,14 @@
 export type Resolver<T> = () => T;
 
-export interface MatchPattern<T, S, N> {
-  some: (_: T) => S;
-  none: Resolver<N> | N;
+export interface MatchPattern<T, U> {
+  some: (_: T) => U;
+  none: Resolver<U> | U;
 }
 
 export interface Option<T> {
   is_some(): boolean;
   is_none(): boolean;
-  match<S, N>(p: MatchPattern<T, S, N>): S | N;
+  match<U>(p: MatchPattern<T, U>): U;
   map<U>(fn: (_: T) => U): Option<U>;
   and_then<U>(fn: (_: T) => Option<U>): Option<U>;
   or(optb: Option<T>): Option<T>;
@@ -51,7 +51,7 @@ export class _Some<T> implements Option<T> {
     return false;
   }
 
-  match<S, N> (p: MatchPattern<T, S, N>): S {
+  match<U> (p: MatchPattern<T, U>): U {
     return p.some(this._);
   }
 
@@ -111,7 +111,7 @@ export class _None<T> implements Option<any> {
     return true;
   }
 
-  match<S, N> (p: MatchPattern<T, S, N>): N {
+  match<U> (p: MatchPattern<T, U>): U {
     if (typeof p.none === 'function') {
       return p.none();
     } else {

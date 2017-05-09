@@ -196,12 +196,12 @@ console.log(y.is_err()); // true
 console.log(y.unwrap_err()); // 'Not a number'
 ```
 
-### `match(p: MatchPattern<O, E, T, U>): T | U`
+### `match(p: MatchPattern<O, E, T>): T`
 
 ```typescript
-interface MatchPattern<O, E, T, U> {
+interface MatchPattern<O, E, T> {
   ok: (_: O) => T;
-  err: (_: E) => U;
+  err: (_: E) => T;
 }
 ```
 

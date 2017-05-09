@@ -202,14 +202,14 @@ const y = None;
 console.log(x.or(y)); // Returns: None
 ```
 
-### `match(p: MatchPattern<T, S, N>): S | N`
+### `match(p: MatchPattern<T, U>): U`
 
 ```typescript
 type Resolver<T> = () => T;
 
-interface MatchPattern<T, S, N> {
-    some:(_: T) => S;
-    none:Resolver<N> | N;
+interface MatchPattern<T, U> {
+    some:(_: T) => U;
+    none:Resolver<U> | U;
 }
 ```
 
