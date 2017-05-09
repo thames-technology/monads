@@ -1,14 +1,14 @@
 import { None, Option, Some } from '../Option';
 
-export interface MatchPattern<O, E, T> {
+export interface MatchPattern<O, E, T, U> {
   ok: (_: O) => T;
-  err: (_: E) => T;
+  err: (_: E) => U;
 }
 
 export interface Result<O, E> {
   is_ok(): boolean;
   is_err(): boolean;
-  match<T>(p: MatchPattern<O, E, T>): T;
+  match<T, U>(p: MatchPattern<O, E, T, U>): T;
   map<T>(fn: (_: O | E) => T): Result<T, E>;
   unwrap(): O;
   unwrap_err(): E;
@@ -39,7 +39,7 @@ export class _Ok<O> implements Result<O, any> {
     return false;
   }
 
-  match<T> (p: MatchPattern<O, any, T>): T {
+  match<T, U> (p: MatchPattern<O, any, T, U>): T {
     return p.ok(this._);
   }
 
@@ -79,7 +79,7 @@ export class _Err<E> implements Result<any, E> {
     return true;
   }
 
-  match<T> (p: MatchPattern<any, E, T>): T {
+  match<T, U> (p: MatchPattern<any, E, T, U>): U {
     return p.err(this._);
   }
 
