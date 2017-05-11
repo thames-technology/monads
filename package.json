@@ -1,6 +1,6 @@
 {
   "name": "tsp-monads",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "Option and Result types for JavaScript; TypeScript first",
   "license": "MIT",
   "keywords": [
