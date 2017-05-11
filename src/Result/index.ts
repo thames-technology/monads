@@ -1,4 +1,4 @@
-import { None, Option, Some } from '../Option';
+import { None, Option, Some, assert_none } from '../Option';
 
 export interface MatchPattern<O, E, T, U> {
   ok: (_: O) => T;
@@ -55,6 +55,14 @@ export class _Ok<O> implements Result<O, any> {
     throw new ReferenceError('Cannot call unwrap_err() on an instance of Ok');
   }
 
+  unwrap_or (optb: O): O {
+    if (assert_none(optb)) {
+      throw new ReferenceError('Cannot use "null" or "undefined" as default parameter when calling unwrap_or()');
+    }
+
+    return this._;
+  }
+
   ok (): Option<O> {
     return Some(this._);
   }
@@ -93,6 +101,14 @@ export class _Err<E> implements Result<any, E> {
 
   unwrap_err (): E {
     return this._;
+  }
+
+  unwrap_or (optb: E): E {
+    if (assert_none(optb)) {
+      throw new ReferenceError('Cannot use "null" or "undefined" as default parameter when calling unwrap_or()');
+    }
+
+    return optb;
   }
 
   ok (): Option<E> {

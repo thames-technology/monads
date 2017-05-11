@@ -17,6 +17,7 @@ describe('Result', () => {
         expect(subject.is_err()).to.equal(false);
 
         expect(() => subject.unwrap_err()).to.throw();
+        expect(subject.unwrap_or('' as any)).to.deep.equal(scenario.value);
 
         if (is_ok(subject)) {
           expect(typeof (subject.unwrap())).to.equal(type.toLowerCase());
@@ -39,6 +40,7 @@ describe('Result', () => {
         expect(subject.is_err()).to.equal(true);
 
         expect(() => subject.unwrap()).to.throw();
+        expect(subject.unwrap_or('optb' as any)).to.equal('optb');
 
         if (is_err(subject)) {
           expect(typeof (subject.unwrap_err())).to.equal(type.toLowerCase());
