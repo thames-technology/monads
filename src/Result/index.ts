@@ -12,6 +12,7 @@ export interface Result<O, E> {
   map<T>(fn: (_: O | E) => T): Result<T, E>;
   unwrap(): O;
   unwrap_err(): E;
+  unwrap_or(optb: O): O;
   ok(): Option<O | E>;
   err(): Option<E | O>;
 }
@@ -103,7 +104,7 @@ export class _Err<E> implements Result<any, E> {
     return this._;
   }
 
-  unwrap_or (optb: E): E {
+  unwrap_or <T>(optb: T): T {
     if (assert_none(optb)) {
       throw new ReferenceError('Cannot use "null" or "undefined" as default parameter when calling unwrap_or()');
     }
