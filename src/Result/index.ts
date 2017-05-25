@@ -13,8 +13,8 @@ export interface Result<O, E> {
   unwrap(): O;
   unwrap_err(): E;
   unwrap_or(optb: O): O;
-  ok(): Option<O | E>;
-  err(): Option<E | O>;
+  ok(): Option<O>;
+  err(): Option<E>;
 }
 
 export function is_ok<O, E> (_: Result<O, E>): _ is _Ok<O> {
@@ -68,7 +68,7 @@ export class _Ok<O> implements Result<O, any> {
     return Some(this._);
   }
 
-  err (): Option<O> {
+  err (): Option<any> {
     return None;
   }
 }
@@ -112,7 +112,7 @@ export class _Err<E> implements Result<any, E> {
     return optb;
   }
 
-  ok (): Option<E> {
+  ok (): Option<any> {
     return None;
   }
 
