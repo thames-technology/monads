@@ -5,7 +5,7 @@ Inspired by Rust
 [![CircleCI](https://circleci.com/gh/Threestup/monads.svg?style=svg)](https://circleci.com/gh/Threestup/monads)
 [![npm version](https://badge.fury.io/js/tsp-monads.svg)](https://badge.fury.io/js/tsp-monads)
 
-**NOTE:** Only works with TypeScript 2.1+. Enabling `strictNullChecks` is strongly recommended.
+**NOTE:** Works with TypeScript 2.1+ and JavaScript. `strictNullChecks` option / flag is strongly recommended.
 
 ## Documentation
 
