@@ -2,7 +2,7 @@
 
 Inspired by Rust
 
-[![Codecov](https://img.shields.io/codecov/c/github/threestup/monads.svg)]
+![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
 [![CircleCI](https://circleci.com/gh/Threestup/monads.svg?style=svg)](https://circleci.com/gh/Threestup/monads)
 [![npm version](https://badge.fury.io/js/tsp-monads.svg)](https://badge.fury.io/js/tsp-monads)
 
