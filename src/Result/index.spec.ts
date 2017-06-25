@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { Result, Ok, Err, is_ok, is_err, _Ok, _Err } from '.';
 
 describe('Result', () => {
@@ -11,17 +10,17 @@ describe('Result', () => {
       it('correctly creates an instance of Ok with value \'' + scenario.value + '\'', () => {
         const subject = Ok(scenario.value);
 
-        expect(subject instanceof _Ok).to.equal(true);
+        expect(subject instanceof _Ok).toEqual(true);
 
-        expect(subject.is_ok()).to.equal(true);
-        expect(subject.is_err()).to.equal(false);
+        expect(subject.is_ok()).toEqual(true);
+        expect(subject.is_err()).toEqual(false);
 
-        expect(() => subject.unwrap_err()).to.throw();
-        expect(subject.unwrap_or('' as any)).to.deep.equal(scenario.value);
+        expect(() => subject.unwrap_err()).toThrow();
+        expect(subject.unwrap_or('' as any)).toEqual(scenario.value);
 
         if (is_ok(subject)) {
-          expect(typeof (subject.unwrap())).to.equal(type.toLowerCase());
-          expect(subject.unwrap()).to.deep.equal(scenario.value);
+          expect(typeof (subject.unwrap())).toEqual(type.toLowerCase());
+          expect(subject.unwrap()).toEqual(scenario.value);
         } else {
           throw new Error('Has to be _Ok!');
         }
@@ -34,17 +33,17 @@ describe('Result', () => {
       it('correctly creates an instance of Err with value \'' + scenario.value + '\'', () => {
         const subject = Err(scenario.value);
 
-        expect(subject instanceof _Err).to.equal(true);
+        expect(subject instanceof _Err).toEqual(true);
 
-        expect(subject.is_ok()).to.equal(false);
-        expect(subject.is_err()).to.equal(true);
+        expect(subject.is_ok()).toEqual(false);
+        expect(subject.is_err()).toEqual(true);
 
-        expect(() => subject.unwrap()).to.throw();
-        expect(subject.unwrap_or('optb' as any)).to.equal('optb');
+        expect(() => subject.unwrap()).toThrow();
+        expect(subject.unwrap_or('optb' as any)).toEqual('optb');
 
         if (is_err(subject)) {
-          expect(typeof (subject.unwrap_err())).to.equal(type.toLowerCase());
-          expect(subject.unwrap_err()).to.deep.equal(scenario.value);
+          expect(typeof (subject.unwrap_err())).toEqual(type.toLowerCase());
+          expect(subject.unwrap_err()).toEqual(scenario.value);
         } else {
           throw new Error('Has to be _Err!');
         }
@@ -152,16 +151,16 @@ describe('Result', () => {
     it('correctly creates an instance of Ok with value \'' + val + '\'', () => {
       const subject = Ok(val);
 
-      expect(subject instanceof _Ok).to.equal(true);
+      expect(subject instanceof _Ok).toEqual(true);
 
-      expect(subject.is_ok()).to.equal(true);
-      expect(subject.is_err()).to.equal(false);
+      expect(subject.is_ok()).toEqual(true);
+      expect(subject.is_err()).toEqual(false);
 
       if (is_ok(subject)) {
         const type = typeof (subject.unwrap());
 
-        expect(type === 'function' || type === 'object').to.equal(true);
-        expect(subject.unwrap()).to.deep.equal(val);
+        expect(type === 'function' || type === 'object').toEqual(true);
+        expect(subject.unwrap()).toEqual(val);
       } else {
         throw new Error('Has to be _Ok!');
       }
@@ -170,16 +169,16 @@ describe('Result', () => {
     it('correctly creates an instance of Err with value \'' + val + '\'', () => {
       const subject = Err(val);
 
-      expect(subject instanceof _Err).to.equal(true);
+      expect(subject instanceof _Err).toEqual(true);
 
-      expect(subject.is_ok()).to.equal(false);
-      expect(subject.is_err()).to.equal(true);
+      expect(subject.is_ok()).toEqual(false);
+      expect(subject.is_err()).toEqual(true);
 
       if (is_err(subject)) {
         const type = typeof (subject.unwrap_err());
 
-        expect(type === 'function' || type === 'object').to.equal(true);
-        expect(subject.unwrap_err()).to.deep.equal(val);
+        expect(type === 'function' || type === 'object').toEqual(true);
+        expect(subject.unwrap_err()).toEqual(val);
       } else {
         throw new Error('Has to be _Err!');
       }
@@ -206,11 +205,11 @@ describe('Result', () => {
       it('Ok works correctly', () => {
         const subject = Ok(scenario.value);
 
-        expect(subject instanceof _Ok).to.equal(true);
+        expect(subject instanceof _Ok).toEqual(true);
 
-        expect(subject.is_ok()).to.equal(true);
-        expect(subject.is_err()).to.equal(false);
-        expect(subject.unwrap()).to.deep.equal(scenario.value);
+        expect(subject.is_ok()).toEqual(true);
+        expect(subject.is_err()).toEqual(false);
+        expect(subject.unwrap()).toEqual(scenario.value);
       });
     };
 
@@ -218,11 +217,11 @@ describe('Result', () => {
       it('Err works correctly', () => {
         const subject = Err(scenario.value);
 
-        expect(subject instanceof _Err).to.equal(true);
+        expect(subject instanceof _Err).toEqual(true);
 
-        expect(subject.is_ok()).to.equal(false);
-        expect(subject.is_err()).to.equal(true);
-        expect(subject.unwrap_err()).to.deep.equal(scenario.value);
+        expect(subject.is_ok()).toEqual(false);
+        expect(subject.is_err()).toEqual(true);
+        expect(subject.unwrap_err()).toEqual(scenario.value);
       });
     };
 
@@ -239,7 +238,7 @@ describe('Result', () => {
         err: (_) => _
       });
 
-      expect(subject).to.equal('STRING');
+      expect(subject).toEqual('STRING');
     });
 
     it('correctly matches Err and returns fallback value', () => {
@@ -251,7 +250,7 @@ describe('Result', () => {
         err: (_) => _
       });
 
-      expect(subject).to.equal(1);
+      expect(subject).toEqual(1);
     });
 
     it('correctly matches Result and returns fallback value', () => {
@@ -262,8 +261,8 @@ describe('Result', () => {
         });
       }
 
-      expect(getMessage(Ok('ok'))).to.equal(`Success: ok`);
-      expect(getMessage(Err('err'))).to.equal(`Error: err`);
+      expect(getMessage(Ok('ok'))).toEqual(`Success: ok`);
+      expect(getMessage(Err('err'))).toEqual(`Error: err`);
     });
   });
 
@@ -273,7 +272,7 @@ describe('Result', () => {
 
       const subject = string.map(_ => parseInt(_));
 
-      expect(subject.unwrap()).to.equal(123);
+      expect(subject.unwrap()).toEqual(123);
     });
 
     it('correctly returns untouched Err when trying to use map', () => {
@@ -282,7 +281,7 @@ describe('Result', () => {
 
       const subject = number.map(_ => _.toString());
 
-      expect(subject.unwrap_err()).to.equal(1);
+      expect(subject.unwrap_err()).toEqual(1);
     });
 
     it('correctly maps Result and returns transformed value', () => {
@@ -291,10 +290,10 @@ describe('Result', () => {
       }
 
       let subject = getMessage(Ok('123'));
-      expect(is_ok(subject) ? subject.unwrap() : 0).to.equal(123);
+      expect(is_ok(subject) ? subject.unwrap() : 0).toEqual(123);
 
       subject = getMessage(Err('123'));
-      expect(is_err(subject) ? subject.unwrap_err() : '0').to.equal('123');
+      expect(is_err(subject) ? subject.unwrap_err() : '0').toEqual('123');
     });
   });
 
@@ -303,15 +302,15 @@ describe('Result', () => {
       const string_ok = Ok('123');
       const subject = string_ok.ok();
 
-      expect(subject.is_some()).to.equal(true);
-      expect(subject.unwrap()).to.equal('123');
+      expect(subject.is_some()).toEqual(true);
+      expect(subject.unwrap()).toEqual('123');
     });
 
     it('correctly returns None when Result is err', () => {
       const string_err = Err('123');
       const subject = string_err.ok();
 
-      expect(subject.is_none()).to.equal(true);
+      expect(subject.is_none()).toEqual(true);
     });
   });
 
@@ -320,15 +319,15 @@ describe('Result', () => {
       const string_err = Err('123');
       const subject = string_err.err();
 
-      expect(subject.is_some()).to.equal(true);
-      expect(subject.unwrap()).to.equal('123');
+      expect(subject.is_some()).toEqual(true);
+      expect(subject.unwrap()).toEqual('123');
     });
 
     it('correctly returns None when Result is ok', () => {
       const string_ok = Ok('123');
       const subject = string_ok.err();
 
-      expect(subject.is_none()).to.equal(true);
+      expect(subject.is_none()).toEqual(true);
     });
   });
 });

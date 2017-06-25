@@ -1,15 +1,14 @@
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-    - npm install yarn -g
   override:
-    - yarn
+    - npm install
 
 test:
   pre:
-    - ./bin/compile-src.sh
+    - npm run compile
   override:
-    - ./bin/test-src.sh
+    - npm run test:ci
   post:
     - bash <(curl -s https://codecov.io/bash)
 

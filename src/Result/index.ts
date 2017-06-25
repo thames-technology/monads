@@ -104,7 +104,7 @@ export class _Err<E> implements Result<any, E> {
     return this._;
   }
 
-  unwrap_or <T>(optb: T): T {
+  unwrap_or<T> (optb: T): T {
     if (assert_none(optb)) {
       throw new ReferenceError('Cannot use "null" or "undefined" as default parameter when calling unwrap_or()');
     }

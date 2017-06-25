@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+// import { expect } from 'chai';
 import { Option, Some, None, is_some, is_none, _Some, _None, get_in } from '.';
 
 describe('Option', () => {
@@ -11,15 +11,15 @@ describe('Option', () => {
       it('correctly creates an instance of Some with value \'' + scenario.value + '\'', () => {
         const subject = Some(scenario.value);
 
-        expect(subject instanceof _Some).to.equal(true);
+        expect(subject instanceof _Some).toEqual(true);
 
-        expect(subject.is_some()).to.equal(true);
-        expect(subject.is_none()).to.equal(false);
-        expect(subject.unwrap_or({} as any)).to.deep.equal(scenario.value);
+        expect(subject.is_some()).toEqual(true);
+        expect(subject.is_none()).toEqual(false);
+        expect(subject.unwrap_or({} as any)).toEqual(scenario.value);
 
         if (is_some(subject)) {
-          expect(typeof (subject.unwrap())).to.equal(type.toLowerCase());
-          expect(subject.unwrap()).to.deep.equal(scenario.value);
+          expect(typeof (subject.unwrap())).toEqual(type.toLowerCase());
+          expect(subject.unwrap()).toEqual(scenario.value);
         } else {
           throw new Error('Has to be _Some!');
         }
@@ -117,17 +117,17 @@ describe('Option', () => {
       it('correctly creates an instance of Option with value \'' + val + '\'', () => {
         const subject = Some(val);
 
-        expect(subject instanceof _Some).to.equal(true);
+        expect(subject instanceof _Some).toEqual(true);
 
-        expect(subject.is_some()).to.equal(true);
-        expect(subject.is_none()).to.equal(false);
-        expect(subject.unwrap_or(val)).to.deep.equal(val);
+        expect(subject.is_some()).toEqual(true);
+        expect(subject.is_none()).toEqual(false);
+        expect(subject.unwrap_or(val)).toEqual(val);
 
         if (is_some(subject)) {
           const type = typeof (subject.unwrap());
 
-          expect(type === 'function' || type === 'object').to.equal(true);
-          expect(subject.unwrap()).to.deep.equal(val);
+          expect(type === 'function' || type === 'object').toEqual(true);
+          expect(subject.unwrap()).toEqual(val);
         } else {
           throw new Error('Has to be _Some!');
         }
@@ -157,11 +157,11 @@ describe('Option', () => {
         it('is None when trying to access out of bound index, property or variable, calling unwrap() impossible', () => {
           const subject = Some(scenario.value);
 
-          expect(subject instanceof _None).to.equal(true);
+          expect(subject instanceof _None).toEqual(true);
 
-          expect(subject.is_none()).to.equal(true);
-          expect(subject.is_some()).to.equal(false);
-          expect(() => subject.unwrap()).to.throw;
+          expect(subject.is_none()).toEqual(true);
+          expect(subject.is_some()).toEqual(false);
+          expect(() => subject.unwrap()).toThrow();
         });
       };
 
@@ -177,7 +177,7 @@ describe('Option', () => {
           none: 'OTHER STRING'
         });
 
-        expect(subject).to.equal('STRING');
+        expect(subject).toEqual('STRING');
       });
 
       it('correctly matches None and returns fallback value', () => {
@@ -189,7 +189,7 @@ describe('Option', () => {
           none: NaN
         });
 
-        expect(subject).to.deep.equal(NaN);
+        expect(subject).toEqual(NaN);
       });
     });
 
@@ -199,7 +199,7 @@ describe('Option', () => {
 
         const subject = string.map(_ => parseInt(_));
 
-        expect(is_some(subject) ? subject.unwrap() : undefined).to.equal(123);
+        expect(is_some(subject) ? subject.unwrap() : undefined).toEqual(123);
       });
     });
   });
@@ -208,12 +208,12 @@ describe('Option', () => {
     it('correctly creates its instance, returns correct value when calling unwrap_or()', () => {
       const subject = None;
 
-      expect(subject instanceof _None).to.equal(true);
+      expect(subject instanceof _None).toEqual(true);
 
-      expect(subject.is_none()).to.equal(true);
-      expect(subject.is_some()).to.equal(false);
+      expect(subject.is_none()).toEqual(true);
+      expect(subject.is_some()).toEqual(false);
 
-      expect(subject.unwrap_or('string')).to.deep.equal('string');
+      expect(subject.unwrap_or('string')).toEqual('string');
     });
 
     describe('unwrap_or', () => {
@@ -224,7 +224,7 @@ describe('Option', () => {
           array = ['a'],
           outOfBoundIndex = array.length + 1;
 
-        expect(() => subject.unwrap_or(array[outOfBoundIndex])).to.throw();
+        expect(() => subject.unwrap_or(array[outOfBoundIndex])).toThrow();
       });
     });
 
@@ -235,7 +235,7 @@ describe('Option', () => {
           none: 'nothing'
         });
 
-        expect(subject).to.equal('nothing');
+        expect(subject).toEqual('nothing');
       });
     });
 
@@ -243,7 +243,7 @@ describe('Option', () => {
       it('correctly maps Some and returns a new Some with transformed value', () => {
         const subject = None.map(_ => parseInt(_));
 
-        expect(subject instanceof _None).to.equal(true);
+        expect(subject instanceof _None).toEqual(true);
       });
     });
   });
@@ -265,7 +265,7 @@ describe('Option', () => {
           none: 1994
         });
 
-        expect(subject).to.equal(date.getFullYear());
+        expect(subject).toEqual(date.getFullYear());
       });
 
       it('correctly matches None and returns fallback value', () => {
@@ -283,7 +283,7 @@ describe('Option', () => {
           none: initialValue
         });
 
-        expect(subject).to.equal(initialValue);
+        expect(subject).toEqual(initialValue);
       });
 
       it('correctly matches None and returns fallback value when method provided to none branch', () => {
@@ -294,7 +294,7 @@ describe('Option', () => {
           none: () => 'N/A'
         });
 
-        expect(subject).to.equal('N/A');
+        expect(subject).toEqual('N/A');
       });
     });
 
@@ -305,7 +305,7 @@ describe('Option', () => {
         const subject = Some(arr[0])
           .map(_ => _.toString());
 
-        expect(is_some(subject) ? subject.unwrap() : undefined).to.equal('1');
+        expect(is_some(subject) ? subject.unwrap() : undefined).toEqual('1');
       });
 
       it('returns None when method applied to a value that does not exist', () => {
@@ -314,7 +314,7 @@ describe('Option', () => {
         const subject = Some(arr[arr.length + 1])
           .map(_ => _.toString());
 
-        expect(subject.is_none()).to.equal(true);
+        expect(subject.is_none()).toEqual(true);
       });
     });
   });
@@ -332,7 +332,7 @@ describe('is_some', () => {
       a = 0;
     }
 
-    expect(a).to.equal(42);
+    expect(a).toEqual(42);
   });
 
   it('should not unwrap after a failing preliminary check', () => {
@@ -350,7 +350,7 @@ describe('is_some', () => {
       b = 'This Is None';
     }
 
-    expect(b).to.equal('This Is None');
+    expect(b).toEqual('This Is None');
   });
 });
 
@@ -370,8 +370,8 @@ describe('is_none', () => {
       b = 'Fail';
     }
 
-    expect(is_none(subject)).to.equal(true);
-    expect(b).to.equal('Correct');
+    expect(is_none(subject)).toEqual(true);
+    expect(b).toEqual('Correct');
   });
 
   it('should return false if Option is Some', () => {
@@ -387,8 +387,8 @@ describe('is_none', () => {
       b = 'Correct';
     }
 
-    expect(is_none(subject)).to.equal(false);
-    expect(b).to.equal('Correct');
+    expect(is_none(subject)).toEqual(false);
+    expect(b).toEqual('Correct');
   });
 
   it('should return true if value is None', () => {
@@ -402,8 +402,8 @@ describe('is_none', () => {
       a = 'Fail';
     }
 
-    expect(is_none(subject)).to.equal(true);
-    expect(a).to.equal('Correct');
+    expect(is_none(subject)).toEqual(true);
+    expect(a).toEqual('Correct');
   });
 });
 
@@ -412,21 +412,21 @@ describe('get_in', () => {
     const obj = {a: {b: 'val'}};
     const subject: Option<string> = get_in(obj, 'a.b');
 
-    expect(subject.is_some()).to.equal(true);
-    expect(subject.unwrap_or('')).to.equal('val');
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or('')).toEqual('val');
   });
 
   it('correctly returns a None if key not found in nested object', () => {
     const obj = {a: {b: 'val'}};
     const subject: Option<string> = get_in(obj, 'a.nonExistentKey');
 
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 
   it('correctly returns a None if object itself undefined', () => {
     const subject: Option<string> = get_in(undefined, 'a.b.c.d');
 
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 });
 
@@ -454,8 +454,8 @@ describe('and_then', () => {
       .and_then(_ => _.contact)
       .and_then(_ => _.name);
 
-    expect(subject.is_some()).to.equal(true);
-    expect(subject.unwrap_or('')).to.equal('Name');
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or('')).toEqual('Name');
   });
 
   it('correctly returns None if \'contact.name\' is None', () => {
@@ -466,7 +466,7 @@ describe('and_then', () => {
       .and_then(_ => _.contact)
       .and_then(_ => _.name);
 
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 
   it('correctly returns None if \'contact\' is None', () => {
@@ -478,7 +478,7 @@ describe('and_then', () => {
       .and_then(_ => _.contact)
       .and_then(_ => _.name);
 
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 
   it('correctly returns None if \'driver\' is None', () => {
@@ -490,7 +490,7 @@ describe('and_then', () => {
       .and_then(_ => _.contact)
       .and_then(_ => _.name);
 
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 });
 
@@ -498,27 +498,27 @@ describe('or', () => {
   it('correctly returns Some(a) if \'a\' is Some and \'b\' is None', () => {
     const a = Some(123), b = None;
     const subject = a.or(b);
-    expect(subject.is_some()).to.equal(true);
-    expect(subject.unwrap_or(0)).to.equal(123);
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or(0)).toEqual(123);
   });
 
   it('correctly returns Some(b) if \'a\' is None and \'b\' is Some', () => {
     const a = None, b = Some(456);
     const subject = a.or(b);
-    expect(subject.is_some()).to.equal(true);
-    expect(subject.unwrap_or(0)).to.equal(456);
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or(0)).toEqual(456);
   });
 
   it('correctly returns Some(a) if \'a\' is Some and \'b\' is Some', () => {
     const a = Some(11), b = Some(12);
     const subject = a.or(b);
-    expect(subject.is_some()).to.equal(true);
-    expect(subject.unwrap_or(0)).to.equal(11);
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or(0)).toEqual(11);
   });
 
   it('correctly returns None if \'a\' is None and \'b\' is None', () => {
     const a = None, b = None;
     const subject = a.or(b);
-    expect(subject.is_none()).to.equal(true);
+    expect(subject.is_none()).toEqual(true);
   });
 });
