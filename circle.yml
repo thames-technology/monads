@@ -10,6 +10,8 @@ test:
     - ./bin/compile-src.sh
   override:
     - ./bin/test-src.sh
+  post:
+    - bash <(curl -s https://codecov.io/bash)
 
 deployment:
   npm:

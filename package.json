@@ -28,7 +28,24 @@
     "@types/sinon": "^1.16.35",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "nyc": "^11.0.2",
     "sinon": "^2.0.0",
     "typescript": "^2.2.1"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha 'dist/**/*.spec.js'",
+    "compile": "rm -rf ./dist && ./node_modules/typescript/bin/tsc -p 'tsconfig.json'",
+    "coverage": "./node_modules/nyc/bin/nyc.js --check-coverage npm test",
+    "codecov": "./node_modules/nyc/bin/nyc.js npm test && ./node_modules/nyc/bin/nyc.js report --reporter=text-lcov > coverage.lcov"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 75,
+    "statements": 75,
+    "functions": 75,
+    "branches": 75,
+    "exclude": [
+      "**/*.spec.js"
+    ]
   }
 }
