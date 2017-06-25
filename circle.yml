@@ -1,7 +1,14 @@
+machine:
+  node:
+    version: 8.0.0
+
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+    - node --version
+    - npm --version
   override:
+    - rm -rf node_modules
     - npm install
 
 test:
