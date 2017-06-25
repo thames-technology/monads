@@ -229,6 +229,16 @@ describe('Result', () => {
     scenarios.forEach(assertionErr);
   });
 
+  describe('unwrap_or', () => {
+    it('throws if no value provided', () => {
+      let string: Result<string, string> = Ok(null as any);
+      expect(() => string.unwrap_or(null as any)).toThrow();
+
+      string = Err('string');
+      expect(() => string.unwrap_or(null as any)).toThrow();
+    });
+  });
+
   describe('match', () => {
     it('correctly matches Ok and returns transformed value', () => {
       const string = Ok('string');
