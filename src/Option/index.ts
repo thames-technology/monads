@@ -79,6 +79,10 @@ export class _Some<T> implements Option<T> {
     return Some(this._);
   }
 
+  and (optb: Option<T>): Option<T> {
+    return optb;
+  }
+
   unwrap (): T {
     if (assert_none(this._)) {
       throw new ReferenceError('Cannot unwrap "null" or "undefined"');
@@ -123,6 +127,10 @@ export class _None<T> implements Option<any> {
 
   or (optb: Option<T>): Option<T> {
     return optb;
+  }
+
+  and (optb: Option<T>): Option<T> {
+    return new _None<T>();
   }
 
   unwrap (): never {

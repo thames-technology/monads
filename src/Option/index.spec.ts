@@ -556,3 +556,30 @@ describe('or', () => {
     expect(subject.is_none()).toEqual(true);
   });
 });
+
+describe('and', () => {
+  it('correctly returns None if \'a\' is Some and \'b\' is None', () => {
+    const a = Some(123), b = None;
+    const subject = a.and(b);
+    expect(subject.is_none()).toEqual(true);
+  });
+
+  it('correctly returns None if \'a\' is None and \'b\' is Some', () => {
+    const a = None, b = Some(123);
+    const subject = a.and(b);
+    expect(subject.is_none()).toEqual(true);
+  });
+
+  it('correctly returns Some(b) if \'a\' is Some and \'b\' is Some', () => {
+    const a = Some(123), b = Some(456);
+    const subject = a.and(b);
+    expect(subject.is_some()).toEqual(true);
+    expect(subject.unwrap_or(0)).toEqual(456);
+  });
+
+  it('correctly returns None if \'a\' is None and \'b\' is None', () => {
+    const a = None, b = None;
+    const subject = a.and(b);
+    expect(subject.is_none()).toEqual(true);
+  });
+});
