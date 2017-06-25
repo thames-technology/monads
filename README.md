@@ -2,9 +2,10 @@
 
 Inspired by Rust
 
-[![CircleCI](https://circleci.com/gh/Threestup/monads.svg?style=svg)](https://circleci.com/gh/Threestup/monads)
+[![CircleCI](https://img.shields.io/circleci/project/github/Threestup/monads.svg)](https://circleci.com/gh/Threestup/monads)
 ![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
-[![npm version](https://badge.fury.io/js/tsp-monads.svg)](https://badge.fury.io/js/tsp-monads)
+[![npm version](https://img.shields.io/npm/dm/tsp-monads.svg)](https://www.npmjs.com/package/tsp-monads)
+[![npm version](https://img.shields.io/npm/v/tsp-monads.svg)](https://www.npmjs.com/package/tsp-monads)
 
 **NOTE:** Works with TypeScript 2.1+ and JavaScript. `strictNullChecks` option / flag is strongly recommended.
 
