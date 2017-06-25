@@ -316,6 +316,29 @@ describe('Option', () => {
 
         expect(subject.is_none()).toEqual(true);
       });
+
+      it('returns None when method throws', () => {
+        const arr = [1, 2, 3];
+
+        const subject = Some(arr[0])
+          .map(_ => JSON.parse('{null}'));
+
+        expect(subject.is_none()).toEqual(true);
+      });
+    });
+  });
+
+  describe('unwrap', () => {
+    it('throws if no value inside', () => {
+      const string: Option<string> = new _Some(null as any);
+      expect(() => string.unwrap()).toThrow();
+    });
+  });
+
+  describe('unwrap_or', () => {
+    it('throws if no value provided', () => {
+      const string: Option<string> = new _Some(null as any);
+      expect(() => string.unwrap_or(null as any)).toThrow();
     });
   });
 });
@@ -489,6 +512,17 @@ describe('and_then', () => {
     const subject = truck.driver
       .and_then(_ => _.contact)
       .and_then(_ => _.name);
+
+    expect(subject.is_none()).toEqual(true);
+  });
+
+  it('catches error and returns None if method throws', () => {
+    contact.name = Some('Name');
+    driver.contact = Some(contact);
+    truck.driver = Some(driver);
+
+    const subject = truck.driver
+      .and_then(_ => Some(JSON.parse('{null}')));
 
     expect(subject.is_none()).toEqual(true);
   });

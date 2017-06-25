@@ -1,6 +1,7 @@
 {
   "testPathIgnorePatterns": [
-    "<rootDir>/node_modules/"
+    "<rootDir>/node_modules/",
+    "<rootDir>/dist/"
   ],
   "mapCoverage": true,
   "transform": {

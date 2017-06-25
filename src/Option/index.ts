@@ -26,12 +26,8 @@ export function is_none<T> (_: Option<T>): _ is _None<T> {
 }
 
 export function get_in (obj: Object | undefined | null, key: string): Option<any> {
-  try {
-    const val = key.split('.').reduce((o, x) => o == null ? o : (o as any)[x], obj);
-    return Some(val);
-  } catch (e) {
-    return new _None<any>();
-  }
+  const val = key.split('.').reduce((o, x) => o == null ? o : (o as any)[x], obj);
+  return Some(val);
 }
 
 export class _Some<T> implements Option<T> {
@@ -59,7 +55,7 @@ export class _Some<T> implements Option<T> {
     try {
       newVal = Some(fn(this._));
     } catch (e) {
-      console.log(`Error: ${e}`);
+      console.error(`Error: ${e}`);
       newVal = None;
     }
 
@@ -72,7 +68,7 @@ export class _Some<T> implements Option<T> {
     try {
       newVal = fn(this._);
     } catch (e) {
-      console.log(`Error: ${e}`);
+      console.error(`Error: ${e}`);
       newVal = None;
     }
 
