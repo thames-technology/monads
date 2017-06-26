@@ -10,6 +10,7 @@ export interface Option<T> {
   map<U>(fn: (_: T) => U): Option<U>;
   and_then<U>(fn: (_: T) => Option<U>): Option<U>;
   or(optb: Option<T>): Option<T>;
+  and(optb: Option<T>): Option<T>;
   unwrap_or(def: T): T;
   unwrap(): T | undefined;
 }
