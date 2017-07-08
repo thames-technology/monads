@@ -8,7 +8,7 @@ export interface MatchPattern<O, E, T, U> {
 export interface Result<O, E> {
   is_ok(): boolean;
   is_err(): boolean;
-  match<T, U>(p: MatchPattern<O, E, T, U>): T;
+  match<T, U>(p: MatchPattern<O, E, T, U>): T | U;
   map<T>(fn: (_: O | E) => T): Result<T, E>;
   unwrap(): O;
   unwrap_err(): E;
