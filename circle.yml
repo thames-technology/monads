@@ -13,9 +13,9 @@ dependencies:
 
 test:
   pre:
-    - npm run compile
+    - make compile
   override:
-    - npm run test:ci
+    - make test-ci
   post:
     - bash <(curl -s https://codecov.io/bash)
 
