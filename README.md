@@ -4,10 +4,9 @@ Inspired by Rust
 
 [![CircleCI](https://img.shields.io/circleci/project/github/Threestup/monads.svg)](https://circleci.com/gh/Threestup/monads)
 ![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
-[![npm version](https://img.shields.io/npm/dm/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads)
 [![npm version](https://img.shields.io/npm/v/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads)
 
-**NOTE:** Works with TypeScript 2.1+ _and_ JavaScript. `strictNullChecks` option / flag strongly recommended.
+**NOTE:** Works with TypeScript 2+ _and_ JavaScript. `strictNullChecks` option / flag strongly recommended.
 
 ## Documentation
 
