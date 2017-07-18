@@ -1,4 +1,3 @@
-// import { expect } from 'chai';
 import { Option, Some, None, is_some, is_none, _Some, _None, get_in } from '.'
 
 describe('Option', () => {

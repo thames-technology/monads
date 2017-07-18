@@ -22,7 +22,7 @@ export function is_some<T>(_: Option<T>): _ is _Some<T> {
   return _.is_some()
 }
 
-export function is_none<T>(_: Option<T>): _ is _None<T> {
+export function is_none<T>(_: Option<T>): _ is _None {
   return _.is_none()
 }
 
@@ -112,7 +112,7 @@ export class _Some<T> implements Option<T> {
   }
 }
 
-export class _None<T> implements Option<any> {
+export class _None implements Option<never> {
   get [Symbol.toStringTag]() {
     return 'None'
   }
@@ -125,7 +125,7 @@ export class _None<T> implements Option<any> {
     return true
   }
 
-  match<S, N>(p: MatchPattern<T, S, N>): N {
+  match<S, N>(p: MatchPattern<never, S, N>): N {
     if (typeof p.none === 'function') {
       return p.none()
     } else {
@@ -133,27 +133,27 @@ export class _None<T> implements Option<any> {
     }
   }
 
-  map<U>(fn: (_: T) => U): Option<U> {
-    return new _None<U>()
+  map<T>(fn: (_: never) => T): Option<T> {
+    return new _None()
   }
 
-  and_then<U>(fn: (_: T) => Option<U>): Option<U> {
-    return new _None<U>()
+  and_then<T>(fn: (_: never) => Option<T>): Option<T> {
+    return new _None()
   }
 
-  or(optb: Option<T>): Option<T> {
+  or<T>(optb: Option<T>): Option<T> {
     return optb
   }
 
-  and(optb: Option<T>): Option<T> {
-    return new _None<T>()
+  and<T>(optb: Option<T>): Option<T> {
+    return new _None()
   }
 
   unwrap(): never {
     throw new ReferenceError('Cannot unwrap None')
   }
 
-  unwrap_or(def: T): T {
+  unwrap_or<T>(def: T): T {
     if (assert_none(def)) {
       throw new ReferenceError(
         'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
@@ -164,8 +164,8 @@ export class _None<T> implements Option<any> {
   }
 }
 
-export function Some<T>(_: T | null | undefined): _Some<T> | _None<T> {
-  return assert_some(_) ? new _Some(_ as T) : new _None<T>()
+export function Some<T>(_: T | null | undefined): Option<T> {
+  return assert_some(_) ? new _Some(_ as T) : new _None()
 }
 
-export const None = new _None<any>()
+export const None = new _None()
