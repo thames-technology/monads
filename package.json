@@ -1,6 +1,6 @@
 {
   "name": "@threestup/monads",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Option and Result types for JavaScript; TypeScript first",
   "license": "MIT",
   "keywords": [
