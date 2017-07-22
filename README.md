@@ -1,6 +1,8 @@
 # Type safe Option and Result type
 
-Inspired by Rust
+Inspired by Rust.
+
+Previously known on npm as [tsp-monads](https://www.npmjs.com/package/tsp-monads).
 
 [![CircleCI](https://img.shields.io/circleci/project/github/Threestup/monads.svg)](https://circleci.com/gh/Threestup/monads)
 ![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
