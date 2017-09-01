@@ -19,11 +19,11 @@ export const assert_none = (_: any) => _ == null
 export const assert_some = (_: any) => !assert_none(_)
 
 export function is_some<T>(_: Option<T>): _ is _Some<T> {
-  return _.is_some()
+  return typeof _.is_some === 'function' && _.is_some()
 }
 
 export function is_none<T>(_: Option<T>): _ is _None {
-  return _.is_none()
+  return typeof _.is_none === 'function' && _.is_none()
 }
 
 export function get_in(
