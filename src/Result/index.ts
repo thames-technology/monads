@@ -18,11 +18,15 @@ export interface Result<O, E> {
 }
 
 export function is_ok<O, E>(_: Result<O, E>): _ is _Ok<O> {
-  return _.is_ok()
+  return typeof _.is_ok === 'function' && _.is_ok()
 }
 
 export function is_err<O, E>(_: Result<O, E>): _ is _Err<E> {
-  return _.is_err()
+  return typeof _.is_err === 'function' && _.is_err()
+}
+
+export function is_result<T, E>(_: any): _ is Result<T, E> {
+  return is_ok(_) || is_err(_)
 }
 
 export class _Ok<O> implements Result<O, any> {

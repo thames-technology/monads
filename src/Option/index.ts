@@ -26,6 +26,10 @@ export function is_none<T>(_: Option<T>): _ is _None {
   return typeof _.is_none === 'function' && _.is_none()
 }
 
+export function is_option<T>(_: any): _ is Option<T> {
+  return is_some(_) || is_none(_)
+}
+
 export function get_in(
   obj: Object | undefined | null,
   key: string,

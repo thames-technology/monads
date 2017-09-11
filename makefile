@@ -9,7 +9,7 @@ compile:
 	rm -rf ${dist_folder}
 	${ts_compiler} -p ${ts_config_file}
 
-prettify:
+format:
 	${prettify_executable} \
 	--no-semi \
 	--single-quote \
@@ -20,6 +20,7 @@ test:
 	${jest_executable} \
 	--config=${jest_config_file} \
 	--coverage \
+	--verbose \
 	--watch
 
 test-ci:
@@ -28,4 +29,5 @@ test-ci:
 	--ci \
 	--config=${jest_config_file} \
 	--coverage \
-	--runInBand
+	--runInBand \
+	--verbose

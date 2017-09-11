@@ -1,4 +1,14 @@
-import { Option, Some, None, is_some, is_none, _Some, _None, get_in } from '.'
+import {
+  Option,
+  Some,
+  None,
+  is_some,
+  is_none,
+  is_option,
+  _Some,
+  _None,
+  get_in,
+} from '.'
 
 describe('Option', () => {
   interface IScenario<T> {
@@ -422,6 +432,25 @@ describe('is_none', () => {
 
     expect(is_none(subject)).toEqual(true)
     expect(a).toEqual('Correct')
+  })
+})
+
+describe('is_option', () => {
+  it('should return true if Option is None', () => {
+    expect(is_option(None)).toEqual(true)
+  })
+
+  it('should return true if Option is Some', () => {
+    expect(is_option(Some(''))).toEqual(true)
+  })
+
+  it('should return false if value is not an Option', () => {
+    expect(is_option(new Function())).toEqual(false)
+    expect(is_option({})).toEqual(false)
+    expect(is_option([])).toEqual(false)
+    expect(is_option(true)).toEqual(false)
+    expect(is_option('')).toEqual(false)
+    expect(is_option(42)).toEqual(false)
   })
 })
 

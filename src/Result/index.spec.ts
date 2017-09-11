@@ -1,4 +1,4 @@
-import { Result, Ok, Err, is_ok, is_err, _Ok, _Err } from '.'
+import { Result, Ok, Err, is_ok, is_err, is_result, _Ok, _Err } from '.'
 
 describe('Result', () => {
   interface IScenario<T> {
@@ -348,6 +348,25 @@ describe('Result', () => {
       const subject = string_ok.err()
 
       expect(subject.is_none()).toEqual(true)
+    })
+  })
+
+  describe('is_result', () => {
+    it('should return true if Result is Err', () => {
+      expect(is_result(Err(''))).toEqual(true)
+    })
+
+    it('should return true if Result is Ok', () => {
+      expect(is_result(Ok(''))).toEqual(true)
+    })
+
+    it('should return false if value is not a Result', () => {
+      expect(is_result(new Function())).toEqual(false)
+      expect(is_result({})).toEqual(false)
+      expect(is_result([])).toEqual(false)
+      expect(is_result(true)).toEqual(false)
+      expect(is_result('')).toEqual(false)
+      expect(is_result(42)).toEqual(false)
     })
   })
 })
