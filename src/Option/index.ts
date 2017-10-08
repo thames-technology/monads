@@ -1,3 +1,5 @@
+import { isPresent, isMissing, isObject, isFunction } from '@openmaths/utils'
+
 export interface MatchPattern<T, S, N> {
   some: (_: T) => S
   none: (() => N) | N
@@ -15,15 +17,12 @@ export interface Option<T> {
   unwrap(): T | undefined
 }
 
-export const assert_none = (_: any) => _ == null
-export const assert_some = (_: any) => !assert_none(_)
-
 export function is_some<T>(_: Option<T>): _ is _Some<T> {
-  return typeof _.is_some === 'function' && _.is_some()
+  return isObject(_) && isFunction(_.is_some) && _.is_some()
 }
 
 export function is_none<T>(_: Option<T>): _ is _None {
-  return typeof _.is_none === 'function' && _.is_none()
+  return isObject(_) && isFunction(_.is_none) && _.is_none()
 }
 
 export function is_option<T>(_: any): _ is Option<T> {
@@ -98,7 +97,7 @@ export class _Some<T> implements Option<T> {
   }
 
   unwrap(): T {
-    if (assert_none(this._)) {
+    if (isMissing(this._)) {
       throw new ReferenceError('Cannot unwrap "null" or "undefined"')
     }
 
@@ -106,7 +105,7 @@ export class _Some<T> implements Option<T> {
   }
 
   unwrap_or(def: T): T {
-    if (assert_none(def)) {
+    if (isMissing(def)) {
       throw new ReferenceError(
         'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
       )
@@ -158,7 +157,7 @@ export class _None implements Option<never> {
   }
 
   unwrap_or<T>(def: T): T {
-    if (assert_none(def)) {
+    if (isMissing(def)) {
       throw new ReferenceError(
         'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
       )
@@ -169,7 +168,7 @@ export class _None implements Option<never> {
 }
 
 export function Some<T>(_: T | null | undefined): Option<T> {
-  return assert_some(_) ? new _Some(_ as T) : new _None()
+  return isPresent(_) ? new _Some(_ as T) : new _None()
 }
 
 export const None = new _None()

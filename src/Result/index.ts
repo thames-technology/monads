@@ -1,4 +1,5 @@
-import { None, Option, Some, assert_none } from '../Option'
+import { isMissing, isObject, isFunction } from '@openmaths/utils'
+import { None, Option, Some } from '../Option'
 
 export interface MatchPattern<O, E, T, U> {
   ok: (_: O) => T
@@ -18,11 +19,11 @@ export interface Result<O, E> {
 }
 
 export function is_ok<O, E>(_: Result<O, E>): _ is _Ok<O> {
-  return typeof _.is_ok === 'function' && _.is_ok()
+  return isObject(_) && isFunction(_.is_ok) && _.is_ok()
 }
 
 export function is_err<O, E>(_: Result<O, E>): _ is _Err<E> {
-  return typeof _.is_err === 'function' && _.is_err()
+  return isObject(_) && isFunction(_.is_err) && _.is_err()
 }
 
 export function is_result<T, E>(_: any): _ is Result<T, E> {
@@ -34,6 +35,10 @@ export class _Ok<O> implements Result<O, any> {
 
   constructor(_: O) {
     this._ = _
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Result'
   }
 
   is_ok() {
@@ -61,7 +66,7 @@ export class _Ok<O> implements Result<O, any> {
   }
 
   unwrap_or(optb: O): O {
-    if (assert_none(optb)) {
+    if (isMissing(optb)) {
       throw new ReferenceError(
         'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
       )
@@ -111,7 +116,7 @@ export class _Err<E> implements Result<any, E> {
   }
 
   unwrap_or<T>(optb: T): T {
-    if (assert_none(optb)) {
+    if (isMissing(optb)) {
       throw new ReferenceError(
         'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
       )
