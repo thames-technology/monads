@@ -46,10 +46,6 @@ export class _Some<T> implements Option<T> {
     this._ = _
   }
 
-  get [Symbol.toStringTag]() {
-    return 'Some'
-  }
-
   is_some() {
     return true
   }
@@ -116,10 +112,6 @@ export class _Some<T> implements Option<T> {
 }
 
 export class _None implements Option<never> {
-  get [Symbol.toStringTag]() {
-    return 'None'
-  }
-
   is_some() {
     return false
   }

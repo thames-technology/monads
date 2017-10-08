@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 8
+    version: 8.5.0
 
 dependencies:
   pre:
@@ -8,7 +8,6 @@ dependencies:
     - node --version
     - npm --version
   override:
-    - rm -rf node_modules
     - npm install
 
 test:

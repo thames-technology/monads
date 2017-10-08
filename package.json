@@ -2,23 +2,13 @@
   "name": "@threestup/monads",
   "version": "0.3.0",
   "description": "Option and Result types for JavaScript; TypeScript first",
-  "license": "MIT",
-  "keywords": [
-    "option",
-    "result",
-    "type",
-    "typescript",
-    "javascript",
-    "threestup"
-  ],
-  "files": [
-    "dist"
-  ],
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/threestup/monads.git"
+  "engines": {
+    "node": ">=6.11.0"
+  },
+  "scripts": {
+    "test": "make test"
   },
   "dependencies": {
     "@openmaths/utils": "^0.4.0"
@@ -29,9 +19,20 @@
     "jest": "^20.0.4",
     "prettier": "^1.5.3",
     "ts-jest": "^20.0.6",
-    "typescript": "^2.4.1"
+    "typescript": "^2.5.3"
   },
-  "scripts": {
-    "test": "make test"
-  }
+  "keywords": [
+    "option",
+    "result",
+    "type",
+    "typescript",
+    "javascript",
+    "threestup"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/threestup/monads.git"
+  },
+  "author": "Slavomir Vojacek <slavomirvojacek@gmail.com>",
+  "license": "MIT"
 }

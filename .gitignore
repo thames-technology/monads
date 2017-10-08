@@ -10,12 +10,9 @@ Thumbs.db
 
 .env
 .env.production
+gcloud-service-key.json
 
+coverage/
 dist/
-dist.test/
 bower_components/
 node_modules/
-
-coverage
-.nyc_output
-coverage.*

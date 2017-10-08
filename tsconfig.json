@@ -5,11 +5,11 @@
     "diagnostics": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
-      "es2015",
-      "dom"
+      "ES6"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
+    "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -20,7 +20,7 @@
     "removeComments": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es5"
+    "target": "ES5"
   },
   "include": [
     "./src/**/*"

@@ -37,10 +37,6 @@ export class _Ok<O> implements Result<O, any> {
     this._ = _
   }
 
-  get [Symbol.toStringTag]() {
-    return 'Result'
-  }
-
   is_ok() {
     return true
   }

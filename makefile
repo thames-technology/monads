@@ -1,26 +1,27 @@
+node_bin=./node_modules/.bin
 dist_folder=./dist
-ts_compiler=./node_modules/typescript/bin/tsc
-ts_config_file=./tsconfig.json
-prettify_executable=./node_modules/prettier/bin/prettier.js
-jest_executable=./node_modules/jest/bin/jest.js
+src_folder=./src
 jest_config_file=./jest.json
+ts_config_file=./tsconfig.json
+tsc_executable=${node_bin}/tsc
+prettify_executable=${node_bin}/prettier
+jest_executable=${node_bin}/jest
 
 compile:
 	rm -rf ${dist_folder}
-	${ts_compiler} -p ${ts_config_file}
+	${tsc_executable} -p ${ts_config_file}
 
 format:
 	${prettify_executable} \
 	--no-semi \
 	--single-quote \
 	--trailing-comma "all" \
-	--write "./src/**/*.ts"
+	--write "${src_folder}/**/*.ts"
 
 test:
 	${jest_executable} \
 	--config=${jest_config_file} \
 	--coverage \
-	--verbose \
 	--watch
 
 test-ci:
