@@ -18,7 +18,7 @@
     "@types/node": "7.0.52",
     "jest": "20.0.4",
     "prettier": "1.9.2",
-    "ts-jest": "20.0.14",
+    "ts-jest": "22.0.0",
     "typescript": "2.6.2"
   },
   "keywords": [
