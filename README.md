@@ -39,7 +39,7 @@ const result = divide(2.0, 3.0)
 
 // Pattern match to retrieve the value
 const message = result.match({
-    some: _ => `Result: ${_}`,
+    some: res => `Result: ${res}`,
     none: 'Cannot divide by 0',
 })
 

@@ -1,4 +1,4 @@
-import { Result, Ok, Err, is_ok, is_err, is_result, _Ok, _Err } from '.'
+import { ResultType, Result, Ok, Err, is_ok, is_err, is_result } from '.'
 
 describe('Result', () => {
   interface IScenario<T> {
@@ -14,17 +14,17 @@ describe('Result', () => {
         () => {
           const subject = Ok(scenario.value)
 
-          expect(subject instanceof _Ok).toEqual(true)
+          expect(subject.type).toEqual(ResultType.Ok)
 
           expect(subject.is_ok()).toEqual(true)
           expect(subject.is_err()).toEqual(false)
 
-          expect(() => subject.unwrap_err()).toThrow()
-          expect(subject.unwrap_or('' as any)).toEqual(scenario.value)
+          expect(() => subject.err()).toThrow()
+          expect(subject.ok_or('' as any)).toEqual(scenario.value)
 
           if (is_ok(subject)) {
-            expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
-            expect(subject.unwrap()).toEqual(scenario.value)
+            expect(typeof subject.ok()).toEqual(type.toLowerCase())
+            expect(subject.ok()).toEqual(scenario.value)
           } else {
             throw new Error('Has to be _Ok!')
           }
@@ -42,17 +42,17 @@ describe('Result', () => {
         () => {
           const subject = Err(scenario.value)
 
-          expect(subject instanceof _Err).toEqual(true)
+          expect(subject.type).toEqual(ResultType.Err)
 
           expect(subject.is_ok()).toEqual(false)
           expect(subject.is_err()).toEqual(true)
 
-          expect(() => subject.unwrap()).toThrow()
-          expect(subject.unwrap_or('optb' as any)).toEqual('optb')
+          expect(() => subject.ok()).toThrow()
+          expect(subject.ok_or('optb' as any)).toEqual('optb')
 
           if (is_err(subject)) {
-            expect(typeof subject.unwrap_err()).toEqual(type.toLowerCase())
-            expect(subject.unwrap_err()).toEqual(scenario.value)
+            expect(typeof subject.err()).toEqual(type.toLowerCase())
+            expect(subject.err()).toEqual(scenario.value)
           } else {
             throw new Error('Has to be _Err!')
           }
@@ -159,16 +159,16 @@ describe('Result', () => {
     it("correctly creates an instance of Ok with value '" + val + "'", () => {
       const subject = Ok(val)
 
-      expect(subject instanceof _Ok).toEqual(true)
+      expect(subject.type).toEqual(ResultType.Ok)
 
       expect(subject.is_ok()).toEqual(true)
       expect(subject.is_err()).toEqual(false)
 
       if (is_ok(subject)) {
-        const type = typeof subject.unwrap()
+        const type = typeof subject.ok()
 
         expect(type === 'function' || type === 'object').toEqual(true)
-        expect(subject.unwrap()).toEqual(val)
+        expect(subject.ok()).toEqual(val)
       } else {
         throw new Error('Has to be _Ok!')
       }
@@ -177,16 +177,16 @@ describe('Result', () => {
     it("correctly creates an instance of Err with value '" + val + "'", () => {
       const subject = Err(val)
 
-      expect(subject instanceof _Err).toEqual(true)
+      expect(subject.type).toEqual(ResultType.Err)
 
       expect(subject.is_ok()).toEqual(false)
       expect(subject.is_err()).toEqual(true)
 
       if (is_err(subject)) {
-        const type = typeof subject.unwrap_err()
+        const type = typeof subject.err()
 
         expect(type === 'function' || type === 'object').toEqual(true)
-        expect(subject.unwrap_err()).toEqual(val)
+        expect(subject.err()).toEqual(val)
       } else {
         throw new Error('Has to be _Err!')
       }
@@ -213,11 +213,11 @@ describe('Result', () => {
       it('Ok works correctly', () => {
         const subject = Ok(scenario.value)
 
-        expect(subject instanceof _Ok).toEqual(true)
+        expect(subject.type).toEqual(ResultType.Ok)
 
         expect(subject.is_ok()).toEqual(true)
         expect(subject.is_err()).toEqual(false)
-        expect(subject.unwrap()).toEqual(scenario.value)
+        expect(subject.ok()).toEqual(scenario.value)
       })
     }
 
@@ -225,11 +225,11 @@ describe('Result', () => {
       it('Err works correctly', () => {
         const subject = Err(scenario.value)
 
-        expect(subject instanceof _Err).toEqual(true)
+        expect(subject.type).toEqual(ResultType.Err)
 
         expect(subject.is_ok()).toEqual(false)
         expect(subject.is_err()).toEqual(true)
-        expect(subject.unwrap_err()).toEqual(scenario.value)
+        expect(subject.err()).toEqual(scenario.value)
       })
     }
 
@@ -237,13 +237,13 @@ describe('Result', () => {
     scenarios.forEach(assertionErr)
   })
 
-  describe('unwrap_or', () => {
-    it('throws if no value provided', () => {
-      let string: Result<string, string> = Ok(null as any)
-      expect(() => string.unwrap_or(null as any)).toThrow()
+  describe('ok_or', () => {
+    it('returns optb correctly', () => {
+      let string: Result<string, string> = Ok('foo')
+      expect(string.ok_or('bar')).toEqual('foo')
 
-      string = Err('string')
-      expect(() => string.unwrap_or(null as any)).toThrow()
+      string = Err('foo')
+      expect(string.ok_or('bar')).toEqual('bar')
     })
   })
 
@@ -290,7 +290,7 @@ describe('Result', () => {
 
       const subject = string.map(_ => parseInt(_))
 
-      expect(subject.unwrap()).toEqual(123)
+      expect(subject.ok()).toEqual(123)
     })
 
     it('correctly returns untouched Err when trying to use map', () => {
@@ -299,7 +299,7 @@ describe('Result', () => {
 
       const subject = number.map(_ => _.toString())
 
-      expect(subject.unwrap_err()).toEqual(1)
+      expect(subject.err()).toEqual(1)
     })
 
     it('correctly maps Result and returns transformed value', () => {
@@ -310,10 +310,10 @@ describe('Result', () => {
       }
 
       let subject = getMessage(Ok('123'))
-      expect(is_ok(subject) ? subject.unwrap() : 0).toEqual(123)
+      expect(is_ok(subject) ? subject.ok() : 0).toEqual(123)
 
       subject = getMessage(Err('123'))
-      expect(is_err(subject) ? subject.unwrap_err() : '0').toEqual('123')
+      expect(is_err(subject) ? subject.err() : '0').toEqual('123')
     })
   })
 
@@ -321,16 +321,14 @@ describe('Result', () => {
     it('correctly returns Some when Result is ok', () => {
       const string_ok = Ok('123')
       const subject = string_ok.ok()
-
-      expect(subject.is_some()).toEqual(true)
-      expect(subject.unwrap()).toEqual('123')
+      expect(subject).toEqual('123')
     })
 
     it('correctly returns None when Result is err', () => {
       const string_err = Err('123')
-      const subject = string_err.ok()
-
-      expect(subject.is_none()).toEqual(true)
+      const subject = () => string_err.ok()
+      expect(subject).toThrow(ReferenceError)
+      expect(subject).toThrow('Cannot get Ok value of Result.Err')
     })
   })
 
@@ -338,16 +336,14 @@ describe('Result', () => {
     it('correctly returns Some when Result is err', () => {
       const string_err = Err('123')
       const subject = string_err.err()
-
-      expect(subject.is_some()).toEqual(true)
-      expect(subject.unwrap()).toEqual('123')
+      expect(subject).toEqual('123')
     })
 
     it('correctly returns None when Result is ok', () => {
       const string_ok = Ok('123')
-      const subject = string_ok.err()
-
-      expect(subject.is_none()).toEqual(true)
+      const subject = () => string_ok.err()
+      expect(subject).toThrow(ReferenceError)
+      expect(subject).toThrow('Cannot get Err value of Result.Ok')
     })
   })
 

@@ -1,139 +1,104 @@
-import { isMissing, isObject, isFunction } from '@openmaths/utils'
-import { None, Option, Some } from '../Option'
+import { isEqual, throwIfFalse } from '@openmaths/utils'
 
-export interface MatchPattern<O, E, T, U> {
-  ok: (_: O) => T
-  err: (_: E) => U
+export const ResultType = {
+  Ok: Symbol(':ok'),
+  Err: Symbol(':err'),
 }
 
-export interface Result<O, E> {
+export interface Match<T, E, U> {
+  ok: (val: T) => U
+  err: (val: E) => U
+}
+
+export interface Result<T, E> {
+  type: symbol
   is_ok(): boolean
   is_err(): boolean
-  match<T, U>(p: MatchPattern<O, E, T, U>): T | U
-  map<T>(fn: (_: O | E) => T): Result<T, E>
-  unwrap(): O
-  unwrap_err(): E
-  unwrap_or(optb: O): O
-  ok(): Option<O>
-  err(): Option<E>
+  ok(): T | never
+  err(): E | never
+  ok_or(optb: T): T
+  match<U>(fn: Match<T, E, U>): U
+  map<U>(fn: (val: T) => U): Result<U, E>
 }
 
-export function is_ok<O, E>(_: Result<O, E>): _ is _Ok<O> {
-  return isObject(_) && isFunction(_.is_ok) && _.is_ok()
+export interface _Ok<T> extends Result<T, never> {
+  ok(): T
+  err(): never
+  match<U>(fn: Match<T, never, U>): U
+  map<U>(fn: (val: T) => U): _Ok<U>
 }
 
-export function is_err<O, E>(_: Result<O, E>): _ is _Err<E> {
-  return isObject(_) && isFunction(_.is_err) && _.is_err()
+export interface _Err<T, E> extends Result<T, E> {
+  ok(): never
+  err(): E
+  match<U>(fn: Match<never, E, U>): U
+  map<U>(fn: (val: T) => U): _Err<U, E>
 }
 
-export function is_result<T, E>(_: any): _ is Result<T, E> {
-  return is_ok(_) || is_err(_)
-}
-
-export class _Ok<O> implements Result<O, any> {
-  protected readonly _: O
-
-  constructor(_: O) {
-    this._ = _
-  }
-
-  is_ok() {
-    return true
-  }
-
-  is_err() {
-    return false
-  }
-
-  match<T, U>(p: MatchPattern<O, any, T, U>): T {
-    return p.ok(this._)
-  }
-
-  map<U>(fn: (_: O) => U): _Ok<U> {
-    return Ok(fn(this._))
-  }
-
-  unwrap(): O {
-    return this._
-  }
-
-  unwrap_err(): never {
-    throw new ReferenceError('Cannot call unwrap_err() on an instance of Ok')
-  }
-
-  unwrap_or(optb: O): O {
-    if (isMissing(optb)) {
-      throw new ReferenceError(
-        'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
-      )
-    }
-
-    return this._
-  }
-
-  ok(): Option<O> {
-    return Some(this._)
-  }
-
-  err(): Option<any> {
-    return None
+export function Ok<T>(val: T): _Ok<T> {
+  return {
+    type: ResultType.Ok,
+    is_ok(): boolean {
+      return true
+    },
+    is_err(): boolean {
+      return false
+    },
+    ok(): T {
+      return val
+    },
+    err(): never {
+      throw new ReferenceError(`Cannot get Err value of Result.Ok`)
+    },
+    ok_or(optb: T): T {
+      return val
+    },
+    match<U>(fn: Match<T, never, U>): U {
+      return fn.ok(val)
+    },
+    map<U>(fn: (val: T) => U): Result<U, never> {
+      return Ok(fn(val))
+    },
   }
 }
 
-export class _Err<E> implements Result<any, E> {
-  protected readonly _: E
-
-  constructor(_: E) {
-    this._ = _
-  }
-
-  is_ok() {
-    return false
-  }
-
-  is_err() {
-    return true
-  }
-
-  match<T, U>(p: MatchPattern<any, E, T, U>): U {
-    return p.err(this._)
-  }
-
-  map<U>(fn: (_: E) => U): _Err<E> {
-    return this
-  }
-
-  unwrap(): never {
-    throw new ReferenceError('Cannot call unwrap() on an instance of Err')
-  }
-
-  unwrap_err(): E {
-    return this._
-  }
-
-  unwrap_or<T>(optb: T): T {
-    if (isMissing(optb)) {
-      throw new ReferenceError(
-        'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
-      )
-    }
-
-    return optb
-  }
-
-  ok(): Option<any> {
-    return None
-  }
-
-  err(): Option<E> {
-    return Some(this._)
+export function Err<T, E>(val: E): _Err<T, E> {
+  return {
+    type: ResultType.Err,
+    is_ok(): boolean {
+      return false
+    },
+    is_err(): boolean {
+      return true
+    },
+    ok(): never {
+      throw new ReferenceError(`Cannot get Ok value of Result.Err`)
+    },
+    err(): E {
+      return val
+    },
+    ok_or(optb: T): T {
+      return optb
+    },
+    match<U>(fn: Match<never, E, U>): U {
+      return fn.err(val)
+    },
+    map<U>(fn: (val: T) => U): _Err<U, E> {
+      return this
+    },
   }
 }
 
-export function Ok<T>(_: T): _Ok<T> {
-  return new _Ok(_)
+export function is_result<T, E>(val: Result<T, E> | any): val is Result<T, E> {
+  return isEqual(val.type, ResultType.Ok) || isEqual(val.type, ResultType.Err)
 }
 
-export function Err<T>(_: T): _Err<T> {
-  return new _Err(_)
+export function is_ok<T, E>(val: Result<T, E>): val is _Ok<T> {
+  throwIfFalse(is_result(val), 'val is not a Result')
+  return val.is_ok()
+}
+
+export function is_err<T, E>(val: Result<T, E>): val is _Err<T, E> {
+  throwIfFalse(is_result(val), 'val is not a Result')
+  return val.is_err()
 }

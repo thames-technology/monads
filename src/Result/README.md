@@ -1,7 +1,6 @@
 # Rust-inspired `Result` type
 
-`Result<T, E>` is the type used for returning and propagating errors. The variants are `Ok(T)`, representing success
-and containing a value, and `Err(E)`, representing error and containing an error value.
+`Result<T, E>` is the type used for returning and propagating errors. The variants are `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
 
 You could consider using `Result` for:
 
@@ -57,151 +56,122 @@ let x: Result<number, string> = Err('Error!')
 console.log(x.is_err()) // true
 ```
 
-### `ok() => Option<T>`
+### `ok() => T`
 
-Converts from `Result<T, E>` to `Option<T>`.
-
-#### Examples
-
-```typescript
-let x: Result<number, string> = Ok(2)
-console.log(x.ok()) // Some(2)
-```
-
-```typescript
-let x: Result<number, string> = Err('Nothing here')
-console.log(x.ok()) // None
-```
-
-### `err() => Option<E>`
-
-Converts from `Result<T, E>` to `Option<E>`.
-
-#### Examples
-
-```typescript
-let x: Result<number, string> = Ok(2)
-console.log(x.err()) // None
-```
-
-```typescript
-let x: Result<number, string> = Err('Nothing here')
-console.log(x.err()) // Some('Nothing here')
-```
-
-### `unwrap() => T`
-
-Unwraps a result, yielding the content of an `Ok`.
+Unwraps and returns `T` on `Ok<T>`.
 
 In general, because this function may throw, its use is discouraged.
-Instead, try to use `match` and handle the `Ok` and `Err` cases explicitly.
+Instead, try to use `match` to handle the `Ok` and `Err` cases explicitly.
 
 #### Throws
 
-Throws a `ReferenceError` if the result is `Err`.
+Throws a `ReferenceError` if called on `Err`.
 
 #### Examples
 
 ```typescript
-let x = Ok('air')
-console.log(x.unwrap()) // 'air'
+let x: Result<number, string> = Ok(2)
+console.log(x.ok()) // 2
 ```
 
 ```typescript
-let x = Err('Panic!')
-console.log(x.unwrap()) // fails, throws an Exception
+let x: Result<number, string> = Err('Nothing here')
+console.log(x.ok()) // throws ReferenceError
 ```
 
 **NOTE:** You can use `is_ok()` to check whether the result is an `Ok`.
-This will enable you to use `unwrap()` in the `true` / success branch.
+This will compile and enable you to use `ok()` in the `true` / success branch.
 
 ```typescript
 const printIndex = (index: Result<string, string>): string => {
     if (is_ok(index)) {
-        return index.unwrap()
+        return index.ok()
     } else {
-        return index.unwrap_err()
+        return index.err()
     }
 }
 ```
 
-### `unwrap_err() => E`
+### `err() => E`
 
-Unwraps a result, yielding the content of an `Err`.
+Unwraps and returns `E` on `Err<E>`.
 
 In general, because this function may throw, its use is discouraged.
-Instead, try to use `match` and handle the `Ok` and `Err` cases explicitly.
+Instead, try to use `match` to handle the `Ok` and `Err` cases explicitly.
 
 #### Throws
 
-Throws a `ReferenceError` if the result is `Ok`.
+Throws a `ReferenceError` if called on `Ok`.
 
 #### Examples
 
 ```typescript
-let x = Err('Expected error')
-console.log(x.unwrap_err()) // 'Expected error'
+let x: Result<number, string> = Ok(2)
+console.log(x.err()) // throws ReferenceError
 ```
 
 ```typescript
-let x = Ok('Panic!')
-console.log(x.unwrap_err()) // fails, throws an Exception
+let x: Result<number, string> = Err('Nothing here')
+console.log(x.err()) // 'Nothing here'
 ```
 
 **NOTE:** You can use `is_err()` to check whether the result is an `Err`.
-This will enable you to use `unwrap_err()` in the `true` / success branch.
+This will compile and enable you to use `err()` in the `true` / success branch.
 
 ```typescript
 const printIndex = (index: Result<string, string>): string => {
     if (is_err(index)) {
-        return index.unwrap_err()
+        return index.err()
     } else {
-        return index.unwrap()
+        return index.ok()
     }
 }
 ```
 
-### `unwrap_or(optb: T) => T`
+### `ok_or(optb: T) => T`
 
-Unwraps a result, yielding the content of an `Ok`. Else, it returns `optb`.
+Unwraps and returns `T`, if called on `Ok`, otherwise returns `optb: T`.
 
 #### Examples
 
 ```typescript
-console.log(Ok('palatable').unwrap_or('taste unknown')) // 'palatable'
-console.log(Err('disgusting').unwrap_or('taste unknown')) // 'taste unknown'
+let x = Ok('bike')
+console.log(x.ok_or('car')) // 'bike'
 ```
 
-### `map(fn: F): Result<U, E>`
+```typescript
+let x = Err('baloon')
+console.log(x.ok_or('air')) // 'air'
+```
+
+### `map(fn: (val: T) => U): Result<U, E>`
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained `Ok` value, leaving an `Err` value untouched.
 
 #### Examples
 
 ```typescript
-const x: Result<number, string> = Ok(123),
-      y: Result<string, string> = x.map(_ => _.toString())
+const x: Result<number, never> = Ok(123),
+      y: Result<string, never> = x.map(val => val.toString())
 
-console.log(y.is_ok()) // true
-console.log(y.is_err()) // false
-console.log(y.unwrap('N/A')) // '123'
+console.log(x.ok()) // 123
+console.log(y.ok()) // '123'
 ```
 
 ```typescript
-const x: Result<number, string> = Err('Not a number'),
-      y: Result<string, string> = x.map(_ => _.toString())
+const x: Result<string, string> = Err('123'),
+      y: Result<number, string> = x.map(parseInt)
 
-console.log(y.is_ok()) // false
-console.log(y.is_err()) // true
-console.log(y.unwrap_err()) // 'Not a number'
+console.log(x.err()) // '123'
+console.log(y.err()) // '123'
 ```
 
 ### `match(p: MatchPattern<O, E, T>): T`
 
 ```typescript
 interface MatchPattern<O, E, T> {
-  ok: (_: O) => T
-  err: (_: E) => T
+  ok: (val: O) => T
+  err: (val: E) => T
 }
 ```
 
@@ -211,7 +181,7 @@ Applies a functions to retrieve contained values within a `Result`.
 
 ```typescript
 const getFullYear = (date: Result<Date, string>): number => date.match({
-  ok: _ => _.getFullYear(),
+  ok: val => val.getFullYear(),
   err: _ => 1994
 })
 
@@ -228,7 +198,7 @@ console.log(getFullYear(errDate)) // 1994
 
 ```typescript
 const getFullYear = (date: Result<Date, string>): number => date.match({
-  ok: _ => _.getFullYear(),
+  ok: val => val.getFullYear(),
   err: _ => '1994' // Error: Type 'string | number' is not assignable to type 'number'.
 })
 ```

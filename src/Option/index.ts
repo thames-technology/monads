@@ -1,32 +1,138 @@
-import { isPresent, isMissing, isObject, isFunction } from '@openmaths/utils'
+import {
+  isEqual,
+  isFunction,
+  isPresent,
+  throwIfMissing,
+  throwIfFalse,
+} from '@openmaths/utils'
 
-export interface MatchPattern<T, S, N> {
-  some: (_: T) => S
-  none: (() => N) | N
+export const OptionType = {
+  Some: Symbol(':some'),
+  None: Symbol(':none'),
+}
+
+export interface Match<T, U> {
+  some: (val: T) => U
+  none: (() => U) | U
 }
 
 export interface Option<T> {
+  type: symbol
   is_some(): boolean
   is_none(): boolean
-  match<S, N>(p: MatchPattern<T, S, N>): S | N
-  map<U>(fn: (_: T) => U): Option<U>
-  and_then<U>(fn: (_: T) => Option<U>): Option<U>
-  or(optb: Option<T>): Option<T>
-  and(optb: Option<T>): Option<T>
+  match<U>(fn: Match<T, U>): U
+  map<U>(fn: (val: T) => U): Option<U>
+  and_then<U>(fn: (val: T) => Option<U>): Option<U>
+  or<U>(optb: Option<U>): Option<T | U>
+  and<U>(optb: Option<U>): Option<U>
   unwrap_or(def: T): T
-  unwrap(): T | undefined
+  unwrap(): T | never
 }
 
-export function is_some<T>(_: Option<T>): _ is _Some<T> {
-  return isObject(_) && isFunction(_.is_some) && _.is_some()
+export interface _Some<T> extends Option<T> {
+  unwrap(): T
+  map<U>(fn: (val: T) => U): _Some<U>
+  or<U>(optb: Option<U>): Option<T>
+  and<U>(optb: Option<U>): Option<U>
 }
 
-export function is_none<T>(_: Option<T>): _ is _None {
-  return isObject(_) && isFunction(_.is_none) && _.is_none()
+export interface _None<T> extends Option<T> {
+  unwrap(): never
+  map<U>(fn: (val: T) => U): _None<U>
+  or<U>(optb: Option<U>): Option<U>
+  and<U>(optb: Option<U>): _None<U>
 }
 
-export function is_option<T>(_: any): _ is Option<T> {
-  return is_some(_) || is_none(_)
+export function Some<T>(val: T | null | undefined): Option<T> {
+  return isPresent(val) ? some_constructor<T>(val as T) : none_constructor<T>()
+}
+
+export const None = none_constructor<any>()
+
+export function some_constructor<T>(val: T): _Some<T> {
+  throwIfMissing(val, `Some has to contain a value. Received ${typeof val}.`)
+
+  return {
+    type: OptionType.Some,
+    is_some(): boolean {
+      return true
+    },
+    is_none(): boolean {
+      return false
+    },
+    match<U>(fn: Match<T, U>): U {
+      return fn.some(val)
+    },
+    map<U>(fn: (val: T) => U) {
+      return some_constructor<U>(fn(val))
+    },
+    and_then<U>(fn: (val: T) => Option<U>): Option<U> {
+      return fn(val)
+    },
+    or<U>(_optb: Option<U>): Option<T> {
+      return this
+    },
+    and<U>(optb: Option<U>): Option<U> {
+      return optb
+    },
+    unwrap_or(_def: T): T {
+      throwIfMissing(_def, 'Cannot call unwrap_or with a missing value.')
+      return val
+    },
+    unwrap(): T {
+      return val
+    },
+  }
+}
+
+export function none_constructor<T>(): _None<T> {
+  return {
+    type: OptionType.None,
+    is_some(): boolean {
+      return false
+    },
+    is_none(): boolean {
+      return true
+    },
+    match<U>(fn: Match<T, U>): U {
+      return isFunction(fn.none) ? fn.none() : fn.none
+    },
+    map<U>(fn: (val: T) => U) {
+      return none_constructor<U>()
+    },
+    and_then<U>(fn: (val: T) => Option<U>): _None<U> {
+      return none_constructor<U>()
+    },
+    or<U>(optb: Option<U>): Option<U> {
+      return optb
+    },
+    and<U>(_optb: Option<U>): _None<U> {
+      return none_constructor<U>()
+    },
+    unwrap_or(def: T): T {
+      throwIfMissing(def, 'Cannot call unwrap_or with a missing value.')
+      return def
+    },
+    unwrap(): never {
+      throw new ReferenceError('Trying to unwrap None.')
+    },
+  }
+}
+
+export function is_option<T>(val: Option<T> | any): val is Option<T> {
+  return (
+    isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
+  )
+}
+
+export function is_some<T>(val: Option<T>): val is _Some<T> {
+  throwIfFalse(is_option(val), 'val is not an Option')
+  return val.is_some()
+}
+
+export function is_none<T>(val: Option<T>): val is _None<T> {
+  throwIfFalse(is_option(val), 'val is not an Option')
+  return val.is_none()
 }
 
 export function get_in(
@@ -38,129 +144,3 @@ export function get_in(
     .reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
   return Some(val)
 }
-
-export class _Some<T> implements Option<T> {
-  protected readonly _: T
-
-  constructor(_: T) {
-    this._ = _
-  }
-
-  is_some() {
-    return true
-  }
-
-  is_none() {
-    return false
-  }
-
-  match<S, N>(p: MatchPattern<T, S, N>): S {
-    return p.some(this._)
-  }
-
-  map<U>(fn: (_: T) => U): Option<U> {
-    let newVal: Option<U>
-
-    try {
-      newVal = Some(fn(this._))
-    } catch (e) {
-      console.error(`Error: ${e}`)
-      newVal = None
-    }
-
-    return newVal
-  }
-
-  and_then<U>(fn: (_: T) => Option<U>): Option<U> {
-    let newVal: Option<U>
-
-    try {
-      newVal = fn(this._)
-    } catch (e) {
-      console.error(`Error: ${e}`)
-      newVal = None
-    }
-
-    return newVal
-  }
-
-  or(optb: Option<T>): Option<T> {
-    return Some(this._)
-  }
-
-  and(optb: Option<T>): Option<T> {
-    return optb
-  }
-
-  unwrap(): T {
-    if (isMissing(this._)) {
-      throw new ReferenceError('Cannot unwrap "null" or "undefined"')
-    }
-
-    return this._
-  }
-
-  unwrap_or(def: T): T {
-    if (isMissing(def)) {
-      throw new ReferenceError(
-        'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
-      )
-    }
-
-    return this._
-  }
-}
-
-export class _None implements Option<never> {
-  is_some() {
-    return false
-  }
-
-  is_none() {
-    return true
-  }
-
-  match<S, N>(p: MatchPattern<never, S, N>): N {
-    if (typeof p.none === 'function') {
-      return p.none()
-    } else {
-      return p.none
-    }
-  }
-
-  map<T>(fn: (_: never) => T): Option<T> {
-    return new _None()
-  }
-
-  and_then<T>(fn: (_: never) => Option<T>): Option<T> {
-    return new _None()
-  }
-
-  or<T>(optb: Option<T>): Option<T> {
-    return optb
-  }
-
-  and<T>(optb: Option<T>): Option<T> {
-    return new _None()
-  }
-
-  unwrap(): never {
-    throw new ReferenceError('Cannot unwrap None')
-  }
-
-  unwrap_or<T>(def: T): T {
-    if (isMissing(def)) {
-      throw new ReferenceError(
-        'Cannot use "null" or "undefined" as default parameter when calling unwrap_or()',
-      )
-    }
-
-    return def
-  }
-}
-
-export function Some<T>(_: T | null | undefined): Option<T> {
-  return isPresent(_) ? new _Some(_ as T) : new _None()
-}
-
-export const None = new _None()

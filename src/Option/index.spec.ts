@@ -1,12 +1,12 @@
 import {
   Option,
+  OptionType,
+  some_constructor,
   Some,
   None,
   is_some,
   is_none,
   is_option,
-  _Some,
-  _None,
   get_in,
 } from '.'
 
@@ -24,18 +24,18 @@ describe('Option', () => {
         () => {
           const subject = Some(scenario.value)
 
-          expect(subject instanceof _Some).toEqual(true)
+          expect(subject.type).toEqual(OptionType.Some)
 
           expect(subject.is_some()).toEqual(true)
           expect(subject.is_none()).toEqual(false)
           expect(subject.unwrap_or({} as any)).toEqual(scenario.value)
 
-          if (is_some(subject)) {
-            expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
-            expect(subject.unwrap()).toEqual(scenario.value)
-          } else {
-            throw new Error('Has to be _Some!')
-          }
+          // if (is_some(subject)) {
+          expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
+          expect(subject.unwrap()).toEqual(scenario.value)
+          // } else {
+          //   throw new Error('Has to be _Some!')
+          // }
         },
       )
     }
@@ -131,20 +131,20 @@ describe('Option', () => {
         () => {
           const subject = Some(val)
 
-          expect(subject instanceof _Some).toEqual(true)
+          expect(subject.type).toEqual(OptionType.Some)
 
           expect(subject.is_some()).toEqual(true)
           expect(subject.is_none()).toEqual(false)
           expect(subject.unwrap_or(val)).toEqual(val)
 
-          if (is_some(subject)) {
-            const type = typeof subject.unwrap()
+          // if (is_some(subject)) {
+          const type = typeof subject.unwrap()
 
-            expect(type === 'function' || type === 'object').toEqual(true)
-            expect(subject.unwrap()).toEqual(val)
-          } else {
-            throw new Error('Has to be _Some!')
-          }
+          expect(type === 'function' || type === 'object').toEqual(true)
+          expect(subject.unwrap()).toEqual(val)
+          // } else {
+          // throw new Error('Has to be _Some!')
+          // }
         },
       )
     })
@@ -172,7 +172,7 @@ describe('Option', () => {
         it('is None when trying to access out of bound index, property or variable, calling unwrap() impossible', () => {
           const subject = Some(scenario.value)
 
-          expect(subject instanceof _None).toEqual(true)
+          expect(subject.type).toEqual(OptionType.None)
 
           expect(subject.is_none()).toEqual(true)
           expect(subject.is_some()).toEqual(false)
@@ -188,7 +188,7 @@ describe('Option', () => {
         const string = Some('string')
 
         const subject = string.match({
-          some: _ => _.toUpperCase(),
+          some: str => str.toUpperCase(),
           none: 'OTHER STRING',
         })
 
@@ -223,7 +223,7 @@ describe('Option', () => {
     it('correctly creates its instance, returns correct value when calling unwrap_or()', () => {
       const subject = None
 
-      expect(subject instanceof _None).toEqual(true)
+      expect(subject.type).toEqual(OptionType.None)
 
       expect(subject.is_none()).toEqual(true)
       expect(subject.is_some()).toEqual(false)
@@ -257,7 +257,7 @@ describe('Option', () => {
       it('correctly maps Some and returns a new Some with transformed value', () => {
         const subject = None.map(_ => parseInt(_))
 
-        expect(subject instanceof _None).toEqual(true)
+        expect(subject.type).toEqual(OptionType.None)
       })
     })
   })
@@ -325,29 +325,28 @@ describe('Option', () => {
         expect(subject.is_none()).toEqual(true)
       })
 
-      it('returns None when method throws', () => {
+      it('throws when transform function throws', () => {
         const arr = [1, 2, 3]
 
-        const subject = Some(arr[0]).map(_ => JSON.parse('{null}'))
+        const subject = () => Some(arr[0]).map(_ => JSON.parse('{null}'))
 
-        expect(subject.is_none()).toEqual(true)
+        expect(subject).toThrow(SyntaxError) // cos JSON.parse
       })
     })
   })
 
-  describe('unwrap', () => {
+  describe('constructor', () => {
     it('throws if no value inside', () => {
-      const string: Option<string> = new _Some(null as any)
-      expect(() => string.unwrap()).toThrow()
+      expect(() => some_constructor(null as any)).toThrow()
     })
   })
 
-  describe('unwrap_or', () => {
-    it('throws if no value provided', () => {
-      const string: Option<string> = new _Some(null as any)
-      expect(() => string.unwrap_or(null as any)).toThrow()
-    })
-  })
+  // describe('unwrap_or', () => {
+  //   it('throws if no value provided', () => {
+  //     const string: Option<string> = some_constructor(null as any)
+  //     expect(() => string.unwrap_or(null as any)).toThrow()
+  //   })
+  // })
 })
 
 describe('is_some', () => {
@@ -538,14 +537,14 @@ describe('and_then', () => {
     expect(subject.is_none()).toEqual(true)
   })
 
-  it('catches error and returns None if method throws', () => {
+  it('throws if transform function throws', () => {
     contact.name = Some('Name')
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
-    const subject = truck.driver.and_then(_ => Some(JSON.parse('{null}')))
+    const subject = () => truck.driver.and_then(_ => Some(JSON.parse('{null}')))
 
-    expect(subject.is_none()).toEqual(true)
+    expect(subject).toThrow(SyntaxError)
   })
 })
 
