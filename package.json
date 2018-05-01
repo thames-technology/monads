@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@types/jest": "22.1.1",
-    "@types/node": "8.5.10",
+    "@types/node": "8.10.11",
     "jest": "22.2.1",
     "prettier": "1.10.2",
     "ts-jest": "22.0.3",
