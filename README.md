@@ -8,7 +8,7 @@ Previously known on npm as [tsp-monads](https://www.npmjs.com/package/tsp-monads
 ![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
 [![npm version](https://img.shields.io/npm/v/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads)
 
-**NOTE:** Works with TypeScript 2+ _and_ JavaScript (ES5+). `strictNullChecks` option / flag strongly recommended.
+**NOTE:** Works with TypeScript 2+ _and_ JavaScript (ES6+). `strictNullChecks` option / flag strongly recommended.
 
 ## Documentation
 
