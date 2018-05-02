@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/src
   docker:
-    - image: circleci/node:8.9
+    - image: circleci/node:8.9@sha256:24e35a687948c0a1addfa7e6145f5ae22fda663b457139380f3132e16be0ffb5
 
 whitelist: &whitelist
   paths:
