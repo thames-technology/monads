@@ -8,42 +8,33 @@ import {
   is_none,
   is_option,
   get_in,
-} from '.'
+} from "."
 
-describe('Option', () => {
+describe("Option", () => {
   interface IScenario<T> {
     value: T
   }
 
   function getAssertion<T>(type: string) {
     return (scenario: IScenario<T>) => {
-      it(
-        "correctly creates an instance of Some with value '" +
-          scenario.value +
-          "'",
-        () => {
-          const subject = Some(scenario.value)
+      it("correctly creates an instance of Some with value '" + scenario.value + "'", () => {
+        const subject = Some(scenario.value)
 
-          expect(subject.type).toEqual(OptionType.Some)
+        expect(subject.type).toEqual(OptionType.Some)
 
-          expect(subject.is_some()).toEqual(true)
-          expect(subject.is_none()).toEqual(false)
-          expect(subject.unwrap_or({} as any)).toEqual(scenario.value)
+        expect(subject.is_some()).toEqual(true)
+        expect(subject.is_none()).toEqual(false)
+        expect(subject.unwrap_or({} as any)).toEqual(scenario.value)
 
-          // if (is_some(subject)) {
-          expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
-          expect(subject.unwrap()).toEqual(scenario.value)
-          // } else {
-          //   throw new Error('Has to be _Some!')
-          // }
-        },
-      )
+        expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
+        expect(subject.unwrap()).toEqual(scenario.value)
+      })
     }
   }
 
-  describe('Some', () => {
-    describe('Boolean', () => {
-      const type = 'Boolean'
+  describe("Some", () => {
+    describe("Boolean", () => {
+      const type = "Boolean"
 
       const scenarios: IScenario<boolean>[] = [
         { value: true },
@@ -56,8 +47,8 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('Number', () => {
-      const type = 'Number'
+    describe("Number", () => {
+      const type = "Number"
 
       const scenarios: IScenario<number>[] = [
         { value: 37 },
@@ -74,14 +65,14 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('String', () => {
-      const type = 'String'
+    describe("String", () => {
+      const type = "String"
 
       const scenarios: IScenario<string>[] = [
-        { value: '' },
-        { value: 'bla' },
+        { value: "" },
+        { value: "bla" },
         { value: typeof 1 },
-        { value: String('abc') },
+        { value: String("abc") },
       ]
 
       const assertion = getAssertion<string>(type)
@@ -89,8 +80,8 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('Function', () => {
-      const type = 'Function'
+    describe("Function", () => {
+      const type = "Function"
 
       const scenarios: IScenario<Function>[] = [
         {
@@ -107,8 +98,8 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('Object', () => {
-      const type = 'Object'
+    describe("Object", () => {
+      const type = "Object"
 
       const scenarios: IScenario<Object>[] = [
         { value: { a: 1 } },
@@ -116,7 +107,7 @@ describe('Option', () => {
         { value: new Date() },
         { value: new Boolean(true) },
         { value: new Number(1) },
-        { value: new String('abc') },
+        { value: new String("abc") },
       ]
 
       const assertion = getAssertion<Object>(type)
@@ -124,40 +115,33 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('RegEx', () => {
+    describe("RegEx", () => {
       const val = /s/
-      it(
-        "correctly creates an instance of Option with value '" + val + "'",
-        () => {
-          const subject = Some(val)
+      it("correctly creates an instance of Option with value '" + val + "'", () => {
+        const subject = Some(val)
 
-          expect(subject.type).toEqual(OptionType.Some)
+        expect(subject.type).toEqual(OptionType.Some)
 
-          expect(subject.is_some()).toEqual(true)
-          expect(subject.is_none()).toEqual(false)
-          expect(subject.unwrap_or(val)).toEqual(val)
+        expect(subject.is_some()).toEqual(true)
+        expect(subject.is_none()).toEqual(false)
+        expect(subject.unwrap_or(val)).toEqual(val)
 
-          // if (is_some(subject)) {
-          const type = typeof subject.unwrap()
+        const type = typeof subject.unwrap()
 
-          expect(type === 'function' || type === 'object').toEqual(true)
-          expect(subject.unwrap()).toEqual(val)
-          // } else {
-          // throw new Error('Has to be _Some!')
-          // }
-        },
-      )
+        expect(type === "function" || type === "object").toEqual(true)
+        expect(subject.unwrap()).toEqual(val)
+      })
     })
 
-    describe('Undefined, Null', () => {
-      let array: string[] = ['a', 'b']
+    describe("Undefined, Null", () => {
+      let array: string[] = ["a", "b"]
       const outOfBoundIndex = array.length + 1
 
       let object = {
-        a: '_a',
-        b: '_b',
+        a: "_a",
+        b: "_b",
       }
-      const outOfBoundProperty = 'z'
+      const outOfBoundProperty = "z"
 
       const scenarios: IScenario<undefined | null>[] = [
         { value: undefined },
@@ -169,7 +153,7 @@ describe('Option', () => {
       ]
 
       const assertion = (scenario: IScenario<any>) => {
-        it('is None when trying to access out of bound index, property or variable, calling unwrap() impossible', () => {
+        it("is None when trying to access out of bound index, property or variable, calling unwrap() impossible", () => {
           const subject = Some(scenario.value)
 
           expect(subject.type).toEqual(OptionType.None)
@@ -183,19 +167,19 @@ describe('Option', () => {
       scenarios.forEach(assertion)
     })
 
-    describe('match', () => {
-      it('correctly matches Some and returns transformed value', () => {
-        const string = Some('string')
+    describe("match", () => {
+      it("correctly matches Some and returns transformed value", () => {
+        const string = Some("string")
 
         const subject = string.match({
           some: str => str.toUpperCase(),
-          none: 'OTHER STRING',
+          none: "OTHER STRING",
         })
 
-        expect(subject).toEqual('STRING')
+        expect(subject).toEqual("STRING")
       })
 
-      it('correctly matches None and returns fallback value', () => {
+      it("correctly matches None and returns fallback value", () => {
         const arr = [1, 2, 3]
         const maybeNumber = Some(arr[arr.length + 1])
 
@@ -208,9 +192,9 @@ describe('Option', () => {
       })
     })
 
-    describe('map', () => {
-      it('correctly maps Some and returns a new Some with transformed value', () => {
-        const string = Some('123')
+    describe("map", () => {
+      it("correctly maps Some and returns a new Some with transformed value", () => {
+        const string = Some("123")
 
         const subject = string.map(_ => parseInt(_))
 
@@ -219,8 +203,8 @@ describe('Option', () => {
     })
   })
 
-  describe('None', () => {
-    it('correctly creates its instance, returns correct value when calling unwrap_or()', () => {
+  describe("None", () => {
+    it("correctly creates its instance, returns correct value when calling unwrap_or()", () => {
       const subject = None
 
       expect(subject.type).toEqual(OptionType.None)
@@ -228,33 +212,33 @@ describe('Option', () => {
       expect(subject.is_none()).toEqual(true)
       expect(subject.is_some()).toEqual(false)
 
-      expect(subject.unwrap_or('string')).toEqual('string')
+      expect(subject.unwrap_or("string")).toEqual("string")
     })
 
-    describe('unwrap_or', () => {
-      it('should correctly throw if trying to call with undefined or null', () => {
+    describe("unwrap_or", () => {
+      it("should correctly throw if trying to call with undefined or null", () => {
         const subject = None
 
-        const array = ['a'],
+        const array = ["a"],
           outOfBoundIndex = array.length + 1
 
         expect(() => subject.unwrap_or(array[outOfBoundIndex])).toThrow()
       })
     })
 
-    describe('match', () => {
-      it('correctly matches None and returns fallback value', () => {
+    describe("match", () => {
+      it("correctly matches None and returns fallback value", () => {
         const subject = None.match({
-          some: _ => 'something',
-          none: 'nothing',
+          some: _ => "something",
+          none: "nothing",
         })
 
-        expect(subject).toEqual('nothing')
+        expect(subject).toEqual("nothing")
       })
     })
 
-    describe('map', () => {
-      it('correctly maps Some and returns a new Some with transformed value', () => {
+    describe("map", () => {
+      it("correctly maps Some and returns a new Some with transformed value", () => {
         const subject = None.map(_ => parseInt(_))
 
         expect(subject.type).toEqual(OptionType.None)
@@ -262,9 +246,9 @@ describe('Option', () => {
     })
   })
 
-  describe('Option', () => {
-    describe('match', () => {
-      it('correctly matches Some and returns transformed value', () => {
+  describe("Option", () => {
+    describe("match", () => {
+      it("correctly matches Some and returns transformed value", () => {
         let a: Option<Date>
 
         const date = new Date()
@@ -280,7 +264,7 @@ describe('Option', () => {
         expect(subject).toEqual(date.getFullYear())
       })
 
-      it('correctly matches None and returns fallback value', () => {
+      it("correctly matches None and returns fallback value", () => {
         let a: Option<boolean>
 
         const initialValue = true
@@ -296,28 +280,28 @@ describe('Option', () => {
         expect(subject).toEqual(initialValue)
       })
 
-      it('correctly matches None and returns fallback value when method provided to none branch', () => {
+      it("correctly matches None and returns fallback value when method provided to none branch", () => {
         let a: Option<string> = None
 
         const subject = a.match({
           some: _ => _,
-          none: () => 'N/A',
+          none: () => "N/A",
         })
 
-        expect(subject).toEqual('N/A')
+        expect(subject).toEqual("N/A")
       })
     })
 
-    describe('map', () => {
-      it('returns transformed Some when method applied to a value that exists', () => {
+    describe("map", () => {
+      it("returns transformed Some when method applied to a value that exists", () => {
         const arr = [1, 2, 3]
 
         const subject = Some(arr[0]).map(_ => _.toString())
 
-        expect(is_some(subject) ? subject.unwrap() : undefined).toEqual('1')
+        expect(is_some(subject) ? subject.unwrap() : undefined).toEqual("1")
       })
 
-      it('returns None when method applied to a value that does not exist', () => {
+      it("returns None when method applied to a value that does not exist", () => {
         const arr = [1, 2, 3]
 
         const subject = Some(arr[arr.length + 1]).map(_ => _.toString())
@@ -325,32 +309,25 @@ describe('Option', () => {
         expect(subject.is_none()).toEqual(true)
       })
 
-      it('throws when transform function throws', () => {
+      it("throws when transform function throws", () => {
         const arr = [1, 2, 3]
 
-        const subject = () => Some(arr[0]).map(_ => JSON.parse('{null}'))
+        const subject = () => Some(arr[0]).map(_ => JSON.parse("{null}"))
 
         expect(subject).toThrow(SyntaxError) // cos JSON.parse
       })
     })
   })
 
-  describe('constructor', () => {
-    it('throws if no value inside', () => {
+  describe("constructor", () => {
+    it("throws if no value inside", () => {
       expect(() => some_constructor(null as any)).toThrow()
     })
   })
-
-  // describe('unwrap_or', () => {
-  //   it('throws if no value provided', () => {
-  //     const string: Option<string> = some_constructor(null as any)
-  //     expect(() => string.unwrap_or(null as any)).toThrow()
-  //   })
-  // })
 })
 
-describe('is_some', () => {
-  it('should unwrap after a successful preliminary check', () => {
+describe("is_some", () => {
+  it("should unwrap after a successful preliminary check", () => {
     let a: number
 
     const subject = Some(42)
@@ -364,8 +341,8 @@ describe('is_some', () => {
     expect(a).toEqual(42)
   })
 
-  it('should not unwrap after a failing preliminary check', () => {
-    const a: string[] = ['a', 'b', 'c'],
+  it("should not unwrap after a failing preliminary check", () => {
+    const a: string[] = ["a", "b", "c"],
       outOfBoundIndex = a.length + 1
 
     let b: string
@@ -375,16 +352,16 @@ describe('is_some', () => {
     if (is_some(subject)) {
       b = subject.unwrap()
     } else {
-      b = 'This Is None'
+      b = "This Is None"
     }
 
-    expect(b).toEqual('This Is None')
+    expect(b).toEqual("This Is None")
   })
 })
 
-describe('is_none', () => {
-  it('should return true if Option is None', () => {
-    const a: string[] = ['a', 'b', 'c'],
+describe("is_none", () => {
+  it("should return true if Option is None", () => {
+    const a: string[] = ["a", "b", "c"],
       outOfBoundIndex = a.length + 1
 
     let b: string
@@ -392,16 +369,16 @@ describe('is_none', () => {
     const subject = Some(a[outOfBoundIndex])
 
     if (is_none(subject)) {
-      b = 'Correct'
+      b = "Correct"
     } else {
-      b = 'Fail'
+      b = "Fail"
     }
 
     expect(is_none(subject)).toEqual(true)
-    expect(b).toEqual('Correct')
+    expect(b).toEqual("Correct")
   })
 
-  it('should return false if Option is Some', () => {
+  it("should return false if Option is Some", () => {
     const a = () => null
 
     let b: string
@@ -409,74 +386,74 @@ describe('is_none', () => {
     const subject = Some(a)
 
     if (is_none(subject)) {
-      b = 'Fail'
+      b = "Fail"
     } else {
-      b = 'Correct'
+      b = "Correct"
     }
 
     expect(is_none(subject)).toEqual(false)
-    expect(b).toEqual('Correct')
+    expect(b).toEqual("Correct")
   })
 
-  it('should return true if value is None', () => {
+  it("should return true if value is None", () => {
     let a: string
 
     const subject = None
 
     if (is_none(subject)) {
-      a = 'Correct'
+      a = "Correct"
     } else {
-      a = 'Fail'
+      a = "Fail"
     }
 
     expect(is_none(subject)).toEqual(true)
-    expect(a).toEqual('Correct')
+    expect(a).toEqual("Correct")
   })
 })
 
-describe('is_option', () => {
-  it('should return true if Option is None', () => {
+describe("is_option", () => {
+  it("should return true if Option is None", () => {
     expect(is_option(None)).toEqual(true)
   })
 
-  it('should return true if Option is Some', () => {
-    expect(is_option(Some(''))).toEqual(true)
+  it("should return true if Option is Some", () => {
+    expect(is_option(Some(""))).toEqual(true)
   })
 
-  it('should return false if value is not an Option', () => {
+  it("should return false if value is not an Option", () => {
     expect(is_option(new Function())).toEqual(false)
     expect(is_option({})).toEqual(false)
     expect(is_option([])).toEqual(false)
     expect(is_option(true)).toEqual(false)
-    expect(is_option('')).toEqual(false)
+    expect(is_option("")).toEqual(false)
     expect(is_option(42)).toEqual(false)
   })
 })
 
-describe('get_in', () => {
-  it('correctly returns a Some if key found in nested object', () => {
-    const obj = { a: { b: 'val' } }
-    const subject: Option<string> = get_in(obj, 'a.b')
+describe("get_in", () => {
+  it("correctly returns a Some if key found in nested object", () => {
+    const obj = { a: { b: "val" } }
+    const subject: Option<string> = get_in(obj, "a.b")
 
     expect(subject.is_some()).toEqual(true)
-    expect(subject.unwrap_or('')).toEqual('val')
+    expect(subject.unwrap_or("")).toEqual("val")
   })
 
-  it('correctly returns a None if key not found in nested object', () => {
-    const obj = { a: { b: 'val' } }
-    const subject: Option<string> = get_in(obj, 'a.nonExistentKey')
+  it("correctly returns a None if key not found in nested object", () => {
+    const obj = { a: { b: "val" } }
+    const subject: Option<string> = get_in(obj, "a.nonExistentKey")
 
     expect(subject.is_none()).toEqual(true)
   })
 
-  it('correctly returns a None if object itself undefined', () => {
-    const subject: Option<string> = get_in(undefined, 'a.b.c.d')
+  it("correctly returns a None if object itself undefined", () => {
+    const subject: Option<string> = get_in(undefined, "a.b.c.d")
 
     expect(subject.is_none()).toEqual(true)
   })
 })
 
-describe('and_then', () => {
+describe("and_then", () => {
   interface Contact {
     name: Option<string>
   }
@@ -497,15 +474,15 @@ describe('and_then', () => {
     truck = { driver: None }
   })
 
-  it('correctly returns the name as a Some if all properties are Some', () => {
-    contact.name = Some('Name')
+  it("correctly returns the name as a Some if all properties are Some", () => {
+    contact.name = Some("Name")
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
     const subject = truck.driver.and_then(_ => _.contact).and_then(_ => _.name)
 
     expect(subject.is_some()).toEqual(true)
-    expect(subject.unwrap_or('')).toEqual('Name')
+    expect(subject.unwrap_or("")).toEqual("Name")
   })
 
   it("correctly returns None if 'contact.name' is None", () => {
@@ -518,7 +495,7 @@ describe('and_then', () => {
   })
 
   it("correctly returns None if 'contact' is None", () => {
-    contact.name = Some('Name')
+    contact.name = Some("Name")
     driver.contact = None
     truck.driver = Some(driver)
 
@@ -528,7 +505,7 @@ describe('and_then', () => {
   })
 
   it("correctly returns None if 'driver' is None", () => {
-    contact.name = Some('Name')
+    contact.name = Some("Name")
     driver.contact = Some(contact)
     truck.driver = None
 
@@ -537,18 +514,18 @@ describe('and_then', () => {
     expect(subject.is_none()).toEqual(true)
   })
 
-  it('throws if transform function throws', () => {
-    contact.name = Some('Name')
+  it("throws if transform function throws", () => {
+    contact.name = Some("Name")
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
-    const subject = () => truck.driver.and_then(_ => Some(JSON.parse('{null}')))
+    const subject = () => truck.driver.and_then(_ => Some(JSON.parse("{null}")))
 
     expect(subject).toThrow(SyntaxError)
   })
 })
 
-describe('or', () => {
+describe("or", () => {
   it("correctly returns Some(a) if 'a' is Some and 'b' is None", () => {
     const a = Some(123),
       b = None
@@ -581,7 +558,7 @@ describe('or', () => {
   })
 })
 
-describe('and', () => {
+describe("and", () => {
   it("correctly returns None if 'a' is Some and 'b' is None", () => {
     const a = Some(123),
       b = None

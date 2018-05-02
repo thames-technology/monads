@@ -1,8 +1,8 @@
-import { isEqual, throwIfFalse } from '@openmaths/utils'
+import { isEqual, throwIfFalse } from "@openmaths/utils"
 
 export const ResultType = {
-  Ok: Symbol(':ok'),
-  Err: Symbol(':err'),
+  Ok: Symbol(":ok"),
+  Err: Symbol(":err"),
 }
 
 export interface Match<T, E, U> {
@@ -94,11 +94,11 @@ export function is_result<T, E>(val: Result<T, E> | any): val is Result<T, E> {
 }
 
 export function is_ok<T, E>(val: Result<T, E>): val is _Ok<T> {
-  throwIfFalse(is_result(val), 'val is not a Result')
+  throwIfFalse(is_result(val), "val is not a Result")
   return val.is_ok()
 }
 
 export function is_err<T, E>(val: Result<T, E>): val is _Err<T, E> {
-  throwIfFalse(is_result(val), 'val is not a Result')
+  throwIfFalse(is_result(val), "val is not a Result")
   return val.is_err()
 }

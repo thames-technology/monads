@@ -1,14 +1,8 @@
-import {
-  isEqual,
-  isFunction,
-  isPresent,
-  throwIfMissing,
-  throwIfFalse,
-} from '@openmaths/utils'
+import { isEqual, isFunction, isPresent, throwIfMissing, throwIfFalse } from "@openmaths/utils"
 
 export const OptionType = {
-  Some: Symbol(':some'),
-  None: Symbol(':none'),
+  Some: Symbol(":some"),
+  None: Symbol(":none"),
 }
 
 export interface Match<T, U> {
@@ -75,8 +69,8 @@ export function some_constructor<T>(val: T): _Some<T> {
     and<U>(optb: Option<U>): Option<U> {
       return optb
     },
-    unwrap_or(_def: T): T {
-      throwIfMissing(_def, 'Cannot call unwrap_or with a missing value.')
+    unwrap_or(def: T): T {
+      throwIfMissing(def, "Cannot call unwrap_or with a missing value.")
       return val
     },
     unwrap(): T {
@@ -110,37 +104,30 @@ export function none_constructor<T>(): _None<T> {
       return none_constructor<U>()
     },
     unwrap_or(def: T): T {
-      throwIfMissing(def, 'Cannot call unwrap_or with a missing value.')
+      throwIfMissing(def, "Cannot call unwrap_or with a missing value.")
       return def
     },
     unwrap(): never {
-      throw new ReferenceError('Trying to unwrap None.')
+      throw new ReferenceError("Trying to unwrap None.")
     },
   }
 }
 
 export function is_option<T>(val: Option<T> | any): val is Option<T> {
-  return (
-    isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
-  )
+  return isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
 }
 
 export function is_some<T>(val: Option<T>): val is _Some<T> {
-  throwIfFalse(is_option(val), 'val is not an Option')
+  throwIfFalse(is_option(val), "val is not an Option")
   return val.is_some()
 }
 
 export function is_none<T>(val: Option<T>): val is _None<T> {
-  throwIfFalse(is_option(val), 'val is not an Option')
+  throwIfFalse(is_option(val), "val is not an Option")
   return val.is_none()
 }
 
-export function get_in(
-  obj: Object | undefined | null,
-  key: string,
-): Option<any> {
-  const val = key
-    .split('.')
-    .reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
+export function get_in(obj: Object | undefined | null, key: string): Option<any> {
+  const val = key.split(".").reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
   return Some(val)
 }
