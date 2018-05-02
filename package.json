@@ -1,11 +1,11 @@
 {
   "name": "@threestup/monads",
-  "version": "0.4.0",
+  "version": "1.0.2",
   "description": "Option and Result types for JavaScript; TypeScript first",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
-    "node": ">=6.11.0"
+    "node": ">=8.9.0"
   },
   "scripts": {
     "test": "make test"
@@ -17,7 +17,7 @@
     "@types/jest": "22.1.1",
     "@types/node": "8.10.11",
     "jest": "22.2.1",
-    "prettier": "1.10.2",
+    "prettier": "1.12.1",
     "ts-jest": "22.0.3",
     "typescript": "2.7.1"
   },
