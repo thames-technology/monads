@@ -12,7 +12,6 @@
     "<rootDir>/node_modules/",
     "<rootDir>/dist/"
   ],
-  "mapCoverage": true,
   "transform": {
     "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
   },
