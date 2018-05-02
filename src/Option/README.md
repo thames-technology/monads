@@ -25,7 +25,7 @@ const result = divide(2.0, 3.0)
 
 // Pattern match to retrieve the value
 const message = result.match({
-    some: _ => `Result: ${_}`,
+    some: res => `Result: ${res}`,
     none: "Cannot divide by 0",
 })
 
@@ -113,7 +113,7 @@ console.log(Some("car").unwrap_or("bike")) // "car"
 console.log(None.unwrap_or("bike")) // "bike"
 ```
 
-### `map(fn: (_: T) => U) => Option<U>`
+### `map(fn: (val: T) => U) => Option<U>`
 
 Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
@@ -121,7 +121,7 @@ Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
 ```typescript
 const x: Option<number> = Some(123),
-      y: Option<string> = x.map(_ => _.toString())
+      y: Option<string> = x.map(val => val.toString())
 
 console.log(y.is_some()) // true
 console.log(y.is_none()) // false
@@ -130,14 +130,14 @@ console.log(y.unwrap_or("N/A")) // "123"
 
 ```typescript
 const x: Option<number> = None,
-      y: Option<string> = x.map(_ => _.toString())
+      y: Option<string> = x.map(val => val.toString())
 
 console.log(y.is_some()) // false
 console.log(y.is_none()) // true
 console.log(y.unwrap_or("N/A")) // "N/A"
 ```
 
-### `and_then(fn: (_: T) => Option<U>) => Option<U>`
+### `and_then(fn: (val: T) => Option<U>) => Option<U>`
 
 Returns `None` if the option is `None`, otherwise calls `fn` with the wrapped value and returns the result.
 
@@ -162,8 +162,8 @@ interface Vehicle {
 
 const getDriverName = (vehicle: Vehicle): Option<string> => {
   return vehicle.driver
-                .and_then(_ => _.contact)
-                .and_then(_ => _.name)
+                .and_then(val => val.contact)
+                .and_then(val => val.name)
 }
 
 console.log(getDriverName({driver: Some({contact: Some({name: Some('John')})})})) // Some('John')
@@ -238,7 +238,7 @@ console.log(x.and(y)) // None
 type Resolver<T> = () => T
 
 interface MatchPattern<T, U> {
-    some: (_: T) => U
+    some: (val: T) => U
     none: Resolver<U> | U
 }
 ```
@@ -250,7 +250,7 @@ return, a fallback value if `Option` is `None`.
 
 ```typescript
 const getFullYear = (date: Option<Date>): number => date.match({
-    some: _ => _.getFullYear(),
+    some: val => val.getFullYear(),
     none: 1994
 })
 
@@ -297,7 +297,7 @@ let y = Some(null) // Compiles, but meh.. don't use this please
 
 ```typescript
 const getFullYear = (date: Option<Date>): number => date.match({
-    some: _ => _.getFullYear(),
+    some: val => val.getFullYear(),
     none: '1994' // Error: Type 'string | number' is not assignable to type 'number'.
 })
 ```
@@ -305,25 +305,16 @@ const getFullYear = (date: Option<Date>): number => date.match({
 ### React examples
 
 ```typescript
-import * as React from 'react'
-import { Option } from 'tsp-monads'
-
-interface User {
-    id: string
-    firstName: Option<string>
-    lastName: Option<string>
+interface Props {
+    user: Option<User>
 }
 
-const getName = (first: Option<string>, last: Option<string>): Option<string> => {
-    return first.map(fN => last.match({
-        some: lN => `${fN} ${lN}`,
-        none: fN
-    }))
+function UserComponent(props: Props) {
+    const { user } = props
+
+    return user.match({
+        some: userProps => <UserProfile {...userProps} />
+        none: <Loading />
+    })
 }
-
-const NameComponent = (user: User) => (
-    <strong>{getName(user.firstName, user.lastName).unwrap_or('N/A')}</strong>
-)
-
-export default NameComponent
 ```

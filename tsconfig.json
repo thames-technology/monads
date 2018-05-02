@@ -20,7 +20,7 @@
     "removeComments": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "ES5"
+    "target": "ES6"
   },
   "include": [
     "./src/**/*"

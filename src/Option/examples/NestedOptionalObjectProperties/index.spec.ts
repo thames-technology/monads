@@ -1,6 +1,6 @@
-import { getDriverName } from '.'
+import { getDriverName } from "."
 
-describe('Nested Optional Object Properties', () => {
+describe("Nested Optional Object Properties", () => {
   it("returns None when key doesn't lead to a value", () => {
     let subject = getDriverName({ driver: {} })
     expect(subject.is_none()).toEqual(true)
@@ -10,8 +10,8 @@ describe('Nested Optional Object Properties', () => {
   })
 
   it("returns Some('John') when key leads to a value", () => {
-    const subject = getDriverName({ driver: { contact: { name: 'John' } } })
+    const subject = getDriverName({ driver: { contact: { name: "John" } } })
     expect(subject.is_some()).toEqual(true)
-    expect(subject.unwrap_or('N/A')).toEqual('John')
+    expect(subject.unwrap_or("N/A")).toEqual("John")
   })
 })
