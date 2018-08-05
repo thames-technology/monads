@@ -6,7 +6,7 @@ Previously known on npm as [tsp-monads](https://www.npmjs.com/package/tsp-monads
 
 [![CircleCI](https://img.shields.io/circleci/project/github/Threestup/monads.svg)](https://circleci.com/gh/Threestup/monads)
 ![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
-[![npm version](https://img.shields.io/npm/v/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads)
+[![npm version](https://img.shields.io/npm/v/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads) [![GuardRails badge](https://badges.production.guardrails.io/Threestup/monads.svg)](https://www.guardrails.io)
 
 **NOTE:** Works with TypeScript 2+ _and_ JavaScript (ES6+). `strictNullChecks` option / flag strongly recommended.
 
