@@ -2,7 +2,7 @@ import { isEqual, throwIfFalse } from "@openmaths/utils"
 
 export const ResultType = {
   Ok: Symbol(":ok"),
-  Err: Symbol(":err")
+  Err: Symbol(":err"),
 }
 
 export interface Match<T, E, U> {
@@ -68,7 +68,7 @@ export function Ok<T, E = never>(val: T): _Ok<T, E> {
     },
     and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
       return fn(val)
-    }
+    },
   }
 }
 
@@ -101,7 +101,7 @@ export function Err<T, E>(val: E): _Err<T, E> {
     },
     and_then<U>(_fn: (val: T) => Result<U, E>): Result<U, E> {
       return Err<U, E>(val)
-    }
+    },
   }
 }
 

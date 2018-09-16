@@ -1,14 +1,8 @@
-import {
-  isEqual,
-  isFunction,
-  isPresent,
-  throwIfMissing,
-  throwIfFalse
-} from "@openmaths/utils"
+import { isEqual, isFunction, isPresent, throwIfMissing, throwIfFalse } from "@openmaths/utils"
 
 export const OptionType = {
   Some: Symbol(":some"),
-  None: Symbol(":none")
+  None: Symbol(":none"),
 }
 
 export interface Match<T, U> {
@@ -81,7 +75,7 @@ export function some_constructor<T>(val: T): _Some<T> {
     },
     unwrap(): T {
       return val
-    }
+    },
   }
 }
 
@@ -115,14 +109,12 @@ export function none_constructor<T>(): _None<T> {
     },
     unwrap(): never {
       throw new ReferenceError("Trying to unwrap None.")
-    }
+    },
   }
 }
 
 export function is_option<T>(val: Option<T> | any): val is Option<T> {
-  return (
-    isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
-  )
+  return isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
 }
 
 export function is_some<T>(val: Option<T>): val is _Some<T> {
@@ -135,12 +127,7 @@ export function is_none<T>(val: Option<T>): val is _None<T> {
   return val.is_none()
 }
 
-export function get_in(
-  obj: Object | undefined | null,
-  key: string
-): Option<any> {
-  const val = key
-    .split(".")
-    .reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
+export function get_in(obj: Object | undefined | null, key: string): Option<any> {
+  const val = key.split(".").reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
   return Some(val)
 }
