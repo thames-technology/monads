@@ -13,4 +13,6 @@ exports.Err = Result_1.Err;
 exports.is_ok = Result_1.is_ok;
 exports.is_err = Result_1.is_err;
 exports.is_result = Result_1.is_result;
+var promise_1 = require("./promise");
+exports.map_async = promise_1.map_async;
 //# sourceMappingURL=main.js.map
