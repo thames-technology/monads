@@ -28,15 +28,14 @@ export interface _Ok<T, E = never> extends Result<T, E> {
   unwrap_err(): E
   match<U>(fn: Match<T, E, U>): U
   map<U>(fn: (val: T) => U): _Ok<U, E>
-  map_err<U>(fn: (err: E) => U): Result<T, U>
   and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
 }
 
-export interface _Err<T, E> extends Result<T, E> {
-  unwrap(): never
+export interface _Err<E, T = never> extends Result<T, E> {
+  unwrap(): T
   unwrap_err(): E
   match<U>(fn: Match<never, E, U>): U
-  map<U>(fn: (val: T) => U): _Err<U, E>
+  map<U>(fn: (val: T) => U): _Err<E, U>
 }
 
 export function Ok<T, E = never>(val: T): _Ok<T, E> {
@@ -51,7 +50,7 @@ export function Ok<T, E = never>(val: T): _Ok<T, E> {
     unwrap(): T {
       return val
     },
-    unwrap_err(): never {
+    unwrap_err(): E {
       throw new ReferenceError(`Cannot get Err value of Result.Ok`)
     },
     ok_or(optb: T): T {
@@ -60,10 +59,10 @@ export function Ok<T, E = never>(val: T): _Ok<T, E> {
     match<U>(fn: Match<T, never, U>): U {
       return fn.ok(val)
     },
-    map<U>(fn: (val: T) => U): Result<U, never> {
+    map<U>(fn: (val: T) => U): Result<U, E> {
       return Ok(fn(val))
     },
-    map_err<U>(_fn: (err: never) => U): Result<T, U> {
+    map_err<U>(_fn: (err: E) => U): Result<T, U> {
       return Ok<T, U>(val)
     },
     and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
@@ -72,7 +71,7 @@ export function Ok<T, E = never>(val: T): _Ok<T, E> {
   }
 }
 
-export function Err<T, E>(val: E): _Err<T, E> {
+export function Err<T, E>(val: E): _Err<E, T> {
   return {
     type: ResultType.Err,
     is_ok(): boolean {
@@ -93,8 +92,8 @@ export function Err<T, E>(val: E): _Err<T, E> {
     match<U>(fn: Match<never, E, U>): U {
       return fn.err(val)
     },
-    map<U>(_fn: (val: T) => U): _Err<U, E> {
-      return this
+    map<U>(_fn: (val: T) => U): Result<U, E> {
+      return Err<U, E>(val)
     },
     map_err<U>(fn: (err: E) => U): Result<T, U> {
       return Err<T, U>(fn(val))
@@ -114,7 +113,7 @@ export function is_ok<T, E>(val: Result<T, E>): val is _Ok<T> {
   return val.is_ok()
 }
 
-export function is_err<T, E>(val: Result<T, E>): val is _Err<T, E> {
+export function is_err<T, E>(val: Result<T, E>): val is _Err<E, T> {
   throwIfFalse(is_result(val), "val is not a Result")
   return val.is_err()
 }

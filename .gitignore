@@ -11,7 +11,7 @@ Thumbs.db
 .env
 .env.production
 gcloud-service-key.json
-
+dist/
 coverage/
 bower_components/
 node_modules/

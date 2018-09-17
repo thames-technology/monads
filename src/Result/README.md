@@ -56,7 +56,7 @@ let x: Result<number, string> = Err('Error!')
 console.log(x.is_err()) // true
 ```
 
-### `ok() => T`
+### `unwrap() => T`
 
 Unwraps and returns `T` on `Ok<T>`.
 
@@ -71,12 +71,12 @@ Throws a `ReferenceError` if called on `Err`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.ok()) // 2
+console.log(x.unwrap()) // 2
 ```
 
 ```typescript
 let x: Result<number, string> = Err('Nothing here')
-console.log(x.ok()) // throws ReferenceError
+console.log(x.unwrap()) // throws ReferenceError
 ```
 
 **NOTE:** You can use `is_ok()` to check whether the result is an `Ok`.
@@ -85,14 +85,14 @@ This will compile and enable you to use `ok()` in the `true` / success branch.
 ```typescript
 const printIndex = (index: Result<string, string>): string => {
     if (is_ok(index)) {
-        return index.ok()
+        return index.unwrap()
     } else {
-        return index.err()
+        return index.unwrap_err()
     }
 }
 ```
 
-### `err() => E`
+### `unwrap_err() => E`
 
 Unwraps and returns `E` on `Err<E>`.
 
@@ -107,12 +107,12 @@ Throws a `ReferenceError` if called on `Ok`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.err()) // throws ReferenceError
+console.log(x.unwrap_err()) // throws ReferenceError
 ```
 
 ```typescript
 let x: Result<number, string> = Err('Nothing here')
-console.log(x.err()) // 'Nothing here'
+console.log(x.unwrap_err()) // 'Nothing here'
 ```
 
 **NOTE:** You can use `is_err()` to check whether the result is an `Err`.
@@ -121,9 +121,9 @@ This will compile and enable you to use `err()` in the `true` / success branch.
 ```typescript
 const printIndex = (index: Result<string, string>): string => {
     if (is_err(index)) {
-        return index.err()
+        return index.unwrap_err()
     } else {
-        return index.ok()
+        return index.unwrap()
     }
 }
 ```
@@ -154,16 +154,56 @@ Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained `O
 const x: Result<number, never> = Ok(123),
       y: Result<string, never> = x.map(val => val.toString())
 
-console.log(x.ok()) // 123
-console.log(y.ok()) // '123'
+console.log(x.unwrap()) // 123
+console.log(y.unwrap()) // '123'
 ```
 
 ```typescript
 const x: Result<string, string> = Err('123'),
       y: Result<number, string> = x.map(parseInt)
 
-console.log(x.err()) // '123'
-console.log(y.err()) // '123'
+console.log(x.unwrap_err()) // '123'
+console.log(y.unwrap_err()) // '123'
+```
+
+### `map_err<U>(fn: (err: E) => U): Result<T, U>`
+
+Maps a `Result<T, E>` to `Result<T, U>` by applying a function to a contained `Err` value, leaving an `Ok` value untouched.
+
+#### Examples
+
+```typescript
+const x: Result<never, number> = Err(123),
+      y: Result<never, string> = x.map_err(val => val.toString())
+
+console.log(x.unwrap_err()) // 123
+console.log(y.unwrap_err()) // '123'
+```
+
+```typescript
+const x: Result<string, string> = Err('123'),
+      y: Result<number, string> = x.map(parseInt)
+
+console.log(x.unwrap_err()) // '123'
+console.log(y.unwrap_err()) // '123'
+```
+
+### `and_then(fn: (val: T) => U): Result<U, E>`
+
+Calls fn if the result is `Ok`, otherwise returns the `Err` value.
+
+This function can be used for control flow based on Result values.
+
+#### Examples
+
+```typescript
+function sq(x: u32): Result<u32, u32> { Ok(x * x) }
+function err(x: u32): Result<u32, u32> { Err(x) }
+
+Ok(2).and_then(sq).and_then(sq) // Ok(16)
+Ok(2).and_then(sq).and_then(err) // Err(4)
+Ok(2).and_then(err).and_then(sq) // Err(2)
+Err(3).and_then(sq).and_then(sq) // Err(3)
 ```
 
 ### `match(p: MatchPattern<O, E, T>): T`
