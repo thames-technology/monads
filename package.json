@@ -14,12 +14,12 @@
     "@openmaths/utils": "^4.0.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.2",
-    "@types/node": "^10.9.4",
-    "jest": "^23.6.0",
-    "prettier": "^1.14.2",
-    "ts-jest": "^23.1.4",
-    "typescript": "^3.0.3"
+    "@types/jest": "23.3.2",
+    "@types/node": "10.9.4",
+    "jest": "23.6.0",
+    "prettier": "1.14.2",
+    "ts-jest": "23.1.4",
+    "typescript": "3.0.3"
   },
   "keywords": [
     "option",
