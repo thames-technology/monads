@@ -11,7 +11,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "@openmaths/utils": "^4.0.2"
+    "@openmaths/utils": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "23.3.2",
