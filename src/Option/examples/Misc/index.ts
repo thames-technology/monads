@@ -1,4 +1,4 @@
-import { Option } from "../.."
+import { Option } from "../../main"
 
 export const getName = (first: Option<string>, last: Option<string>): Option<string> => {
   return first.map((fN) =>

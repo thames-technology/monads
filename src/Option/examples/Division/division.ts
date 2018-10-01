@@ -1,4 +1,4 @@
-import { None, Option, Some } from "../.."
+import { None, Option, Some } from "../../main"
 
 function divide(numerator: number, denominator: number): Option<number> {
   if (denominator === 0) {

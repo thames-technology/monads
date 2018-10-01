@@ -1,5 +1,5 @@
-import { nope, sq } from "."
-import { None, Some } from "../.."
+import { None, Some } from "../../main"
+import { nope, sq } from "./main"
 
 describe("Nested Options", () => {
   it("returns Some(16) when all Options in chain are Some", () => {

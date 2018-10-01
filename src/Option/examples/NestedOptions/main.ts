@@ -1,4 +1,4 @@
-import { None, Option, Some } from "../.."
+import { None, Option, Some } from "../../main"
 
 function sq(x: number): Option<number> {
   return Some(x * x)

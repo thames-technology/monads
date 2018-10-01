@@ -1,4 +1,4 @@
-import { getDriverName } from "."
+import { getDriverName } from "./main"
 
 describe("Nested Optional Object Properties", () => {
   it("returns None when key doesn't lead to a value", () => {

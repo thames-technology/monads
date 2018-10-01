@@ -1,4 +1,4 @@
-import { get_in, Option } from "../.."
+import { get_in, Option } from "../../main"
 
 interface Car {
   driver?: {
