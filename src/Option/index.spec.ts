@@ -1,13 +1,13 @@
 import {
-  Option,
-  OptionType,
-  some_constructor,
-  Some,
-  None,
-  is_some,
+  get_in,
   is_none,
   is_option,
-  get_in,
+  is_some,
+  None,
+  Option,
+  OptionType,
+  Some,
+  some_constructor,
 } from "."
 
 describe("Option", () => {
@@ -17,18 +17,21 @@ describe("Option", () => {
 
   function getAssertion<T>(type: string) {
     return (scenario: IScenario<T>) => {
-      it("correctly creates an instance of Some with value '" + scenario.value + "'", () => {
-        const subject = Some(scenario.value)
+      it(
+        "correctly creates an instance of Some with value '" + scenario.value + "'",
+        () => {
+          const subject = Some(scenario.value)
 
-        expect(subject.type).toEqual(OptionType.Some)
+          expect(subject.type).toEqual(OptionType.Some)
 
-        expect(subject.is_some()).toEqual(true)
-        expect(subject.is_none()).toEqual(false)
-        expect(subject.unwrap_or({} as any)).toEqual(scenario.value)
+          expect(subject.is_some()).toEqual(true)
+          expect(subject.is_none()).toEqual(false)
+          expect(subject.unwrap_or({} as any)).toEqual(scenario.value)
 
-        expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
-        expect(subject.unwrap()).toEqual(scenario.value)
-      })
+          expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
+          expect(subject.unwrap()).toEqual(scenario.value)
+        },
+      )
     }
   }
 
@@ -85,7 +88,7 @@ describe("Option", () => {
 
       const scenarios: IScenario<Function>[] = [
         {
-          value: function() {},
+          value() {},
         },
         {
           value: class C {},
@@ -134,10 +137,10 @@ describe("Option", () => {
     })
 
     describe("Undefined, Null", () => {
-      let array: string[] = ["a", "b"]
+      const array: string[] = ["a", "b"]
       const outOfBoundIndex = array.length + 1
 
-      let object = {
+      const object = {
         a: "_a",
         b: "_b",
       }
@@ -172,7 +175,7 @@ describe("Option", () => {
         const string = Some("string")
 
         const subject = string.match({
-          some: str => str.toUpperCase(),
+          some: (str) => str.toUpperCase(),
           none: "OTHER STRING",
         })
 
@@ -184,7 +187,7 @@ describe("Option", () => {
         const maybeNumber = Some(arr[arr.length + 1])
 
         const subject = maybeNumber.match({
-          some: _ => _ * 2,
+          some: (_) => _ * 2,
           none: NaN,
         })
 
@@ -196,7 +199,7 @@ describe("Option", () => {
       it("correctly maps Some and returns a new Some with transformed value", () => {
         const string = Some("123")
 
-        const subject = string.map(_ => parseInt(_))
+        const subject = string.map((_) => parseInt(_))
 
         expect(is_some(subject) ? subject.unwrap() : undefined).toEqual(123)
       })
@@ -229,7 +232,7 @@ describe("Option", () => {
     describe("match", () => {
       it("correctly matches None and returns fallback value", () => {
         const subject = None.match({
-          some: _ => "something",
+          some: (_) => "something",
           none: "nothing",
         })
 
@@ -239,7 +242,7 @@ describe("Option", () => {
 
     describe("map", () => {
       it("correctly maps Some and returns a new Some with transformed value", () => {
-        const subject = None.map(_ => parseInt(_))
+        const subject = None.map((_) => parseInt(_))
 
         expect(subject.type).toEqual(OptionType.None)
       })
@@ -253,11 +256,11 @@ describe("Option", () => {
 
         const date = new Date()
 
-        if (true === true) a = Some(date)
-        else a = None
+        if (true === true) { a = Some(date) }
+        else { a = None }
 
         const subject = a.match({
-          some: _ => _.getFullYear(),
+          some: (_) => _.getFullYear(),
           none: 1994,
         })
 
@@ -269,11 +272,11 @@ describe("Option", () => {
 
         const initialValue = true
 
-        if (1 > 2) a = Some(initialValue)
-        else a = None
+        if (1 > 2) { a = Some(initialValue) }
+        else { a = None }
 
         const subject = a.match({
-          some: _ => !_,
+          some: (_) => !_,
           none: initialValue,
         })
 
@@ -281,10 +284,10 @@ describe("Option", () => {
       })
 
       it("correctly matches None and returns fallback value when method provided to none branch", () => {
-        let a: Option<string> = None
+        const a: Option<string> = None
 
         const subject = a.match({
-          some: _ => _,
+          some: (_) => _,
           none: () => "N/A",
         })
 
@@ -296,7 +299,7 @@ describe("Option", () => {
       it("returns transformed Some when method applied to a value that exists", () => {
         const arr = [1, 2, 3]
 
-        const subject = Some(arr[0]).map(_ => _.toString())
+        const subject = Some(arr[0]).map((_) => _.toString())
 
         expect(is_some(subject) ? subject.unwrap() : undefined).toEqual("1")
       })
@@ -304,7 +307,7 @@ describe("Option", () => {
       it("returns None when method applied to a value that does not exist", () => {
         const arr = [1, 2, 3]
 
-        const subject = Some(arr[arr.length + 1]).map(_ => _.toString())
+        const subject = Some(arr[arr.length + 1]).map((_) => _.toString())
 
         expect(subject.is_none()).toEqual(true)
       })
@@ -312,7 +315,7 @@ describe("Option", () => {
       it("throws when transform function throws", () => {
         const arr = [1, 2, 3]
 
-        const subject = () => Some(arr[0]).map(_ => JSON.parse("{null}"))
+        const subject = () => Some(arr[0]).map((_) => JSON.parse("{null}"))
 
         expect(subject).toThrow(SyntaxError) // cos JSON.parse
       })
@@ -479,7 +482,7 @@ describe("and_then", () => {
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
-    const subject = truck.driver.and_then(_ => _.contact).and_then(_ => _.name)
+    const subject = truck.driver.and_then((_) => _.contact).and_then((_) => _.name)
 
     expect(subject.is_some()).toEqual(true)
     expect(subject.unwrap_or("")).toEqual("Name")
@@ -489,7 +492,7 @@ describe("and_then", () => {
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
-    const subject = truck.driver.and_then(_ => _.contact).and_then(_ => _.name)
+    const subject = truck.driver.and_then((_) => _.contact).and_then((_) => _.name)
 
     expect(subject.is_none()).toEqual(true)
   })
@@ -499,7 +502,7 @@ describe("and_then", () => {
     driver.contact = None
     truck.driver = Some(driver)
 
-    const subject = truck.driver.and_then(_ => _.contact).and_then(_ => _.name)
+    const subject = truck.driver.and_then((_) => _.contact).and_then((_) => _.name)
 
     expect(subject.is_none()).toEqual(true)
   })
@@ -509,7 +512,7 @@ describe("and_then", () => {
     driver.contact = Some(contact)
     truck.driver = None
 
-    const subject = truck.driver.and_then(_ => _.contact).and_then(_ => _.name)
+    const subject = truck.driver.and_then((_) => _.contact).and_then((_) => _.name)
 
     expect(subject.is_none()).toEqual(true)
   })
@@ -519,7 +522,7 @@ describe("and_then", () => {
     driver.contact = Some(contact)
     truck.driver = Some(driver)
 
-    const subject = () => truck.driver.and_then(_ => Some(JSON.parse("{null}")))
+    const subject = () => truck.driver.and_then((_) => Some(JSON.parse("{null}")))
 
     expect(subject).toThrow(SyntaxError)
   })

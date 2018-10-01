@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/src
   docker:
-    - image: circleci/node:8.11@sha256:372dbff602066c00561c11b8a19d85665001b9c13ec82f87247e1910e9fbd63b
+    - image: circleci/node:9.11
 
 whitelist: &whitelist
   paths:
@@ -24,6 +24,21 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/src
+          <<: *whitelist
+
+  check-format:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/src
+      - run:
+          name: Check formatting
+          command: make check-format
+      - run:
+          name: Run linter
+          command: make lint
       - persist_to_workspace:
           root: ~/src
           <<: *whitelist
@@ -78,9 +93,12 @@ workflows:
   build:
     jobs:
       - checkout
-      - build:
+      - check-format:
           requires:
             - checkout
+      - build:
+          requires:
+            - check-format
       - test:
           requires:
             - build
@@ -96,7 +114,7 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*/
             branches:
               ignore: /.*/
-      - build:
+      - check-format:
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
@@ -104,6 +122,14 @@ workflows:
               ignore: /.*/
           requires:
             - checkout
+      - build:
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
+          requires:
+            - check-format
       - test:
           filters:
             tags:

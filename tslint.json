@@ -1,0 +1,21 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-security"],
+  "jsRules": {},
+  "rules": {
+    "arrow-parens": false,
+    "array-type": false,
+    "interface-name": false,
+    "member-access": false,
+    "no-var-requires": false,
+    "object-literal-sort-keys": false,
+    "semicolon": false,
+    "trailing-comma": false,
+    "typedef": [
+      true,
+      "call-signature",
+      "property-declaration"
+    ],
+    "variable-name": false
+  },
+  "rulesDirectory": []
+}

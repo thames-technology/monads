@@ -1,4 +1,4 @@
-import { ResultType, Result, Ok, Err, is_ok, is_err, is_result } from "."
+import { Err, is_err, is_ok, is_result, Ok, Result, ResultType } from "."
 
 describe("Result", () => {
   interface IScenario<T> {
@@ -7,47 +7,53 @@ describe("Result", () => {
 
   function getOkAssertion<T>(type: string) {
     return (scenario: IScenario<T>) => {
-      it("correctly creates an instance of Ok with value '" + scenario.value + "'", () => {
-        const subject = Ok(scenario.value)
+      it(
+        "correctly creates an instance of Ok with value '" + scenario.value + "'",
+        () => {
+          const subject = Ok(scenario.value)
 
-        expect(subject.type).toEqual(ResultType.Ok)
+          expect(subject.type).toEqual(ResultType.Ok)
 
-        expect(subject.is_ok()).toEqual(true)
-        expect(subject.is_err()).toEqual(false)
+          expect(subject.is_ok()).toEqual(true)
+          expect(subject.is_err()).toEqual(false)
 
-        expect(() => subject.err()).toThrow()
-        expect(subject.ok_or("" as any)).toEqual(scenario.value)
+          expect(() => subject.err()).toThrow()
+          expect(subject.ok_or("" as any)).toEqual(scenario.value)
 
-        if (is_ok(subject)) {
-          expect(typeof subject.ok()).toEqual(type.toLowerCase())
-          expect(subject.ok()).toEqual(scenario.value)
-        } else {
-          throw new Error("Has to be _Ok!")
-        }
-      })
+          if (is_ok(subject)) {
+            expect(typeof subject.ok()).toEqual(type.toLowerCase())
+            expect(subject.ok()).toEqual(scenario.value)
+          } else {
+            throw new Error("Has to be _Ok!")
+          }
+        },
+      )
     }
   }
 
   function getErrAssertion<T>(type: string) {
     return (scenario: IScenario<T>) => {
-      it("correctly creates an instance of Err with value '" + scenario.value + "'", () => {
-        const subject = Err(scenario.value)
+      it(
+        "correctly creates an instance of Err with value '" + scenario.value + "'",
+        () => {
+          const subject = Err(scenario.value)
 
-        expect(subject.type).toEqual(ResultType.Err)
+          expect(subject.type).toEqual(ResultType.Err)
 
-        expect(subject.is_ok()).toEqual(false)
-        expect(subject.is_err()).toEqual(true)
+          expect(subject.is_ok()).toEqual(false)
+          expect(subject.is_err()).toEqual(true)
 
-        expect(() => subject.ok()).toThrow()
-        expect(subject.ok_or("optb" as any)).toEqual("optb")
+          expect(() => subject.ok()).toThrow()
+          expect(subject.ok_or("optb" as any)).toEqual("optb")
 
-        if (is_err(subject)) {
-          expect(typeof subject.err()).toEqual(type.toLowerCase())
-          expect(subject.err()).toEqual(scenario.value)
-        } else {
-          throw new Error("Has to be _Err!")
-        }
-      })
+          if (is_err(subject)) {
+            expect(typeof subject.err()).toEqual(type.toLowerCase())
+            expect(subject.err()).toEqual(scenario.value)
+          } else {
+            throw new Error("Has to be _Err!")
+          }
+        },
+      )
     }
   }
 
@@ -109,7 +115,7 @@ describe("Result", () => {
 
     const scenarios: IScenario<Function>[] = [
       {
-        value: function() {},
+        value() {},
       },
       {
         value: class C {},
@@ -242,8 +248,8 @@ describe("Result", () => {
       const string = Ok("string")
 
       const subject = string.match({
-        ok: _ => _.toUpperCase(),
-        err: _ => _,
+        ok: (_) => _.toUpperCase(),
+        err: (_) => _,
       })
 
       expect(subject).toEqual("STRING")
@@ -254,8 +260,8 @@ describe("Result", () => {
       const number = Err(arr[0])
 
       const subject = number.match({
-        ok: _ => 0,
-        err: _ => _,
+        ok: (_) => 0,
+        err: (_) => _,
       })
 
       expect(subject).toEqual(1)
@@ -264,8 +270,8 @@ describe("Result", () => {
     it("correctly matches Result and returns fallback value", () => {
       function getMessage(data: Result<string, string>) {
         return data.match({
-          ok: _ => `Success: ${_}`,
-          err: _ => `Error: ${_}`,
+          ok: (_) => `Success: ${_}`,
+          err: (_) => `Error: ${_}`,
         })
       }
 
@@ -278,7 +284,7 @@ describe("Result", () => {
     it("correctly maps Ok and returns transformed Result", () => {
       const string = Ok("123")
 
-      const subject = string.map(_ => parseInt(_))
+      const subject = string.map((_) => parseInt(_))
 
       expect(subject.ok()).toEqual(123)
     })
@@ -287,14 +293,14 @@ describe("Result", () => {
       const arr = [1, 2, 3]
       const number = Err(arr[0])
 
-      const subject = number.map(_ => _.toString())
+      const subject = number.map((_) => _.toString())
 
       expect(subject.err()).toEqual(1)
     })
 
     it("correctly maps Result and returns transformed value", () => {
       function getMessage(data: Result<string, string>): Result<number, string> {
-        return data.map(_ => parseInt(_))
+        return data.map((_) => parseInt(_))
       }
 
       let subject = getMessage(Ok("123"))

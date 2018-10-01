@@ -1,4 +1,4 @@
-import { Result, Ok, Err } from "../.."
+import { Err, Ok, Result } from "../.."
 
 export const getIndex = (values: string[], value: string): Result<number, string> => {
   const index = values.indexOf(value)

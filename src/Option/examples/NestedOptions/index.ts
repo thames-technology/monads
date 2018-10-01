@@ -1,4 +1,4 @@
-import { Option, Some, None } from "../.."
+import { None, Option, Some } from "../.."
 
 export const sq = (x: number): Option<number> => Some(x * x)
 export const nope = (_: number): Option<number> => None
@@ -25,7 +25,7 @@ export interface Vehicle {
 }
 
 export const getDriverName = (vehicle: Vehicle): Option<string> => {
-  return vehicle.driver.and_then(val => val.contact).and_then(val => val.name)
+  return vehicle.driver.and_then((val) => val.contact).and_then((val) => val.name)
 }
 
 console.log(getDriverName({ driver: Some({ contact: Some({ name: Some("John") }) }) })) // Returns: Some('John')
