@@ -1,25 +1,28 @@
 {
-  "name": "@threestup/monads",
+  "name": "@usefultools/monads",
   "version": "1.1.0",
-  "description": "Option and Result types for JavaScript; TypeScript first",
+  "description": "Type safe Option and Result type – for TypeScript and JavaScript",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=9.10.0",
+    "npm": ">=6.1.0"
   },
   "scripts": {
     "test": "make test"
   },
   "dependencies": {
-    "@openmaths/utils": "^4.0.2"
+    "@usefultools/utils": "^6.0.2"
   },
   "devDependencies": {
     "@types/jest": "23.3.2",
-    "@types/node": "10.9.4",
+    "@types/node": "^10.11.3",
     "jest": "23.6.0",
-    "prettier": "1.14.2",
-    "ts-jest": "23.1.4",
-    "typescript": "3.0.3"
+    "prettier": "^1.14.3",
+    "ts-jest": "^23.10.3",
+    "tslint": "^5.11.0",
+    "tslint-config-security": "^1.5.0",
+    "typescript": "^3.1.1"
   },
   "keywords": [
     "option",
@@ -31,8 +34,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/threestup/monads.git"
+    "url": "git@github.com:litchi-io/monads.git"
   },
   "author": "Slavomir Vojacek <slavomirvojacek@gmail.com>",
-  "license": "MIT"
+  "license": "ISC"
 }

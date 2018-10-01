@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
-    "alwaysStrict": true,
     "declaration": true,
     "diagnostics": true,
+    "emitBOM": true,
+    "extendedDiagnostics": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
     "lib": [
-      "ES6"
+      "ES2018"
     ],
+    "locale": "en",
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "./dist",
@@ -19,7 +21,7 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "strictNullChecks": true,
+    "strict": true, // enables --noImplicitAny, --noImplicitThis, --alwaysStrict, --strictNullChecks, --strictFunctionTypes and --strictPropertyInitialization.
     "target": "ES6"
   },
   "include": [

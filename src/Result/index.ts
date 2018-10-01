@@ -1,4 +1,4 @@
-import { isEqual, throwIfFalse } from "@openmaths/utils"
+import { isEqual, throwIfFalse } from "@usefultools/utils"
 
 export const ResultType = {
   Ok: Symbol(":ok"),
@@ -21,21 +21,21 @@ export interface Result<T, E> {
   map<U>(fn: (val: T) => U): Result<U, E>
 }
 
-export interface _Ok<T> extends Result<T, never> {
+export interface ResOk<T> extends Result<T, never> {
   ok(): T
   err(): never
   match<U>(fn: Match<T, never, U>): U
-  map<U>(fn: (val: T) => U): _Ok<U>
+  map<U>(fn: (val: T) => U): ResOk<U>
 }
 
-export interface _Err<T, E> extends Result<T, E> {
+export interface ResErr<T, E> extends Result<T, E> {
   ok(): never
   err(): E
   match<U>(fn: Match<never, E, U>): U
-  map<U>(fn: (val: T) => U): _Err<U, E>
+  map<U>(fn: (val: T) => U): ResErr<U, E>
 }
 
-export function Ok<T>(val: T): _Ok<T> {
+export function Ok<T>(val: T): ResOk<T> {
   return {
     type: ResultType.Ok,
     is_ok(): boolean {
@@ -62,7 +62,7 @@ export function Ok<T>(val: T): _Ok<T> {
   }
 }
 
-export function Err<T, E>(val: E): _Err<T, E> {
+export function Err<T, E>(err: E): ResErr<T, E> {
   return {
     type: ResultType.Err,
     is_ok(): boolean {
@@ -75,16 +75,16 @@ export function Err<T, E>(val: E): _Err<T, E> {
       throw new ReferenceError(`Cannot get Ok value of Result.Err`)
     },
     err(): E {
-      return val
+      return err
     },
     ok_or(optb: T): T {
       return optb
     },
     match<U>(fn: Match<never, E, U>): U {
-      return fn.err(val)
+      return fn.err(err)
     },
-    map<U>(fn: (val: T) => U): _Err<U, E> {
-      return this
+    map<U>(_fn: (_val: T) => U): ResErr<U, E> {
+      return Err(err)
     },
   }
 }
@@ -93,12 +93,12 @@ export function is_result<T, E>(val: Result<T, E> | any): val is Result<T, E> {
   return isEqual(val.type, ResultType.Ok) || isEqual(val.type, ResultType.Err)
 }
 
-export function is_ok<T, E>(val: Result<T, E>): val is _Ok<T> {
+export function is_ok<T, E>(val: Result<T, E>): val is ResOk<T> {
   throwIfFalse(is_result(val), "val is not a Result")
   return val.is_ok()
 }
 
-export function is_err<T, E>(val: Result<T, E>): val is _Err<T, E> {
+export function is_err<T, E>(val: Result<T, E>): val is ResErr<T, E> {
   throwIfFalse(is_result(val), "val is not a Result")
   return val.is_err()
 }

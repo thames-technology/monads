@@ -3,9 +3,11 @@ dist_folder=./dist
 src_folder=./src
 jest_config_file=./jest.json
 ts_config_file=./tsconfig.json
-tsc_executable=${node_bin}/tsc
-prettier_executable=${node_bin}/prettier
+tslint_config_file=./tslint.json
 jest_executable=${node_bin}/jest
+prettier_executable=${node_bin}/prettier
+tsc_executable=${node_bin}/tsc
+tslint_executable=${node_bin}/tslint
 
 compile:
 	rm -rf ${dist_folder}
@@ -14,10 +16,17 @@ compile:
 
 format:
 	${prettier_executable} \
-	--no-semi \
-	--print-width "100" \
-	--trailing-comma "all" \
 	--write "${src_folder}/**/*.ts"
+
+check-format:
+	${prettier_executable} \
+	--list-different "${src_folder}/**/*.ts"
+
+lint:
+	${tslint_executable} \
+	-c ${tslint_config_file} \
+	--fix \
+	"${src_folder}/**/*.ts"
 
 test:
 	${jest_executable} \

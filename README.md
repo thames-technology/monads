@@ -1,25 +1,27 @@
+[![CircleCI](https://circleci.com/gh/litchi-io/monads.svg?style=svg)](https://circleci.com/gh/litchi-io/monads)
+[![codecov](https://codecov.io/gh/litchi-io/monads/branch/master/graph/badge.svg)](https://codecov.io/gh/litchi-io/monads)
+[![npm version](https://img.shields.io/npm/v/@usefultools/monads.svg)](https://www.npmjs.com/package/@usefultools/monads)
+[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/litchi-io/monads/blob/master/SECURITY.md)
+
 # Type safe Option and Result type
 
 Inspired by Rust.
 
-Previously known on npm as [tsp-monads](https://www.npmjs.com/package/tsp-monads).
+## Prereqs & Install
 
-[![CircleCI](https://img.shields.io/circleci/project/github/Threestup/monads.svg)](https://circleci.com/gh/Threestup/monads)
-![Codecov](https://img.shields.io/codecov/c/github/Threestup/monads.svg)
-[![npm version](https://img.shields.io/npm/v/@threestup/monads.svg)](https://www.npmjs.com/package/@threestup/monads) [![GuardRails badge](https://badges.production.guardrails.io/Threestup/monads.svg)](https://www.guardrails.io)
+* Node >=9.10.0
+* npm >=6.1.0
 
-**NOTE:** Works with TypeScript 2+ _and_ JavaScript (ES6+). `strictNullChecks` option / flag strongly recommended.
+Please note that the **TypeScript target is ES6**.
+
+```sh
+npm install @usefultools/monads
+```
 
 ## Documentation
 
 - [Option Type](https://github.com/threestup/monads/tree/master/src/Option)
 - [Result Type](https://github.com/threestup/monads/tree/master/src/Result)
-
-## Install
-
-```
-npm install @threestup/monads
-```
 
 ## Basic Usage
 

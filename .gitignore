@@ -7,10 +7,9 @@ Thumbs.db
 *.log
 *.css
 .idea
+.vscode
 
 .env
-.env.production
-gcloud-service-key.json
 
 coverage/
 dist/

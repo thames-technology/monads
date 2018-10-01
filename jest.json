@@ -2,24 +2,26 @@
   "collectCoverageFrom": [
     "**/*.{ts,tsx}",
     "!src/main.ts",
-    "!src/types.ts",
+    "!**/**/index.ts",
+    "!**/**/types.ts",
+    "!**/**/types.d.ts",
     "!**/node_modules/**",
     "!**/dist/**",
-    "!**/examples/**",
     "!**/fixture/**"
   ],
-  "testPathIgnorePatterns": [
-    "<rootDir>/node_modules/",
-    "<rootDir>/dist/"
-  ],
-  "transform": {
-    "^.+\\.tsx?$": "ts-jest"
-  },
-  "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
   "moduleFileExtensions": [
     "ts",
     "tsx",
     "js",
     "json"
-  ]
+  ],
+  "testEnvironment": "node",
+  "testPathIgnorePatterns": [
+    "<rootDir>/node_modules/",
+    "<rootDir>/dist/"
+  ],
+  "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  }
 }

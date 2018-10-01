@@ -1,4 +1,10 @@
-import { isEqual, isFunction, isPresent, throwIfMissing, throwIfFalse } from "@openmaths/utils"
+import {
+  isEqual,
+  isFunction,
+  isPresent,
+  throwIfFalse,
+  throwIfMissing,
+} from "@usefultools/utils"
 
 export const OptionType = {
   Some: Symbol(":some"),
@@ -23,18 +29,18 @@ export interface Option<T> {
   unwrap(): T | never
 }
 
-export interface _Some<T> extends Option<T> {
+export interface OptSome<T> extends Option<T> {
   unwrap(): T
-  map<U>(fn: (val: T) => U): _Some<U>
+  map<U>(fn: (val: T) => U): OptSome<U>
   or<U>(optb: Option<U>): Option<T>
   and<U>(optb: Option<U>): Option<U>
 }
 
-export interface _None<T> extends Option<T> {
+export interface OptNone<T> extends Option<T> {
   unwrap(): never
-  map<U>(fn: (val: T) => U): _None<U>
+  map<U>(fn: (val: T) => U): OptNone<U>
   or<U>(optb: Option<U>): Option<U>
-  and<U>(optb: Option<U>): _None<U>
+  and<U>(optb: Option<U>): OptNone<U>
 }
 
 export function Some<T>(val: T | null | undefined): Option<T> {
@@ -43,7 +49,7 @@ export function Some<T>(val: T | null | undefined): Option<T> {
 
 export const None = none_constructor<any>()
 
-export function some_constructor<T>(val: T): _Some<T> {
+export function some_constructor<T>(val: T): OptSome<T> {
   throwIfMissing(val, `Some has to contain a value. Received ${typeof val}.`)
 
   return {
@@ -57,7 +63,7 @@ export function some_constructor<T>(val: T): _Some<T> {
     match<U>(fn: Match<T, U>): U {
       return fn.some(val)
     },
-    map<U>(fn: (val: T) => U) {
+    map<U>(fn: (val: T) => U): OptSome<U> {
       return some_constructor<U>(fn(val))
     },
     and_then<U>(fn: (val: T) => Option<U>): Option<U> {
@@ -79,7 +85,7 @@ export function some_constructor<T>(val: T): _Some<T> {
   }
 }
 
-export function none_constructor<T>(): _None<T> {
+export function none_constructor<T>(): OptNone<T> {
   return {
     type: OptionType.None,
     is_some(): boolean {
@@ -91,16 +97,16 @@ export function none_constructor<T>(): _None<T> {
     match<U>(fn: Match<T, U>): U {
       return isFunction(fn.none) ? fn.none() : fn.none
     },
-    map<U>(fn: (val: T) => U) {
+    map<U>(fn: (val: T) => U): OptNone<U> {
       return none_constructor<U>()
     },
-    and_then<U>(fn: (val: T) => Option<U>): _None<U> {
+    and_then<U>(fn: (val: T) => Option<U>): OptNone<U> {
       return none_constructor<U>()
     },
     or<U>(optb: Option<U>): Option<U> {
       return optb
     },
-    and<U>(_optb: Option<U>): _None<U> {
+    and<U>(_optb: Option<U>): OptNone<U> {
       return none_constructor<U>()
     },
     unwrap_or(def: T): T {
@@ -117,17 +123,17 @@ export function is_option<T>(val: Option<T> | any): val is Option<T> {
   return isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
 }
 
-export function is_some<T>(val: Option<T>): val is _Some<T> {
+export function is_some<T>(val: Option<T>): val is OptSome<T> {
   throwIfFalse(is_option(val), "val is not an Option")
   return val.is_some()
 }
 
-export function is_none<T>(val: Option<T>): val is _None<T> {
+export function is_none<T>(val: Option<T>): val is OptNone<T> {
   throwIfFalse(is_option(val), "val is not an Option")
   return val.is_none()
 }
 
-export function get_in(obj: Object | undefined | null, key: string): Option<any> {
+export function get_in(obj: object | undefined | null, key: string): Option<any> {
   const val = key.split(".").reduce((o, x) => (o == null ? o : (o as any)[x]), obj)
   return Some(val)
 }

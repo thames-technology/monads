@@ -1,4 +1,4 @@
-import { Result, Ok, Err } from "../.."
+import { Err, Ok, Result } from "../.."
 
 export const getIndex = (values: string[], value: string): Result<number, string> => {
   const index = values.indexOf(value)
@@ -11,5 +11,5 @@ export const getIndex = (values: string[], value: string): Result<number, string
   }
 }
 
-console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
-console.log(getIndex(["a", "b", "c"], "z")) // Err('Value not found')
+getIndex(["a", "b", "c"], "b") // Ok(1)
+getIndex(["a", "b", "c"], "z") // Err('Value not found')
