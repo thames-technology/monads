@@ -1,7 +1,7 @@
 {
-  "name": "@threestup/monads",
+  "name": "@usefultools/monads",
   "version": "1.1.0",
-  "description": "Option and Result types for JavaScript; TypeScript first",
+  "description": "Type safe Option and Result type – for TypeScript and JavaScript",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
@@ -34,8 +34,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/threestup/monads.git"
+    "url": "git@github.com:litchi-io/monads.git"
   },
   "author": "Slavomir Vojacek <slavomirvojacek@gmail.com>",
-  "license": "MIT"
+  "license": "ISC"
 }
