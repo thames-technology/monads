@@ -113,7 +113,7 @@ describe("Result", () => {
   describe("Function", () => {
     const type = "Function"
 
-    const scenarios: IScenario<Function>[] = [
+    const scenarios: IScenario<any>[] = [
       {
         value(): undefined {
           return undefined
@@ -125,8 +125,8 @@ describe("Result", () => {
       { value: Math.sin },
     ]
 
-    const assertionOk = getOkAssertion<Function>(type)
-    const assertionErr = getErrAssertion<Function>(type)
+    const assertionOk = getOkAssertion<any>(type)
+    const assertionErr = getErrAssertion<any>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
