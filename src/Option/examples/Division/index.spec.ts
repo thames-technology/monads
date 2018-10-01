@@ -1,4 +1,4 @@
-import { divide } from "."
+import divide from "."
 
 describe("Division", () => {
   it("returns Some(2) when 4 is divided by 2", () => {

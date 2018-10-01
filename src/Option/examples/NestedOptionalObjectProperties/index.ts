@@ -1,6 +1,6 @@
 import { get_in, Option } from "../.."
 
-export interface Car {
+interface Car {
   driver?: {
     contact?: {
       name?: string
@@ -8,10 +8,12 @@ export interface Car {
   }
 }
 
-export const getDriverName = (car: Car): Option<string> => {
+function getDriverName(car: Car): Option<string> {
   return get_in(car, "driver.contact.name")
 }
 
-console.log(getDriverName({ driver: {} })) // Returns: None
-console.log(getDriverName({ driver: { contact: {} } })) // Returns: None
-console.log(getDriverName({ driver: { contact: { name: "John" } } })) // Returns: Some('John')
+getDriverName({ driver: {} }) // Returns: None
+getDriverName({ driver: { contact: {} } }) // Returns: None
+getDriverName({ driver: { contact: { name: "John" } } }) // Returns: Some('John')
+
+export { Car, getDriverName }

@@ -5,7 +5,7 @@ describe("Result", () => {
     value: T
   }
 
-  function getOkAssertion<T>(type: string) {
+  function getOkAssertion<T>(type: string): (scenario: IScenario<T>) => void {
     return (scenario: IScenario<T>) => {
       it(
         "correctly creates an instance of Ok with value '" + scenario.value + "'",
@@ -31,7 +31,7 @@ describe("Result", () => {
     }
   }
 
-  function getErrAssertion<T>(type: string) {
+  function getErrAssertion<T>(type: string): (scenario: IScenario<T>) => void {
     return (scenario: IScenario<T>) => {
       it(
         "correctly creates an instance of Err with value '" + scenario.value + "'",
@@ -66,8 +66,8 @@ describe("Result", () => {
       { value: Boolean(true) },
     ]
 
-    const assertionOk = getOkAssertion<boolean>(type),
-      assertionErr = getErrAssertion<boolean>(type)
+    const assertionOk = getOkAssertion<boolean>(type)
+    const assertionErr = getErrAssertion<boolean>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
@@ -86,8 +86,8 @@ describe("Result", () => {
       { value: Number(1) },
     ]
 
-    const assertionOk = getOkAssertion<number>(type),
-      assertionErr = getErrAssertion<number>(type)
+    const assertionOk = getOkAssertion<number>(type)
+    const assertionErr = getErrAssertion<number>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
@@ -103,8 +103,8 @@ describe("Result", () => {
       { value: String("abc") },
     ]
 
-    const assertionOk = getOkAssertion<string>(type),
-      assertionErr = getErrAssertion<string>(type)
+    const assertionOk = getOkAssertion<string>(type)
+    const assertionErr = getErrAssertion<string>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
@@ -115,7 +115,9 @@ describe("Result", () => {
 
     const scenarios: IScenario<Function>[] = [
       {
-        value() {},
+        value(): undefined {
+          return undefined
+        },
       },
       {
         value: class C {},
@@ -123,8 +125,8 @@ describe("Result", () => {
       { value: Math.sin },
     ]
 
-    const assertionOk = getOkAssertion<Function>(type),
-      assertionErr = getErrAssertion<Function>(type)
+    const assertionOk = getOkAssertion<Function>(type)
+    const assertionErr = getErrAssertion<Function>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
@@ -133,17 +135,17 @@ describe("Result", () => {
   describe("Object", () => {
     const type = "Object"
 
-    const scenarios: IScenario<Object>[] = [
+    const scenarios: IScenario<object>[] = [
       { value: { a: 1 } },
       { value: [1, 2, 4] },
       { value: new Date() },
-      { value: new Boolean(true) },
-      { value: new Number(1) },
-      { value: new String("abc") },
+      // { value: Boolean(true) },
+      // { value: Number(1) },
+      // { value: String("abc") },
     ]
 
-    const assertionOk = getOkAssertion<Object>(type),
-      assertionErr = getErrAssertion<Object>(type)
+    const assertionOk = getOkAssertion<object>(type)
+    const assertionErr = getErrAssertion<object>(type)
 
     scenarios.forEach(assertionOk)
     scenarios.forEach(assertionErr)
@@ -190,11 +192,11 @@ describe("Result", () => {
   })
 
   describe("Undefined, Null", () => {
-    const array: string[] = ["a", "b"],
-      outOfBoundIndex = array.length + 1
+    const array: string[] = ["a", "b"]
+    const outOfBoundIndex = array.length + 1
 
-    const object = { a: "_a", b: "_b" },
-      outOfBoundProperty = "z"
+    const object = { a: "_a", b: "_b" }
+    const outOfBoundProperty = "z"
 
     const scenarios: IScenario<undefined | null>[] = [
       { value: undefined },
@@ -268,7 +270,7 @@ describe("Result", () => {
     })
 
     it("correctly matches Result and returns fallback value", () => {
-      function getMessage(data: Result<string, string>) {
+      function getMessage(data: Result<string, string>): string {
         return data.match({
           ok: (_) => `Success: ${_}`,
           err: (_) => `Error: ${_}`,
@@ -284,7 +286,7 @@ describe("Result", () => {
     it("correctly maps Ok and returns transformed Result", () => {
       const string = Ok("123")
 
-      const subject = string.map((_) => parseInt(_))
+      const subject = string.map((_) => parseInt(_, 10))
 
       expect(subject.ok()).toEqual(123)
     })
@@ -300,7 +302,7 @@ describe("Result", () => {
 
     it("correctly maps Result and returns transformed value", () => {
       function getMessage(data: Result<string, string>): Result<number, string> {
-        return data.map((_) => parseInt(_))
+        return data.map((_) => parseInt(_, 10))
       }
 
       let subject = getMessage(Ok("123"))
