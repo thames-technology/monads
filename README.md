@@ -20,8 +20,8 @@ npm install @usefultools/monads
 
 ## Documentation
 
-- [Option Type](https://github.com/threestup/monads/tree/master/src/Option)
-- [Result Type](https://github.com/threestup/monads/tree/master/src/Result)
+- [Option Type](./src/Option)
+- [Result Type](./src/Result)
 
 ## Basic Usage
 
@@ -69,5 +69,5 @@ console.log(getIndex(['a', 'b', 'c'], 'z')) // Err('Value not found')
 
 ## Documentation
 
-- [Option Type](https://github.com/threestup/monads/tree/master/src/Option)
-- [Result Type](https://github.com/threestup/monads/tree/master/src/Result)
+- [Option Type](./src/Option)
+- [Result Type](./src/Result)
