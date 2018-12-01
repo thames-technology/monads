@@ -56,7 +56,7 @@ let x: Result<number, string> = Err('Error!')
 console.log(x.is_err()) // true
 ```
 
-### `ok() => T`
+### `unwrap() => T`
 
 Unwraps and returns `T` on `Ok<T>`.
 
@@ -71,28 +71,28 @@ Throws a `ReferenceError` if called on `Err`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.ok()) // 2
+console.log(x.unwrap()) // 2
 ```
 
 ```typescript
 let x: Result<number, string> = Err('Nothing here')
-console.log(x.ok()) // throws ReferenceError
+console.log(x.unwrap()) // throws ReferenceError
 ```
 
 **NOTE:** You can use `is_ok()` to check whether the result is an `Ok`.
-This will compile and enable you to use `ok()` in the `true` / success branch.
+This will compile and enable you to use `unwrap()` in the `true` / success branch.
 
 ```typescript
-const printIndex = (index: Result<string, string>): string => {
+const printIndex = (index: Result<number, string>): number | string => {
     if (is_ok(index)) {
-        return index.ok()
+        return index.unwrap()
     } else {
-        return index.err()
+        return index.unwrap_err()
     }
 }
 ```
 
-### `err() => E`
+### `unwrap_err() => E`
 
 Unwraps and returns `E` on `Err<E>`.
 
@@ -107,28 +107,28 @@ Throws a `ReferenceError` if called on `Ok`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.err()) // throws ReferenceError
+console.log(x.unwrap_err()) // throws ReferenceError
 ```
 
 ```typescript
 let x: Result<number, string> = Err('Nothing here')
-console.log(x.err()) // 'Nothing here'
+console.log(x.unwrap_err()) // 'Nothing here'
 ```
 
 **NOTE:** You can use `is_err()` to check whether the result is an `Err`.
-This will compile and enable you to use `err()` in the `true` / success branch.
+This will compile and enable you to use `unwrap_err()` in the `true` / success branch.
 
 ```typescript
-const printIndex = (index: Result<string, string>): string => {
+const printIndex = (index: Result<number, string>): number | string => {
     if (is_err(index)) {
-        return index.err()
+        return index.unwrap_err()
     } else {
-        return index.ok()
+        return index.unwrap()
     }
 }
 ```
 
-### `ok_or(optb: T) => T`
+### `unwrap_or(optb: T) => T`
 
 Unwraps and returns `T`, if called on `Ok`, otherwise returns `optb: T`.
 
@@ -136,15 +136,15 @@ Unwraps and returns `T`, if called on `Ok`, otherwise returns `optb: T`.
 
 ```typescript
 let x = Ok('bike')
-console.log(x.ok_or('car')) // 'bike'
+console.log(x.unwrap_or('car')) // 'bike'
 ```
 
 ```typescript
 let x = Err('baloon')
-console.log(x.ok_or('air')) // 'air'
+console.log(x.unwrap_or('air')) // 'air'
 ```
 
-### `map(fn: (val: T) => U): Result<U, E>`
+### `map<U>(fn: (val: T) => U): Result<U, E>`
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function to a contained `Ok` value, leaving an `Err` value untouched.
 
@@ -164,6 +164,44 @@ const x: Result<string, string> = Err('123'),
 
 console.log(x.err()) // '123'
 console.log(y.err()) // '123'
+```
+
+### `map_err<U>(fn: (err: T) => U): Result<T, U>`
+
+Maps a `Result<T, E>` to `Result<T, E>` by applying a function to a contained `Err` value, leaving an `Ok` value untouched.
+
+#### Examples
+
+```typescript
+const x: Result<number, never> = Err("error"),
+      y: Result<string, never> = x.map_err(err => err.toUpperCase())
+
+console.log(x.unwrap_err()) // "error"
+console.log(y.unwrap_err()) // "ERROR"
+```
+
+```typescript
+const x: Result<string, string> = Ok('value'),
+      y: Result<number, string> = x.map_err(val => val.toUpperCase())
+
+console.log(x.unwrap()) // "value"
+console.log(y.unwrap()) // "value"
+```
+
+### `and_then(fn: (val: T) => Result<U, E>): Result<U, E>`
+
+Calls `fn` if the result is `Ok`, otherwise returns the `Err` value of self. This function can be used for control flow based on `Result` values.
+
+#### Examples
+
+```typescript
+const sq = (x: number) => Ok(x * x)
+const err = (x: number) => Err(x)
+
+console.log(Ok(2).and_then(sq).and_then(sq)) // Ok(16)
+console.log(Ok(2).and_then(sq).and_then(err)) // Err(4)
+console.log(Ok(2).and_then(err).and_then(sq)) // Err(2)
+console.log(Err(3).and_then(sq).and_then(sq)) // Err(3)
 ```
 
 ### `match(p: MatchPattern<O, E, T>): T`
