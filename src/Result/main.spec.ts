@@ -313,6 +313,38 @@ describe("Result", () => {
     })
   })
 
+  describe("map_err", () => {
+    it("correctly maps on Err and returns transformed Result", () => {
+      const err = Err("unknown error")
+      const subject = err.map_err((errStr) => errStr.toUpperCase())
+      expect(subject.is_err()).toEqual(true)
+      expect(subject.unwrap_err()).toEqual("UNKNOWN ERROR")
+    })
+
+    it("doesn't change Ok val on Ok", () => {
+      const ok: Result<string, number> = Ok("value")
+      const subject = ok.map_err((errNum) => errNum.toString())
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual("value")
+    })
+  })
+
+  describe("and_then", () => {
+    it("correctly returns new result on Ok", () => {
+      const ok = Ok(2)
+      const subject = ok.and_then((int) => Ok(int * int))
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual(4)
+    })
+
+    it("doesn't change Err val on Err", () => {
+      const err: Result<number, string> = Err("error")
+      const subject = err.and_then((int) => Ok(int * int))
+      expect(subject.is_err()).toEqual(true)
+      expect(subject.unwrap_err()).toEqual("error")
+    })
+  })
+
   describe("unwrap", () => {
     it("unwraps when Result is ok", () => {
       const string_ok = Ok("123")

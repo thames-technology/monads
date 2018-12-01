@@ -1,5 +1,5 @@
 import { isEqual, throwIfFalse } from "@usefultools/utils"
-import { None, Option, Some } from "../Option/main"
+import { None, Option, OptNone, Some } from "../Option/main"
 
 export const ResultType = {
   Ok: Symbol(":ok"),
@@ -22,6 +22,8 @@ export interface Result<T, E> {
   unwrap_err(): E | never
   match<U>(fn: Match<T, E, U>): U
   map<U>(fn: (val: T) => U): Result<U, E>
+  map_err<U>(fn: (err: E) => U): Result<T, U>
+  and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
 }
 
 export interface ResOk<T, E = never> extends Result<T, E> {
@@ -29,7 +31,9 @@ export interface ResOk<T, E = never> extends Result<T, E> {
   unwrap_or(optb: T): T
   unwrap_err(): never
   match<U>(fn: Match<T, never, U>): U
-  map<U>(fn: (val: T) => U): ResOk<U>
+  map<U>(fn: (val: T) => U): ResOk<U, never>
+  map_err<U>(fn: (err: E) => U): ResOk<T, never>
+  and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
 }
 
 export interface ResErr<T, E> extends Result<T, E> {
@@ -37,7 +41,9 @@ export interface ResErr<T, E> extends Result<T, E> {
   unwrap_or(optb: T): T
   unwrap_err(): E
   match<U>(fn: Match<never, E, U>): U
-  map<U>(fn: (val: T) => U): ResErr<U, E>
+  map<U>(fn: (val: T) => U): ResErr<never, E>
+  map_err<U>(fn: (err: E) => U): ResErr<never, U>
+  and_then<U>(fn: (val: T) => Result<U, E>): ResErr<never, E>
 }
 
 export function Ok<T, E = never>(val: T): ResOk<T, E> {
@@ -52,7 +58,7 @@ export function Ok<T, E = never>(val: T): ResOk<T, E> {
     ok(): Option<T> {
       return Some(val)
     },
-    err(): Option<E> {
+    err(): OptNone<E> {
       return None
     },
     unwrap(): T {
@@ -67,8 +73,14 @@ export function Ok<T, E = never>(val: T): ResOk<T, E> {
     match<U>(fn: Match<T, never, U>): U {
       return fn.ok(val)
     },
-    map<U>(fn: (val: T) => U): Result<U, never> {
+    map<U>(fn: (val: T) => U): ResOk<U, never> {
       return Ok(fn(val))
+    },
+    map_err<U>(_fn: (err: E) => U): ResOk<T, never> {
+      return Ok(val)
+    },
+    and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
+      return fn(val)
     },
   }
 }
@@ -100,7 +112,13 @@ export function Err<T, E>(err: E): ResErr<T, E> {
     match<U>(fn: Match<never, E, U>): U {
       return fn.err(err)
     },
-    map<U>(_fn: (_val: T) => U): ResErr<U, E> {
+    map<U>(_fn: (_val: T) => U): ResErr<never, E> {
+      return Err(err)
+    },
+    map_err<U>(fn: (err: E) => U): ResErr<never, U> {
+      return Err(fn(err))
+    },
+    and_then<U>(_fn: (val: T) => Result<U, E>): ResErr<never, E> {
       return Err(err)
     },
   }
