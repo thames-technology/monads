@@ -30,6 +30,8 @@ npm install @usefultools/monads
 
 See full `Option<T>` API documentation [here](./src/Option).
 
+See `Option<T>` examples [here](./src/Option/examples).
+
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
 
@@ -57,6 +59,8 @@ console.log(message) // "Result: 0.6666666666666666"
 ### `Result<T, E>`
 
 See full `Result<T, E>` API documentation [here](./src/Result).
+
+See `Result<T, E>` examples [here](./src/Result/examples).
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
