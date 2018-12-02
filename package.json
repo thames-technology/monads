@@ -12,10 +12,10 @@
     "test": "make test"
   },
   "dependencies": {
-    "@usefultools/utils": "^6.2.0"
+    "@usefultools/utils": "^6.2.1"
   },
   "devDependencies": {
-    "@types/jest": "23.3.2",
+    "@types/jest": "^23.3.10",
     "@types/node": "^10.12.11",
     "jest": "23.6.0",
     "prettier": "^1.15.3",
