@@ -51,6 +51,7 @@ const message = result.match({
 })
 
 console.log(message) // "Result: 0.6666666666666666"
+
 ```
 
 ### `Result<T, E>`
@@ -73,7 +74,7 @@ function getIndex(values: string[], value: string): Result<number, string> {
 
 console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
-...
+
 ```
 
 ## Contributing
