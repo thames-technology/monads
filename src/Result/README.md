@@ -61,6 +61,42 @@ console.log(x.is_err()) // true
 
 ```
 
+### `ok() => Option<T>`
+
+Converts from `Result<T, E>` to `Option<T>`.
+
+Converts `self` into an `Option<T>`, consuming `self`, and discarding the error, if any.
+
+```typescript
+let x: Result<number, string> = Ok(2)
+console.log(x.ok()) // Some(2)
+
+```
+
+```typescript
+let x: Result<number, string> = Err("Nothing here")
+console.log(x.ok()) // None
+
+```
+
+### `err() => Option<E>`
+
+Converts from `Result<T, E>` to `Option<E>`.
+
+Converts `self` into an `Option<E>`, consuming `self`, and discarding the success, if any.
+
+```typescript
+let x: Result<number, string> = Ok(2)
+console.log(x.err()) // None
+
+```
+
+```typescript
+let x: Result<number, string> = Err("Nothing here")
+console.log(x.err()) // Some("Nothing here")
+
+```
+
 ### `unwrap() => T`
 
 Unwraps and returns `T` on `Ok<T>`.
