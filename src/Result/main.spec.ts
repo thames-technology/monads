@@ -17,12 +17,12 @@ describe("Result", () => {
           expect(subject.is_ok()).toEqual(true)
           expect(subject.is_err()).toEqual(false)
 
-          expect(() => subject.err()).toThrow()
-          expect(subject.ok_or("" as any)).toEqual(scenario.value)
+          expect(() => subject.unwrap_err()).toThrow()
+          expect(subject.unwrap_or("" as any)).toEqual(scenario.value)
 
           if (is_ok(subject)) {
-            expect(typeof subject.ok()).toEqual(type.toLowerCase())
-            expect(subject.ok()).toEqual(scenario.value)
+            expect(typeof subject.unwrap()).toEqual(type.toLowerCase())
+            expect(subject.unwrap()).toEqual(scenario.value)
           } else {
             throw new Error("Has to be _Ok!")
           }
@@ -43,12 +43,12 @@ describe("Result", () => {
           expect(subject.is_ok()).toEqual(false)
           expect(subject.is_err()).toEqual(true)
 
-          expect(() => subject.ok()).toThrow()
-          expect(subject.ok_or("optb" as any)).toEqual("optb")
+          expect(() => subject.unwrap()).toThrow()
+          expect(subject.unwrap_or("optb" as any)).toEqual("optb")
 
           if (is_err(subject)) {
-            expect(typeof subject.err()).toEqual(type.toLowerCase())
-            expect(subject.err()).toEqual(scenario.value)
+            expect(typeof subject.unwrap_err()).toEqual(type.toLowerCase())
+            expect(subject.unwrap_err()).toEqual(scenario.value)
           } else {
             throw new Error("Has to be _Err!")
           }
@@ -163,10 +163,10 @@ describe("Result", () => {
       expect(subject.is_err()).toEqual(false)
 
       if (is_ok(subject)) {
-        const type = typeof subject.ok()
+        const type = typeof subject.unwrap()
 
         expect(type === "function" || type === "object").toEqual(true)
-        expect(subject.ok()).toEqual(val)
+        expect(subject.unwrap()).toEqual(val)
       } else {
         throw new Error("Has to be _Ok!")
       }
@@ -181,10 +181,10 @@ describe("Result", () => {
       expect(subject.is_err()).toEqual(true)
 
       if (is_err(subject)) {
-        const type = typeof subject.err()
+        const type = typeof subject.unwrap_err()
 
         expect(type === "function" || type === "object").toEqual(true)
-        expect(subject.err()).toEqual(val)
+        expect(subject.unwrap_err()).toEqual(val)
       } else {
         throw new Error("Has to be _Err!")
       }
@@ -215,7 +215,7 @@ describe("Result", () => {
 
         expect(subject.is_ok()).toEqual(true)
         expect(subject.is_err()).toEqual(false)
-        expect(subject.ok()).toEqual(scenario.value)
+        expect(subject.unwrap()).toEqual(scenario.value)
       })
     }
 
@@ -227,7 +227,7 @@ describe("Result", () => {
 
         expect(subject.is_ok()).toEqual(false)
         expect(subject.is_err()).toEqual(true)
-        expect(subject.err()).toEqual(scenario.value)
+        expect(subject.unwrap_err()).toEqual(scenario.value)
       })
     }
 
@@ -238,10 +238,10 @@ describe("Result", () => {
   describe("ok_or", () => {
     it("returns optb correctly", () => {
       let string: Result<string, string> = Ok("foo")
-      expect(string.ok_or("bar")).toEqual("foo")
+      expect(string.unwrap_or("bar")).toEqual("foo")
 
       string = Err("foo")
-      expect(string.ok_or("bar")).toEqual("bar")
+      expect(string.unwrap_or("bar")).toEqual("bar")
     })
   })
 
@@ -288,7 +288,7 @@ describe("Result", () => {
 
       const subject = string.map((_) => parseInt(_, 10))
 
-      expect(subject.ok()).toEqual(123)
+      expect(subject.unwrap()).toEqual(123)
     })
 
     it("correctly returns untouched Err when trying to use map", () => {
@@ -297,7 +297,7 @@ describe("Result", () => {
 
       const subject = number.map((_) => _.toString())
 
-      expect(subject.err()).toEqual(1)
+      expect(subject.unwrap_err()).toEqual(1)
     })
 
     it("correctly maps Result and returns transformed value", () => {
@@ -306,40 +306,116 @@ describe("Result", () => {
       }
 
       let subject = getMessage(Ok("123"))
-      expect(is_ok(subject) ? subject.ok() : 0).toEqual(123)
+      expect(is_ok(subject) ? subject.unwrap() : 0).toEqual(123)
 
       subject = getMessage(Err("123"))
-      expect(is_err(subject) ? subject.err() : "0").toEqual("123")
+      expect(is_err(subject) ? subject.unwrap_err() : "0").toEqual("123")
+    })
+  })
+
+  describe("map_err", () => {
+    it("correctly maps on Err and returns transformed Result", () => {
+      const err = Err("unknown error")
+      const subject = err.map_err((errStr) => errStr.toUpperCase())
+      expect(subject.is_err()).toEqual(true)
+      expect(subject.unwrap_err()).toEqual("UNKNOWN ERROR")
+    })
+
+    it("doesn't change Ok val on Ok", () => {
+      const ok: Result<string, number> = Ok("value")
+      const subject = ok.map_err((errNum) => errNum.toString())
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual("value")
+    })
+  })
+
+  describe("and_then", () => {
+    it("correctly returns new result on Ok", () => {
+      const ok = Ok(2)
+      const subject = ok.and_then((int) => Ok(int * int))
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual(4)
+    })
+
+    it("doesn't change Err val on Err", () => {
+      const err: Result<number, string> = Err("error")
+      const subject = err.and_then((int) => Ok(int * int))
+      expect(subject.is_err()).toEqual(true)
+      expect(subject.unwrap_err()).toEqual("error")
+    })
+  })
+
+  describe("unwrap", () => {
+    it("unwraps when Result is ok", () => {
+      const string_ok = Ok("123")
+      const subject = string_ok.unwrap()
+      expect(subject).toEqual("123")
+    })
+
+    it("throws when Result is err", () => {
+      const string_err = Err("123")
+      const subject = () => string_err.unwrap()
+      expect(subject).toThrow(ReferenceError)
+      expect(subject).toThrow("Cannot unwrap Ok value of Result.Err")
+    })
+  })
+
+  describe("unwrap_or", () => {
+    it("unwraps original value when Result is ok", () => {
+      const string_ok = Ok("123")
+      const subject = string_ok.unwrap_or("456")
+      expect(subject).toEqual("123")
+    })
+
+    it("unwraps optb when Result is err", () => {
+      const string_err = Err("123")
+      const subject = string_err.unwrap_or("456")
+      expect(subject).toEqual("456")
+    })
+  })
+
+  describe("unwrap_err", () => {
+    it("unwraps error when Result is err", () => {
+      const string_err = Err("123")
+      const subject = string_err.unwrap_err()
+      expect(subject).toEqual("123")
+    })
+
+    it("throws when Result is ok", () => {
+      const string_ok = Ok("123")
+      const subject = () => string_ok.unwrap_err()
+      expect(subject).toThrow(ReferenceError)
+      expect(subject).toThrow("Cannot unwrap Err value of Result.Ok")
     })
   })
 
   describe("ok", () => {
-    it("correctly returns Some when Result is ok", () => {
-      const string_ok = Ok("123")
-      const subject = string_ok.ok()
-      expect(subject).toEqual("123")
+    it("converts value into Some for Ok", () => {
+      const string = Ok("123")
+      const subject = string.ok()
+      expect(subject.is_some()).toEqual(true)
+      expect(subject.unwrap()).toEqual("123")
     })
 
-    it("correctly returns None when Result is err", () => {
-      const string_err = Err("123")
-      const subject = () => string_err.ok()
-      expect(subject).toThrow(ReferenceError)
-      expect(subject).toThrow("Cannot get Ok value of Result.Err")
+    it("converts value into None for Err", () => {
+      const string = Err("123")
+      const subject = string.ok()
+      expect(subject.is_none()).toEqual(true)
     })
   })
 
   describe("err", () => {
-    it("correctly returns Some when Result is err", () => {
-      const string_err = Err("123")
-      const subject = string_err.err()
-      expect(subject).toEqual("123")
+    it("converts value into Some for Err", () => {
+      const string = Err("123")
+      const subject = string.err()
+      expect(subject.is_some()).toEqual(true)
+      expect(subject.unwrap()).toEqual("123")
     })
 
-    it("correctly returns None when Result is ok", () => {
-      const string_ok = Ok("123")
-      const subject = () => string_ok.err()
-      expect(subject).toThrow(ReferenceError)
-      expect(subject).toThrow("Cannot get Err value of Result.Ok")
+    it("converts value into None for Ok", () => {
+      const string = Ok("123")
+      const subject = string.err()
+      expect(subject.is_none()).toEqual(true)
     })
   })
 
