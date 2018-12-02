@@ -28,6 +28,8 @@ npm install @usefultools/monads
 
 ### `Option<T>`
 
+See full `Option<T>` API documentation [here](./src/Option).
+
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
 
@@ -51,9 +53,9 @@ const message = result.match({
 console.log(message) // "Result: 0.6666666666666666"
 ```
 
-See full `Option<T>` API documentation [here](./src/Option).
-
 ### `Result<T, E>`
+
+See full `Result<T, E>` API documentation [here](./src/Result).
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
@@ -73,8 +75,6 @@ console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 ...
 ```
-
-See full `Result<T, E>` API documentation [here](./src/Result).
 
 ## Contributing
 
