@@ -1,7 +1,7 @@
 {
   "name": "@usefultools/monads",
   "version": "2.0.1-0",
-  "description": "Type safe Option and Result type – for TypeScript and JavaScript",
+  "description": "Type safe Option and Result types – inspired by Rust",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
@@ -30,12 +30,12 @@
     "type",
     "typescript",
     "javascript",
-    "threestup"
+    "usefultools"
   ],
   "repository": {
     "type": "git",
     "url": "git@github.com:litchi-io/monads.git"
   },
-  "author": "Slavomir Vojacek <slavomirvojacek@gmail.com>",
+  "author": "Slavo Vojacek <slavomirvojacek@gmail.com>",
   "license": "ISC"
 }
