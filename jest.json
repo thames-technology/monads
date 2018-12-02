@@ -5,6 +5,7 @@
     "!**/**/index.ts",
     "!**/**/types.ts",
     "!**/**/types.d.ts",
+    "!**/examples/**",
     "!**/node_modules/**",
     "!**/dist/**",
     "!**/fixture/**"
