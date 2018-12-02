@@ -246,6 +246,7 @@ type MatchPattern<T, U> = {
   some: (val: T) => U
   none: (() => T) | U
 }
+
 ```
 
 Applies a function to retrieve a contained value if `Option` is `Some`; Either returns, or applies another function to
