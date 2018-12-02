@@ -30,8 +30,6 @@ npm install @usefultools/monads
 
 See full `Option<T>` API documentation [here](./src/Option).
 
-See `Option<T>` examples [here](./src/Option/examples).
-
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
 
@@ -56,11 +54,11 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ```
 
+More `Option<T>` examples [here](./src/Option/examples).
+
 ### `Result<T, E>`
 
 See full `Result<T, E>` API documentation [here](./src/Result).
-
-See `Result<T, E>` examples [here](./src/Result/examples).
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
@@ -80,6 +78,8 @@ console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 ```
+
+More `Result<T, E>` examples [here](./src/Result/examples).
 
 ## Contributing
 
