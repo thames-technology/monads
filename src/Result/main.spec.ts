@@ -295,7 +295,7 @@ describe("Result", () => {
       const arr = [1, 2, 3]
       const number = Err(arr[0])
 
-      const subject = number.map((_) => _.toString())
+      const subject = number.map((_) => "different value")
 
       expect(subject.unwrap_err()).toEqual(1)
     })
