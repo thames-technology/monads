@@ -1,8 +1,8 @@
-[![CircleCI](https://circleci.com/gh/litchi-io/monads.svg?style=svg)](https://circleci.com/gh/litchi-io/monads)
-[![codecov](https://codecov.io/gh/litchi-io/monads/branch/master/graph/badge.svg)](https://codecov.io/gh/litchi-io/monads)
+[![CircleCI](https://circleci.com/gh/qworks-io/monads.svg?style=svg)](https://circleci.com/gh/qworks-io/monads)
+[![codecov](https://codecov.io/gh/qworks-io/monads/branch/master/graph/badge.svg)](https://codecov.io/gh/qworks-io/monads)
 [![npm version](https://img.shields.io/npm/v/@usefultools/monads.svg)](https://www.npmjs.com/package/@usefultools/monads)
-[![GuardRails](https://badges.production.guardrails.io/litchi-io/monads.svg)](https://www.guardrails.io)
-[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/litchi-io/monads/blob/master/SECURITY.md)
+[![GuardRails](https://badges.production.guardrails.io/qworks-io/monads.svg)](https://www.guardrails.io)
+[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/qworks-io/monads/blob/master/SECURITY.md)
 
 # Monads
 
