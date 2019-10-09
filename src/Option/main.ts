@@ -43,8 +43,8 @@ export interface OptNone<T> extends Option<T> {
   and<U>(optb: Option<U>): OptNone<U>
 }
 
-export function Some<T>(val: T | null | undefined): Option<T> {
-  return isPresent(val) ? some_constructor<T>(val as T) : none_constructor<T>()
+export function Some<T>(val?: T): Option<T> {
+  return arguments.length > 0 ? some_constructor<T>(val as T) : none_constructor<T>()
 }
 
 export const None = none_constructor<any>()
