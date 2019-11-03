@@ -5,8 +5,8 @@
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
-    "node": ">=9.10.0",
-    "npm": ">=6.1.0"
+    "node": ">=12.13.0",
+    "npm": ">=6.12.0"
   },
   "scripts": {
     "test": "make test"
@@ -34,7 +34,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:litchi-io/monads.git"
+    "url": "git@github.com:qworks-io/monads.git"
   },
   "author": "Slavo Vojacek <slavomirvojacek@gmail.com>",
   "license": "ISC"
