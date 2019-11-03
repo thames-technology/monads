@@ -15,14 +15,14 @@
     "@usefultools/utils": "^6.3.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.2",
-    "jest": "^24.8.0",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
     "tslint-config-security": "^1.16.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.4"
   },
   "keywords": [
     "option",

@@ -1,10 +1,11 @@
 import {
   isEqual,
   isFunction,
-  isPresent,
+  isUndefined,
   throwIfFalse,
   throwIfMissing,
 } from "@usefultools/utils"
+import { isObject } from "util"
 
 export const OptionType = {
   Some: Symbol(":some"),
@@ -43,14 +44,16 @@ export interface OptNone<T> extends Option<T> {
   and<U>(optb: Option<U>): OptNone<U>
 }
 
-export function Some<T>(val: T | null | undefined): Option<T> {
-  return isPresent(val) ? some_constructor<T>(val as T) : none_constructor<T>()
+export function Some<T>(val?: T | undefined): Option<T> {
+  return isUndefined(val) ? none_constructor<T>() : some_constructor<T>(val as T)
 }
 
 export const None = none_constructor<any>()
 
 export function some_constructor<T>(val: T): OptSome<T> {
-  throwIfMissing(val, `Some has to contain a value. Received ${typeof val}.`)
+  if (isEqual(typeof val, "undefined")) {
+    throw new TypeError("Some has to contain a value. Constructor received undefined.")
+  }
 
   return {
     type: OptionType.Some,
@@ -97,10 +100,10 @@ export function none_constructor<T>(): OptNone<T> {
     match<U>(fn: Match<T, U>): U {
       return isFunction(fn.none) ? fn.none() : fn.none
     },
-    map<U>(fn: (val: T) => U): OptNone<U> {
+    map<U>(_fn: (val: T) => U): OptNone<U> {
       return none_constructor<U>()
     },
-    and_then<U>(fn: (val: T) => Option<U>): OptNone<U> {
+    and_then<U>(_fn: (val: T) => Option<U>): OptNone<U> {
       return none_constructor<U>()
     },
     or<U>(optb: Option<U>): Option<U> {
@@ -120,7 +123,10 @@ export function none_constructor<T>(): OptNone<T> {
 }
 
 export function is_option<T>(val: Option<T> | any): val is Option<T> {
-  return isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None)
+  return (
+    isObject(val) &&
+    (isEqual(val.type, OptionType.Some) || isEqual(val.type, OptionType.None))
+  )
 }
 
 export function is_some<T>(val: Option<T>): val is OptSome<T> {

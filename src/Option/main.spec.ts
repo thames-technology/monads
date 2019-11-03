@@ -139,6 +139,12 @@ describe("Option", () => {
     })
 
     describe("Undefined, Null", () => {
+      it("undefined is treated as None, null is a valid Some", () => {
+        expect(Some().is_some()).toEqual(false)
+        expect(Some(undefined).is_some()).toEqual(false)
+        expect(Some(null).is_some()).toEqual(true)
+      })
+
       const array: string[] = ["a", "b"]
       const outOfBoundIndex = array.length + 1
 
@@ -148,17 +154,14 @@ describe("Option", () => {
       }
       const outOfBoundProperty = "z"
 
-      const scenarios: IScenario<undefined | null>[] = [
+      const scenarios: IScenario<undefined>[] = [
         { value: undefined },
-        { value: null },
         { value: array[outOfBoundIndex] },
-        { value: [null][0] },
         { value: (object as any)[outOfBoundProperty] },
-        { value: ({ _: null } as any)._ },
       ]
 
       const assertion = (scenario: IScenario<any>) => {
-        it(`is None when trying to access out of bound index, property or variable,
+        it(`is None when trying to access out of bound index, property or variable (${scenario}),
           calling unwrap() impossible`, () => {
           const subject = Some(scenario.value)
 
@@ -333,7 +336,7 @@ describe("Option", () => {
 
   describe("constructor", () => {
     it("throws if no value inside", () => {
-      expect(() => some_constructor(null as any)).toThrow()
+      expect(() => some_constructor(undefined)).toThrow()
     })
   })
 })
