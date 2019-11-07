@@ -4,7 +4,7 @@ Type `Option<T>` represents an optional value: every `Option` is either `Some` a
 
 You could consider using `Option` for:
 
-- Nullable pointers (`null` and/or `undefined`)
+- Nullable pointers (`undefined` in JavaScript)
 - Return value for otherwise reporting simple errors, where None is returned on error
 - Default values and/or properties
 - Nested optional object properties
@@ -50,6 +50,23 @@ console.log(x.is_some()) // true
 ```typescript
 let x: Option<number> = None
 console.log(x.is_some()) // false
+
+```
+
+#### `null` and `undefined`
+
+In previous versions of this package, calling `Some(val)` where `val` is either `null` or `undefined` would result in `None`.
+
+Hovewer, `null` is considered a _value_ and it is internally treated as `object`.
+
+Therefore, as of version `v3.0.0`, constructing `Some` with `null` (explicitly, or implicitly) will indeed yield `Some<null>`.
+
+```typescript
+expect(Some().is_some()).toEqual(false)
+expect(Some(undefined).is_some()).toEqual(false)
+
+// This assertion would fail in versions below 3.0.0
+expect(Some(null).is_some()).toEqual(true)
 
 ```
 

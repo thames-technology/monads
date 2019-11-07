@@ -15,7 +15,7 @@ Type safe [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [R
 
 Please note that the **TypeScript target is ES6**.
 
-```sh
+```bash
 npm install @usefultools/monads
 ```
 
@@ -87,7 +87,7 @@ If you have comments, complaints, or ideas for improvements, feel free to open a
 
 ## Author and license
 
-This library was created by [@LITCHI.IO](https://github.com/litchi-io). Main author and maintainer is [Slavo Vojacek](https://github.com/slavovojacek).
+This library was created by [@qworks.io](https://github.com/qworks-io). Main author and maintainer is [Slavo Vojacek](https://github.com/slavovojacek).
 
 Contributors: [Slavo Vojacek](https://github.com/slavovojacek)
 

@@ -1,12 +1,12 @@
 {
   "name": "@usefultools/monads",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Type safe Option and Result types – inspired by Rust",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
-    "node": ">=9.10.0",
-    "npm": ">=6.1.0"
+    "node": ">=12.13.0",
+    "npm": ">=6.12.0"
   },
   "scripts": {
     "test": "make test"
@@ -15,14 +15,14 @@
     "@usefultools/utils": "^6.3.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.2",
-    "jest": "^24.8.0",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
     "tslint-config-security": "^1.16.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.4"
   },
   "keywords": [
     "option",
@@ -34,7 +34,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:litchi-io/monads.git"
+    "url": "git@github.com:qworks-io/monads.git"
   },
   "author": "Slavo Vojacek <slavomirvojacek@gmail.com>",
   "license": "ISC"
