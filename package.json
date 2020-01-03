@@ -1,6 +1,6 @@
 {
   "name": "@usefultools/monads",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Type safe Option and Result types – inspired by Rust",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
