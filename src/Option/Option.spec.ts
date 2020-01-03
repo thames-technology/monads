@@ -8,7 +8,7 @@ import {
   OptionType,
   Some,
   some_constructor,
-} from "./main"
+} from "./Option"
 
 describe("Option", () => {
   interface IScenario<T> {

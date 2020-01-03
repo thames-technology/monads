@@ -1,4 +1,4 @@
-import { Err, is_err, is_ok, is_result, Ok, Result, ResultType } from "./main"
+import { Err, is_err, is_ok, is_result, Ok, Result, ResultType } from "./Result"
 
 describe("Result", () => {
   interface IScenario<T> {

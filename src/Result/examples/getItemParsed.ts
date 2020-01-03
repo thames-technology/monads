@@ -1,5 +1,5 @@
 import { isString } from "@usefultools/utils"
-import { Err, Ok, Result } from "../main"
+import { Err, Ok, Result } from "../Result"
 import { Context } from "./types"
 
 function getItemParsed<T>(key: string, ctx: Context): Result<T, string> {

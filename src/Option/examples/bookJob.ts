@@ -1,4 +1,4 @@
-import { is_some, None, Option, Some } from "../main"
+import { is_some, None, Option, Some } from "../Option"
 import { Context, JobArgs, Schedule } from "./types"
 
 function calculatePickupTime(schedule: Schedule): Option<Date> {

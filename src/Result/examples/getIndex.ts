@@ -1,4 +1,4 @@
-import { Err, Ok, Result } from "../main"
+import { Err, Ok, Result } from "../Result"
 
 function getIndex(values: string[], value: string): Result<number, string> {
   const index = values.indexOf(value)

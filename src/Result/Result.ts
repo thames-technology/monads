@@ -1,5 +1,5 @@
 import { isEqual, throwIfFalse } from "@usefultools/utils"
-import { None, Option, OptNone, Some } from "../Option/main"
+import { None, Option, OptNone, Some } from "../Option/Option"
 
 export const ResultType = {
   Ok: Symbol(":ok"),
