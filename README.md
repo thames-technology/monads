@@ -10,8 +10,8 @@ Type safe [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [R
 
 ## Prereqs & Install
 
-* Node >=9.10.0
-* npm >=6.1.0
+* Node >=13.5.0
+* npm >=6.13.0
 
 Please note that the **TypeScript target is ES6**.
 
@@ -28,7 +28,7 @@ npm install @usefultools/monads
 
 ### `Option<T>`
 
-See full `Option<T>` API documentation [here](./src/Option).
+See full `Option<T>` **[API documentation here](./src/Option)**.
 
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
@@ -58,7 +58,7 @@ More `Option<T>` examples [here](./src/Option/examples).
 
 ### `Result<T, E>`
 
-See full `Result<T, E>` API documentation [here](./src/Result).
+See full `Result<T, E>` **[API documentation here](./src/Result)**.
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
