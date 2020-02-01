@@ -10,8 +10,8 @@ Type safe [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [R
 
 ## Prereqs & Install
 
-* Node >=13.5.0
-* npm >=6.13.0
+* Node >= 12
+* npm >= 6
 
 Please note that the **TypeScript target is ES6**.
 
