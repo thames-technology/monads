@@ -359,6 +359,18 @@ describe("Result", () => {
       expect(subject.is_ok()).toEqual(true)
       expect(subject.unwrap()).toEqual(4)
     })
+
+    it("correctly chain multiple (Ok) statements", () => {
+      const doubleOr12: (int: number) => Result<number,number> =
+      (int: number) => (int * 2 === 16) ? Ok(12) : Err(int * 2)
+
+      const subject = doubleOr12(2)
+        .or_else(doubleOr12)
+        .or_else(doubleOr12)
+        .or_else(doubleOr12)
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual(12)
+    })
   })
 
   describe("unwrap", () => {
