@@ -345,6 +345,22 @@ describe("Result", () => {
     })
   })
 
+  describe("or_else", () => {
+    it("correctly returns ok value of this on Ok", () => {
+      const ok = Ok(2)
+      const subject = ok.or_else(() => Ok(5))
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual(2)
+    })
+
+    it("correctly return alternative new value on error", () => {
+      const err: Result<number, number> = Err(2)
+      const subject = err.or_else((int) => Ok(int * int))
+      expect(subject.is_ok()).toEqual(true)
+      expect(subject.unwrap()).toEqual(4)
+    })
+  })
+
   describe("unwrap", () => {
     it("unwraps when Result is ok", () => {
       const string_ok = Ok("123")
