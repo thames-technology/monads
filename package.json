@@ -1,6 +1,6 @@
 {
   "name": "@hqoss/monads",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Type safe Option, Result, and Either types; inspired by Rust",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
