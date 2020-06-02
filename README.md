@@ -1,5 +1,7 @@
 ![Node.js CI](https://github.com/hqoss/monads/workflows/Node.js%20CI/badge.svg)
+
 <!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Grade) -->
+
 <!-- [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Coverage) -->
 
 # 👻 Monads
@@ -7,6 +9,26 @@
 Type safe Option, Result, and Either types; inspired by Rust
 
 ## Table of contents
+
+-   [⏳ Install](#-install)
+
+-   [📝 Usage](#-usage)
+
+    -   [`Option<T>`](#optiont)
+    -   [`Result<T, E>`](#resultt-e)
+    -   [API Docs](#api-docs)
+
+-   [⚡️ Performance](#️-performance)
+
+-   [🧬 Core design principles](#🧬-core-design-principles)
+
+-   [Node version support](#node-version-support)
+
+    -   [Why ES2018](#why-es2018)
+
+-   [Testing](#testing)
+
+-   [TODO](#todo)
 
 ## ⏳ Install
 

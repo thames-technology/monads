@@ -4,7 +4,7 @@
 
 You could consider using `Result` for:
 
-- Return value whenever errors are expected and recoverable
+-   Return value whenever errors are expected and recoverable
 
 ```typescript
 function getIndex(values: string[], value: string): Result<number, string> {
