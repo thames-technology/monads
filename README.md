@@ -1,7 +1,6 @@
 ![Node.js CI](https://github.com/hqoss/monads/workflows/Node.js%20CI/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb2d7cfddcab4f3c98275a66b1aa227a)](https://app.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Grade_Dashboard)
-
-<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Coverage) -->
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Coverage)
 
 # 👻 Monads
 
@@ -31,17 +30,17 @@ Type safe Option, Result, and Either types; inspired by Rust
 
 ## ⏳ Install
 
-**⚠️ NOTE:** The project is configured to target `ES2018` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
-
 ```bash
 npm install @hqoss/monads
 ```
+
+**⚠️ NOTE:** The project is configured to target `ES2018` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
 
 ## 📝 Usage
 
 ### `Option<T>`
 
-ℹ️ See full `Option<T>` **[API documentation here](./src/Option)**.
+[See full documentation](./src/Option).
 
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
@@ -68,7 +67,7 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ### `Result<T, E>`
 
-ℹ️ See full `Result<T, E>` **[API documentation here](./src/Result)**.
+[See full documentation](./src/Result).
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"

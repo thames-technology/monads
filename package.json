@@ -13,7 +13,7 @@
     "format": "prettier --write \"./{src,test}/**/*.ts\"",
     "format:check": "prettier --check \"./{src,test}/**/*.ts\"",
     "test": "jest",
-    "generate-docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
+    "generate-docs": "rm -rf ./docs && typedoc --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
     "preversion": "npm run format:check && npm run build && npm test",
     "prepublishOnly": "npm run format:check && npm run build && npm test",
     "postversion": "git push --follow-tags"
