@@ -1,148 +1,148 @@
-import { isEqual, throwIfFalse } from "@usefultools/utils"
-import { None, Option, OptNone, Some } from "../Option/Option"
+import { isEqual, throwIfFalse } from "@usefultools/utils";
+import { None, Option, OptNone, Some } from "../option/option";
 
 export const ResultType = {
   Ok: Symbol(":ok"),
   Err: Symbol(":err"),
-}
+};
 
 export interface Match<T, E, U> {
-  ok: (val: T) => U
-  err: (val: E) => U
+  ok: (val: T) => U;
+  err: (val: E) => U;
 }
 
 export interface Result<T, E> {
-  type: symbol
-  is_ok(): boolean
-  is_err(): boolean
-  ok(): Option<T>
-  err(): Option<E>
-  unwrap(): T | never
-  unwrap_or(optb: T): T
-  unwrap_err(): E | never
-  match<U>(fn: Match<T, E, U>): U
-  map<U>(fn: (val: T) => U): Result<U, E>
-  map_err<U>(fn: (err: E) => U): Result<T, U>
-  and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
-  or_else<U>(fn: (err: E) => Result<U, E>): Result<T, E> | Result<U, E>
+  type: symbol;
+  isOk(): boolean;
+  isErr(): boolean;
+  ok(): Option<T>;
+  err(): Option<E>;
+  unwrap(): T | never;
+  unwrapOr(optb: T): T;
+  unwrapErr(): E | never;
+  match<U>(fn: Match<T, E, U>): U;
+  map<U>(fn: (val: T) => U): Result<U, E>;
+  mapErr<U>(fn: (err: E) => U): Result<T, U>;
+  andThen<U>(fn: (val: T) => Result<U, E>): Result<U, E>;
+  orElse<U>(fn: (err: E) => Result<U, E>): Result<T, E> | Result<U, E>;
 }
 
 export interface ResOk<T, E = never> extends Result<T, E> {
-  unwrap(): T
-  unwrap_or(optb: T): T
-  unwrap_err(): never
-  match<U>(fn: Match<T, never, U>): U
-  map<U>(fn: (val: T) => U): ResOk<U, never>
-  map_err<U>(fn: (err: E) => U): ResOk<T, never>
-  and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
-  or_else<U>(fn: (err: E) => Result<U, E>): Result<T, E>
+  unwrap(): T;
+  unwrapOr(optb: T): T;
+  unwrapErr(): never;
+  match<U>(fn: Match<T, never, U>): U;
+  map<U>(fn: (val: T) => U): ResOk<U, never>;
+  mapErr<U>(fn: (err: E) => U): ResOk<T, never>;
+  andThen<U>(fn: (val: T) => Result<U, E>): Result<U, E>;
+  orElse<U>(fn: (err: E) => Result<U, E>): Result<T, E>;
 }
 
 export interface ResErr<T, E> extends Result<T, E> {
-  unwrap(): never
-  unwrap_or(optb: T): T
-  unwrap_err(): E
-  match<U>(fn: Match<never, E, U>): U
-  map<U>(fn: (val: T) => U): ResErr<never, E>
-  map_err<U>(fn: (err: E) => U): ResErr<never, U>
-  and_then<U>(fn: (val: T) => Result<U, E>): ResErr<never, E>
-  or_else<U>(fn: (err: E) => Result<U, E>): Result<U, E>
+  unwrap(): never;
+  unwrapOr(optb: T): T;
+  unwrapErr(): E;
+  match<U>(fn: Match<never, E, U>): U;
+  map<U>(fn: (val: T) => U): ResErr<never, E>;
+  mapErr<U>(fn: (err: E) => U): ResErr<never, U>;
+  andThen<U>(fn: (val: T) => Result<U, E>): ResErr<never, E>;
+  orElse<U>(fn: (err: E) => Result<U, E>): Result<U, E>;
 }
 
 export function Ok<T, E = never>(val: T): ResOk<T, E> {
   return {
     type: ResultType.Ok,
-    is_ok(): boolean {
-      return true
+    isOk(): boolean {
+      return true;
     },
-    is_err(): boolean {
-      return false
+    isErr(): boolean {
+      return false;
     },
     ok(): Option<T> {
-      return Some(val)
+      return Some(val);
     },
     err(): OptNone<E> {
-      return None
+      return None;
     },
     unwrap(): T {
-      return val
+      return val;
     },
-    unwrap_or(_optb: T): T {
-      return val
+    unwrapOr(_optb: T): T {
+      return val;
     },
-    unwrap_err(): never {
-      throw new ReferenceError("Cannot unwrap Err value of Result.Ok")
+    unwrapErr(): never {
+      throw new ReferenceError("Cannot unwrap Err value of Result.Ok");
     },
     match<U>(fn: Match<T, never, U>): U {
-      return fn.ok(val)
+      return fn.ok(val);
     },
     map<U>(fn: (val: T) => U): ResOk<U, never> {
-      return Ok(fn(val))
+      return Ok(fn(val));
     },
-    map_err<U>(_fn: (err: E) => U): ResOk<T, never> {
-      return Ok(val)
+    mapErr<U>(_fn: (err: E) => U): ResOk<T, never> {
+      return Ok(val);
     },
-    and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
-      return fn(val)
+    andThen<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
+      return fn(val);
     },
-    or_else<U>(_fn: (err: E) => Result<U, E>): ResOk<T, E> {
-      return Ok(val)
+    orElse<U>(_fn: (err: E) => Result<U, E>): ResOk<T, E> {
+      return Ok(val);
     },
-  }
+  };
 }
 
 export function Err<T, E>(err: E): ResErr<T, E> {
   return {
     type: ResultType.Err,
-    is_ok(): boolean {
-      return false
+    isOk(): boolean {
+      return false;
     },
-    is_err(): boolean {
-      return true
+    isErr(): boolean {
+      return true;
     },
     ok(): Option<T> {
-      return None
+      return None;
     },
     err(): Option<E> {
-      return Some(err)
+      return Some(err);
     },
     unwrap(): never {
-      throw new ReferenceError("Cannot unwrap Ok value of Result.Err")
+      throw new ReferenceError("Cannot unwrap Ok value of Result.Err");
     },
-    unwrap_or(optb: T): T {
-      return optb
+    unwrapOr(optb: T): T {
+      return optb;
     },
-    unwrap_err(): E {
-      return err
+    unwrapErr(): E {
+      return err;
     },
     match<U>(fn: Match<never, E, U>): U {
-      return fn.err(err)
+      return fn.err(err);
     },
     map<U>(_fn: (_val: T) => U): ResErr<never, E> {
-      return Err(err)
+      return Err(err);
     },
-    map_err<U>(fn: (err: E) => U): ResErr<never, U> {
-      return Err(fn(err))
+    mapErr<U>(fn: (err: E) => U): ResErr<never, U> {
+      return Err(fn(err));
     },
-    and_then<U>(_fn: (val: T) => Result<U, E>): ResErr<never, E> {
-      return Err(err)
+    andThen<U>(_fn: (val: T) => Result<U, E>): ResErr<never, E> {
+      return Err(err);
     },
-    or_else<U>(fn: (err: E) => Result<U, E>): Result<U, E> {
-      return fn(err)
+    orElse<U>(fn: (err: E) => Result<U, E>): Result<U, E> {
+      return fn(err);
     },
-  }
+  };
 }
 
-export function is_result<T, E>(val: Result<T, E> | any): val is Result<T, E> {
-  return isEqual(val.type, ResultType.Ok) || isEqual(val.type, ResultType.Err)
+export function isResult<T, E>(val: Result<T, E> | any): val is Result<T, E> {
+  return isEqual(val.type, ResultType.Ok) || isEqual(val.type, ResultType.Err);
 }
 
-export function is_ok<T, E>(val: Result<T, E>): val is ResOk<T> {
-  throwIfFalse(is_result(val), "val is not a Result")
-  return val.is_ok()
+export function isOk<T, E>(val: Result<T, E>): val is ResOk<T> {
+  throwIfFalse(isResult(val), "val is not a Result");
+  return val.isOk();
 }
 
-export function is_err<T, E>(val: Result<T, E>): val is ResErr<T, E> {
-  throwIfFalse(is_result(val), "val is not a Result")
-  return val.is_err()
+export function isErr<T, E>(val: Result<T, E>): val is ResErr<T, E> {
+  throwIfFalse(isResult(val), "val is not a Result");
+  return val.isErr();
 }
