@@ -43,7 +43,7 @@
 
 *Inherited from [Result](result.md).[type](result.md#type)*
 
-*Defined in [result/result.ts:15](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L15)*
+*Defined in [result/result.ts:15](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L15)*
 
 ## Methods
 
@@ -53,7 +53,7 @@
 
 *Overrides [Result](result.md).[andThen](result.md#andthen)*
 
-*Defined in [result/result.ts:48](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L48)*
+*Defined in [result/result.ts:48](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L48)*
 
 **Type parameters:**
 
@@ -81,7 +81,7 @@ ___
 
 *Inherited from [Result](result.md).[err](result.md#err)*
 
-*Defined in [result/result.ts:19](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L19)*
+*Defined in [result/result.ts:19](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L19)*
 
 **Returns:** *[Option](option.md)‹E›*
 
@@ -93,7 +93,7 @@ ___
 
 *Inherited from [Result](result.md).[isErr](result.md#iserr)*
 
-*Defined in [result/result.ts:17](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L17)*
+*Defined in [result/result.ts:17](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L17)*
 
 **Returns:** *boolean*
 
@@ -105,7 +105,7 @@ ___
 
 *Inherited from [Result](result.md).[isOk](result.md#isok)*
 
-*Defined in [result/result.ts:16](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L16)*
+*Defined in [result/result.ts:16](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L16)*
 
 **Returns:** *boolean*
 
@@ -117,7 +117,7 @@ ___
 
 *Overrides [Result](result.md).[map](result.md#map)*
 
-*Defined in [result/result.ts:46](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L46)*
+*Defined in [result/result.ts:46](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L46)*
 
 **Type parameters:**
 
@@ -145,7 +145,7 @@ ___
 
 *Overrides [Result](result.md).[mapErr](result.md#maperr)*
 
-*Defined in [result/result.ts:47](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L47)*
+*Defined in [result/result.ts:47](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L47)*
 
 **Type parameters:**
 
@@ -173,7 +173,7 @@ ___
 
 *Overrides [Result](result.md).[match](result.md#match)*
 
-*Defined in [result/result.ts:45](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L45)*
+*Defined in [result/result.ts:45](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L45)*
 
 **Type parameters:**
 
@@ -195,7 +195,7 @@ ___
 
 *Inherited from [Result](result.md).[ok](result.md#ok)*
 
-*Defined in [result/result.ts:18](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L18)*
+*Defined in [result/result.ts:18](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L18)*
 
 **Returns:** *[Option](option.md)‹T›*
 
@@ -207,7 +207,7 @@ ___
 
 *Overrides [Result](result.md).[orElse](result.md#orelse)*
 
-*Defined in [result/result.ts:49](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L49)*
+*Defined in [result/result.ts:49](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L49)*
 
 **Type parameters:**
 
@@ -235,7 +235,7 @@ ___
 
 *Overrides [Result](result.md).[unwrap](result.md#unwrap)*
 
-*Defined in [result/result.ts:42](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L42)*
+*Defined in [result/result.ts:42](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L42)*
 
 **Returns:** *never*
 
@@ -247,7 +247,7 @@ ___
 
 *Overrides [Result](result.md).[unwrapErr](result.md#unwraperr)*
 
-*Defined in [result/result.ts:44](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L44)*
+*Defined in [result/result.ts:44](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L44)*
 
 **Returns:** *E*
 
@@ -259,7 +259,7 @@ ___
 
 *Overrides [Result](result.md).[unwrapOr](result.md#unwrapor)*
 
-*Defined in [result/result.ts:43](https://github.com/qworks-io/monads/blob/61eb289/src/result/result.ts#L43)*
+*Defined in [result/result.ts:43](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L43)*
 
 **Parameters:**
 

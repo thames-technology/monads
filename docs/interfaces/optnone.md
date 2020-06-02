@@ -38,7 +38,7 @@
 
 *Inherited from [Option](option.md).[type](option.md#type)*
 
-*Defined in [option/option.ts:21](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L21)*
+*Defined in [option/option.ts:21](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L21)*
 
 ## Methods
 
@@ -48,7 +48,7 @@
 
 *Overrides [Option](option.md).[and](option.md#and)*
 
-*Defined in [option/option.ts:44](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L44)*
+*Defined in [option/option.ts:44](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L44)*
 
 **Type parameters:**
 
@@ -70,7 +70,7 @@ ___
 
 *Inherited from [Option](option.md).[andThen](option.md#andthen)*
 
-*Defined in [option/option.ts:26](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L26)*
+*Defined in [option/option.ts:26](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L26)*
 
 **Type parameters:**
 
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [Option](option.md).[isNone](option.md#isnone)*
 
-*Defined in [option/option.ts:23](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L23)*
+*Defined in [option/option.ts:23](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L23)*
 
 **Returns:** *boolean*
 
@@ -110,7 +110,7 @@ ___
 
 *Inherited from [Option](option.md).[isSome](option.md#issome)*
 
-*Defined in [option/option.ts:22](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L22)*
+*Defined in [option/option.ts:22](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L22)*
 
 **Returns:** *boolean*
 
@@ -122,7 +122,7 @@ ___
 
 *Overrides [Option](option.md).[map](option.md#map)*
 
-*Defined in [option/option.ts:42](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L42)*
+*Defined in [option/option.ts:42](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L42)*
 
 **Type parameters:**
 
@@ -150,7 +150,7 @@ ___
 
 *Inherited from [Option](option.md).[match](option.md#match)*
 
-*Defined in [option/option.ts:24](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L24)*
+*Defined in [option/option.ts:24](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L24)*
 
 **Type parameters:**
 
@@ -172,7 +172,7 @@ ___
 
 *Overrides [Option](option.md).[or](option.md#or)*
 
-*Defined in [option/option.ts:43](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L43)*
+*Defined in [option/option.ts:43](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L43)*
 
 **Type parameters:**
 
@@ -194,7 +194,7 @@ ___
 
 *Overrides [Option](option.md).[unwrap](option.md#unwrap)*
 
-*Defined in [option/option.ts:41](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L41)*
+*Defined in [option/option.ts:41](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L41)*
 
 **Returns:** *never*
 
@@ -206,7 +206,7 @@ ___
 
 *Inherited from [Option](option.md).[unwrapOr](option.md#unwrapor)*
 
-*Defined in [option/option.ts:29](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L29)*
+*Defined in [option/option.ts:29](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L29)*
 
 **Parameters:**
 

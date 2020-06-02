@@ -38,7 +38,7 @@
 
 • **type**: *symbol*
 
-*Defined in [option/option.ts:21](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L21)*
+*Defined in [option/option.ts:21](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L21)*
 
 ## Methods
 
@@ -46,7 +46,7 @@
 
 ▸ **and**<**U**>(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹U›*
 
-*Defined in [option/option.ts:28](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L28)*
+*Defined in [option/option.ts:28](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L28)*
 
 **Type parameters:**
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **andThen**<**U**>(`fn`: function): *[Option](option.md)‹U›*
 
-*Defined in [option/option.ts:26](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L26)*
+*Defined in [option/option.ts:26](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L26)*
 
 **Type parameters:**
 
@@ -92,7 +92,7 @@ ___
 
 ▸ **isNone**(): *boolean*
 
-*Defined in [option/option.ts:23](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L23)*
+*Defined in [option/option.ts:23](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L23)*
 
 **Returns:** *boolean*
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **isSome**(): *boolean*
 
-*Defined in [option/option.ts:22](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L22)*
+*Defined in [option/option.ts:22](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L22)*
 
 **Returns:** *boolean*
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **map**<**U**>(`fn`: function): *[Option](option.md)‹U›*
 
-*Defined in [option/option.ts:25](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L25)*
+*Defined in [option/option.ts:25](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L25)*
 
 **Type parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 ▸ **match**<**U**>(`fn`: [Match](match.md)‹T, U›): *U*
 
-*Defined in [option/option.ts:24](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L24)*
+*Defined in [option/option.ts:24](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L24)*
 
 **Type parameters:**
 
@@ -158,7 +158,7 @@ ___
 
 ▸ **or**<**U**>(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹T | U›*
 
-*Defined in [option/option.ts:27](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L27)*
+*Defined in [option/option.ts:27](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L27)*
 
 **Type parameters:**
 
@@ -178,7 +178,7 @@ ___
 
 ▸ **unwrap**(): *T | never*
 
-*Defined in [option/option.ts:30](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L30)*
+*Defined in [option/option.ts:30](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L30)*
 
 **Returns:** *T | never*
 
@@ -188,7 +188,7 @@ ___
 
 ▸ **unwrapOr**(`def`: T): *T*
 
-*Defined in [option/option.ts:29](https://github.com/qworks-io/monads/blob/61eb289/src/option/option.ts#L29)*
+*Defined in [option/option.ts:29](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L29)*
 
 **Parameters:**
 

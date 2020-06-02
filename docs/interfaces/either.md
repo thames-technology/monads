@@ -48,7 +48,7 @@
 
 • **type**: *symbol*
 
-*Defined in [either/either.ts:15](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L15)*
+*Defined in [either/either.ts:15](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L15)*
 
 ## Methods
 
@@ -56,7 +56,7 @@
 
 ▸ **isLeft**(): *boolean*
 
-*Defined in [either/either.ts:16](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L16)*
+*Defined in [either/either.ts:16](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L16)*
 
 **Returns:** *boolean*
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **isRight**(): *boolean*
 
-*Defined in [either/either.ts:17](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L17)*
+*Defined in [either/either.ts:17](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L17)*
 
 **Returns:** *boolean*
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **left**(): *[Option](option.md)‹L›*
 
-*Defined in [either/either.ts:18](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L18)*
+*Defined in [either/either.ts:18](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L18)*
 
 **Returns:** *[Option](option.md)‹L›*
 
@@ -86,7 +86,7 @@ ___
 
 ▸ **leftAndThen**<**U**>(`fn`: function): *[Either](either.md)‹U, R›*
 
-*Defined in [either/either.ts:19](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L19)*
+*Defined in [either/either.ts:19](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L19)*
 
 **Type parameters:**
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **map**<**U**>(`fn`: function): *[Either](either.md)‹U, U›*
 
-*Defined in [either/either.ts:30](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L30)*
+*Defined in [either/either.ts:30](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L30)*
 
 **Type parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 ▸ **mapLeft**<**U**>(`fn`: function): *[Either](either.md)‹U, R›*
 
-*Defined in [either/either.ts:31](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L31)*
+*Defined in [either/either.ts:31](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L31)*
 
 **Type parameters:**
 
@@ -164,7 +164,7 @@ ___
 
 ▸ **mapRight**<**U**>(`fn`: function): *[Either](either.md)‹L, U›*
 
-*Defined in [either/either.ts:32](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L32)*
+*Defined in [either/either.ts:32](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L32)*
 
 **Type parameters:**
 
@@ -190,7 +190,7 @@ ___
 
 ▸ **match**<**U**>(`fn`: Match‹L, R, U›): *U*
 
-*Defined in [either/either.ts:29](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L29)*
+*Defined in [either/either.ts:29](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L29)*
 
 **Type parameters:**
 
@@ -210,7 +210,7 @@ ___
 
 ▸ **right**(): *[Option](option.md)‹R›*
 
-*Defined in [either/either.ts:20](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L20)*
+*Defined in [either/either.ts:20](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L20)*
 
 **Returns:** *[Option](option.md)‹R›*
 
@@ -220,7 +220,7 @@ ___
 
 ▸ **rightAndThen**<**U**>(`fn`: function): *[Either](either.md)‹L, U›*
 
-*Defined in [either/either.ts:21](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L21)*
+*Defined in [either/either.ts:21](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L21)*
 
 **Type parameters:**
 
@@ -246,7 +246,7 @@ ___
 
 ▸ **unwrap**(): *L | R*
 
-*Defined in [either/either.ts:22](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L22)*
+*Defined in [either/either.ts:22](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L22)*
 
 **Returns:** *L | R*
 
@@ -256,7 +256,7 @@ ___
 
 ▸ **unwrapLeft**(): *L | never*
 
-*Defined in [either/either.ts:23](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L23)*
+*Defined in [either/either.ts:23](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L23)*
 
 **Returns:** *L | never*
 
@@ -266,7 +266,7 @@ ___
 
 ▸ **unwrapLeftOr**(`other`: L): *L*
 
-*Defined in [either/either.ts:24](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L24)*
+*Defined in [either/either.ts:24](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L24)*
 
 **Parameters:**
 
@@ -282,7 +282,7 @@ ___
 
 ▸ **unwrapLeftOrElse**(`fn`: function): *L*
 
-*Defined in [either/either.ts:25](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L25)*
+*Defined in [either/either.ts:25](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L25)*
 
 **Parameters:**
 
@@ -304,7 +304,7 @@ ___
 
 ▸ **unwrapRight**(): *R | never*
 
-*Defined in [either/either.ts:26](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L26)*
+*Defined in [either/either.ts:26](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L26)*
 
 **Returns:** *R | never*
 
@@ -314,7 +314,7 @@ ___
 
 ▸ **unwrapRightOr**(`other`: R): *R*
 
-*Defined in [either/either.ts:27](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L27)*
+*Defined in [either/either.ts:27](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L27)*
 
 **Parameters:**
 
@@ -330,7 +330,7 @@ ___
 
 ▸ **unwrapRightOrElse**(`fn`: function): *R*
 
-*Defined in [either/either.ts:28](https://github.com/qworks-io/monads/blob/61eb289/src/either/either.ts#L28)*
+*Defined in [either/either.ts:28](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L28)*
 
 **Parameters:**
 

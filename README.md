@@ -42,7 +42,7 @@ npm install @hqoss/monads
 
 ### `Option<T>`
 
-[See full documentation](./src/Option).
+[See full documentation](./src/option).
 
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
@@ -69,7 +69,7 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ### `Result<T, E>`
 
-[See full documentation](./src/Result).
+[See full documentation](./src/result).
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
