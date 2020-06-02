@@ -24,6 +24,7 @@ export interface Result<T, E> {
   map<U>(fn: (val: T) => U): Result<U, E>
   map_err<U>(fn: (err: E) => U): Result<T, U>
   and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
+  or_else<U>(fn: (err: E) => Result<U, E>): Result<T, E> | Result<U, E>
 }
 
 export interface ResOk<T, E = never> extends Result<T, E> {
@@ -34,6 +35,7 @@ export interface ResOk<T, E = never> extends Result<T, E> {
   map<U>(fn: (val: T) => U): ResOk<U, never>
   map_err<U>(fn: (err: E) => U): ResOk<T, never>
   and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E>
+  or_else<U>(fn: (err: E) => Result<U, E>): Result<T, E>
 }
 
 export interface ResErr<T, E> extends Result<T, E> {
@@ -44,6 +46,7 @@ export interface ResErr<T, E> extends Result<T, E> {
   map<U>(fn: (val: T) => U): ResErr<never, E>
   map_err<U>(fn: (err: E) => U): ResErr<never, U>
   and_then<U>(fn: (val: T) => Result<U, E>): ResErr<never, E>
+  or_else<U>(fn: (err: E) => Result<U, E>): Result<U, E>
 }
 
 export function Ok<T, E = never>(val: T): ResOk<T, E> {
@@ -81,6 +84,9 @@ export function Ok<T, E = never>(val: T): ResOk<T, E> {
     },
     and_then<U>(fn: (val: T) => Result<U, E>): Result<U, E> {
       return fn(val)
+    },
+    or_else<U>(_fn: (err: E) => Result<U, E>): ResOk<T, E> {
+      return Ok(val)
     },
   }
 }
@@ -120,6 +126,9 @@ export function Err<T, E>(err: E): ResErr<T, E> {
     },
     and_then<U>(_fn: (val: T) => Result<U, E>): ResErr<never, E> {
       return Err(err)
+    },
+    or_else<U>(fn: (err: E) => Result<U, E>): Result<U, E> {
+      return fn(err)
     },
   }
 }
