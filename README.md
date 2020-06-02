@@ -2,6 +2,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Coverage)
 [![GuardRails badge](https://badges.guardrails.io/hqoss/monads.svg?token=14bca43cc8b71d3659ac85cfb0bf590ca88a6d9f09216c2aff0d1b870de404ee&provider=github)](https://dashboard.guardrails.io/gh/hqoss/36606)
+![npm](https://img.shields.io/npm/v/@hqoss/monads)
 
 # 👻 Monads
 
