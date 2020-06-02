@@ -19,7 +19,7 @@ Type safe Option, Result, and Either types; inspired by Rust
 
 -   [⚡️ Performance](#️-performance)
 
--   [🧬 Core design principles](#🧬-core-design-principles)
+-   [Core design principles](#core-design-principles)
 
 -   [Node version support](#node-version-support)
 
@@ -96,7 +96,7 @@ console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 TBC
 
-## 🧬 Core design principles
+## Core design principles
 
 -   **Code quality**; This package may end up being used in mission-critical software, so it's important that the code is performant, secure, and battle-tested.
 
