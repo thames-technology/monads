@@ -6,6 +6,8 @@
 
 # 👻 Monads
 
+⚠️ The owner organisation on &lt;npmjs.com> has been changed to `@hqoss`. Please use `@hqoss/monads` going forward.
+
 Type safe Option, Result, and Either types; inspired by Rust.
 
 ## Table of contents
@@ -31,6 +33,8 @@ Type safe Option, Result, and Either types; inspired by Rust.
 -   [TODO](#todo)
 
 ## ⏳ Install
+
+⚠️ The owner organisation on &lt;npmjs.com> has been changed to `@hqoss`. Please use `@hqoss/monads` going forward.
 
 ```bash
 npm install @hqoss/monads
