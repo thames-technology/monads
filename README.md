@@ -1,6 +1,5 @@
 ![Node.js CI](https://github.com/hqoss/monads/workflows/Node.js%20CI/badge.svg)
-
-<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Grade) -->
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb2d7cfddcab4f3c98275a66b1aa227a)](https://app.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Grade_Dashboard)
 
 <!-- [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Coverage) -->
 
