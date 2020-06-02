@@ -5,7 +5,7 @@
 
 # 👻 Monads
 
-Type safe Option, Result, and Either types; inspired by Rust
+Type safe Option, Result, and Either types; inspired by Rust.
 
 ## Table of contents
 
