@@ -25,7 +25,7 @@ console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 ## Documentation
 
-### `is_ok() => boolean`
+### `isOk() => boolean`
 
 Returns `true` if the result is `Ok`.
 
@@ -33,17 +33,17 @@ Returns `true` if the result is `Ok`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.is_ok()) // true
+console.log(x.isOk()) // true
 
 ```
 
 ```typescript
 let x: Result<number, string> = Err("Error!")
-console.log(x.is_ok()) // false
+console.log(x.isOk()) // false
 
 ```
 
-### `is_err() => boolean`
+### `isErr() => boolean`
 
 Returns `true` if the result is `Err`.
 
@@ -51,13 +51,13 @@ Returns `true` if the result is `Err`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.is_err()) // false
+console.log(x.isErr()) // false
 
 ```
 
 ```typescript
 let x: Result<number, string> = Err("Error!")
-console.log(x.is_err()) // true
+console.log(x.isErr()) // true
 
 ```
 
@@ -122,20 +122,20 @@ console.log(x.unwrap()) // throws ReferenceError
 
 ```
 
-**NOTE:** You can use `is_ok()` to check whether the result is an `Ok`.
+**NOTE:** You can use `isOk()` to check whether the result is an `Ok`.
 This will compile and enable you to use `unwrap()` in the `true` / success branch.
 
 ```typescript
 function printIndex(index: Result<number, string>): number | string {
-  if (is_ok(index)) {
+  if (isOk(index)) {
     return index.unwrap()
   } else {
-    return index.unwrap_err()
+    return index.unwrapErr()
   }
 }
 ```
 
-### `unwrap_err() => E`
+### `unwrapErr() => E`
 
 Unwraps and returns `E` on `Err<E>`.
 
@@ -150,30 +150,30 @@ Throws a `ReferenceError` if called on `Ok`.
 
 ```typescript
 let x: Result<number, string> = Ok(2)
-console.log(x.unwrap_err()) // throws ReferenceError
+console.log(x.unwrapErr()) // throws ReferenceError
 
 ```
 
 ```typescript
 let x: Result<number, string> = Err("Nothing here")
-console.log(x.unwrap_err()) // "Nothing here"
+console.log(x.unwrapErr()) // "Nothing here"
 
 ```
 
-**NOTE:** You can use `is_err()` to check whether the result is an `Err`.
-This will compile and enable you to use `unwrap_err()` in the `true` / success branch.
+**NOTE:** You can use `isErr()` to check whether the result is an `Err`.
+This will compile and enable you to use `unwrapErr()` in the `true` / success branch.
 
 ```typescript
 function printIndex(index: Result<number, string>): number | string {
-  if (is_err(index)) {
-    return index.unwrap_err()
+  if (isErr(index)) {
+    return index.unwrapErr()
   } else {
     return index.unwrap()
   }
 }
 ```
 
-### `unwrap_or(optb: T) => T`
+### `unwrapOr(optb: T) => T`
 
 Unwraps and returns `T`, if called on `Ok`, otherwise returns `optb: T`.
 
@@ -181,13 +181,13 @@ Unwraps and returns `T`, if called on `Ok`, otherwise returns `optb: T`.
 
 ```typescript
 let x = Ok("bike")
-console.log(x.unwrap_or("car")) // "bike"
+console.log(x.unwrapOr("car")) // "bike"
 
 ```
 
 ```typescript
 let x = Err("baloon")
-console.log(x.unwrap_or("air")) // "air"
+console.log(x.unwrapOr("air")) // "air"
 
 ```
 
@@ -210,12 +210,12 @@ console.log(y.unwrap()) // "123"
 let x: Result<string, string> = Err("123")
 let y: Result<number, string> = x.map(parseInt)
 
-console.log(x.unwrap_err()) // "123"
-console.log(y.unwrap_err()) // "123"
+console.log(x.unwrapErr()) // "123"
+console.log(y.unwrapErr()) // "123"
 
 ```
 
-### `map_err<U>(fn: (err: T) => U): Result<T, U>`
+### `mapErr<U>(fn: (err: T) => U): Result<T, U>`
 
 Maps a `Result<T, E>` to `Result<T, E>` by applying a function to a contained `Err` value, leaving an `Ok` value untouched.
 
@@ -223,23 +223,23 @@ Maps a `Result<T, E>` to `Result<T, E>` by applying a function to a contained `E
 
 ```typescript
 let x: Result<number, never> = Err("error")
-let y: Result<string, never> = x.map_err(err => err.toUpperCase())
+let y: Result<string, never> = x.mapErr(err => err.toUpperCase())
 
-console.log(x.unwrap_err()) // "error"
-console.log(y.unwrap_err()) // "ERROR"
+console.log(x.unwrapErr()) // "error"
+console.log(y.unwrapErr()) // "ERROR"
 
 ```
 
 ```typescript
 let x: Result<string, string> = Ok("value")
-let y: Result<number, string> = x.map_err(val => val.toUpperCase())
+let y: Result<number, string> = x.mapErr(val => val.toUpperCase())
 
 console.log(x.unwrap()) // "value"
 console.log(y.unwrap()) // "value"
 
 ```
 
-### `and_then(fn: (val: T) => Result<U, E>): Result<U, E>`
+### `andThen(fn: (val: T) => Result<U, E>): Result<U, E>`
 
 Calls `fn` if the result is `Ok`, otherwise returns the `Err` value of self. This function can be used for control flow based on `Result` values.
 
@@ -249,10 +249,10 @@ Calls `fn` if the result is `Ok`, otherwise returns the `Err` value of self. Thi
 const sq = (x: number) => Ok(x * x)
 const err = (x: number) => Err(x)
 
-console.log(Ok(2).and_then(sq).and_then(sq)) // Ok(16)
-console.log(Ok(2).and_then(sq).and_then(err)) // Err(4)
-console.log(Ok(2).and_then(err).and_then(sq)) // Err(2)
-console.log(Err(3).and_then(sq).and_then(sq)) // Err(3)
+console.log(Ok(2).andThen(sq).andThen(sq)) // Ok(16)
+console.log(Ok(2).andThen(sq).andThen(err)) // Err(4)
+console.log(Ok(2).andThen(err).andThen(sq)) // Err(2)
+console.log(Err(3).andThen(sq).andThen(sq)) // Err(3)
 
 ```
 

@@ -1,0 +1,27 @@
+# This workflow will do a clean install of node dependencies, build the source code, run tests, and publish the artifacts to npm.
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/publishing-nodejs-packages.
+
+name: Build and publish a Node.js package
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm ci
+    # The scripts in package.json will ensure the package is built, formatted,
+    # and that the tests are passing.
+    - run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

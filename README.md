@@ -1,34 +1,26 @@
-[![CircleCI](https://circleci.com/gh/qworks-io/monads.svg?style=svg)](https://circleci.com/gh/qworks-io/monads)
-[![codecov](https://codecov.io/gh/qworks-io/monads/branch/master/graph/badge.svg)](https://codecov.io/gh/qworks-io/monads)
-[![npm version](https://img.shields.io/npm/v/@usefultools/monads.svg)](https://www.npmjs.com/package/@usefultools/monads)
-[![GuardRails](https://badges.production.guardrails.io/qworks-io/monads.svg)](https://www.guardrails.io)
-[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/qworks-io/monads/blob/master/SECURITY.md)
+![Node.js CI](https://github.com/hqoss/monads/workflows/Node.js%20CI/badge.svg)
+<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Grade) -->
+<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/65406302416243f788cee055ce10821a)](https://www.codacy.com/gh/hqoss/node-http-client?utm_source=github.com&utm_medium=referral&utm_content=hqoss/node-http-client&utm_campaign=Badge_Coverage) -->
 
-# Monads
+# 👻 Monads
 
-Type safe [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [Result](https://doc.rust-lang.org/std/result/enum.Result.html) types – inspired by Rust.
+Type safe Option, Result, and Either types; inspired by Rust
 
-## Prereqs & Install
+## Table of contents
 
-* Node >= 12
-* npm >= 6
+## ⏳ Install
 
-Please note that the **TypeScript target is ES6**.
+**⚠️ NOTE:** The project is configured to target `ES2018` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
 
 ```bash
-npm install @usefultools/monads
+npm install @hqoss/monads
 ```
 
-## Documentation
-
-- [Option Type](./src/Option)
-- [Result Type](./src/Result)
-
-## Usage
+## 📝 Usage
 
 ### `Option<T>`
 
-See full `Option<T>` **[API documentation here](./src/Option)**.
+ℹ️ See full `Option<T>` **[API documentation here](./src/Option)**.
 
 ```typescript
 import { Option, Some, None } from "@usefultools/monads"
@@ -51,14 +43,11 @@ const message = result.match({
 })
 
 console.log(message) // "Result: 0.6666666666666666"
-
 ```
-
-More `Option<T>` examples [here](./src/Option/examples).
 
 ### `Result<T, E>`
 
-See full `Result<T, E>` **[API documentation here](./src/Result)**.
+ℹ️ See full `Result<T, E>` **[API documentation here](./src/Result)**.
 
 ```typescript
 import { Result, Ok, Err } from "@usefultools/monads"
@@ -76,19 +65,55 @@ function getIndex(values: string[], value: string): Result<number, string> {
 
 console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
-
 ```
 
-More `Result<T, E>` examples [here](./src/Result/examples).
+### API Docs
 
-## Contributing
+[See full API Documentation here](docs/globals.md).
 
-If you have comments, complaints, or ideas for improvements, feel free to open an issue or a pull request! See [Contributing guide](./CONTRIBUTING.md) for details about project setup, testing, etc.
+## ⚡️ Performance
 
-## Author and license
+TBC
 
-This library was created by [@qworks.io](https://github.com/qworks-io). Main author and maintainer is [Slavo Vojacek](https://github.com/slavovojacek).
+## 🧬 Core design principles
 
-Contributors: [Slavo Vojacek](https://github.com/slavovojacek)
+-   **Code quality**; This package may end up being used in mission-critical software, so it's important that the code is performant, secure, and battle-tested.
 
-`@usefultools/monads` is available under the ISC license. See the [LICENSE file](./LICENSE.txt) for more info.
+-   **Developer experience**; Developers must be able to use this package with no significant barriers to entry. It has to be easy-to-find, well-documented, and pleasant to use.
+
+-   **Modularity & Configurability**; It's important that users can compose and easily change the ways in which they consume and work with this package.
+
+## Node version support
+
+The project is configured to target ES2018. In practice, this means consumers should run on Node 12 or higher, unless additional compilation/transpilation steps are in place to ensure compatibility with the target runtime.
+
+Please see <https://node.green/#ES2018> for reference.
+
+### Why ES2018
+
+Firstly, according to the official [Node release schedule](https://github.com/nodejs/Release), Node 12.x entered LTS on 2019-10-21 and is scheduled to enter Maintenance on 2020-10-20. With the End-of-Life scheduled for April 2022, we are confident that most users will now be running 12.x or higher.
+
+Secondly, the [7.3 release of V8](https://v8.dev/blog/v8-release-73) (ships with Node 12.x or higher) includes "zero-cost async stack traces".
+
+From the release notes:
+
+> We are turning on the --async-stack-traces flag by default. Zero-cost async stack traces make it easier to diagnose problems in production with heavily asynchronous code, as the error.stack property that is usually sent to log files/services now provides more insight into what caused the problem.
+
+## Testing
+
+[Ava](https://github.com/avajs/ava) and [Jest](https://jestjs.io/) were considered. Jest was chosen as it is very easy to configure and includes most of the features we need out-of-the-box.
+
+Further investigation will be launched in foreseeable future to consider moving to Ava.
+
+We prefer using [Nock](https://github.com/nock/nock) over mocking.
+
+## TODO
+
+A quick and dirty tech debt tracker before we move to Issues.
+
+-   [ ] Write a **Contributing** guide
+-   [ ] Complete testing section, add best practices
+-   [ ] Describe scripts and usage, add best practices
+-   [ ] Add typespec and generate docs
+-   [ ] Describe security best practices, e.g. `npm doctor`, `npm audit`, `npm outdated`, `ignore-scripts` in `.npmrc`, etc.
+-   [ ] Add "Why should I use this" section

@@ -35,7 +35,7 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ## Documentation
 
-### `is_some() => boolean`
+### `isSome() => boolean`
 
 Returns `true` if the option is a `Some` value.
 
@@ -43,13 +43,13 @@ Returns `true` if the option is a `Some` value.
 
 ```typescript
 let x: Option<number> = Some(2)
-console.log(x.is_some()) // true
+console.log(x.isSome()) // true
 
 ```
 
 ```typescript
 let x: Option<number> = None
-console.log(x.is_some()) // false
+console.log(x.isSome()) // false
 
 ```
 
@@ -62,15 +62,15 @@ Hovewer, `null` is considered a _value_ and it is internally treated as `object`
 Therefore, as of version `v3.0.0`, constructing `Some` with `null` (explicitly, or implicitly) will indeed yield `Some<null>`.
 
 ```typescript
-expect(Some().is_some()).toEqual(false)
-expect(Some(undefined).is_some()).toEqual(false)
+expect(Some().isSome()).toEqual(false)
+expect(Some(undefined).isSome()).toEqual(false)
 
 // This assertion would fail in versions below 3.0.0
-expect(Some(null).is_some()).toEqual(true)
+expect(Some(null).isSome()).toEqual(true)
 
 ```
 
-### `is_none() => boolean`
+### `isNone() => boolean`
 
 Returns `true` if the option is a `None` value.
 
@@ -78,13 +78,13 @@ Returns `true` if the option is a `None` value.
 
 ```typescript
 let x: Option<number> = Some(2)
-console.log(x.is_none()) // false
+console.log(x.isNone()) // false
 
 ```
 
 ```typescript
 let x: Option<number> = None
-console.log(x.is_none()) // true
+console.log(x.isNone()) // true
 
 ```
 
@@ -113,11 +113,11 @@ console.log(x.unwrap()) // fails, throws an Exception
 
 ```
 
-Alternatively, you can choose to use `is_some()` to check whether the option is `Some`. This will enable you to use `unwrap()` in the `true` / success branch.
+Alternatively, you can choose to use `isSome()` to check whether the option is `Some`. This will enable you to use `unwrap()` in the `true` / success branch.
 
 ```typescript
 function getName(name: Option<string>): string {
-  if (is_some(name)) {
+  if (isSome(name)) {
     return name.unwrap()
   } else {
     return "N/A"
@@ -126,15 +126,15 @@ function getName(name: Option<string>): string {
 
 ```
 
-### `unwrap_or(optb: T) => T`
+### `unwrapOr(optb: T) => T`
 
 Returns the contained value or `optb`.
 
 #### Examples
 
 ```typescript
-console.log(Some("car").unwrap_or("bike")) // "car"
-console.log(None.unwrap_or("bike")) // "bike"
+console.log(Some("car").unwrapOr("bike")) // "car"
+console.log(None.unwrapOr("bike")) // "bike"
 
 ```
 
@@ -148,7 +148,7 @@ Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 let x: Option<string> = Some("123")
 let y: Option<number> = x.map(parseInt)
 
-console.log(y.is_some()) // true
+console.log(y.isSome()) // true
 console.log(y.unwrap()) // 123
 
 ```
@@ -157,11 +157,11 @@ console.log(y.unwrap()) // 123
 let x: Option<string> = None
 let y: Option<number> = x.map(parseInt)
 
-console.log(y.is_none()) // true
+console.log(y.isNone()) // true
 
 ```
 
-### `and_then(fn: (val: T) => Option<U>) => Option<U>`
+### `andThen(fn: (val: T) => Option<U>) => Option<U>`
 
 Returns `None` if the option is `None`, otherwise calls `fn` with the wrapped value and returns the result.
 
@@ -173,10 +173,10 @@ Some languages call this operation `flatmap`.
 const sq = (x: number): Option<number> => Some(x * x)
 const nope = (_: number): Option<number> => None
 
-console.log(Some(2).and_then(sq).and_then(sq)) // Some(16)
-console.log(Some(2).and_then(sq).and_then(nope)) // None
-console.log(Some(2).and_then(nope).and_then(sq)) // None
-console.log(None.and_then(sq).and_then(sq)) // None
+console.log(Some(2).andThen(sq).andThen(sq)) // Some(16)
+console.log(Some(2).andThen(sq).andThen(nope)) // None
+console.log(Some(2).andThen(nope).andThen(sq)) // None
+console.log(None.andThen(sq).andThen(sq)) // None
 
 ```
 
@@ -285,7 +285,7 @@ console.log(getFullYear(noDate)) // 1994
 
 ```
 
-### `get_in(obj: Object, key: string): Option<T>`
+### `getIn(obj: Object, key: string): Option<T>`
 
 Retrieves value `T` and converts it to `Option<T>` if key leads to this value, otherwise returns `None`. It is highly recommended to cast the return type to `Option<T>` explicitly, as seen in examples below.
 
@@ -300,7 +300,7 @@ interface Car {
   }
 }
 
-const getDriverName = (car: Car): Option<string> => get_in(car, "driver.contact.name")
+const getDriverName = (car: Car): Option<string> => getIn(car, "driver.contact.name")
 
 console.log(getDriverName({driver: {}})) // None
 console.log(getDriverName({driver: {contact: {}}})) // None

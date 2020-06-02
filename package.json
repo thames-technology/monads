@@ -1,41 +1,52 @@
 {
-  "name": "@usefultools/monads",
-  "version": "3.0.3",
-  "description": "Type safe Option and Result types – inspired by Rust",
+  "name": "@hqoss/monads",
+  "version": "0.0.0-alpha.1",
+  "description": "Type safe Option, Result, and Either types; inspired by Rust",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "engines": {
-    "node": ">=12.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=12",
+    "npm": ">=6"
   },
   "scripts": {
-    "test": "make test"
-  },
-  "dependencies": {
-    "@usefultools/utils": "^6.3.1"
-  },
-  "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "@types/node": "^13.7.0",
-    "jest": "^25.1.0",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.1.0",
-    "tslint": "^6.0.0",
-    "tslint-config-security": "^1.16.0",
-    "typescript": "^3.7.5"
+    "build": "rm -rf ./dist && tsc",
+    "format": "prettier --write \"./{src,test}/**/*.ts\"",
+    "format:check": "prettier --check \"./{src,test}/**/*.ts\"",
+    "test": "jest",
+    "generate-docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
+    "preversion": "npm run format:check && npm run build && npm test",
+    "prepublishOnly": "npm run format:check && npm run build && npm test",
+    "postversion": "git push --follow-tags"
   },
   "keywords": [
+    "monads",
     "option",
     "result",
-    "type",
-    "typescript",
+    "either",
     "javascript",
-    "usefultools"
+    "js",
+    "typescript",
+    "node",
+    "node.js"
   ],
+  "author": "Slavo Vojacek",
+  "license": "MIT",
+  "dependencies": {
+    "@usefultools/utils": "^6.3.1",
+    "tslib": "^2.0.0",
+    "url-join": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.0",
+    "typedoc": "^0.17.3",
+    "typedoc-plugin-markdown": "^2.2.17",
+    "typescript": "^3.8.3"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:qworks-io/monads.git"
-  },
-  "author": "Slavo Vojacek <slavomirvojacek@gmail.com>",
-  "license": "ISC"
+    "url": "git@github.com:hqoss/monads.git"
+  }
 }
