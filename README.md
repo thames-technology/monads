@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb2d7cfddcab4f3c98275a66b1aa227a)](https://app.codacy.com/gh/hqoss/monads?utm_source=github.com&utm_medium=referral&utm_content=hqoss/monads&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/qworks-io/monads.svg?style=svg)](https://circleci.com/gh/qworks-io/monads)
 [![codecov](https://codecov.io/gh/qworks-io/monads/branch/master/graph/badge.svg)](https://codecov.io/gh/qworks-io/monads)
 [![npm version](https://img.shields.io/npm/v/@usefultools/monads.svg)](https://www.npmjs.com/package/@usefultools/monads)
