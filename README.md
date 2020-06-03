@@ -18,6 +18,7 @@ Type safe Option, Result, and Either types; inspired by Rust.
 
     -   [`Option<T>`](#optiont)
     -   [`Result<T, E>`](#resultt-e)
+    -   [`Either<L, R>`](#eitherl-r)
     -   [API Docs](#api-docs)
 
 -   [Core design principles](#core-design-principles)
@@ -45,7 +46,7 @@ npm install @hqoss/monads
 [See full documentation](./src/option).
 
 ```typescript
-import { Option, Some, None } from "@usefultools/monads"
+import { Option, Some, None } from "@hqoss/monads"
 
 function divide(numerator: number, denominator: number): Option<number> {
   if (denominator === 0) {
@@ -72,7 +73,7 @@ console.log(message) // "Result: 0.6666666666666666"
 [See full documentation](./src/result).
 
 ```typescript
-import { Result, Ok, Err } from "@usefultools/monads"
+import { Result, Ok, Err } from "@hqoss/monads"
 
 function getIndex(values: string[], value: string): Result<number, string> {
   const index = values.indexOf(value)
@@ -87,6 +88,21 @@ function getIndex(values: string[], value: string): Result<number, string> {
 
 console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
+```
+
+### `Either<L, R>`
+
+[See full documentation](./src/either).
+
+```typescript
+import { Either } from "@hqoss/monads"
+
+function getLabel(uncertainDate: Either<Date, string>) {
+  return uncertainDate.match({
+    left: date => date.toLocaleDateString(),
+    right: text => `<abbr title="${text}">an uncertain date</abbr>`,
+  })
+}
 ```
 
 ### API Docs
