@@ -6,7 +6,7 @@
 
 # 👻 Monads
 
-⚠️ **The owner organisation on <https://www.npmjs.com/> has been changed to `@hqoss`. Please use `@hqoss/monads` going forward. Please note that all new versions will use `camelCase` in order to follow JavaScript conventions.** ⚠️
+⚠️ **The owner organisation on <https://www.npmjs.com/> has been changed to `@hqoss`. Please use `@hqoss/monads` going forward. Please note that all new versions will use `camelCase` in order to follow JavaScript conventions.**
 
 Type safe Option, Result, and Either types; inspired by Rust.
 
