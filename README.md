@@ -20,8 +20,6 @@ Type safe Option, Result, and Either types; inspired by Rust.
     -   [`Result<T, E>`](#resultt-e)
     -   [API Docs](#api-docs)
 
--   [⚡️ Performance](#️-performance)
-
 -   [Core design principles](#core-design-principles)
 
 -   [Node version support](#node-version-support)
@@ -94,10 +92,6 @@ console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 ### API Docs
 
 [See full API Documentation here](docs/globals.md).
-
-## ⚡️ Performance
-
-TBC
 
 ## Core design principles
 

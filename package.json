@@ -33,8 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "@usefultools/utils": "^6.3.1",
-    "tslib": "^2.0.0",
-    "url-join": "^4.0.1"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
