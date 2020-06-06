@@ -14,6 +14,9 @@ Type safe Option, Result, and Either types; inspired by Rust.
 
 -   [⏳ Install](#-install)
 
+    -   [Deno](#deno)
+    -   [Node.js and the Browser](#nodejs-and-the-browser)
+
 -   [📝 Usage](#-usage)
 
     -   [`Option<T>`](#optiont)
@@ -32,6 +35,18 @@ Type safe Option, Result, and Either types; inspired by Rust.
 -   [TODO](#todo)
 
 ## ⏳ Install
+
+### Deno
+
+```typescript
+import { Some } from "https://deno.land/x/monads/mod.ts"
+
+const air = Some("air").unwrapOr("baloon")
+
+console.log(air) // "air"
+```
+
+### Node.js and the Browser
 
 ```bash
 npm install @hqoss/monads
