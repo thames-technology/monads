@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["./src/**/*.ts", "!./src/index.ts"],
+  collectCoverageFrom: ["./src/**/*.ts", "!./src/index.ts", "!./src/**/*.deno.ts"],
   coverageThreshold: {
     global: {
       branches: 90,

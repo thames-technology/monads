@@ -2,7 +2,6 @@ import {
   Err,
   isErr,
   isOk,
-  isResult,
   Ok,
   Result,
   ResultType,
@@ -459,25 +458,6 @@ describe("Result", () => {
       const string = Ok("123");
       const subject = string.err();
       expect(subject.isNone()).toEqual(true);
-    });
-  });
-
-  describe("isResult", () => {
-    it("should return true if Result is Err", () => {
-      expect(isResult(Err(""))).toEqual(true);
-    });
-
-    it("should return true if Result is Ok", () => {
-      expect(isResult(Ok(""))).toEqual(true);
-    });
-
-    it("should return false if value is not a Result", () => {
-      expect(isResult(new Function())).toEqual(false);
-      expect(isResult({})).toEqual(false);
-      expect(isResult([])).toEqual(false);
-      expect(isResult(true)).toEqual(false);
-      expect(isResult("")).toEqual(false);
-      expect(isResult(42)).toEqual(false);
     });
   });
 });

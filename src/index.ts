@@ -1,10 +1,3 @@
-export {
-  Either,
-  Left,
-  Right,
-  isLeft,
-  isRight,
-  isEither,
-} from "./either/either";
-export { Option, Some, None, isSome, isNone, isOption } from "./option/option";
-export { Result, Ok, Err, isOk, isErr, isResult } from "./result/result";
+export { Either, Left, Right, isLeft, isRight } from "./either/either";
+export { Option, Some, None, isSome, isNone } from "./option/option";
+export { Result, Ok, Err, isOk, isErr } from "./result/result";

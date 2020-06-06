@@ -1,7 +1,5 @@
 import {
-  getIn,
   isNone,
-  isOption,
   isSome,
   None,
   Option,
@@ -428,48 +426,6 @@ describe("isNone", () => {
 
     expect(isNone(subject)).toEqual(true);
     expect(a).toEqual("Correct");
-  });
-});
-
-describe("isOption", () => {
-  it("should return true if Option is None", () => {
-    expect(isOption(None)).toEqual(true);
-  });
-
-  it("should return true if Option is Some", () => {
-    expect(isOption(Some(""))).toEqual(true);
-  });
-
-  it("should return false if value is not an Option", () => {
-    expect(isOption(new Function())).toEqual(false);
-    expect(isOption({})).toEqual(false);
-    expect(isOption([])).toEqual(false);
-    expect(isOption(true)).toEqual(false);
-    expect(isOption("")).toEqual(false);
-    expect(isOption(42)).toEqual(false);
-  });
-});
-
-describe("getIn", () => {
-  it("correctly returns a Some if key found in nested object", () => {
-    const obj = { a: { b: "val" } };
-    const subject: Option<string> = getIn(obj, "a.b");
-
-    expect(subject.isSome()).toEqual(true);
-    expect(subject.unwrapOr("")).toEqual("val");
-  });
-
-  it("correctly returns a None if key not found in nested object", () => {
-    const obj = { a: { b: "val" } };
-    const subject: Option<string> = getIn(obj, "a.nonExistentKey");
-
-    expect(subject.isNone()).toEqual(true);
-  });
-
-  it("correctly returns a None if object itself undefined", () => {
-    const subject: Option<string> = getIn(undefined, "a.b.c.d");
-
-    expect(subject.isNone()).toEqual(true);
   });
 });
 

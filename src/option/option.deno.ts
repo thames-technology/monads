@@ -73,7 +73,11 @@ export function some_constructor<T>(val: T): OptSome<T> {
     and<U>(optb: Option<U>): Option<U> {
       return optb;
     },
-    unwrapOr(_def: T): T {
+    unwrapOr(def: T): T {
+      if (def == null) {
+        throw new Error("Cannot call unwrapOr with a missing value.");
+      }
+
       return val;
     },
     unwrap(): T {

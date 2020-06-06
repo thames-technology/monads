@@ -2,7 +2,6 @@ import {
   Right,
   isRight,
   isLeft,
-  isEither,
   Left,
   Either,
   EitherType,
@@ -512,25 +511,6 @@ describe("Either", () => {
       const subject = jest.fn();
       string_left.mapRight(subject);
       expect(subject).not.toBeCalled();
-    });
-  });
-
-  describe("isEither", () => {
-    it("should return true if Either is Right", () => {
-      expect(isEither(Right(""))).toEqual(true);
-    });
-
-    it("should return true if Either is Left", () => {
-      expect(isEither(Left(""))).toEqual(true);
-    });
-
-    it("should return false if value is not a Either", () => {
-      expect(isEither(new Function())).toEqual(false);
-      expect(isEither({})).toEqual(false);
-      expect(isEither([])).toEqual(false);
-      expect(isEither(true)).toEqual(false);
-      expect(isEither("")).toEqual(false);
-      expect(isEither(42)).toEqual(false);
     });
   });
 });

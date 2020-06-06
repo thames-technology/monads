@@ -1,4 +1,4 @@
-import { None, Option, OptNone, Some } from "../option/option";
+import { None, Option, OptNone, Some } from "../option/option.deno.ts";
 
 export const EitherType = {
   Left: Symbol(":left"),
