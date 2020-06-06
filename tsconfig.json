@@ -64,7 +64,8 @@
     "forceConsistentCasingInFileNames": true,
     "extendedDiagnostics": true
   },
-  "include": [
-    "./src/**/*", "test/Either.spec.ts", "test/Option.spec.ts", "test/Result.spec.ts"
+  "exclude": [
+    "mod.ts",
+    "./src/**/*.deno.ts"
   ]
 }
