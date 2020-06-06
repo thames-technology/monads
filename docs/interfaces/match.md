@@ -41,7 +41,7 @@
 
 • **err**: *function*
 
-*Defined in [result/result.ts:11](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L11)*
+*Defined in [src/result/result.ts:10](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L10)*
 
 #### Type declaration:
 
@@ -59,7 +59,7 @@ ___
 
 • **left**: *function*
 
-*Defined in [either/either.ts:10](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L10)*
+*Defined in [src/either/either.ts:9](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L9)*
 
 #### Type declaration:
 
@@ -77,7 +77,7 @@ ___
 
 • **none**: *function | U*
 
-*Defined in [option/option.ts:17](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L17)*
+*Defined in [src/option/option.ts:8](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L8)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **ok**: *function*
 
-*Defined in [result/result.ts:10](https://github.com/qworks-io/monads/blob/6a3a7f7/src/result/result.ts#L10)*
+*Defined in [src/result/result.ts:9](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L9)*
 
 #### Type declaration:
 
@@ -103,7 +103,7 @@ ___
 
 • **right**: *function*
 
-*Defined in [either/either.ts:11](https://github.com/qworks-io/monads/blob/6a3a7f7/src/either/either.ts#L11)*
+*Defined in [src/either/either.ts:10](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L10)*
 
 #### Type declaration:
 
@@ -121,7 +121,7 @@ ___
 
 • **some**: *function*
 
-*Defined in [option/option.ts:16](https://github.com/qworks-io/monads/blob/6a3a7f7/src/option/option.ts#L16)*
+*Defined in [src/option/option.ts:7](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L7)*
 
 #### Type declaration:
 
