@@ -66,6 +66,6 @@
   },
   "exclude": [
     "mod.ts",
-    "./src/**/*.deno.ts"
+    "./lib/**/*.deno.ts"
   ]
 }

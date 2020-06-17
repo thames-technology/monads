@@ -5,7 +5,7 @@ import {
   Left,
   Either,
   EitherType,
-} from "../../src/either/either";
+} from "../../lib/either/either";
 
 describe("Either", () => {
   interface IScenario<T> {

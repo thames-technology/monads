@@ -6,7 +6,7 @@ import {
   OptionType,
   Some,
   some_constructor,
-} from "../../src/option/option";
+} from "../../lib/option/option";
 
 describe("Option", () => {
   interface IScenario<T> {

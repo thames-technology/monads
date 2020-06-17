@@ -1,6 +1,6 @@
 [@hqoss/monads](../README.md) › [Globals](../globals.md) › [Match](match.md)
 
-# Interface: Match <**T, U, L, R, U, T, E, U**>
+# Interface: Match ‹**T, U, L, R, U, T, E, U**›
 
 ## Type parameters
 
@@ -41,7 +41,7 @@
 
 • **err**: *function*
 
-*Defined in [src/result/result.ts:10](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L10)*
+Defined in lib/result/result.ts:10
 
 #### Type declaration:
 
@@ -59,7 +59,7 @@ ___
 
 • **left**: *function*
 
-*Defined in [src/either/either.ts:9](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L9)*
+Defined in lib/either/either.ts:9
 
 #### Type declaration:
 
@@ -77,7 +77,7 @@ ___
 
 • **none**: *function | U*
 
-*Defined in [src/option/option.ts:8](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L8)*
+Defined in lib/option/option.ts:8
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **ok**: *function*
 
-*Defined in [src/result/result.ts:9](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L9)*
+Defined in lib/result/result.ts:9
 
 #### Type declaration:
 
@@ -103,7 +103,7 @@ ___
 
 • **right**: *function*
 
-*Defined in [src/either/either.ts:10](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L10)*
+Defined in lib/either/either.ts:10
 
 #### Type declaration:
 
@@ -121,7 +121,7 @@ ___
 
 • **some**: *function*
 
-*Defined in [src/option/option.ts:7](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L7)*
+Defined in lib/option/option.ts:7
 
 #### Type declaration:
 

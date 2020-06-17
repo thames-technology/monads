@@ -49,15 +49,15 @@
 
 • **None**: *[OptNone](interfaces/optnone.md)‹any›* = none_constructor<any>()
 
-*Defined in [src/option/option.ts:44](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L44)*
+Defined in lib/option/option.ts:44
 
 ## Functions
 
 ###  Err
 
-▸ **Err**<**T**, **E**>(`err`: E): *[ResErr](interfaces/reserr.md)‹T, E›*
+▸ **Err**‹**T**, **E**›(`err`: E): *[ResErr](interfaces/reserr.md)‹T, E›*
 
-*Defined in [src/result/result.ts:93](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L93)*
+Defined in lib/result/result.ts:93
 
 **Type parameters:**
 
@@ -77,9 +77,9 @@ ___
 
 ###  Left
 
-▸ **Left**<**L**, **R**>(`val`: L): *[ResLeft](interfaces/resleft.md)‹L, R›*
+▸ **Left**‹**L**, **R**›(`val`: L): *[ResLeft](interfaces/resleft.md)‹L, R›*
 
-*Defined in [src/either/either.ts:54](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L54)*
+Defined in lib/either/either.ts:54
 
 **Type parameters:**
 
@@ -99,9 +99,9 @@ ___
 
 ###  Ok
 
-▸ **Ok**<**T**, **E**>(`val`: T): *[ResOk](interfaces/resok.md)‹T, E›*
+▸ **Ok**‹**T**, **E**›(`val`: T): *[ResOk](interfaces/resok.md)‹T, E›*
 
-*Defined in [src/result/result.ts:51](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L51)*
+Defined in lib/result/result.ts:51
 
 **Type parameters:**
 
@@ -121,9 +121,9 @@ ___
 
 ###  Right
 
-▸ **Right**<**L**, **R**>(`val`: R): *[ResRight](interfaces/resright.md)‹L, R›*
+▸ **Right**‹**L**, **R**›(`val`: R): *[ResRight](interfaces/resright.md)‹L, R›*
 
-*Defined in [src/either/either.ts:111](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L111)*
+Defined in lib/either/either.ts:111
 
 **Type parameters:**
 
@@ -143,9 +143,9 @@ ___
 
 ###  Some
 
-▸ **Some**<**T**>(`val?`: T | undefined): *[Option](interfaces/option.md)‹T›*
+▸ **Some**‹**T**›(`val?`: T | undefined): *[Option](interfaces/option.md)‹T›*
 
-*Defined in [src/option/option.ts:38](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L38)*
+Defined in lib/option/option.ts:38
 
 **Type parameters:**
 
@@ -163,9 +163,9 @@ ___
 
 ###  isErr
 
-▸ **isErr**<**T**, **E**>(`val`: [Result](interfaces/result.md)‹T, E›): *val is ResErr<T, E>*
+▸ **isErr**‹**T**, **E**›(`val`: [Result](interfaces/result.md)‹T, E›): *val is ResErr<T, E>*
 
-*Defined in [src/result/result.ts:139](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L139)*
+Defined in lib/result/result.ts:139
 
 **Type parameters:**
 
@@ -185,9 +185,9 @@ ___
 
 ###  isLeft
 
-▸ **isLeft**<**L**, **R**>(`val`: [Either](interfaces/either.md)‹L, R›): *val is ResLeft<L, R>*
+▸ **isLeft**‹**L**, **R**›(`val`: [Either](interfaces/either.md)‹L, R›): *val is ResLeft<L, R>*
 
-*Defined in [src/either/either.ts:168](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L168)*
+Defined in lib/either/either.ts:168
 
 **Type parameters:**
 
@@ -207,9 +207,9 @@ ___
 
 ###  isNone
 
-▸ **isNone**<**T**>(`val`: [Option](interfaces/option.md)‹T›): *val is OptNone<T>*
+▸ **isNone**‹**T**›(`val`: [Option](interfaces/option.md)‹T›): *val is OptNone<T>*
 
-*Defined in [src/option/option.ts:132](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L132)*
+Defined in lib/option/option.ts:132
 
 **Type parameters:**
 
@@ -227,9 +227,9 @@ ___
 
 ###  isOk
 
-▸ **isOk**<**T**, **E**>(`val`: [Result](interfaces/result.md)‹T, E›): *val is ResOk<T>*
+▸ **isOk**‹**T**, **E**›(`val`: [Result](interfaces/result.md)‹T, E›): *val is ResOk<T>*
 
-*Defined in [src/result/result.ts:135](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L135)*
+Defined in lib/result/result.ts:135
 
 **Type parameters:**
 
@@ -249,9 +249,9 @@ ___
 
 ###  isRight
 
-▸ **isRight**<**L**, **R**>(`val`: [Either](interfaces/either.md)‹L, R›): *val is ResRight<L, R>*
+▸ **isRight**‹**L**, **R**›(`val`: [Either](interfaces/either.md)‹L, R›): *val is ResRight<L, R>*
 
-*Defined in [src/either/either.ts:172](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L172)*
+Defined in lib/either/either.ts:172
 
 **Type parameters:**
 
@@ -271,9 +271,9 @@ ___
 
 ###  isSome
 
-▸ **isSome**<**T**>(`val`: [Option](interfaces/option.md)‹T›): *val is OptSome<T>*
+▸ **isSome**‹**T**›(`val`: [Option](interfaces/option.md)‹T›): *val is OptSome<T>*
 
-*Defined in [src/option/option.ts:128](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L128)*
+Defined in lib/option/option.ts:128
 
 **Type parameters:**
 
@@ -291,9 +291,9 @@ ___
 
 ###  none_constructor
 
-▸ **none_constructor**<**T**>(): *[OptNone](interfaces/optnone.md)‹T›*
+▸ **none_constructor**‹**T**›(): *[OptNone](interfaces/optnone.md)‹T›*
 
-*Defined in [src/option/option.ts:85](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L85)*
+Defined in lib/option/option.ts:85
 
 **Type parameters:**
 
@@ -305,9 +305,9 @@ ___
 
 ###  some_constructor
 
-▸ **some_constructor**<**T**>(`val`: T): *[OptSome](interfaces/optsome.md)‹T›*
+▸ **some_constructor**‹**T**›(`val`: T): *[OptSome](interfaces/optsome.md)‹T›*
 
-*Defined in [src/option/option.ts:46](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L46)*
+Defined in lib/option/option.ts:46
 
 **Type parameters:**
 
@@ -327,19 +327,19 @@ Name | Type |
 
 ### ▪ **EitherType**: *object*
 
-*Defined in [src/either/either.ts:3](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L3)*
+Defined in lib/either/either.ts:3
 
 ###  Left
 
 • **Left**: *symbol* = Symbol(":left")
 
-*Defined in [src/either/either.ts:4](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L4)*
+Defined in lib/either/either.ts:4
 
 ###  Right
 
 • **Right**: *symbol* = Symbol(":right")
 
-*Defined in [src/either/either.ts:5](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L5)*
+Defined in lib/either/either.ts:5
 
 ___
 
@@ -347,19 +347,19 @@ ___
 
 ### ▪ **OptionType**: *object*
 
-*Defined in [src/option/option.ts:1](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L1)*
+Defined in lib/option/option.ts:1
 
 ###  None
 
 • **None**: *symbol* = Symbol(":none")
 
-*Defined in [src/option/option.ts:3](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L3)*
+Defined in lib/option/option.ts:3
 
 ###  Some
 
 • **Some**: *symbol* = Symbol(":some")
 
-*Defined in [src/option/option.ts:2](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L2)*
+Defined in lib/option/option.ts:2
 
 ___
 
@@ -367,16 +367,16 @@ ___
 
 ### ▪ **ResultType**: *object*
 
-*Defined in [src/result/result.ts:3](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L3)*
+Defined in lib/result/result.ts:3
 
 ###  Err
 
 • **Err**: *symbol* = Symbol(":err")
 
-*Defined in [src/result/result.ts:5](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L5)*
+Defined in lib/result/result.ts:5
 
 ###  Ok
 
 • **Ok**: *symbol* = Symbol(":ok")
 
-*Defined in [src/result/result.ts:4](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L4)*
+Defined in lib/result/result.ts:4

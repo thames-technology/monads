@@ -1,6 +1,6 @@
 [@hqoss/monads](../README.md) › [Globals](../globals.md) › [OptSome](optsome.md)
 
-# Interface: OptSome <**T**>
+# Interface: OptSome ‹**T**›
 
 ## Type parameters
 
@@ -38,17 +38,17 @@
 
 *Inherited from [Option](option.md).[type](option.md#type)*
 
-*Defined in [src/option/option.ts:12](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L12)*
+Defined in lib/option/option.ts:12
 
 ## Methods
 
 ###  and
 
-▸ **and**<**U**>(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹U›*
+▸ **and**‹**U**›(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹U›*
 
 *Overrides [Option](option.md).[and](option.md#and)*
 
-*Defined in [src/option/option.ts:28](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L28)*
+Defined in lib/option/option.ts:28
 
 **Type parameters:**
 
@@ -66,11 +66,11 @@ ___
 
 ###  andThen
 
-▸ **andThen**<**U**>(`fn`: function): *[Option](option.md)‹U›*
+▸ **andThen**‹**U**›(`fn`: function): *[Option](option.md)‹U›*
 
 *Inherited from [Option](option.md).[andThen](option.md#andthen)*
 
-*Defined in [src/option/option.ts:17](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L17)*
+Defined in lib/option/option.ts:17
 
 **Type parameters:**
 
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [Option](option.md).[isNone](option.md#isnone)*
 
-*Defined in [src/option/option.ts:14](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L14)*
+Defined in lib/option/option.ts:14
 
 **Returns:** *boolean*
 
@@ -110,7 +110,7 @@ ___
 
 *Inherited from [Option](option.md).[isSome](option.md#issome)*
 
-*Defined in [src/option/option.ts:13](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L13)*
+Defined in lib/option/option.ts:13
 
 **Returns:** *boolean*
 
@@ -118,11 +118,11 @@ ___
 
 ###  map
 
-▸ **map**<**U**>(`fn`: function): *[OptSome](optsome.md)‹U›*
+▸ **map**‹**U**›(`fn`: function): *[OptSome](optsome.md)‹U›*
 
 *Overrides [Option](option.md).[map](option.md#map)*
 
-*Defined in [src/option/option.ts:26](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L26)*
+Defined in lib/option/option.ts:26
 
 **Type parameters:**
 
@@ -146,11 +146,11 @@ ___
 
 ###  match
 
-▸ **match**<**U**>(`fn`: [Match](match.md)‹T, U›): *U*
+▸ **match**‹**U**›(`fn`: [Match](match.md)‹T, U›): *U*
 
 *Inherited from [Option](option.md).[match](option.md#match)*
 
-*Defined in [src/option/option.ts:15](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L15)*
+Defined in lib/option/option.ts:15
 
 **Type parameters:**
 
@@ -168,11 +168,11 @@ ___
 
 ###  or
 
-▸ **or**<**U**>(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹T›*
+▸ **or**‹**U**›(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹T›*
 
 *Overrides [Option](option.md).[or](option.md#or)*
 
-*Defined in [src/option/option.ts:27](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L27)*
+Defined in lib/option/option.ts:27
 
 **Type parameters:**
 
@@ -194,7 +194,7 @@ ___
 
 *Overrides [Option](option.md).[unwrap](option.md#unwrap)*
 
-*Defined in [src/option/option.ts:25](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L25)*
+Defined in lib/option/option.ts:25
 
 **Returns:** *T*
 
@@ -206,7 +206,7 @@ ___
 
 *Inherited from [Option](option.md).[unwrapOr](option.md#unwrapor)*
 
-*Defined in [src/option/option.ts:20](https://github.com/qworks-io/monads/blob/d32300b/src/option/option.ts#L20)*
+Defined in lib/option/option.ts:20
 
 **Parameters:**
 

@@ -1,6 +1,6 @@
 [@hqoss/monads](../README.md) › [Globals](../globals.md) › [ResOk](resok.md)
 
-# Interface: ResOk <**T, E**>
+# Interface: ResOk ‹**T, E**›
 
 ## Type parameters
 
@@ -43,17 +43,17 @@
 
 *Inherited from [Result](result.md).[type](result.md#type)*
 
-*Defined in [src/result/result.ts:14](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L14)*
+Defined in lib/result/result.ts:14
 
 ## Methods
 
 ###  andThen
 
-▸ **andThen**<**U**>(`fn`: function): *[Result](result.md)‹U, E›*
+▸ **andThen**‹**U**›(`fn`: function): *[Result](result.md)‹U, E›*
 
 *Overrides [Result](result.md).[andThen](result.md#andthen)*
 
-*Defined in [src/result/result.ts:36](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L36)*
+Defined in lib/result/result.ts:36
 
 **Type parameters:**
 
@@ -81,7 +81,7 @@ ___
 
 *Inherited from [Result](result.md).[err](result.md#err)*
 
-*Defined in [src/result/result.ts:18](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L18)*
+Defined in lib/result/result.ts:18
 
 **Returns:** *[Option](option.md)‹E›*
 
@@ -93,7 +93,7 @@ ___
 
 *Inherited from [Result](result.md).[isErr](result.md#iserr)*
 
-*Defined in [src/result/result.ts:16](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L16)*
+Defined in lib/result/result.ts:16
 
 **Returns:** *boolean*
 
@@ -105,7 +105,7 @@ ___
 
 *Inherited from [Result](result.md).[isOk](result.md#isok)*
 
-*Defined in [src/result/result.ts:15](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L15)*
+Defined in lib/result/result.ts:15
 
 **Returns:** *boolean*
 
@@ -113,11 +113,11 @@ ___
 
 ###  map
 
-▸ **map**<**U**>(`fn`: function): *[ResOk](resok.md)‹U, never›*
+▸ **map**‹**U**›(`fn`: function): *[ResOk](resok.md)‹U, never›*
 
 *Overrides [Result](result.md).[map](result.md#map)*
 
-*Defined in [src/result/result.ts:34](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L34)*
+Defined in lib/result/result.ts:34
 
 **Type parameters:**
 
@@ -141,11 +141,11 @@ ___
 
 ###  mapErr
 
-▸ **mapErr**<**U**>(`fn`: function): *[ResOk](resok.md)‹T, never›*
+▸ **mapErr**‹**U**›(`fn`: function): *[ResOk](resok.md)‹T, never›*
 
 *Overrides [Result](result.md).[mapErr](result.md#maperr)*
 
-*Defined in [src/result/result.ts:35](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L35)*
+Defined in lib/result/result.ts:35
 
 **Type parameters:**
 
@@ -169,11 +169,11 @@ ___
 
 ###  match
 
-▸ **match**<**U**>(`fn`: Match‹T, never, U›): *U*
+▸ **match**‹**U**›(`fn`: Match‹T, never, U›): *U*
 
 *Overrides [Result](result.md).[match](result.md#match)*
 
-*Defined in [src/result/result.ts:33](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L33)*
+Defined in lib/result/result.ts:33
 
 **Type parameters:**
 
@@ -195,7 +195,7 @@ ___
 
 *Inherited from [Result](result.md).[ok](result.md#ok)*
 
-*Defined in [src/result/result.ts:17](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L17)*
+Defined in lib/result/result.ts:17
 
 **Returns:** *[Option](option.md)‹T›*
 
@@ -203,11 +203,11 @@ ___
 
 ###  orElse
 
-▸ **orElse**<**U**>(`fn`: function): *[Result](result.md)‹T, E›*
+▸ **orElse**‹**U**›(`fn`: function): *[Result](result.md)‹T, E›*
 
 *Overrides [Result](result.md).[orElse](result.md#orelse)*
 
-*Defined in [src/result/result.ts:37](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L37)*
+Defined in lib/result/result.ts:37
 
 **Type parameters:**
 
@@ -235,7 +235,7 @@ ___
 
 *Overrides [Result](result.md).[unwrap](result.md#unwrap)*
 
-*Defined in [src/result/result.ts:30](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L30)*
+Defined in lib/result/result.ts:30
 
 **Returns:** *T*
 
@@ -247,7 +247,7 @@ ___
 
 *Overrides [Result](result.md).[unwrapErr](result.md#unwraperr)*
 
-*Defined in [src/result/result.ts:32](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L32)*
+Defined in lib/result/result.ts:32
 
 **Returns:** *never*
 
@@ -259,7 +259,7 @@ ___
 
 *Overrides [Result](result.md).[unwrapOr](result.md#unwrapor)*
 
-*Defined in [src/result/result.ts:31](https://github.com/qworks-io/monads/blob/d32300b/src/result/result.ts#L31)*
+Defined in lib/result/result.ts:31
 
 **Parameters:**
 

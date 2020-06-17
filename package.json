@@ -2,8 +2,8 @@
   "name": "@hqoss/monads",
   "version": "0.3.3",
   "description": "Type safe Option, Result, and Either types; inspired by Rust",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./dist/lib/index.js",
+  "typings": "./dist/lib/index.d.ts",
   "engines": {
     "node": ">=12",
     "npm": ">=6"
@@ -12,7 +12,7 @@
     "build": "rm -rf ./dist && tsc",
     "format": "prettier --write \"./{src,test}/**/*.ts\"",
     "format:check": "prettier --check \"./{src,test}/**/*.ts\"",
-    "test": "jest",
+    "test": "jest ./test/**/*.ts",
     "generate-docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
     "preversion": "npm run format:check && npm run build && npm test",
     "prepublishOnly": "npm run format:check && npm run build && npm test",
@@ -35,13 +35,13 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
+    "@types/jest": "^26.0.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.0",
     "typedoc": "^0.17.3",
-    "typedoc-plugin-markdown": "^2.2.17",
-    "typescript": "^3.8.3"
+    "typedoc-plugin-markdown": "^2.3.1",
+    "typescript": "^3.9.5"
   },
   "repository": {
     "type": "git",

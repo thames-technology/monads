@@ -5,7 +5,7 @@ import {
   Ok,
   Result,
   ResultType,
-} from "../../src/result/result";
+} from "../../lib/result/result";
 
 describe("Result", () => {
   interface IScenario<T> {

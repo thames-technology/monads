@@ -1,6 +1,6 @@
 [@hqoss/monads](../README.md) › [Globals](../globals.md) › [ResRight](resright.md)
 
-# Interface: ResRight <**L, R**>
+# Interface: ResRight ‹**L, R**›
 
 ## Type parameters
 
@@ -48,7 +48,7 @@
 
 *Inherited from [Either](either.md).[type](either.md#type)*
 
-*Defined in [src/either/either.ts:14](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L14)*
+Defined in lib/either/either.ts:14
 
 ## Methods
 
@@ -58,7 +58,7 @@
 
 *Inherited from [Either](either.md).[isLeft](either.md#isleft)*
 
-*Defined in [src/either/either.ts:15](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L15)*
+Defined in lib/either/either.ts:15
 
 **Returns:** *boolean*
 
@@ -70,7 +70,7 @@ ___
 
 *Inherited from [Either](either.md).[isRight](either.md#isright)*
 
-*Defined in [src/either/either.ts:16](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L16)*
+Defined in lib/either/either.ts:16
 
 **Returns:** *boolean*
 
@@ -82,7 +82,7 @@ ___
 
 *Inherited from [Either](either.md).[left](either.md#left)*
 
-*Defined in [src/either/either.ts:17](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L17)*
+Defined in lib/either/either.ts:17
 
 **Returns:** *[Option](option.md)‹L›*
 
@@ -90,11 +90,11 @@ ___
 
 ###  leftAndThen
 
-▸ **leftAndThen**<**U**>(`fn`: function): *[Either](either.md)‹U, R›*
+▸ **leftAndThen**‹**U**›(`fn`: function): *[Either](either.md)‹U, R›*
 
 *Inherited from [Either](either.md).[leftAndThen](either.md#leftandthen)*
 
-*Defined in [src/either/either.ts:18](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L18)*
+Defined in lib/either/either.ts:18
 
 **Type parameters:**
 
@@ -118,11 +118,11 @@ ___
 
 ###  map
 
-▸ **map**<**U**>(`fn`: function): *[ResRight](resright.md)‹never, U›*
+▸ **map**‹**U**›(`fn`: function): *[ResRight](resright.md)‹never, U›*
 
 *Overrides [Either](either.md).[map](either.md#map)*
 
-*Defined in [src/either/either.ts:49](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L49)*
+Defined in lib/either/either.ts:49
 
 **Type parameters:**
 
@@ -146,11 +146,11 @@ ___
 
 ###  mapLeft
 
-▸ **mapLeft**<**U**>(`fn`: function): *[Either](either.md)‹never, R›*
+▸ **mapLeft**‹**U**›(`fn`: function): *[Either](either.md)‹never, R›*
 
 *Overrides [Either](either.md).[mapLeft](either.md#mapleft)*
 
-*Defined in [src/either/either.ts:50](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L50)*
+Defined in lib/either/either.ts:50
 
 **Type parameters:**
 
@@ -174,11 +174,11 @@ ___
 
 ###  mapRight
 
-▸ **mapRight**<**U**>(`fn`: function): *[ResRight](resright.md)‹never, U›*
+▸ **mapRight**‹**U**›(`fn`: function): *[ResRight](resright.md)‹never, U›*
 
 *Overrides [Either](either.md).[mapRight](either.md#mapright)*
 
-*Defined in [src/either/either.ts:51](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L51)*
+Defined in lib/either/either.ts:51
 
 **Type parameters:**
 
@@ -202,11 +202,11 @@ ___
 
 ###  match
 
-▸ **match**<**U**>(`fn`: Match‹never, R, U›): *U*
+▸ **match**‹**U**›(`fn`: Match‹never, R, U›): *U*
 
 *Overrides [Either](either.md).[match](either.md#match)*
 
-*Defined in [src/either/either.ts:48](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L48)*
+Defined in lib/either/either.ts:48
 
 **Type parameters:**
 
@@ -228,7 +228,7 @@ ___
 
 *Inherited from [Either](either.md).[right](either.md#right)*
 
-*Defined in [src/either/either.ts:19](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L19)*
+Defined in lib/either/either.ts:19
 
 **Returns:** *[Option](option.md)‹R›*
 
@@ -236,11 +236,11 @@ ___
 
 ###  rightAndThen
 
-▸ **rightAndThen**<**U**>(`fn`: function): *[Either](either.md)‹L, U›*
+▸ **rightAndThen**‹**U**›(`fn`: function): *[Either](either.md)‹L, U›*
 
 *Inherited from [Either](either.md).[rightAndThen](either.md#rightandthen)*
 
-*Defined in [src/either/either.ts:20](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L20)*
+Defined in lib/either/either.ts:20
 
 **Type parameters:**
 
@@ -268,7 +268,7 @@ ___
 
 *Overrides [Either](either.md).[unwrap](either.md#unwrap)*
 
-*Defined in [src/either/either.ts:45](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L45)*
+Defined in lib/either/either.ts:45
 
 **Returns:** *R*
 
@@ -280,7 +280,7 @@ ___
 
 *Overrides [Either](either.md).[unwrapLeft](either.md#unwrapleft)*
 
-*Defined in [src/either/either.ts:46](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L46)*
+Defined in lib/either/either.ts:46
 
 **Returns:** *never*
 
@@ -292,7 +292,7 @@ ___
 
 *Inherited from [Either](either.md).[unwrapLeftOr](either.md#unwrapleftor)*
 
-*Defined in [src/either/either.ts:23](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L23)*
+Defined in lib/either/either.ts:23
 
 **Parameters:**
 
@@ -310,7 +310,7 @@ ___
 
 *Inherited from [Either](either.md).[unwrapLeftOrElse](either.md#unwrapleftorelse)*
 
-*Defined in [src/either/either.ts:24](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L24)*
+Defined in lib/either/either.ts:24
 
 **Parameters:**
 
@@ -334,7 +334,7 @@ ___
 
 *Overrides [Either](either.md).[unwrapRight](either.md#unwrapright)*
 
-*Defined in [src/either/either.ts:47](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L47)*
+Defined in lib/either/either.ts:47
 
 **Returns:** *R*
 
@@ -346,7 +346,7 @@ ___
 
 *Inherited from [Either](either.md).[unwrapRightOr](either.md#unwraprightor)*
 
-*Defined in [src/either/either.ts:26](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L26)*
+Defined in lib/either/either.ts:26
 
 **Parameters:**
 
@@ -364,7 +364,7 @@ ___
 
 *Inherited from [Either](either.md).[unwrapRightOrElse](either.md#unwraprightorelse)*
 
-*Defined in [src/either/either.ts:27](https://github.com/qworks-io/monads/blob/d32300b/src/either/either.ts#L27)*
+Defined in lib/either/either.ts:27
 
 **Parameters:**
 
