@@ -58,7 +58,7 @@ npm install @hqoss/monads
 
 ### `Option<T>`
 
-[See full documentation](./src/option)
+[See full documentation](./lib/option)
 
 ```typescript
 import { Option, Some, None } from "@hqoss/monads"
@@ -85,7 +85,7 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ### `Result<T, E>`
 
-[See full documentation](./src/result)
+[See full documentation](./lib/result)
 
 ```typescript
 import { Result, Ok, Err } from "@hqoss/monads"
@@ -107,7 +107,7 @@ console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 ### `Either<L, R>`
 
-[See full documentation](./src/either)
+[See full documentation](./lib/either)
 
 ```typescript
 import { Either } from "@hqoss/monads"
