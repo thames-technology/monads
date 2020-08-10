@@ -18,6 +18,7 @@ export interface Result<T, E> {
   err(): Option<E>;
   unwrap(): T | never;
   unwrapOr(optb: T): T;
+  unwrapOrElse(fn: (err: E) => T): T;
   unwrapErr(): E | never;
   match<U>(fn: Match<T, E, U>): U;
   map<U>(fn: (val: T) => U): Result<U, E>;
@@ -29,6 +30,7 @@ export interface Result<T, E> {
 export interface ResOk<T, E = never> extends Result<T, E> {
   unwrap(): T;
   unwrapOr(optb: T): T;
+  unwrapOrElse(fn: (err: E) => T): T;
   unwrapErr(): never;
   match<U>(fn: Match<T, never, U>): U;
   map<U>(fn: (val: T) => U): ResOk<U, never>;
@@ -40,6 +42,7 @@ export interface ResOk<T, E = never> extends Result<T, E> {
 export interface ResErr<T, E> extends Result<T, E> {
   unwrap(): never;
   unwrapOr(optb: T): T;
+  unwrapOrElse(fn: (err: E) => T): T;
   unwrapErr(): E;
   match<U>(fn: Match<never, E, U>): U;
   map<U>(fn: (val: T) => U): ResErr<never, E>;
@@ -67,6 +70,9 @@ export function Ok<T, E = never>(val: T): ResOk<T, E> {
       return val;
     },
     unwrapOr(_optb: T): T {
+      return val;
+    },
+    unwrapOrElse(_fn: (err: E) => T): T {
       return val;
     },
     unwrapErr(): never {
@@ -110,6 +116,9 @@ export function Err<T, E>(err: E): ResErr<T, E> {
     },
     unwrapOr(optb: T): T {
       return optb;
+    },
+    unwrapOrElse(fn: (err: E) => T): T {
+      return fn(err);
     },
     unwrapErr(): E {
       return err;

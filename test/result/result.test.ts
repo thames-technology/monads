@@ -416,6 +416,20 @@ describe("Result", () => {
     });
   });
 
+  describe("unwrapOrElse", () => {
+    it("unwraps original value when Result is ok", () => {
+      const string_ok = Ok("123");
+      const subject = string_ok.unwrapOrElse((s) => s + "456");
+      expect(subject).toEqual("123");
+    });
+
+    it("executes the function when Result is err", () => {
+      const string_err = Err("123");
+      const subject = string_err.unwrapOrElse((s) => s + "456");
+      expect(subject).toEqual("123456");
+    });
+  });
+
   describe("unwrapErr", () => {
     it("unwraps error when Result is err", () => {
       const string_err = Err("123");
