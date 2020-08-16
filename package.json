@@ -35,13 +35,13 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.0",
-    "jest": "^26.0.1",
+    "@types/jest": "^26.0.10",
+    "jest": "^26.4.0",
     "prettier": "^2.0.5",
-    "ts-jest": "^26.1.0",
-    "typedoc": "^0.17.3",
-    "typedoc-plugin-markdown": "^2.3.1",
-    "typescript": "^3.9.5"
+    "ts-jest": "^26.2.0",
+    "typedoc": "^0.18.0",
+    "typedoc-plugin-markdown": "^2.4.0",
+    "typescript": "^3.9.7"
   },
   "repository": {
     "type": "git",
