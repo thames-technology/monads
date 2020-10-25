@@ -1,0 +1,23 @@
+name: "publish current release to https://nest.land"
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  publishToNestDotLand:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: "setup" # check: https://github.com/actions/virtual-environments/issues/1777
+        uses: denolib/setup-deno@v2 
+        with:
+         deno-version: v1.4.6
+
+      - name: "check nest.land"
+        run: | 
+          deno run --allow-net --allow-read --allow-run https://deno.land/x/cicd/publish-on-nest.land.ts ${{ secrets.GITHUB_TOKEN }} ${{ secrets.NESTAPIKEY }} ${{ github.repository }}
