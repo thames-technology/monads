@@ -1,0 +1,10 @@
+{
+  "name": "monads",
+  "description": "👻 Type safe Option, Result, and Either types; inspired by Rust",
+  "homepage": "https://github.com/hqoss/monads",
+  "files": [
+    "./**/*.ts",
+    "README.md"
+  ],
+  "entry": "./mod.ts"
+}
