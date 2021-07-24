@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://sniptt.com">
+    <img src="../../.github/assets/monads-social-cover.svg" alt="Monads Logo" />
+  </a>
+</p>
+
 ## Table of contents
 
 *   [Introduction](#introduction)
