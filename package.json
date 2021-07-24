@@ -2,8 +2,6 @@
   "name": "@sniptt/monads",
   "version": "0.5.1",
   "description": "Option, Result, and Either types for TypeScript; Inspired by Rust",
-  "type": "module",
-  "exports": "./build/index.js",
   "files": [
     "build"
   ],
@@ -48,14 +46,11 @@
     "url": "git@github.com:sniptt/monads.git"
   },
   "ava": {
-    "extensions": {
-      "ts": "module"
-    },
-    "nonSemVerExperiments": {
-      "configurableModuleFormat": true
-    },
-    "nodeArguments": [
-      "--loader=ts-node/esm"
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
     ]
   }
 }

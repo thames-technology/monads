@@ -1,4 +1,4 @@
-import { None, Option, OptNone, Some } from '../option/option.js';
+import { None, Option, OptNone, Some } from '../option/option';
 
 export const ResultType = {
   Ok: Symbol(':ok'),
