@@ -1,14 +1,20 @@
-![Node.js CI](https://github.com/sniptt-official/monads/workflows/ci/badge.svg)
-![npm](https://img.shields.io/npm/v/@sniptt/monads)
-
 <p align="center">
   <a href="https://sniptt.com">
     <img src=".github/assets/monads-social-cover.svg" alt="Monads Logo" />
   </a>
 </p>
 
+<p align="right">
+  <i>If you use this repo, star it ✨</i>
+</p>
+
+***
+
 <p align="center"><b>Option, Result, and Either types for TypeScript</b></p>
+
 <p align="center">Inspired by Rust</p>
+
+***
 
 ## Install
 
