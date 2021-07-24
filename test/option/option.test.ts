@@ -6,9 +6,9 @@ import {
   OptionType,
   Some,
   some_constructor,
-} from "../../lib/option/option";
+} from '../../lib/option/option';
 
-describe("Option", () => {
+describe('Option', () => {
   interface IScenario<T> {
     value: T;
   }
@@ -35,9 +35,9 @@ describe("Option", () => {
     };
   }
 
-  describe("Some", () => {
-    describe("Boolean", () => {
-      const type = "Boolean";
+  describe('Some', () => {
+    describe('Boolean', () => {
+      const type = 'Boolean';
 
       const scenarios: IScenario<boolean>[] = [
         { value: true },
@@ -50,8 +50,8 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("Number", () => {
-      const type = "Number";
+    describe('Number', () => {
+      const type = 'Number';
 
       const scenarios: IScenario<number>[] = [
         { value: 37 },
@@ -68,14 +68,14 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("String", () => {
-      const type = "String";
+    describe('String', () => {
+      const type = 'String';
 
       const scenarios: IScenario<string>[] = [
-        { value: "" },
-        { value: "bla" },
+        { value: '' },
+        { value: 'bla' },
         { value: typeof 1 },
-        { value: String("abc") },
+        { value: String('abc') },
       ];
 
       const assertion = getAssertion<string>(type);
@@ -83,8 +83,8 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("Function", () => {
-      const type = "Function";
+    describe('Function', () => {
+      const type = 'Function';
 
       const scenarios: IScenario<any>[] = [
         {
@@ -103,8 +103,8 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("Object", () => {
-      const type = "Object";
+    describe('Object', () => {
+      const type = 'Object';
 
       const scenarios: IScenario<object>[] = [
         { value: { a: 1 } },
@@ -120,7 +120,7 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("RegEx", () => {
+    describe('RegEx', () => {
       const val = /s/;
       it(
         "correctly creates an instance of Option with value '" + val + "'",
@@ -135,27 +135,27 @@ describe("Option", () => {
 
           const type = typeof subject.unwrap();
 
-          expect(type === "function" || type === "object").toEqual(true);
+          expect(type === 'function' || type === 'object').toEqual(true);
           expect(subject.unwrap()).toEqual(val);
         },
       );
     });
 
-    describe("Undefined, Null", () => {
-      it("undefined is treated as None, null is a valid Some", () => {
+    describe('Undefined, Null', () => {
+      it('undefined is treated as None, null is a valid Some', () => {
         expect(Some().isSome()).toEqual(false);
         expect(Some(undefined).isSome()).toEqual(false);
         expect(Some(null).isSome()).toEqual(true);
       });
 
-      const array: string[] = ["a", "b"];
+      const array: string[] = ['a', 'b'];
       const outOfBoundIndex = array.length + 1;
 
       const object = {
-        a: "_a",
-        b: "_b",
+        a: '_a',
+        b: '_b',
       };
-      const outOfBoundProperty = "z";
+      const outOfBoundProperty = 'z';
 
       const scenarios: IScenario<undefined>[] = [
         { value: undefined },
@@ -179,19 +179,19 @@ describe("Option", () => {
       scenarios.forEach(assertion);
     });
 
-    describe("match", () => {
-      it("correctly matches Some and returns transformed value", () => {
-        const string = Some("string");
+    describe('match', () => {
+      it('correctly matches Some and returns transformed value', () => {
+        const string = Some('string');
 
         const subject = string.match({
           some: (str) => str.toUpperCase(),
-          none: "OTHER STRING",
+          none: 'OTHER STRING',
         });
 
-        expect(subject).toEqual("STRING");
+        expect(subject).toEqual('STRING');
       });
 
-      it("correctly matches None and returns fallback value", () => {
+      it('correctly matches None and returns fallback value', () => {
         const arr = [1, 2, 3];
         const maybeNumber = Some(arr[arr.length + 1]);
 
@@ -204,9 +204,9 @@ describe("Option", () => {
       });
     });
 
-    describe("map", () => {
-      it("correctly maps Some and returns a new Some with transformed value", () => {
-        const string = Some("123");
+    describe('map', () => {
+      it('correctly maps Some and returns a new Some with transformed value', () => {
+        const string = Some('123');
 
         const subject = string.map((_) => parseInt(_, 10));
 
@@ -215,8 +215,8 @@ describe("Option", () => {
     });
   });
 
-  describe("None", () => {
-    it("correctly creates its instance, returns correct value when calling unwrapOr()", () => {
+  describe('None', () => {
+    it('correctly creates its instance, returns correct value when calling unwrapOr()', () => {
       const subject = None;
 
       expect(subject.type).toEqual(OptionType.None);
@@ -224,33 +224,33 @@ describe("Option", () => {
       expect(subject.isNone()).toEqual(true);
       expect(subject.isSome()).toEqual(false);
 
-      expect(subject.unwrapOr("string")).toEqual("string");
+      expect(subject.unwrapOr('string')).toEqual('string');
     });
 
-    describe("unwrapOr", () => {
-      it("should correctly throw if trying to call with undefined or null", () => {
+    describe('unwrapOr', () => {
+      it('should correctly throw if trying to call with undefined or null', () => {
         const subject = None;
 
-        const array = ["a"];
+        const array = ['a'];
         const outOfBoundIndex = array.length + 1;
 
         expect(() => subject.unwrapOr(array[outOfBoundIndex])).toThrow();
       });
     });
 
-    describe("match", () => {
-      it("correctly matches None and returns fallback value", () => {
+    describe('match', () => {
+      it('correctly matches None and returns fallback value', () => {
         const subject = None.match({
-          some: (_) => "something",
-          none: "nothing",
+          some: (_) => 'something',
+          none: 'nothing',
         });
 
-        expect(subject).toEqual("nothing");
+        expect(subject).toEqual('nothing');
       });
     });
 
-    describe("map", () => {
-      it("correctly maps Some and returns a new Some with transformed value", () => {
+    describe('map', () => {
+      it('correctly maps Some and returns a new Some with transformed value', () => {
         const subject = None.map((_) => parseInt(_, 10));
 
         expect(subject.type).toEqual(OptionType.None);
@@ -258,9 +258,9 @@ describe("Option", () => {
     });
   });
 
-  describe("Option", () => {
-    describe("match", () => {
-      it("correctly matches Some and returns transformed value", () => {
+  describe('Option', () => {
+    describe('match', () => {
+      it('correctly matches Some and returns transformed value', () => {
         let a: Option<Date>;
 
         const date = new Date();
@@ -279,7 +279,7 @@ describe("Option", () => {
         expect(subject).toEqual(date.getFullYear());
       });
 
-      it("correctly matches None and returns fallback value", () => {
+      it('correctly matches None and returns fallback value', () => {
         let a: Option<boolean>;
 
         const initialValue = true;
@@ -298,28 +298,28 @@ describe("Option", () => {
         expect(subject).toEqual(initialValue);
       });
 
-      it("correctly matches None and returns fallback value when method provided to none branch", () => {
+      it('correctly matches None and returns fallback value when method provided to none branch', () => {
         const a: Option<string> = None;
 
         const subject = a.match({
           some: (_) => _,
-          none: () => "N/A",
+          none: () => 'N/A',
         });
 
-        expect(subject).toEqual("N/A");
+        expect(subject).toEqual('N/A');
       });
     });
 
-    describe("map", () => {
-      it("returns transformed Some when method applied to a value that exists", () => {
+    describe('map', () => {
+      it('returns transformed Some when method applied to a value that exists', () => {
         const arr = [1, 2, 3];
 
         const subject = Some(arr[0]).map((_) => _.toString());
 
-        expect(isSome(subject) ? subject.unwrap() : undefined).toEqual("1");
+        expect(isSome(subject) ? subject.unwrap() : undefined).toEqual('1');
       });
 
-      it("returns None when method applied to a value that does not exist", () => {
+      it('returns None when method applied to a value that does not exist', () => {
         const arr = [1, 2, 3];
 
         const subject = Some(arr[arr.length + 1]).map((_) => _.toString());
@@ -327,25 +327,25 @@ describe("Option", () => {
         expect(subject.isNone()).toEqual(true);
       });
 
-      it("throws when transform function throws", () => {
+      it('throws when transform function throws', () => {
         const arr = [1, 2, 3];
 
-        const subject = () => Some(arr[0]).map((_) => JSON.parse("{null}"));
+        const subject = () => Some(arr[0]).map((_) => JSON.parse('{null}'));
 
         expect(subject).toThrow(SyntaxError); // cos JSON.parse
       });
     });
   });
 
-  describe("constructor", () => {
-    it("throws if no value inside", () => {
+  describe('constructor', () => {
+    it('throws if no value inside', () => {
       expect(() => some_constructor(undefined)).toThrow();
     });
   });
 });
 
-describe("isSome", () => {
-  it("should unwrap after a successful preliminary check", () => {
+describe('isSome', () => {
+  it('should unwrap after a successful preliminary check', () => {
     let a: number;
 
     const subject = Some(42);
@@ -359,8 +359,8 @@ describe("isSome", () => {
     expect(a).toEqual(42);
   });
 
-  it("should not unwrap after a failing preliminary check", () => {
-    const a: string[] = ["a", "b", "c"];
+  it('should not unwrap after a failing preliminary check', () => {
+    const a: string[] = ['a', 'b', 'c'];
     const outOfBoundIndex = a.length + 1;
 
     let b: string;
@@ -370,16 +370,16 @@ describe("isSome", () => {
     if (isSome(subject)) {
       b = subject.unwrap();
     } else {
-      b = "This Is None";
+      b = 'This Is None';
     }
 
-    expect(b).toEqual("This Is None");
+    expect(b).toEqual('This Is None');
   });
 });
 
-describe("isNone", () => {
-  it("should return true if Option is None", () => {
-    const a: string[] = ["a", "b", "c"];
+describe('isNone', () => {
+  it('should return true if Option is None', () => {
+    const a: string[] = ['a', 'b', 'c'];
     const outOfBoundIndex = a.length + 1;
 
     let b: string;
@@ -387,16 +387,16 @@ describe("isNone", () => {
     const subject = Some(a[outOfBoundIndex]);
 
     if (isNone(subject)) {
-      b = "Correct";
+      b = 'Correct';
     } else {
-      b = "Fail";
+      b = 'Fail';
     }
 
     expect(isNone(subject)).toEqual(true);
-    expect(b).toEqual("Correct");
+    expect(b).toEqual('Correct');
   });
 
-  it("should return false if Option is Some", () => {
+  it('should return false if Option is Some', () => {
     const a = () => null;
 
     let b: string;
@@ -404,32 +404,32 @@ describe("isNone", () => {
     const subject = Some(a);
 
     if (isNone(subject)) {
-      b = "Fail";
+      b = 'Fail';
     } else {
-      b = "Correct";
+      b = 'Correct';
     }
 
     expect(isNone(subject)).toEqual(false);
-    expect(b).toEqual("Correct");
+    expect(b).toEqual('Correct');
   });
 
-  it("should return true if value is None", () => {
+  it('should return true if value is None', () => {
     let a: string;
 
     const subject = None;
 
     if (isNone(subject)) {
-      a = "Correct";
+      a = 'Correct';
     } else {
-      a = "Fail";
+      a = 'Fail';
     }
 
     expect(isNone(subject)).toEqual(true);
-    expect(a).toEqual("Correct");
+    expect(a).toEqual('Correct');
   });
 });
 
-describe("andThen", () => {
+describe('andThen', () => {
   interface Contact {
     name: Option<string>;
   }
@@ -450,8 +450,8 @@ describe("andThen", () => {
     truck = { driver: None };
   });
 
-  it("correctly returns the name as a Some if all properties are Some", () => {
-    contact.name = Some("Name");
+  it('correctly returns the name as a Some if all properties are Some', () => {
+    contact.name = Some('Name');
     driver.contact = Some(contact);
     truck.driver = Some(driver);
 
@@ -460,7 +460,7 @@ describe("andThen", () => {
       .andThen((_) => _.name);
 
     expect(subject.isSome()).toEqual(true);
-    expect(subject.unwrapOr("")).toEqual("Name");
+    expect(subject.unwrapOr('')).toEqual('Name');
   });
 
   it("correctly returns None if 'contact.name' is None", () => {
@@ -475,7 +475,7 @@ describe("andThen", () => {
   });
 
   it("correctly returns None if 'contact' is None", () => {
-    contact.name = Some("Name");
+    contact.name = Some('Name');
     driver.contact = None;
     truck.driver = Some(driver);
 
@@ -487,7 +487,7 @@ describe("andThen", () => {
   });
 
   it("correctly returns None if 'driver' is None", () => {
-    contact.name = Some("Name");
+    contact.name = Some('Name');
     driver.contact = Some(contact);
     truck.driver = None;
 
@@ -498,19 +498,19 @@ describe("andThen", () => {
     expect(subject.isNone()).toEqual(true);
   });
 
-  it("throws if transform function throws", () => {
-    contact.name = Some("Name");
+  it('throws if transform function throws', () => {
+    contact.name = Some('Name');
     driver.contact = Some(contact);
     truck.driver = Some(driver);
 
     const subject = () =>
-      truck.driver.andThen((_) => Some(JSON.parse("{null}")));
+      truck.driver.andThen((_) => Some(JSON.parse('{null}')));
 
     expect(subject).toThrow(SyntaxError);
   });
 });
 
-describe("or", () => {
+describe('or', () => {
   it("correctly returns Some(a) if 'a' is Some and 'b' is None", () => {
     const a = Some(123);
     const b = None;
@@ -543,7 +543,7 @@ describe("or", () => {
   });
 });
 
-describe("and", () => {
+describe('and', () => {
   it("correctly returns None if 'a' is Some and 'b' is None", () => {
     const a = Some(123);
     const b = None;

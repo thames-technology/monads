@@ -1,6 +1,6 @@
 export const OptionType = {
-  Some: Symbol(":some"),
-  None: Symbol(":none"),
+  Some: Symbol(':some'),
+  None: Symbol(':none'),
 };
 
 export interface Match<T, U> {
@@ -36,7 +36,7 @@ export interface OptNone<T> extends Option<T> {
 }
 
 export function Some<T>(val?: T | undefined): Option<T> {
-  return typeof val === "undefined"
+  return typeof val === 'undefined'
     ? none_constructor<T>()
     : some_constructor<T>(val as T);
 }
@@ -44,9 +44,9 @@ export function Some<T>(val?: T | undefined): Option<T> {
 export const None = none_constructor<any>();
 
 export function some_constructor<T>(val: T): OptSome<T> {
-  if (typeof val === "undefined") {
+  if (typeof val === 'undefined') {
     throw new TypeError(
-      "Some has to contain a value. Constructor received undefined.",
+      'Some has to contain a value. Constructor received undefined.',
     );
   }
 
@@ -94,7 +94,7 @@ export function none_constructor<T>(): OptNone<T> {
     match<U>(matchObject: Match<T, U>): U {
       const { none } = matchObject;
 
-      if (typeof none === "function") {
+      if (typeof none === 'function') {
         return (none as () => U)();
       }
 
@@ -114,13 +114,13 @@ export function none_constructor<T>(): OptNone<T> {
     },
     unwrapOr(def: T): T {
       if (def == null) {
-        throw new Error("Cannot call unwrapOr with a missing value.");
+        throw new Error('Cannot call unwrapOr with a missing value.');
       }
 
       return def;
     },
     unwrap(): never {
-      throw new ReferenceError("Trying to unwrap None.");
+      throw new ReferenceError('Trying to unwrap None.');
     },
   };
 }

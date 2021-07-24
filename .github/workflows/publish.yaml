@@ -1,6 +1,6 @@
 # See https://help.github.com/en/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Build and publish a Node.js package
+name: publish
 
 on:
   push:
@@ -9,18 +9,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-        registry-url: 'https://registry.npmjs.org'
-    - run: npm ci
-    # The scripts in package.json will ensure the package is built, formatted,
-    # and that the tests are passing.
-    - run: npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      # The scripts in package.json will ensure the package is built, formatted,
+      # and that the tests are passing.
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

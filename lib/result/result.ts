@@ -1,8 +1,8 @@
-import { None, Option, OptNone, Some } from "../option/option";
+import { None, Option, OptNone, Some } from '../option/option';
 
 export const ResultType = {
-  Ok: Symbol(":ok"),
-  Err: Symbol(":err"),
+  Ok: Symbol(':ok'),
+  Err: Symbol(':err'),
 };
 
 export interface Match<T, E, U> {
@@ -76,7 +76,7 @@ export function Ok<T, E = never>(val: T): ResOk<T, E> {
       return val;
     },
     unwrapErr(): never {
-      throw new ReferenceError("Cannot unwrap Err value of Result.Ok");
+      throw new ReferenceError('Cannot unwrap Err value of Result.Ok');
     },
     match<U>(matchObject: Match<T, never, U>): U {
       return matchObject.ok(val);
@@ -112,7 +112,7 @@ export function Err<T, E>(err: E): ResErr<T, E> {
       return Some(err);
     },
     unwrap(): never {
-      throw new ReferenceError("Cannot unwrap Ok value of Result.Err");
+      throw new ReferenceError('Cannot unwrap Ok value of Result.Err');
     },
     unwrapOr(optb: T): T {
       return optb;

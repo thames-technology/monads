@@ -2,16 +2,16 @@
   "name": "@hqoss/monads",
   "version": "0.5.0",
   "description": "Type safe Option, Result, and Either types; inspired by Rust",
-  "main": "./dist/lib/index.js",
-  "typings": "./dist/lib/index.d.ts",
+  "main": "./build/lib/index.js",
+  "typings": "./build/lib/index.d.ts",
   "engines": {
     "node": ">=14",
     "npm": ">=7"
   },
   "scripts": {
-    "build": "rm -rf ./dist && tsc",
-    "format": "prettier --write \"./{lib,test}/**/*.ts\"",
-    "format:check": "prettier --check \"./{lib,test}/**/*.ts\"",
+    "build": "tsc",
+    "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
+    "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
     "test": "jest ./test/**/*.ts",
     "generate-docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
     "preversion": "npm run format:check && npm run build && npm test",
@@ -31,20 +31,18 @@
   ],
   "author": "Slavo Vojacek",
   "license": "MIT",
-  "dependencies": {
-    "tslib": "^2.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "26.0.23",
-    "jest": "27.0.4",
-    "prettier": "2.3.1",
-    "ts-jest": "27.0.2",
-    "typedoc": "0.20.36",
-    "typedoc-plugin-markdown": "3.9.0",
-    "typescript": "4.3.2"
+    "@types/jest": "26.0.24",
+    "jest": "27.0.6",
+    "prettier": "2.3.2",
+    "ts-jest": "27.0.4",
+    "typedoc": "0.21.4",
+    "typedoc-plugin-markdown": "3.10.4",
+    "typescript": "4.3.5"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:hqoss/monads.git"
+    "url": "git@github.com:sniptt/monads.git"
   }
 }

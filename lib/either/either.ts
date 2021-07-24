@@ -1,8 +1,8 @@
-import { None, Option, OptNone, Some } from "../option/option";
+import { None, Option, OptNone, Some } from '../option/option';
 
 export const EitherType = {
-  Left: Symbol(":left"),
-  Right: Symbol(":right"),
+  Left: Symbol(':left'),
+  Right: Symbol(':right'),
 };
 
 export interface Match<L, R, U> {
@@ -85,7 +85,7 @@ export function Left<L, R>(val: L): ResLeft<L, R> {
       return val;
     },
     unwrapRight(): never {
-      throw new ReferenceError("Cannot unwrap Right value of Either.Left");
+      throw new ReferenceError('Cannot unwrap Right value of Either.Left');
     },
     unwrapRightOr(other: R): R {
       return other;
@@ -133,7 +133,7 @@ export function Right<L, R>(val: R): ResRight<L, R> {
       return val;
     },
     unwrapLeft(): never {
-      throw new ReferenceError("Cannot unwrap Left value of Either.Right");
+      throw new ReferenceError('Cannot unwrap Left value of Either.Right');
     },
     unwrapLeftOr(other: L): L {
       return other;
