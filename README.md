@@ -10,7 +10,7 @@
 
 ***
 
-<p align="center"><b>Option, Result, and Either types for TypeScript</b></p>
+<p align="center">👻 <b>Option, Result, and Either types for TypeScript</b></p>
 
 <p align="center">Inspired by Rust</p>
 
