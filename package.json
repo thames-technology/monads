@@ -22,12 +22,12 @@
     "node",
     "node.js"
   ],
-  "author": "sniptt.com <support@sniptt.com> (https://github.com/sniptt-official)",
+  "author": "Sniptt <support@sniptt.com> (sniptt.com)",
   "license": "MIT",
   "homepage": "https://github.com/sniptt-official/monads",
   "bugs": "https://github.com/sniptt-official/monads/issues",
   "scripts": {
-    "build": "tsc && denoify && mv deno_build deno",
+    "build": "rm -rf build deno && tsc && denoify && mv deno_build deno && npm run format",
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
     "test": "nyc ava --fail-fast ./test/**/*.test.ts",
