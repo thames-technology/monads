@@ -8,8 +8,6 @@ In the meantime, please check the [API docs](../../docs/interfaces/Either.md)
 
 Original implementation: <https://docs.rs/either/1.6.1/either/enum.Either.html>
 
-***
-
 `Either` with variants `Left` and `Right` is a general purpose sum type with two cases.
 
 The `Either` type is symmetric and treats its variants the same way, without preference. For representing success or error, use [`Result<T, E>`](../result) instead.

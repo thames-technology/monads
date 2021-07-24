@@ -2,8 +2,6 @@
 
 Original implementation: <https://doc.rust-lang.org/std/result/enum.Result.html>
 
-***
-
 `Result<T, E>` is the type used for returning and propagating errors. The variants are `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
 
 You could consider using `Result` for:
