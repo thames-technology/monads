@@ -27,7 +27,7 @@
   "homepage": "https://github.com/sniptt-official/monads",
   "bugs": "https://github.com/sniptt-official/monads/issues",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && denoify && mv deno_build deno",
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
     "test": "nyc ava --fail-fast ./test/**/*.test.ts",
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "ava": "3.15.0",
+    "denoify": "0.7.2",
     "nyc": "15.1.0",
     "prettier": "2.3.2",
     "ts-node": "10.1.0",
