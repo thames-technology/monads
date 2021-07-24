@@ -1,7 +1,9 @@
 ![Node.js CI](https://github.com/sniptt-official/monads/workflows/ci/badge.svg)
+
 <!-- [![Codacy Badge](https://app.codacy.com/project/badge/Grade/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com\&utm_medium=referral\&utm_content=hqoss/monads\&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com\&utm_medium=referral\&utm_content=hqoss/monads\&utm_campaign=Badge_Coverage)
 [![GuardRails badge](https://badges.guardrails.io/hqoss/monads.svg?token=14bca43cc8b71d3659ac85cfb0bf590ca88a6d9f09216c2aff0d1b870de404ee\&provider=github)](https://dashboard.guardrails.io/gh/hqoss/36606) -->
+
 ![npm](https://img.shields.io/npm/v/@sniptt/monads)
 
 # 👻 Monads
@@ -10,12 +12,12 @@ Type safe Option, Result, and Either types; inspired by Rust.
 
 ## Table of contents
 
-*   [⏳ Install](#-install)
+*   [Install](#install)
 
+    *   [Node.js and the browser](#nodejs-and-the-browser)
     *   [Deno](#deno)
-    *   [Node.js and the Browser](#nodejs-and-the-browser)
 
-*   [📝 Usage](#-usage)
+*   [Usage](#usage)
 
     *   [`Option<T>`](#optiont)
     *   [`Result<T, E>`](#resultt-e)
@@ -26,7 +28,15 @@ Type safe Option, Result, and Either types; inspired by Rust.
 
 *   [TODO](#todo)
 
-## ⏳ Install
+## Install
+
+### Node.js and the browser
+
+```bash
+npm install @sniptt/monads
+```
+
+**⚠️ NOTE:** The project is configured to target `ES2020` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
 
 ### Deno
 
@@ -38,15 +48,7 @@ const air = Some("air").unwrapOr("baloon")
 console.log(air) // "air"
 ```
 
-### Node.js and the Browser
-
-```bash
-npm install @hqoss/monads
-```
-
-**⚠️ NOTE:** The project is configured to target `ES2018` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
-
-## 📝 Usage
+## Usage
 
 ### `Option<T>`
 
@@ -114,7 +116,7 @@ function getLabel(uncertainDate: Either<Date, string>) {
 
 ### API Docs
 
-[See full API Documentation here](docs/globals.md).
+[See full API Documentation here](docs/README.md).
 
 ## Node version support
 

@@ -13,7 +13,7 @@
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
     "test": "jest ./test/**/*.ts",
-    "generate-docs": "rm -rf ./docs && typedoc --mode file --excludePrivate --excludeNotExported --plugin typedoc-plugin-markdown --out ./docs && rm ./docs/README.md",
+    "docs": "rm -rf ./docs && typedoc lib/index.ts --excludePrivate --excludeProtected --plugin typedoc-plugin-markdown --readme none --out ./docs",
     "preversion": "npm run format:check && npm run build && npm test",
     "prepublishOnly": "npm run format:check && npm run build && npm test",
     "postversion": "git push --follow-tags"
