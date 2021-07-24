@@ -12,7 +12,13 @@
 
 <p align="center">👻 <b>Option, Result, and Either types for JavaScript</b></p>
 
-<p align="center">Inspired by Rust</p>
+<p align="center">
+  Inspired by <a href="https://doc.rust-lang.org/stable/std/option/" target="_blank">Rust</a>
+</p>
+
+<p align="center">
+  <b>Zero dependencies</b> 💪
+</p>
 
 ***
 
@@ -20,7 +26,7 @@
 
 ### Node.js and the browser
 
-```bash
+```sh
 npm install @sniptt/monads
 ```
 

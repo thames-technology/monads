@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[option/option.ts:44](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/option/option.ts#L44)
+[option/option.ts:44](https://github.com/sniptt-official/monads/blob/f783cc8/lib/option/option.ts#L44)
 
 ## Functions
 
@@ -63,7 +63,7 @@
 
 #### Defined in
 
-[result/result.ts:99](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/result/result.ts#L99)
+[result/result.ts:99](https://github.com/sniptt-official/monads/blob/f783cc8/lib/result/result.ts#L99)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:54](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/either/either.ts#L54)
+[either/either.ts:54](https://github.com/sniptt-official/monads/blob/f783cc8/lib/either/either.ts#L54)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:54](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/result/result.ts#L54)
+[result/result.ts:54](https://github.com/sniptt-official/monads/blob/f783cc8/lib/result/result.ts#L54)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:111](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/either/either.ts#L111)
+[either/either.ts:111](https://github.com/sniptt-official/monads/blob/f783cc8/lib/either/either.ts#L111)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:38](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/option/option.ts#L38)
+[option/option.ts:38](https://github.com/sniptt-official/monads/blob/f783cc8/lib/option/option.ts#L38)
 
 ___
 
@@ -197,7 +197,7 @@ val is ResErr<T, E\>
 
 #### Defined in
 
-[result/result.ts:148](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/result/result.ts#L148)
+[result/result.ts:148](https://github.com/sniptt-official/monads/blob/f783cc8/lib/result/result.ts#L148)
 
 ___
 
@@ -224,7 +224,7 @@ val is ResLeft<L, R\>
 
 #### Defined in
 
-[either/either.ts:168](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/either/either.ts#L168)
+[either/either.ts:168](https://github.com/sniptt-official/monads/blob/f783cc8/lib/either/either.ts#L168)
 
 ___
 
@@ -250,7 +250,7 @@ val is OptNone<T\>
 
 #### Defined in
 
-[option/option.ts:126](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/option/option.ts#L126)
+[option/option.ts:126](https://github.com/sniptt-official/monads/blob/f783cc8/lib/option/option.ts#L126)
 
 ___
 
@@ -277,7 +277,7 @@ val is ResOk<T, never\>
 
 #### Defined in
 
-[result/result.ts:144](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/result/result.ts#L144)
+[result/result.ts:144](https://github.com/sniptt-official/monads/blob/f783cc8/lib/result/result.ts#L144)
 
 ___
 
@@ -304,7 +304,7 @@ val is ResRight<L, R\>
 
 #### Defined in
 
-[either/either.ts:172](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/either/either.ts#L172)
+[either/either.ts:172](https://github.com/sniptt-official/monads/blob/f783cc8/lib/either/either.ts#L172)
 
 ___
 
@@ -330,4 +330,4 @@ val is OptSome<T\>
 
 #### Defined in
 
-[option/option.ts:122](https://github.com/sniptt-official/monads/blob/b8a68b4/lib/option/option.ts#L122)
+[option/option.ts:122](https://github.com/sniptt-official/monads/blob/f783cc8/lib/option/option.ts#L122)
