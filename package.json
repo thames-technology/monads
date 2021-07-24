@@ -4,7 +4,9 @@
   "description": "Option, Result, and Either types for TypeScript; Inspired by Rust",
   "type": "module",
   "exports": "./build/index.js",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "types": "build",
   "engines": {
     "node": ">=14",
