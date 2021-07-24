@@ -2,25 +2,15 @@
   "name": "@sniptt/monads",
   "version": "0.5.3",
   "description": "Option, Result, and Either types for TypeScript; Inspired by Rust",
-  "files": [
-    "build"
-  ],
   "main": "build/index.js",
   "types": "build",
   "engines": {
     "node": ">=14",
     "npm": ">=7"
   },
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
-    "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
-    "test": "ava ./test/**/*.test.ts",
-    "docs": "rm -rf ./docs && typedoc lib/index.ts --excludePrivate --excludeProtected --plugin typedoc-plugin-markdown --readme none --out ./docs",
-    "preversion": "npm run format:check && npm run build && npm test",
-    "prepublishOnly": "npm run format:check && npm run build && npm test",
-    "postversion": "git push --follow-tags"
-  },
+  "files": [
+    "build"
+  ],
   "keywords": [
     "monads",
     "option",
@@ -32,10 +22,22 @@
     "node",
     "node.js"
   ],
-  "author": "Slavo Vojacek",
+  "author": "sniptt.com <support@sniptt.com> (https://github.com/sniptt-official)",
   "license": "MIT",
+  "homepage": "https://github.com/sniptt-official/monads",
+  "bugs": "https://github.com/sniptt-official/monads/issues",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
+    "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
+    "test": "nyc ava --fail-fast ./test/**/*.test.ts",
+    "docs": "rm -rf ./docs && typedoc lib/index.ts --excludePrivate --excludeProtected --plugin typedoc-plugin-markdown --readme none --out ./docs",
+    "preversion": "npm run format:check && npm run build && npm test",
+    "postversion": "git push --follow-tags"
+  },
   "devDependencies": {
     "ava": "3.15.0",
+    "nyc": "15.1.0",
     "prettier": "2.3.2",
     "ts-node": "10.1.0",
     "typedoc": "0.21.4",
@@ -52,6 +54,7 @@
     ],
     "require": [
       "ts-node/register"
-    ]
+    ],
+    "verbose": true
   }
 }

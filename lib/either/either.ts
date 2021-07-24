@@ -36,7 +36,7 @@ export interface ResLeft<L, R> extends Either<L, R> {
   unwrapLeft(): L;
   unwrapRight(): never;
   match<U>(fn: Match<L, never, U>): U;
-  map<U>(fn: (val: L | R) => U): ResLeft<U, never>;
+  map<U>(fn: (val: L) => U): ResLeft<U, never>;
   mapLeft<U>(fn: (left: L) => U): Either<U, never>;
   mapRight<U>(fn: (right: R) => U): ResLeft<L, never>;
 }
@@ -46,7 +46,7 @@ export interface ResRight<L, R> extends Either<L, R> {
   unwrapLeft(): never;
   unwrapRight(): R;
   match<U>(fn: Match<never, R, U>): U;
-  map<U>(fn: (val: L | R) => U): ResRight<never, U>;
+  map<U>(fn: (val: R) => U): ResRight<never, U>;
   mapLeft<U>(fn: (left: L) => U): Either<never, R>;
   mapRight<U>(fn: (right: R) => U): ResRight<never, U>;
 }
@@ -153,7 +153,7 @@ export function Right<L, R>(val: R): ResRight<L, R> {
     match<U>(matchObject: Match<never, R, U>): U {
       return matchObject.right(val);
     },
-    map<U>(fn: (val: L | R) => U): ResRight<never, U> {
+    map<U>(fn: (val: R) => U): ResRight<never, U> {
       return Right(fn(val));
     },
     mapLeft<U>(_fn: (left: L) => U): Either<never, R> {

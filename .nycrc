@@ -1,0 +1,11 @@
+{
+  "reporter": ["lcov", "text", "text-summary"],
+  "include": ["lib/**/*.ts"],
+  "exclude": [],
+  "check-coverage": true,
+  "all": true,
+  "branches": 100,
+  "functions": 100,
+  "lines": 100,
+  "statements": 100
+}
