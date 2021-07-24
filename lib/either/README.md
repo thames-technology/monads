@@ -1,12 +1,15 @@
-⚠️ **Full documentation for this module is currently work in progress**
+<p align="center">
+  <a href="https://sniptt.com">
+    <img src="../../.github/assets/monads-social-cover.svg" alt="Monads Logo" />
+  </a>
+</p>
 
-In the meantime, please check the [API docs](../../docs/interfaces/Either.md)
+## Table of contents
 
-***
+*   [Introduction](#introduction)
+*   [Documentation](#documentation)
 
-## Rust-inspired `Either<L, R>` type
-
-Original implementation: <https://docs.rs/either/1.6.1/either/enum.Either.html>
+## Introduction
 
 `Either` with variants `Left` and `Right` is a general purpose sum type with two cases.
 
@@ -22,3 +25,11 @@ const getLabel = (uncertainDate: Either<Date, string>): string => {
   });
 };
 ```
+
+Original implementation: <https://docs.rs/either/1.6.1/either/enum.Either.html>
+
+## Documentation
+
+⚠️ **Full documentation for this module is currently work in progress**
+
+In the meantime, please check the [API docs](../../docs/interfaces/Either.md)
