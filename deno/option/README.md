@@ -1,15 +1,44 @@
-# Rust-inspired `Option<T>` type
+<p align="center">
+  <a href="https://sniptt.com">
+    <img src="../../.github/assets/monads-social-cover.svg" alt="Monads Logo" />
+  </a>
+</p>
 
-Original implementation: <https://doc.rust-lang.org/std/option/enum.Option.html>
+## Table of contents
+
+*   [Introduction](#introduction)
+*   [Documentation](#documentation)
+    *   [`isSome() => boolean`](#issome--boolean)
+        *   [Examples](#examples)
+        *   [A note on `null` and `undefined`](#a-note-on-null-and-undefined)
+    *   [`isNone() => boolean`](#isnone--boolean)
+        *   [Examples](#examples-1)
+    *   [`unwrap() => T`](#unwrap--t)
+        *   [Throws](#throws)
+        *   [Examples](#examples-2)
+    *   [`unwrapOr(optb: T) => T`](#unwraporoptb-t--t)
+        *   [Examples](#examples-3)
+    *   [`map(fn: (val: T) => U) => Option<U>`](#mapfn-val-t--u--optionu)
+        *   [Examples](#examples-4)
+    *   [`andThen(fn: (val: T) => Option<U>) => Option<U>`](#andthenfn-val-t--optionu--optionu)
+        *   [Examples](#examples-5)
+    *   [`or(optb: Option<T>) => Option<T>`](#oroptb-optiont--optiont)
+        *   [Examples](#examples-6)
+    *   [`and(optb: Option<T>) => Option<T>`](#andoptb-optiont--optiont)
+        *   [Examples](#examples-7)
+    *   [`match(p: MatchPattern<T, U>): U`](#matchp-matchpatternt-u-u)
+        *   [Examples](#examples-8)
+
+## Introduction
 
 Type `Option<T>` represents an optional value: every `Option` is either `Some` and contains a value, or `None`, and does not.
 
 You could consider using `Option` for:
 
--   Nullable pointers (`undefined` in JavaScript)
--   Return value for otherwise reporting simple errors, where None is returned on error
--   Default values and/or properties
--   Nested optional object properties
+*   Nullable pointers (`undefined` in JavaScript)
+*   Return value for otherwise reporting simple errors, where None is returned on error
+*   Default values and/or properties
+*   Nested optional object properties
 
 `Option`s are commonly paired with pattern matching to query the presence of a value and take action, always accounting for the `None` case.
 
@@ -35,6 +64,8 @@ console.log(message) // "Result: 0.6666666666666666"
 
 ```
 
+Original implementation: <https://doc.rust-lang.org/std/option/enum.Option.html>
+
 ## Documentation
 
 ### `isSome() => boolean`
@@ -55,13 +86,11 @@ console.log(x.isSome()) // false
 
 ```
 
-#### `null` and `undefined`
+#### A note on `null` and `undefined`
 
-In previous versions of this package, calling `Some(val)` where `val` is either `null` or `undefined` would result in `None`.
+`null` is considered a *value* and it is internally treated as `object`.
 
-Hovewer, `null` is considered a _value_ and it is internally treated as `object`.
-
-Therefore, as of version `v3.0.0`, constructing `Some` with `null` (explicitly, or implicitly) will indeed yield `Some<null>`.
+Constructing `Some` with `null` (explicitly, or implicitly) will yield `Some<null>`, while `undefined` will yield `None`.
 
 ```typescript
 expect(Some().isSome()).toEqual(false)
@@ -284,40 +313,5 @@ const noDate = None
 
 console.log(getFullYear(someDate)) // 2017
 console.log(getFullYear(noDate)) // 1994
-
-```
-
-### `getIn(obj: Object, key: string): Option<T>`
-
-Retrieves value `T` and converts it to `Option<T>` if key leads to this value, otherwise returns `None`. It is highly recommended to cast the return type to `Option<T>` explicitly, as seen in examples below.
-
-#### Examples
-
-```typescript
-interface Car {
-  driver?: {
-    contact?: {
-      name?: string
-    }
-  }
-}
-
-const getDriverName = (car: Car): Option<string> => getIn(car, "driver.contact.name")
-
-console.log(getDriverName({driver: {}})) // None
-console.log(getDriverName({driver: {contact: {}}})) // None
-console.log(getDriverName({driver: {contact: {name: "John"}}})) // Some("John")
-
-```
-
-## Appendix
-
-### Typing in action
-
-```typescript
-const getFullYear = (date: Option<Date>): number => date.match({
-  some: val => val.getFullYear(),
-  none: "1994" // Error: Type 'string | number' is not assignable to type 'number'.
-})
 
 ```

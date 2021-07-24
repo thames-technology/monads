@@ -1,12 +1,43 @@
-# Rust-inspired `Result<T, E>` type
+<p align="center">
+  <a href="https://sniptt.com">
+    <img src="../../.github/assets/monads-social-cover.svg" alt="Monads Logo" />
+  </a>
+</p>
 
-Original implementation: <https://doc.rust-lang.org/std/result/enum.Result.html>
+## Table of contents
+
+*   [Introduction](#introduction)
+*   [Documentation](#documentation)
+    *   [`isOk() => boolean`](#isok--boolean)
+        *   [Examples](#examples)
+    *   [`isErr() => boolean`](#iserr--boolean)
+        *   [Examples](#examples-1)
+    *   [`ok() => Option<T>`](#ok--optiont)
+    *   [`err() => Option<E>`](#err--optione)
+    *   [`unwrap() => T`](#unwrap--t)
+        *   [Throws](#throws)
+        *   [Examples](#examples-2)
+    *   [`unwrapErr() => E`](#unwraperr--e)
+        *   [Throws](#throws-1)
+        *   [Examples](#examples-3)
+    *   [`unwrapOr(optb: T) => T`](#unwraporoptb-t--t)
+        *   [Examples](#examples-4)
+    *   [`map<U>(fn: (val: T) => U): Result<U, E>`](#mapufn-val-t--u-resultu-e)
+        *   [Examples](#examples-5)
+    *   [`mapErr<U>(fn: (err: T) => U): Result<T, U>`](#maperrufn-err-t--u-resultt-u)
+        *   [Examples](#examples-6)
+    *   [`andThen(fn: (val: T) => Result<U, E>): Result<U, E>`](#andthenfn-val-t--resultu-e-resultu-e)
+        *   [Examples](#examples-7)
+    *   [`match(p: MatchPattern<O, E, T>): T`](#matchp-matchpatterno-e-t-t)
+        *   [Examples](#examples-8)
+
+## Introduction
 
 `Result<T, E>` is the type used for returning and propagating errors. The variants are `Ok(T)`, representing success and containing a value, and `Err(E)`, representing error and containing an error value.
 
 You could consider using `Result` for:
 
--   Return value whenever errors are expected and recoverable
+*   Return value whenever errors are expected and recoverable
 
 ```typescript
 function getIndex(values: string[], value: string): Result<number, string> {
@@ -24,6 +55,8 @@ console.log(getIndex(["a", "b", "c"], "b")) // Ok(1)
 console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 ```
+
+Original implementation: <https://doc.rust-lang.org/std/result/enum.Result.html>
 
 ## Documentation
 
@@ -283,17 +316,5 @@ const errDate = Err("Invalid Date")
 
 console.log(getFullYear(okDate)) // 2017
 console.log(getFullYear(errDate)) // 1994
-
-```
-
-## Appendix
-
-### Typing in action
-
-```typescript
-const getFullYear = (date: Result<Date, string>): number => date.match({
-  ok: val => val.getFullYear(),
-  err: _ => "1994" // Error: Type 'string | number' is not assignable to type 'number'.
-})
 
 ```
