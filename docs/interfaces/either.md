@@ -1,4 +1,4 @@
-[@hqoss/monads](../README.md) / Either
+[@sniptt/monads](../README.md) / Either
 
 # Interface: Either<L, R\>
 
@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[either/either.ts:14](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L14)
+[either/either.ts:14](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L14)
 
 ## Methods
 
@@ -57,7 +57,7 @@
 
 #### Defined in
 
-[either/either.ts:15](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L15)
+[either/either.ts:15](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L15)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:16](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L16)
+[either/either.ts:16](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L16)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:17](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L17)
+[either/either.ts:17](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L17)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:18](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L18)
+[either/either.ts:18](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L18)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:29](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L29)
+[either/either.ts:29](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L29)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:30](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L30)
+[either/either.ts:30](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L30)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:31](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L31)
+[either/either.ts:31](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L31)
 
 ___
 
@@ -215,7 +215,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:28](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L28)
+[either/either.ts:28](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L28)
 
 ___
 
@@ -229,7 +229,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:19](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L19)
+[either/either.ts:19](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L19)
 
 ___
 
@@ -255,7 +255,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:20](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L20)
+[either/either.ts:20](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L20)
 
 ___
 
@@ -269,7 +269,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:21](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L21)
+[either/either.ts:21](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L21)
 
 ___
 
@@ -283,7 +283,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:22](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L22)
+[either/either.ts:22](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L22)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:23](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L23)
+[either/either.ts:23](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L23)
 
 ___
 
@@ -323,7 +323,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:24](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L24)
+[either/either.ts:24](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L24)
 
 ___
 
@@ -337,7 +337,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:25](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L25)
+[either/either.ts:25](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L25)
 
 ___
 
@@ -357,7 +357,7 @@ ___
 
 #### Defined in
 
-[either/either.ts:26](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L26)
+[either/either.ts:26](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L26)
 
 ___
 
@@ -377,4 +377,4 @@ ___
 
 #### Defined in
 
-[either/either.ts:27](https://github.com/sniptt-official/monads/blob/588afea/lib/either/either.ts#L27)
+[either/either.ts:27](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L27)

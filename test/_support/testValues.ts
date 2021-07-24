@@ -8,6 +8,8 @@ export const numberValues: Array<number> = [
 
 export const bigintValues: Array<bigint> = [...new Set([BigInt(42)])];
 
+export const symbolValues: Array<symbol> = [...new Set([Symbol('foo')])];
+
 export const stringValues: Array<string> = [
   ...new Set(['', 'foobar', '42', typeof 1, String('abc')]),
 ];

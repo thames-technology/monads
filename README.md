@@ -17,7 +17,9 @@
 npm install @sniptt/monads
 ```
 
-**⚠️ NOTE:** The project is configured to target `ES2020` and the library uses `commonjs` module resolution. Read more in the [Node version support](#node-version-support) section.
+This project is configured to target `ES2020` and the library uses `commonjs` module resolution.
+
+See <https://node.green/#ES2020> for reference.
 
 ### Deno
 
@@ -98,12 +100,6 @@ function getLabel(uncertainDate: Either<Date, string>) {
 ## API Docs
 
 [See full API Documentation here](docs/README.md).
-
-## Node version support
-
-The project is configured to target ES2020. In practice, this means consumers should run on Node 14 or higher, unless additional compilation/transpilation steps are in place to ensure compatibility with the target runtime.
-
-Please see <https://node.green/#ES2020> for reference.
 
 ## TODO
 

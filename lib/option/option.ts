@@ -43,13 +43,7 @@ export function Some<T>(val?: T | undefined): Option<T> {
 
 export const None = none_constructor<any>();
 
-export function some_constructor<T>(val: T): OptSome<T> {
-  if (typeof val === 'undefined') {
-    throw new TypeError(
-      'Some has to contain a value. Constructor received undefined.',
-    );
-  }
-
+function some_constructor<T>(val: T): OptSome<T> {
   return {
     type: OptionType.Some,
     isSome(): boolean {
@@ -82,7 +76,7 @@ export function some_constructor<T>(val: T): OptSome<T> {
   };
 }
 
-export function none_constructor<T>(): OptNone<T> {
+function none_constructor<T>(): OptNone<T> {
   return {
     type: OptionType.None,
     isSome(): boolean {

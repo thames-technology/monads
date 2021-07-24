@@ -17,10 +17,11 @@ import {
   numberValues,
   objectValues,
   stringValues,
+  symbolValues,
   undefinedValues,
 } from '../_support/testValues';
 
-const getMessage = (e: Either<unknown, unknown>): string => {
+const testMatch = (e: Either<unknown, unknown>): string => {
   return e.match({
     left: (_) => `left`,
     right: (_) => `right`,
@@ -105,7 +106,7 @@ const testLeft = <T>(t: ExecutionContext, input: T, type: string) => {
   );
 
   // Test match
-  t.is(getMessage(left), 'left');
+  t.is(testMatch(left), 'left');
 };
 
 const testRight = <T>(t: ExecutionContext, input: T, type: string) => {
@@ -186,7 +187,7 @@ const testRight = <T>(t: ExecutionContext, input: T, type: string) => {
   );
 
   // Test match
-  t.is(getMessage(right), 'right');
+  t.is(testMatch(right), 'right');
 };
 
 booleanValues.forEach((value, index) => {
@@ -231,6 +232,21 @@ bigintValues.forEach((value, index) => {
     testRight,
     value,
     'bigint',
+  );
+});
+
+symbolValues.forEach((value, index) => {
+  test(
+    `Left works with symbol value ${String(value)} ${index}`,
+    testLeft,
+    value,
+    'symbol',
+  );
+  test(
+    `Right works with symbol value ${String(value)} ${index}`,
+    testRight,
+    value,
+    'symbol',
   );
 });
 
