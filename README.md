@@ -1,9 +1,4 @@
 ![Node.js CI](https://github.com/sniptt-official/monads/workflows/ci/badge.svg)
-
-<!-- [![Codacy Badge](https://app.codacy.com/project/badge/Grade/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com\&utm_medium=referral\&utm_content=hqoss/monads\&utm_campaign=Badge_Grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/afa382493ae441b3824f4d409438d90b)](https://www.codacy.com/gh/hqoss/monads?utm_source=github.com\&utm_medium=referral\&utm_content=hqoss/monads\&utm_campaign=Badge_Coverage)
-[![GuardRails badge](https://badges.guardrails.io/hqoss/monads.svg?token=14bca43cc8b71d3659ac85cfb0bf590ca88a6d9f09216c2aff0d1b870de404ee\&provider=github)](https://dashboard.guardrails.io/gh/hqoss/36606) -->
-
 ![npm](https://img.shields.io/npm/v/@sniptt/monads)
 
 <div align="center"><b>Option, Result, and Either types for TypeScript</b></div>
@@ -26,9 +21,8 @@ See <https://node.green/#ES2020> for reference.
 ```typescript
 import { Some } from "https://deno.land/x/monads/mod.ts"
 
-const air = Some("air").unwrapOr("baloon")
-
-console.log(air) // "air"
+Some("air").unwrapOr("baloon") // "air"
+None.unwrapOr("baloon") // "baloon"
 ```
 
 ## Usage
@@ -101,12 +95,6 @@ function getLabel(uncertainDate: Either<Date, string>) {
 
 [See full API Documentation here](docs/README.md).
 
-## TODO
+## License
 
-A quick and dirty tech debt tracker before we move to Issues.
-
-*   \[ ] Write a **Contributing** guide
-*   \[ ] Complete testing section, add best practices
-*   \[ ] Describe scripts and usage, add best practices
-*   \[ ] Describe security best practices, e.g. `npm doctor`, `npm audit`, `npm outdated`, `ignore-scripts` in `.npmrc`, etc.
-*   \[ ] Add "Why should I use this" section
+See [LICENSE](LICENSE)
