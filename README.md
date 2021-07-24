@@ -6,8 +6,6 @@
 
 ![npm](https://img.shields.io/npm/v/@sniptt/monads)
 
-# Monads
-
 <div align="center"><b>Option, Result, and Either types for TypeScript</b></div>
 <div align="center">Inspired by Rust</div>
 
