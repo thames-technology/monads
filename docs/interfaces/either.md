@@ -1,347 +1,380 @@
-[@hqoss/monads](../README.md) › [Globals](../globals.md) › [Either](either.md)
+[@sniptt/monads](../README.md) / Either
 
-# Interface: Either ‹**L, R**›
+# Interface: Either<L, R\>
 
 ## Type parameters
 
-▪ **L**
+| Name |
+| :------ |
+| `L` |
+| `R` |
 
-▪ **R**
-
-## Hierarchy
-
-* **Either**
-
-  ↳ [ResLeft](resleft.md)
-
-  ↳ [ResRight](resright.md)
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [type](either.md#type)
+- [type](Either.md#type)
 
 ### Methods
 
-* [isLeft](either.md#isleft)
-* [isRight](either.md#isright)
-* [left](either.md#left)
-* [leftAndThen](either.md#leftandthen)
-* [map](either.md#map)
-* [mapLeft](either.md#mapleft)
-* [mapRight](either.md#mapright)
-* [match](either.md#match)
-* [right](either.md#right)
-* [rightAndThen](either.md#rightandthen)
-* [unwrap](either.md#unwrap)
-* [unwrapLeft](either.md#unwrapleft)
-* [unwrapLeftOr](either.md#unwrapleftor)
-* [unwrapLeftOrElse](either.md#unwrapleftorelse)
-* [unwrapRight](either.md#unwrapright)
-* [unwrapRightOr](either.md#unwraprightor)
-* [unwrapRightOrElse](either.md#unwraprightorelse)
+- [isLeft](Either.md#isleft)
+- [isRight](Either.md#isright)
+- [left](Either.md#left)
+- [leftAndThen](Either.md#leftandthen)
+- [map](Either.md#map)
+- [mapLeft](Either.md#mapleft)
+- [mapRight](Either.md#mapright)
+- [match](Either.md#match)
+- [right](Either.md#right)
+- [rightAndThen](Either.md#rightandthen)
+- [unwrap](Either.md#unwrap)
+- [unwrapLeft](Either.md#unwrapleft)
+- [unwrapLeftOr](Either.md#unwrapleftor)
+- [unwrapLeftOrElse](Either.md#unwrapleftorelse)
+- [unwrapRight](Either.md#unwrapright)
+- [unwrapRightOr](Either.md#unwraprightor)
+- [unwrapRightOrElse](Either.md#unwraprightorelse)
 
 ## Properties
 
-###  type
+### type
 
-• **type**: *symbol*
+• **type**: `symbol`
 
-Defined in lib/either/either.ts:14
+#### Defined in
+
+[either/either.ts:14](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L14)
 
 ## Methods
 
-###  isLeft
+### isLeft
 
-▸ **isLeft**(): *boolean*
+▸ **isLeft**(): `boolean`
 
-Defined in lib/either/either.ts:15
+#### Returns
 
-**Returns:** *boolean*
+`boolean`
 
-___
+#### Defined in
 
-###  isRight
-
-▸ **isRight**(): *boolean*
-
-Defined in lib/either/either.ts:16
-
-**Returns:** *boolean*
+[either/either.ts:15](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L15)
 
 ___
 
-###  left
+### isRight
 
-▸ **left**(): *[Option](option.md)‹L›*
+▸ **isRight**(): `boolean`
 
-Defined in lib/either/either.ts:17
+#### Returns
 
-**Returns:** *[Option](option.md)‹L›*
+`boolean`
 
-___
+#### Defined in
 
-###  leftAndThen
-
-▸ **leftAndThen**‹**U**›(`fn`: function): *[Either](either.md)‹U, R›*
-
-Defined in lib/either/either.ts:18
-
-**Type parameters:**
-
-▪ **U**
-
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`val`: L): *[Either](either.md)‹U, R›*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`val` | L |
-
-**Returns:** *[Either](either.md)‹U, R›*
+[either/either.ts:16](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L16)
 
 ___
 
-###  map
+### left
 
-▸ **map**‹**U**›(`fn`: function): *[Either](either.md)‹U, U›*
+▸ **left**(): [`Option`](Option.md)<`L`\>
 
-Defined in lib/either/either.ts:29
+#### Returns
 
-**Type parameters:**
+[`Option`](Option.md)<`L`\>
 
-▪ **U**
+#### Defined in
 
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`val`: L | R): *U*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`val` | L &#124; R |
-
-**Returns:** *[Either](either.md)‹U, U›*
+[either/either.ts:17](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L17)
 
 ___
 
-###  mapLeft
+### leftAndThen
 
-▸ **mapLeft**‹**U**›(`fn`: function): *[Either](either.md)‹U, R›*
+▸ **leftAndThen**<`U`\>(`fn`): [`Either`](Either.md)<`U`, `R`\>
 
-Defined in lib/either/either.ts:30
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `L`) => [`Either`](Either.md)<`U`, `R`\> |
 
-▪ **fn**: *function*
+#### Returns
 
-▸ (`left`: L): *U*
+[`Either`](Either.md)<`U`, `R`\>
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`left` | L |
-
-**Returns:** *[Either](either.md)‹U, R›*
-
-___
-
-###  mapRight
-
-▸ **mapRight**‹**U**›(`fn`: function): *[Either](either.md)‹L, U›*
-
-Defined in lib/either/either.ts:31
-
-**Type parameters:**
-
-▪ **U**
-
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`right`: R): *U*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`right` | R |
-
-**Returns:** *[Either](either.md)‹L, U›*
+[either/either.ts:18](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L18)
 
 ___
 
-###  match
+### map
 
-▸ **match**‹**U**›(`fn`: Match‹L, R, U›): *U*
+▸ **map**<`U`\>(`fn`): [`Either`](Either.md)<`U`, `U`\>
 
-Defined in lib/either/either.ts:28
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `L` \| `R`) => `U` |
 
-Name | Type |
------- | ------ |
-`fn` | Match‹L, R, U› |
+#### Returns
 
-**Returns:** *U*
+[`Either`](Either.md)<`U`, `U`\>
 
-___
+#### Defined in
 
-###  right
-
-▸ **right**(): *[Option](option.md)‹R›*
-
-Defined in lib/either/either.ts:19
-
-**Returns:** *[Option](option.md)‹R›*
+[either/either.ts:29](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L29)
 
 ___
 
-###  rightAndThen
+### mapLeft
 
-▸ **rightAndThen**‹**U**›(`fn`: function): *[Either](either.md)‹L, U›*
+▸ **mapLeft**<`U`\>(`fn`): [`Either`](Either.md)<`U`, `R`\>
 
-Defined in lib/either/either.ts:20
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`left`: `L`) => `U` |
 
-▪ **fn**: *function*
+#### Returns
 
-▸ (`val`: R): *[Either](either.md)‹L, U›*
+[`Either`](Either.md)<`U`, `R`\>
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`val` | R |
-
-**Returns:** *[Either](either.md)‹L, U›*
-
-___
-
-###  unwrap
-
-▸ **unwrap**(): *L | R*
-
-Defined in lib/either/either.ts:21
-
-**Returns:** *L | R*
+[either/either.ts:30](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L30)
 
 ___
 
-###  unwrapLeft
+### mapRight
 
-▸ **unwrapLeft**(): *L | never*
+▸ **mapRight**<`U`\>(`fn`): [`Either`](Either.md)<`L`, `U`\>
 
-Defined in lib/either/either.ts:22
+#### Type parameters
 
-**Returns:** *L | never*
+| Name |
+| :------ |
+| `U` |
 
-___
+#### Parameters
 
-###  unwrapLeftOr
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`right`: `R`) => `U` |
 
-▸ **unwrapLeftOr**(`other`: L): *L*
+#### Returns
 
-Defined in lib/either/either.ts:23
+[`Either`](Either.md)<`L`, `U`\>
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`other` | L |
-
-**Returns:** *L*
-
-___
-
-###  unwrapLeftOrElse
-
-▸ **unwrapLeftOrElse**(`fn`: function): *L*
-
-Defined in lib/either/either.ts:24
-
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`right`: R): *L*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`right` | R |
-
-**Returns:** *L*
+[either/either.ts:31](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L31)
 
 ___
 
-###  unwrapRight
+### match
 
-▸ **unwrapRight**(): *R | never*
+▸ **match**<`U`\>(`fn`): `U`
 
-Defined in lib/either/either.ts:25
+#### Type parameters
 
-**Returns:** *R | never*
+| Name |
+| :------ |
+| `U` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | `Match`<`L`, `R`, `U`\> |
+
+#### Returns
+
+`U`
+
+#### Defined in
+
+[either/either.ts:28](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L28)
 
 ___
 
-###  unwrapRightOr
+### right
 
-▸ **unwrapRightOr**(`other`: R): *R*
+▸ **right**(): [`Option`](Option.md)<`R`\>
 
-Defined in lib/either/either.ts:26
+#### Returns
 
-**Parameters:**
+[`Option`](Option.md)<`R`\>
 
-Name | Type |
------- | ------ |
-`other` | R |
+#### Defined in
 
-**Returns:** *R*
+[either/either.ts:19](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L19)
 
 ___
 
-###  unwrapRightOrElse
+### rightAndThen
 
-▸ **unwrapRightOrElse**(`fn`: function): *R*
+▸ **rightAndThen**<`U`\>(`fn`): [`Either`](Either.md)<`L`, `U`\>
 
-Defined in lib/either/either.ts:27
+#### Type parameters
 
-**Parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **fn**: *function*
+#### Parameters
 
-▸ (`left`: L): *R*
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `R`) => [`Either`](Either.md)<`L`, `U`\> |
 
-**Parameters:**
+#### Returns
 
-Name | Type |
------- | ------ |
-`left` | L |
+[`Either`](Either.md)<`L`, `U`\>
 
-**Returns:** *R*
+#### Defined in
+
+[either/either.ts:20](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L20)
+
+___
+
+### unwrap
+
+▸ **unwrap**(): `L` \| `R`
+
+#### Returns
+
+`L` \| `R`
+
+#### Defined in
+
+[either/either.ts:21](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L21)
+
+___
+
+### unwrapLeft
+
+▸ **unwrapLeft**(): `L`
+
+#### Returns
+
+`L`
+
+#### Defined in
+
+[either/either.ts:22](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L22)
+
+___
+
+### unwrapLeftOr
+
+▸ **unwrapLeftOr**(`other`): `L`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | `L` |
+
+#### Returns
+
+`L`
+
+#### Defined in
+
+[either/either.ts:23](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L23)
+
+___
+
+### unwrapLeftOrElse
+
+▸ **unwrapLeftOrElse**(`fn`): `L`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`right`: `R`) => `L` |
+
+#### Returns
+
+`L`
+
+#### Defined in
+
+[either/either.ts:24](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L24)
+
+___
+
+### unwrapRight
+
+▸ **unwrapRight**(): `R`
+
+#### Returns
+
+`R`
+
+#### Defined in
+
+[either/either.ts:25](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L25)
+
+___
+
+### unwrapRightOr
+
+▸ **unwrapRightOr**(`other`): `R`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `other` | `R` |
+
+#### Returns
+
+`R`
+
+#### Defined in
+
+[either/either.ts:26](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L26)
+
+___
+
+### unwrapRightOrElse
+
+▸ **unwrapRightOrElse**(`fn`): `R`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`left`: `L`) => `R` |
+
+#### Returns
+
+`R`
+
+#### Defined in
+
+[either/either.ts:27](https://github.com/sniptt-official/monads/blob/269971f/lib/either/either.ts#L27)

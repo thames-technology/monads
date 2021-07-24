@@ -1,199 +1,229 @@
-[@hqoss/monads](../README.md) › [Globals](../globals.md) › [Option](option.md)
+[@sniptt/monads](../README.md) / Option
 
-# Interface: Option ‹**T**›
+# Interface: Option<T\>
 
 ## Type parameters
 
-▪ **T**
+| Name |
+| :------ |
+| `T` |
 
-## Hierarchy
-
-* **Option**
-
-  ↳ [OptSome](optsome.md)
-
-  ↳ [OptNone](optnone.md)
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [type](option.md#type)
+- [type](Option.md#type)
 
 ### Methods
 
-* [and](option.md#and)
-* [andThen](option.md#andthen)
-* [isNone](option.md#isnone)
-* [isSome](option.md#issome)
-* [map](option.md#map)
-* [match](option.md#match)
-* [or](option.md#or)
-* [unwrap](option.md#unwrap)
-* [unwrapOr](option.md#unwrapor)
+- [and](Option.md#and)
+- [andThen](Option.md#andthen)
+- [isNone](Option.md#isnone)
+- [isSome](Option.md#issome)
+- [map](Option.md#map)
+- [match](Option.md#match)
+- [or](Option.md#or)
+- [unwrap](Option.md#unwrap)
+- [unwrapOr](Option.md#unwrapor)
 
 ## Properties
 
-###  type
+### type
 
-• **type**: *symbol*
+• **type**: `symbol`
 
-Defined in lib/option/option.ts:12
+#### Defined in
+
+[option/option.ts:12](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L12)
 
 ## Methods
 
-###  and
+### and
 
-▸ **and**‹**U**›(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹U›*
+▸ **and**<`U`\>(`optb`): [`Option`](Option.md)<`U`\>
 
-Defined in lib/option/option.ts:19
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `optb` | [`Option`](Option.md)<`U`\> |
 
-Name | Type |
------- | ------ |
-`optb` | [Option](option.md)‹U› |
+#### Returns
 
-**Returns:** *[Option](option.md)‹U›*
+[`Option`](Option.md)<`U`\>
 
-___
+#### Defined in
 
-###  andThen
-
-▸ **andThen**‹**U**›(`fn`: function): *[Option](option.md)‹U›*
-
-Defined in lib/option/option.ts:17
-
-**Type parameters:**
-
-▪ **U**
-
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`val`: T): *[Option](option.md)‹U›*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`val` | T |
-
-**Returns:** *[Option](option.md)‹U›*
+[option/option.ts:19](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L19)
 
 ___
 
-###  isNone
+### andThen
 
-▸ **isNone**(): *boolean*
+▸ **andThen**<`U`\>(`fn`): [`Option`](Option.md)<`U`\>
 
-Defined in lib/option/option.ts:14
+#### Type parameters
 
-**Returns:** *boolean*
+| Name |
+| :------ |
+| `U` |
 
-___
+#### Parameters
 
-###  isSome
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `T`) => [`Option`](Option.md)<`U`\> |
 
-▸ **isSome**(): *boolean*
+#### Returns
 
-Defined in lib/option/option.ts:13
+[`Option`](Option.md)<`U`\>
 
-**Returns:** *boolean*
+#### Defined in
 
-___
-
-###  map
-
-▸ **map**‹**U**›(`fn`: function): *[Option](option.md)‹U›*
-
-Defined in lib/option/option.ts:16
-
-**Type parameters:**
-
-▪ **U**
-
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`val`: T): *U*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`val` | T |
-
-**Returns:** *[Option](option.md)‹U›*
+[option/option.ts:17](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L17)
 
 ___
 
-###  match
+### isNone
 
-▸ **match**‹**U**›(`fn`: [Match](match.md)‹T, U›): *U*
+▸ **isNone**(): `boolean`
 
-Defined in lib/option/option.ts:15
+#### Returns
 
-**Type parameters:**
+`boolean`
 
-▪ **U**
+#### Defined in
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`fn` | [Match](match.md)‹T, U› |
-
-**Returns:** *U*
+[option/option.ts:14](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L14)
 
 ___
 
-###  or
+### isSome
 
-▸ **or**‹**U**›(`optb`: [Option](option.md)‹U›): *[Option](option.md)‹T | U›*
+▸ **isSome**(): `boolean`
 
-Defined in lib/option/option.ts:18
+#### Returns
 
-**Type parameters:**
+`boolean`
 
-▪ **U**
+#### Defined in
 
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`optb` | [Option](option.md)‹U› |
-
-**Returns:** *[Option](option.md)‹T | U›*
+[option/option.ts:13](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L13)
 
 ___
 
-###  unwrap
+### map
 
-▸ **unwrap**(): *T | never*
+▸ **map**<`U`\>(`fn`): [`Option`](Option.md)<`U`\>
 
-Defined in lib/option/option.ts:21
+#### Type parameters
 
-**Returns:** *T | never*
+| Name |
+| :------ |
+| `U` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `T`) => `U` |
+
+#### Returns
+
+[`Option`](Option.md)<`U`\>
+
+#### Defined in
+
+[option/option.ts:16](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L16)
 
 ___
 
-###  unwrapOr
+### match
 
-▸ **unwrapOr**(`def`: T): *T*
+▸ **match**<`U`\>(`fn`): `U`
 
-Defined in lib/option/option.ts:20
+#### Type parameters
 
-**Parameters:**
+| Name |
+| :------ |
+| `U` |
 
-Name | Type |
------- | ------ |
-`def` | T |
+#### Parameters
 
-**Returns:** *T*
+| Name | Type |
+| :------ | :------ |
+| `fn` | `Match`<`T`, `U`\> |
+
+#### Returns
+
+`U`
+
+#### Defined in
+
+[option/option.ts:15](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L15)
+
+___
+
+### or
+
+▸ **or**<`U`\>(`optb`): [`Option`](Option.md)<`T` \| `U`\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `U` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `optb` | [`Option`](Option.md)<`U`\> |
+
+#### Returns
+
+[`Option`](Option.md)<`T` \| `U`\>
+
+#### Defined in
+
+[option/option.ts:18](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L18)
+
+___
+
+### unwrap
+
+▸ **unwrap**(): `T`
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[option/option.ts:21](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L21)
+
+___
+
+### unwrapOr
+
+▸ **unwrapOr**(`def`): `T`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `def` | `T` |
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[option/option.ts:20](https://github.com/sniptt-official/monads/blob/269971f/lib/option/option.ts#L20)

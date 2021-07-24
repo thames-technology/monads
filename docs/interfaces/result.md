@@ -1,246 +1,296 @@
-[@hqoss/monads](../README.md) › [Globals](../globals.md) › [Result](result.md)
+[@sniptt/monads](../README.md) / Result
 
-# Interface: Result ‹**T, E**›
+# Interface: Result<T, E\>
 
 ## Type parameters
 
-▪ **T**
+| Name |
+| :------ |
+| `T` |
+| `E` |
 
-▪ **E**
-
-## Hierarchy
-
-* **Result**
-
-  ↳ [ResOk](resok.md)
-
-  ↳ [ResErr](reserr.md)
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [type](result.md#type)
+- [type](Result.md#type)
 
 ### Methods
 
-* [andThen](result.md#andthen)
-* [err](result.md#err)
-* [isErr](result.md#iserr)
-* [isOk](result.md#isok)
-* [map](result.md#map)
-* [mapErr](result.md#maperr)
-* [match](result.md#match)
-* [ok](result.md#ok)
-* [orElse](result.md#orelse)
-* [unwrap](result.md#unwrap)
-* [unwrapErr](result.md#unwraperr)
-* [unwrapOr](result.md#unwrapor)
+- [andThen](Result.md#andthen)
+- [err](Result.md#err)
+- [isErr](Result.md#iserr)
+- [isOk](Result.md#isok)
+- [map](Result.md#map)
+- [mapErr](Result.md#maperr)
+- [match](Result.md#match)
+- [ok](Result.md#ok)
+- [orElse](Result.md#orelse)
+- [unwrap](Result.md#unwrap)
+- [unwrapErr](Result.md#unwraperr)
+- [unwrapOr](Result.md#unwrapor)
+- [unwrapOrElse](Result.md#unwraporelse)
 
 ## Properties
 
-###  type
+### type
 
-• **type**: *symbol*
+• **type**: `symbol`
 
-Defined in lib/result/result.ts:14
+#### Defined in
+
+[result/result.ts:14](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L14)
 
 ## Methods
 
-###  andThen
+### andThen
 
-▸ **andThen**‹**U**›(`fn`: function): *[Result](result.md)‹U, E›*
+▸ **andThen**<`U`\>(`fn`): [`Result`](Result.md)<`U`, `E`\>
 
-Defined in lib/result/result.ts:25
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `T`) => [`Result`](Result.md)<`U`, `E`\> |
 
-▪ **fn**: *function*
+#### Returns
 
-▸ (`val`: T): *[Result](result.md)‹U, E›*
+[`Result`](Result.md)<`U`, `E`\>
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`val` | T |
-
-**Returns:** *[Result](result.md)‹U, E›*
-
-___
-
-###  err
-
-▸ **err**(): *[Option](option.md)‹E›*
-
-Defined in lib/result/result.ts:18
-
-**Returns:** *[Option](option.md)‹E›*
+[result/result.ts:26](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L26)
 
 ___
 
-###  isErr
+### err
 
-▸ **isErr**(): *boolean*
+▸ **err**(): [`Option`](Option.md)<`E`\>
 
-Defined in lib/result/result.ts:16
+#### Returns
 
-**Returns:** *boolean*
+[`Option`](Option.md)<`E`\>
 
-___
+#### Defined in
 
-###  isOk
-
-▸ **isOk**(): *boolean*
-
-Defined in lib/result/result.ts:15
-
-**Returns:** *boolean*
+[result/result.ts:18](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L18)
 
 ___
 
-###  map
+### isErr
 
-▸ **map**‹**U**›(`fn`: function): *[Result](result.md)‹U, E›*
+▸ **isErr**(): `boolean`
 
-Defined in lib/result/result.ts:23
+#### Returns
 
-**Type parameters:**
+`boolean`
 
-▪ **U**
+#### Defined in
 
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`val`: T): *U*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`val` | T |
-
-**Returns:** *[Result](result.md)‹U, E›*
+[result/result.ts:16](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L16)
 
 ___
 
-###  mapErr
+### isOk
 
-▸ **mapErr**‹**U**›(`fn`: function): *[Result](result.md)‹T, U›*
+▸ **isOk**(): `boolean`
 
-Defined in lib/result/result.ts:24
+#### Returns
 
-**Type parameters:**
+`boolean`
 
-▪ **U**
+#### Defined in
 
-**Parameters:**
-
-▪ **fn**: *function*
-
-▸ (`err`: E): *U*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`err` | E |
-
-**Returns:** *[Result](result.md)‹T, U›*
+[result/result.ts:15](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L15)
 
 ___
 
-###  match
+### map
 
-▸ **match**‹**U**›(`fn`: Match‹T, E, U›): *U*
+▸ **map**<`U`\>(`fn`): [`Result`](Result.md)<`U`, `E`\>
 
-Defined in lib/result/result.ts:22
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`val`: `T`) => `U` |
 
-Name | Type |
------- | ------ |
-`fn` | Match‹T, E, U› |
+#### Returns
 
-**Returns:** *U*
+[`Result`](Result.md)<`U`, `E`\>
 
-___
+#### Defined in
 
-###  ok
-
-▸ **ok**(): *[Option](option.md)‹T›*
-
-Defined in lib/result/result.ts:17
-
-**Returns:** *[Option](option.md)‹T›*
+[result/result.ts:24](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L24)
 
 ___
 
-###  orElse
+### mapErr
 
-▸ **orElse**‹**U**›(`fn`: function): *[Result](result.md)‹T, E› | [Result](result.md)‹U, E›*
+▸ **mapErr**<`U`\>(`fn`): [`Result`](Result.md)<`T`, `U`\>
 
-Defined in lib/result/result.ts:26
+#### Type parameters
 
-**Type parameters:**
+| Name |
+| :------ |
+| `U` |
 
-▪ **U**
+#### Parameters
 
-**Parameters:**
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`err`: `E`) => `U` |
 
-▪ **fn**: *function*
+#### Returns
 
-▸ (`err`: E): *[Result](result.md)‹U, E›*
+[`Result`](Result.md)<`T`, `U`\>
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`err` | E |
-
-**Returns:** *[Result](result.md)‹T, E› | [Result](result.md)‹U, E›*
-
-___
-
-###  unwrap
-
-▸ **unwrap**(): *T | never*
-
-Defined in lib/result/result.ts:19
-
-**Returns:** *T | never*
+[result/result.ts:25](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L25)
 
 ___
 
-###  unwrapErr
+### match
 
-▸ **unwrapErr**(): *E | never*
+▸ **match**<`U`\>(`fn`): `U`
 
-Defined in lib/result/result.ts:21
+#### Type parameters
 
-**Returns:** *E | never*
+| Name |
+| :------ |
+| `U` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | `Match`<`T`, `E`, `U`\> |
+
+#### Returns
+
+`U`
+
+#### Defined in
+
+[result/result.ts:23](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L23)
 
 ___
 
-###  unwrapOr
+### ok
 
-▸ **unwrapOr**(`optb`: T): *T*
+▸ **ok**(): [`Option`](Option.md)<`T`\>
 
-Defined in lib/result/result.ts:20
+#### Returns
 
-**Parameters:**
+[`Option`](Option.md)<`T`\>
 
-Name | Type |
------- | ------ |
-`optb` | T |
+#### Defined in
 
-**Returns:** *T*
+[result/result.ts:17](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L17)
+
+___
+
+### orElse
+
+▸ **orElse**<`U`\>(`fn`): [`Result`](Result.md)<`T`, `E`\> \| [`Result`](Result.md)<`U`, `E`\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `U` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`err`: `E`) => [`Result`](Result.md)<`U`, `E`\> |
+
+#### Returns
+
+[`Result`](Result.md)<`T`, `E`\> \| [`Result`](Result.md)<`U`, `E`\>
+
+#### Defined in
+
+[result/result.ts:27](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L27)
+
+___
+
+### unwrap
+
+▸ **unwrap**(): `T`
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[result/result.ts:19](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L19)
+
+___
+
+### unwrapErr
+
+▸ **unwrapErr**(): `E`
+
+#### Returns
+
+`E`
+
+#### Defined in
+
+[result/result.ts:22](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L22)
+
+___
+
+### unwrapOr
+
+▸ **unwrapOr**(`optb`): `T`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `optb` | `T` |
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[result/result.ts:20](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L20)
+
+___
+
+### unwrapOrElse
+
+▸ **unwrapOrElse**(`fn`): `T`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`err`: `E`) => `T` |
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[result/result.ts:21](https://github.com/sniptt-official/monads/blob/269971f/lib/result/result.ts#L21)

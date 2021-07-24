@@ -1,8 +1,8 @@
-import { None, Option, OptNone, Some } from "../option/option";
+import { None, Option, OptNone, Some } from '../option/option';
 
 export const EitherType = {
-  Left: Symbol(":left"),
-  Right: Symbol(":right"),
+  Left: Symbol(':left'),
+  Right: Symbol(':right'),
 };
 
 export interface Match<L, R, U> {
@@ -36,7 +36,7 @@ export interface ResLeft<L, R> extends Either<L, R> {
   unwrapLeft(): L;
   unwrapRight(): never;
   match<U>(fn: Match<L, never, U>): U;
-  map<U>(fn: (val: L | R) => U): ResLeft<U, never>;
+  map<U>(fn: (val: L) => U): ResLeft<U, never>;
   mapLeft<U>(fn: (left: L) => U): Either<U, never>;
   mapRight<U>(fn: (right: R) => U): ResLeft<L, never>;
 }
@@ -46,7 +46,7 @@ export interface ResRight<L, R> extends Either<L, R> {
   unwrapLeft(): never;
   unwrapRight(): R;
   match<U>(fn: Match<never, R, U>): U;
-  map<U>(fn: (val: L | R) => U): ResRight<never, U>;
+  map<U>(fn: (val: R) => U): ResRight<never, U>;
   mapLeft<U>(fn: (left: L) => U): Either<never, R>;
   mapRight<U>(fn: (right: R) => U): ResRight<never, U>;
 }
@@ -85,7 +85,7 @@ export function Left<L, R>(val: L): ResLeft<L, R> {
       return val;
     },
     unwrapRight(): never {
-      throw new ReferenceError("Cannot unwrap Right value of Either.Left");
+      throw new ReferenceError('Cannot unwrap Right value of Either.Left');
     },
     unwrapRightOr(other: R): R {
       return other;
@@ -133,7 +133,7 @@ export function Right<L, R>(val: R): ResRight<L, R> {
       return val;
     },
     unwrapLeft(): never {
-      throw new ReferenceError("Cannot unwrap Left value of Either.Right");
+      throw new ReferenceError('Cannot unwrap Left value of Either.Right');
     },
     unwrapLeftOr(other: L): L {
       return other;
@@ -153,7 +153,7 @@ export function Right<L, R>(val: R): ResRight<L, R> {
     match<U>(matchObject: Match<never, R, U>): U {
       return matchObject.right(val);
     },
-    map<U>(fn: (val: L | R) => U): ResRight<never, U> {
+    map<U>(fn: (val: R) => U): ResRight<never, U> {
       return Right(fn(val));
     },
     mapLeft<U>(_fn: (left: L) => U): Either<never, R> {

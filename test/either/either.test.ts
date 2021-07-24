@@ -1,3 +1,5 @@
+import test, { ExecutionContext } from 'ava';
+
 import {
   Right,
   isRight,
@@ -5,512 +7,320 @@ import {
   Left,
   Either,
   EitherType,
-} from "../../lib/either/either";
+} from '../../lib/either/either';
 
-describe("Either", () => {
-  interface IScenario<T> {
-    value: T;
-  }
+import {
+  bigintValues,
+  booleanValues,
+  functionValues,
+  nullValues,
+  numberValues,
+  objectValues,
+  stringValues,
+  symbolValues,
+  undefinedValues,
+} from '../_support/testValues';
 
-  function getLeftAssertion<T>(type: string): (scenario: IScenario<T>) => void {
-    return (scenario: IScenario<T>) => {
-      it(
-        "correctly creates an instance of Left with value '" +
-          scenario.value +
-          "'",
-        () => {
-          const subject = Left(scenario.value);
-
-          expect(subject.type).toEqual(EitherType.Left);
-
-          expect(subject.isLeft()).toEqual(true);
-          expect(subject.isRight()).toEqual(false);
-
-          expect(subject.left().isSome()).toEqual(true);
-          expect(subject.right().isSome()).toEqual(false);
-
-          expect(subject.unwrapLeft()).toEqual(scenario.value);
-          expect(() => subject.unwrapRight()).toThrow();
-
-          if (isLeft(subject)) {
-            expect(typeof subject.unwrap()).toEqual(type.toLowerCase());
-            expect(subject.unwrap()).toEqual(scenario.value);
-          } else {
-            throw new Error("Has to be _Left!");
-          }
-        },
-      );
-    };
-  }
-
-  function getRightAssertion<T>(
-    type: string,
-  ): (scenario: IScenario<T>) => void {
-    return (scenario: IScenario<T>) => {
-      it(
-        "correctly creates an instance of Right with value '" +
-          scenario.value +
-          "'",
-        () => {
-          const subject = Right(scenario.value);
-
-          expect(subject.type).toEqual(EitherType.Right);
-
-          expect(subject.isLeft()).toEqual(false);
-          expect(subject.isRight()).toEqual(true);
-
-          expect(subject.left().isSome()).toEqual(false);
-          expect(subject.right().isSome()).toEqual(true);
-
-          expect(() => subject.unwrapLeft()).toThrow();
-          expect(subject.unwrapRight()).toEqual(scenario.value);
-
-          if (isRight(subject)) {
-            expect(typeof subject.unwrap()).toEqual(type.toLowerCase());
-            expect(subject.unwrap()).toEqual(scenario.value);
-          } else {
-            throw new Error("Has to be _Right!");
-          }
-        },
-      );
-    };
-  }
-
-  describe("Boolean", () => {
-    const type = "Boolean";
-
-    const scenarios: IScenario<boolean>[] = [
-      { value: true },
-      { value: false },
-      { value: Boolean(true) },
-    ];
-
-    const assertionLeft = getLeftAssertion<boolean>(type);
-    const assertionRight = getRightAssertion<boolean>(type);
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
+const testMatch = (e: Either<unknown, unknown>): string => {
+  return e.match({
+    left: (_) => `left`,
+    right: (_) => `right`,
   });
-
-  describe("Number", () => {
-    const type = "Number";
-
-    const scenarios: IScenario<number>[] = [
-      { value: 37 },
-      { value: 3.14 },
-      { value: 0 },
-      { value: Math.LN2 },
-      { value: Infinity },
-      { value: NaN },
-      { value: Number(1) },
-    ];
-
-    const assertionLeft = getLeftAssertion<number>(type);
-    const assertionRight = getRightAssertion<number>(type);
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
-  });
-
-  describe("String", () => {
-    const type = "String";
-
-    const scenarios: IScenario<string>[] = [
-      { value: "" },
-      { value: "bla" },
-      { value: typeof 1 },
-      { value: String("abc") },
-    ];
-
-    const assertionLeft = getLeftAssertion<string>(type);
-    const assertionRight = getRightAssertion<string>(type);
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
-  });
-
-  describe("Function", () => {
-    const type = "Function";
-
-    const scenarios: IScenario<any>[] = [
-      {
-        value(): undefined {
-          return undefined;
-        },
-      },
-      {
-        value: class C {},
-      },
-      { value: Math.sin },
-    ];
-
-    const assertionLeft = getLeftAssertion<any>(type);
-    const assertionRight = getRightAssertion<any>(type);
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
-  });
-
-  describe("Object", () => {
-    const type = "Object";
-
-    const scenarios: IScenario<object>[] = [
-      { value: { a: 1 } },
-      { value: [1, 2, 4] },
-      { value: new Date() },
-    ];
-
-    const assertionLeft = getLeftAssertion<object>(type);
-    const assertionRight = getRightAssertion<object>(type);
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
-  });
-
-  describe("RegEx", () => {
-    const val = /s/;
-
-    it("correctly creates an instance of Left with value '" + val + "'", () => {
-      const subject = Left(val);
-
-      expect(subject.type).toEqual(EitherType.Left);
-
-      expect(subject.isLeft()).toEqual(true);
-      expect(subject.isRight()).toEqual(false);
-
-      if (isLeft(subject)) {
-        const type = typeof subject.unwrap();
-
-        expect(type === "function" || type === "object").toEqual(true);
-        expect(subject.unwrap()).toEqual(val);
-      } else {
-        throw new Error("Has to be _Left!");
-      }
-    });
-
-    it(
-      "correctly creates an instance of Right with value '" + val + "'",
-      () => {
-        const subject = Right(val);
-
-        expect(subject.type).toEqual(EitherType.Right);
-
-        expect(subject.isLeft()).toEqual(false);
-        expect(subject.isRight()).toEqual(true);
-
-        if (isRight(subject)) {
-          const type = typeof subject.unwrapRight();
-
-          expect(type === "function" || type === "object").toEqual(true);
-          expect(subject.unwrapRight()).toEqual(val);
-        } else {
-          throw new Error("Has to be _Right!");
-        }
-      },
-    );
-  });
-
-  describe("Undefined, Null", () => {
-    const array: string[] = ["a", "b"];
-    const outOfBoundIndex = array.length + 1;
-
-    const object = { a: "_a", b: "_b" };
-    const outOfBoundProperty = "z";
-
-    const scenarios: IScenario<undefined | null>[] = [
-      { value: undefined },
-      { value: null },
-      { value: array[outOfBoundIndex] },
-      { value: [null][0] },
-      { value: (object as any)[outOfBoundProperty] },
-      { value: ({ _: null } as any)._ },
-    ];
-
-    const assertionLeft = (scenario: IScenario<any>) => {
-      it("Left works correctly", () => {
-        const subject = Left(scenario.value);
-
-        expect(subject.type).toEqual(EitherType.Left);
-
-        expect(subject.isLeft()).toEqual(true);
-        expect(subject.isRight()).toEqual(false);
-        expect(subject.unwrap()).toEqual(scenario.value);
-        expect(subject.unwrapLeft()).toEqual(scenario.value);
-      });
-    };
-
-    const assertionRight = (scenario: IScenario<any>) => {
-      it("Right works correctly", () => {
-        const subject = Right(scenario.value);
-
-        expect(subject.type).toEqual(EitherType.Right);
-
-        expect(subject.isLeft()).toEqual(false);
-        expect(subject.isRight()).toEqual(true);
-        expect(subject.unwrap()).toEqual(scenario.value);
-        expect(subject.unwrapRight()).toEqual(scenario.value);
-      });
-    };
-
-    scenarios.forEach(assertionLeft);
-    scenarios.forEach(assertionRight);
-  });
-
-  describe("left", () => {
-    it("converts value into Some for Left", () => {
-      const string = Left("123");
-      const subject = string.left();
-      expect(subject.isSome()).toEqual(true);
-      expect(subject.unwrap()).toEqual("123");
-    });
-
-    it("converts value into None for Right", () => {
-      const string = Right("123");
-      const subject = string.left();
-      expect(subject.isNone()).toEqual(true);
-    });
-  });
-
-  describe("leftAndThen", () => {
-    it("correctly returns new either on Left", () => {
-      const left = Left(2);
-      const subject1 = left.leftAndThen((int) => Left(int * int));
-      expect(subject1.isLeft()).toEqual(true);
-      expect(subject1.unwrap()).toEqual(4);
-      const subject2 = left.leftAndThen((int) => Right(int * 10));
-      expect(subject2.isRight()).toEqual(true);
-      expect(subject2.unwrap()).toEqual(20);
-    });
-
-    it("doesn't change Right val on Right", () => {
-      const right: Either<number, string> = Right("error");
-      const subject = right.leftAndThen((int) => Left(int * int));
-      expect(subject.isRight()).toEqual(true);
-      expect(subject.unwrapRight()).toEqual("error");
-    });
-  });
-
-  describe("right", () => {
-    it("converts value into Some for Right", () => {
-      const string = Right("123");
-      const subject = string.right();
-      expect(subject.isSome()).toEqual(true);
-      expect(subject.unwrap()).toEqual("123");
-    });
-
-    it("converts value into None for Left", () => {
-      const string = Left("123");
-      const subject = string.right();
-      expect(subject.isNone()).toEqual(true);
-    });
-  });
-
-  describe("rightAndThen", () => {
-    it("correctly returns new either on Right", () => {
-      const right = Right(2);
-      const subject1 = right.rightAndThen((int) => Right(int * int));
-      expect(subject1.isRight()).toEqual(true);
-      expect(subject1.unwrap()).toEqual(4);
-      const subject2 = right.rightAndThen((int) => Left(int * 10));
-      expect(subject2.isLeft()).toEqual(true);
-      expect(subject2.unwrap()).toEqual(20);
-    });
-
-    it("doesn't change Left val on Left", () => {
-      const left: Either<string, number> = Left("three");
-      const subject = left.rightAndThen((int) => Right(int * int));
-      expect(subject.isLeft()).toEqual(true);
-      expect(subject.unwrapLeft()).toEqual("three");
-    });
-  });
-
-  describe("unwrap", () => {
-    it("unwraps when Either is left or right", () => {
-      const string_left = Left("123");
-      const subject1 = string_left.unwrap();
-      expect(subject1).toEqual("123");
-      const string_right = Right("456");
-      const subject2 = string_right.unwrap();
-      expect(subject2).toEqual("456");
-    });
-  });
-
-  describe("unwrapLeft", () => {
-    it("unwraps when Either is left", () => {
-      const string_left = Left("123");
-      const subject = string_left.unwrapLeft();
-      expect(subject).toEqual("123");
-    });
-
-    it("throws when Either is right", () => {
-      const string_right = Right("123");
-      const subject = () => string_right.unwrapLeft();
-      expect(subject).toThrow(ReferenceError);
-      expect(subject).toThrow("Cannot unwrap Left value of Either.Right");
-    });
-  });
-
-  describe("unwrapLeftOr", () => {
-    it("unwraps original value when Either is left", () => {
-      const string_left = Left("123");
-      const subject = string_left.unwrapLeftOr("456");
-      expect(subject).toEqual("123");
-    });
-
-    it("unwraps other value when Either is right", () => {
-      const string_left = Right("123");
-      const subject = string_left.unwrapLeftOr("456");
-      expect(subject).toEqual("456");
-    });
-  });
-
-  describe("unwrapLeftOrElse", () => {
-    it("unwraps original value when Either is left", () => {
-      const string_left = Left("123");
-      const subject = string_left.unwrapLeftOrElse((_) => "456");
-      expect(subject).toEqual("123");
-    });
-
-    it("unwraps other value when Either is right", () => {
-      const string_left = Right("123");
-      const subject = string_left.unwrapLeftOrElse((_) => "456");
-      expect(subject).toEqual("456");
-    });
-
-    it("doesn't call fn when Either is left", () => {
-      const string_left = Left("123");
-      const subject = jest.fn();
-      string_left.unwrapLeftOrElse(subject);
-      expect(subject).not.toBeCalled();
-    });
-  });
-
-  describe("unwrapRight", () => {
-    it("unwraps when Either is right", () => {
-      const string_right = Right("123");
-      const subject = string_right.unwrapRight();
-      expect(subject).toEqual("123");
-    });
-
-    it("throws when Either is left", () => {
-      const string_left = Left("123");
-      const subject = () => string_left.unwrapRight();
-      expect(subject).toThrow(ReferenceError);
-      expect(subject).toThrow("Cannot unwrap Right value of Either.Left");
-    });
-  });
-
-  describe("unwrapRightOr", () => {
-    it("unwraps original value when Either is right", () => {
-      const string_right = Right("123");
-      const subject = string_right.unwrapRightOr("456");
-      expect(subject).toEqual("123");
-    });
-
-    it("unwraps other value when Either is left", () => {
-      const string_right = Left("123");
-      const subject = string_right.unwrapRightOr("456");
-      expect(subject).toEqual("456");
-    });
-  });
-
-  describe("unwrapRightOrElse", () => {
-    it("unwraps original value when Either is right", () => {
-      const string_right = Right("123");
-      const subject = string_right.unwrapRightOrElse((_) => "456");
-      expect(subject).toEqual("123");
-    });
-
-    it("unwraps other value when Either is left", () => {
-      const string_right = Left("123");
-      const subject = string_right.unwrapRightOrElse((_) => "456");
-      expect(subject).toEqual("456");
-    });
-
-    it("doesn't call fn when Either is right", () => {
-      const string_right = Right("123");
-      const subject = jest.fn();
-      string_right.unwrapRightOrElse(subject);
-      expect(subject).not.toBeCalled();
-    });
-  });
-
-  describe("match", () => {
-    it("matches Either and returns transformed value", () => {
-      function getMessage(data: Either<string, string>): string {
-        return data.match({
-          left: (_) => `Left: ${_}`,
-          right: (_) => `Right: ${_}`,
-        });
-      }
-
-      expect(getMessage(Left("left"))).toEqual(`Left: left`);
-      expect(getMessage(Right("right"))).toEqual(`Right: right`);
-    });
-  });
-
-  describe("map", () => {
-    it("maps Left and Right and returns transformed Either", () => {
-      const string_left = Left<string, string>("123");
-      const string_right = Right<string, string>("456");
-
-      const subject1 = string_left.map((_) => parseInt(_, 10));
-      const subject2 = string_right.map((_) => parseInt(_, 10));
-
-      expect(subject1.unwrap()).toEqual(123);
-      expect(subject2.unwrap()).toEqual(456);
-    });
-  });
-
-  describe("mapLeft", () => {
-    it("maps Left and returns transformed Either", () => {
-      const string = Left("123");
-
-      const subject = string.mapLeft((_) => parseInt(_, 10));
-
-      expect(subject.unwrap()).toEqual(123);
-    });
-
-    it("doesn't maps when Either is right", () => {
-      const arr = [1, 2, 3];
-      const number = Right(arr[0]);
-
-      const subject = number.mapLeft((_) => "different value");
-
-      expect(subject.unwrap()).toEqual(1);
-    });
-
-    it("doesn't call fn when Either is right", () => {
-      const string_right = Right("123");
-      const subject = jest.fn();
-      string_right.mapLeft(subject);
-      expect(subject).not.toBeCalled();
-    });
-  });
-
-  describe("mapRight", () => {
-    it("maps Right and returns transformed Either", () => {
-      const string = Right("123");
-
-      const subject = string.mapRight((_) => parseInt(_, 10));
-
-      expect(subject.unwrap()).toEqual(123);
-    });
-
-    it("doesn't maps when Either is left", () => {
-      const arr = [1, 2, 3];
-      const number = Left(arr[0]);
-
-      const subject = number.mapRight((_) => "different value");
-
-      expect(subject.unwrap()).toEqual(1);
-    });
-
-    it("doesn't call fn when Either is left", () => {
-      const string_left = Left("123");
-      const subject = jest.fn();
-      string_left.mapRight(subject);
-      expect(subject).not.toBeCalled();
-    });
-  });
+};
+
+const testLeft = <T>(t: ExecutionContext, input: T, type: string) => {
+  const left = Left<T, unknown>(input);
+
+  t.is(left.type, EitherType.Left);
+
+  // Test right, isRight, left, isLeft
+  t.true(isLeft(left));
+  t.false(isRight(left));
+  t.true(left.isLeft());
+  t.false(left.isRight());
+  type === 'undefined'
+    ? t.true(left.left().isNone())
+    : t.true(left.left().isSome());
+  t.false(left.right().isSome());
+
+  // Test unwrap, unwrapLeft, unwrapLeftOr, unwrapLeftOrElse, unwrapRight, unwrapRightOr, unwrapRightOrElse
+  t.is(left.unwrap(), input);
+  t.is(left.unwrapLeft(), input);
+  t.is(left.unwrapLeftOr('foo' as any), input);
+  t.is(
+    left.unwrapLeftOrElse((_) => {
+      t.fail('cannot be right');
+      return input;
+    }),
+    input,
+  );
+  t.throws(() => left.unwrapRight());
+  t.is(left.unwrapRightOr('foo'), 'foo');
+  t.is(
+    left.unwrapRightOrElse((l) => {
+      t.is(l, input);
+      return 'foo';
+    }),
+    'foo',
+  );
+
+  // Test map, mapLeft, and mapRight
+  t.is(
+    left
+      .map((l) => {
+        t.is(l, input);
+        return 'foo';
+      })
+      .unwrap(),
+    'foo',
+  );
+  t.is(
+    left
+      .mapLeft((l) => {
+        t.is(l, input);
+        return 'foo';
+      })
+      .unwrap(),
+    'foo',
+  );
+  t.true(left.mapRight((_) => 'foo').isLeft());
+
+  // Test leftAndThen, rightAndThen
+  t.is(
+    left
+      .leftAndThen((l) => {
+        t.is(l, input);
+        return Right('foo');
+      })
+      .unwrapRight(),
+    'foo',
+  );
+  t.is(
+    left
+      .rightAndThen((_) => {
+        t.fail('cannot be right');
+        return Left(input);
+      })
+      .isLeft(),
+    true,
+  );
+
+  // Test match
+  t.is(testMatch(left), 'left');
+};
+
+const testRight = <T>(t: ExecutionContext, input: T, type: string) => {
+  const right = Right<unknown, T>(input);
+
+  t.is(right.type, EitherType.Right);
+
+  // Test right, isRight, left, isLeft
+  t.false(isLeft(right));
+  t.true(isRight(right));
+  t.false(right.isLeft());
+  t.true(right.isRight());
+  t.false(right.left().isSome());
+  type === 'undefined'
+    ? t.true(right.right().isNone())
+    : t.true(right.right().isSome());
+
+  // Test unwrap, unwrapLeft, unwrapLeftOr, unwrapLeftOrElse, unwrapRight, unwrapRightOr, unwrapRightOrElse
+  t.is(right.unwrap(), input);
+  t.throws(() => right.unwrapLeft());
+  t.is(right.unwrapLeftOr('foo'), 'foo');
+  t.is(
+    right.unwrapLeftOrElse((r) => {
+      t.is(r, input);
+      return 'foo';
+    }),
+    'foo',
+  );
+  t.is(right.unwrapRight(), input);
+  t.is(right.unwrapRightOr('foo' as any), input);
+  t.is(
+    right.unwrapRightOrElse((_) => {
+      t.fail('cannot be left');
+      return input;
+    }),
+    input,
+  );
+
+  // Test map, mapLeft, and mapRight
+  t.is(
+    right
+      .map((r) => {
+        t.is(r, input);
+        return 'foo';
+      })
+      .unwrapRight(),
+    'foo',
+  );
+  t.true(right.mapLeft((_) => 'foo').isRight());
+  t.is(
+    right
+      .mapRight((r) => {
+        t.is(r, input);
+        return 'foo';
+      })
+      .unwrapRight(),
+    'foo',
+  );
+
+  // Test leftAndThen, rightAndThen
+  t.is(
+    right
+      .leftAndThen((_) => {
+        t.fail('cannot be left');
+        return Left(input);
+      })
+      .isRight(),
+    true,
+  );
+  t.is(
+    right
+      .rightAndThen((r) => {
+        t.is(r, input);
+        return Left('foo');
+      })
+      .unwrapLeft(),
+    'foo',
+  );
+
+  // Test match
+  t.is(testMatch(right), 'right');
+};
+
+booleanValues.forEach((value, index) => {
+  test(
+    `Left works with boolean value ${value} ${index}`,
+    testLeft,
+    value,
+    'boolean',
+  );
+  test(
+    `Right works with boolean value ${value} ${index}`,
+    testRight,
+    value,
+    'boolean',
+  );
+});
+
+numberValues.forEach((value, index) => {
+  test(
+    `Left works with number value ${value} ${index}`,
+    testLeft,
+    value,
+    'number',
+  );
+  test(
+    `Right works with number value ${value} ${index}`,
+    testRight,
+    value,
+    'number',
+  );
+});
+
+bigintValues.forEach((value, index) => {
+  test(
+    `Left works with bigint value ${value} ${index}`,
+    testLeft,
+    value,
+    'bigint',
+  );
+  test(
+    `Right works with bigint value ${value} ${index}`,
+    testRight,
+    value,
+    'bigint',
+  );
+});
+
+symbolValues.forEach((value, index) => {
+  test(
+    `Left works with symbol value ${String(value)} ${index}`,
+    testLeft,
+    value,
+    'symbol',
+  );
+  test(
+    `Right works with symbol value ${String(value)} ${index}`,
+    testRight,
+    value,
+    'symbol',
+  );
+});
+
+stringValues.forEach((value, index) => {
+  test(
+    `Left works with string value ${value} ${index}`,
+    testLeft,
+    value,
+    'string',
+  );
+  test(
+    `Right works with string value ${value} ${index}`,
+    testRight,
+    value,
+    'string',
+  );
+});
+
+functionValues.forEach((value, index) => {
+  test(
+    `Left works with function value ${value} ${index}`,
+    testLeft,
+    value,
+    'function',
+  );
+  test(
+    `Right works with function value ${value} ${index}`,
+    testRight,
+    value,
+    'function',
+  );
+});
+
+undefinedValues.forEach((value, index) => {
+  test(
+    `Left works with undefined value ${value} ${index}`,
+    testLeft,
+    value,
+    'undefined',
+  );
+  test(
+    `Right works with undefined value ${value} ${index}`,
+    testRight,
+    value,
+    'undefined',
+  );
+});
+
+nullValues.forEach((value, index) => {
+  test(
+    `Left works with null value ${value} ${index}`,
+    testLeft,
+    value,
+    'object',
+  );
+  test(
+    `Right works with null value ${value} ${index}`,
+    testRight,
+    value,
+    'object',
+  );
+});
+
+objectValues.forEach((value, index) => {
+  test(
+    `Left works with object value ${value} ${index}`,
+    testLeft,
+    value,
+    'object',
+  );
+  test(
+    `Right works with object value ${value} ${index}`,
+    testRight,
+    value,
+    'object',
+  );
 });
