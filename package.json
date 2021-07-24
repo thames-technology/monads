@@ -4,7 +4,8 @@
   "description": "Option, Result, and Either types for TypeScript; Inspired by Rust",
   "type": "module",
   "exports": "./build/index.js",
-  "typings": "./build/index.d.ts",
+  "files": ["build"],
+  "types": "build",
   "engines": {
     "node": ">=14",
     "npm": ">=7"
@@ -13,7 +14,7 @@
     "build": "tsc",
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
-    "test": "jest ./test/**/*.ts",
+    "test": "ava ./test/**/*.test.ts",
     "docs": "rm -rf ./docs && typedoc lib/index.ts --excludePrivate --excludeProtected --plugin typedoc-plugin-markdown --readme none --out ./docs",
     "preversion": "npm run format:check && npm run build && npm test",
     "prepublishOnly": "npm run format:check && npm run build && npm test",
@@ -32,12 +33,10 @@
   ],
   "author": "Slavo Vojacek",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "26.0.24",
-    "jest": "27.0.6",
+    "ava": "3.15.0",
     "prettier": "2.3.2",
-    "ts-jest": "27.0.4",
+    "ts-node": "10.1.0",
     "typedoc": "0.21.4",
     "typedoc-plugin-markdown": "3.10.4",
     "typescript": "4.3.5"
@@ -45,5 +44,16 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:sniptt/monads.git"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
+    ]
   }
 }
