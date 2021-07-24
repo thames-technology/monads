@@ -5,6 +5,7 @@
   "files": [
     "build"
   ],
+  "main": "build/index.js",
   "types": "build",
   "engines": {
     "node": ">=14",
