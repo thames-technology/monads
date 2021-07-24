@@ -1,9 +1,10 @@
 {
-  "name": "@hqoss/monads",
+  "name": "@sniptt/monads",
   "version": "0.5.0",
-  "description": "Type safe Option, Result, and Either types; inspired by Rust",
-  "main": "./build/lib/index.js",
-  "typings": "./build/lib/index.d.ts",
+  "description": "Option, Result, and Either types for TypeScript; Inspired by Rust",
+  "type": "module",
+  "exports": "./build/index.js",
+  "typings": "./build/index.d.ts",
   "engines": {
     "node": ">=14",
     "npm": ">=7"

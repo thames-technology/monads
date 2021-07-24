@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[result/result.ts:14](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L14)
+[result/result.ts:14](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L14)
 
 ## Methods
 
@@ -65,7 +65,7 @@
 
 #### Defined in
 
-[result/result.ts:26](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L26)
+[result/result.ts:26](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L26)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:18](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L18)
+[result/result.ts:18](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L18)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:16](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L16)
+[result/result.ts:16](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L16)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:15](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L15)
+[result/result.ts:15](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L15)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:24](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L24)
+[result/result.ts:24](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L24)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:25](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L25)
+[result/result.ts:25](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L25)
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:23](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L23)
+[result/result.ts:23](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L23)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:17](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L17)
+[result/result.ts:17](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L17)
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:27](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L27)
+[result/result.ts:27](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L27)
 
 ___
 
@@ -239,7 +239,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:19](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L19)
+[result/result.ts:19](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L19)
 
 ___
 
@@ -253,7 +253,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:22](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L22)
+[result/result.ts:22](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L22)
 
 ___
 
@@ -273,7 +273,7 @@ ___
 
 #### Defined in
 
-[result/result.ts:20](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L20)
+[result/result.ts:20](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L20)
 
 ___
 
@@ -293,4 +293,4 @@ ___
 
 #### Defined in
 
-[result/result.ts:21](https://github.com/sniptt-official/monads/blob/eccaba1/lib/result/result.ts#L21)
+[result/result.ts:21](https://github.com/sniptt-official/monads/blob/588afea/lib/result/result.ts#L21)

@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[option/option.ts:12](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L12)
+[option/option.ts:12](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L12)
 
 ## Methods
 
@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[option/option.ts:19](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L19)
+[option/option.ts:19](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L19)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:17](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L17)
+[option/option.ts:17](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L17)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:14](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L14)
+[option/option.ts:14](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L14)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:13](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L13)
+[option/option.ts:13](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L13)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:16](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L16)
+[option/option.ts:16](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L16)
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:15](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L15)
+[option/option.ts:15](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L15)
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:18](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L18)
+[option/option.ts:18](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L18)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 #### Defined in
 
-[option/option.ts:21](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L21)
+[option/option.ts:21](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L21)
 
 ___
 
@@ -226,4 +226,4 @@ ___
 
 #### Defined in
 
-[option/option.ts:20](https://github.com/sniptt-official/monads/blob/eccaba1/lib/option/option.ts#L20)
+[option/option.ts:20](https://github.com/sniptt-official/monads/blob/588afea/lib/option/option.ts#L20)
