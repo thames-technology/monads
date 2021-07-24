@@ -6,27 +6,9 @@
 
 ![npm](https://img.shields.io/npm/v/@sniptt/monads)
 
-# 👻 Monads
+# Monads
 
-Type safe Option, Result, and Either types; inspired by Rust.
-
-## Table of contents
-
-*   [Install](#install)
-
-    *   [Node.js and the browser](#nodejs-and-the-browser)
-    *   [Deno](#deno)
-
-*   [Usage](#usage)
-
-    *   [`Option<T>`](#optiont)
-    *   [`Result<T, E>`](#resultt-e)
-    *   [`Either<L, R>`](#eitherl-r)
-    *   [API Docs](#api-docs)
-
-*   [Node version support](#node-version-support)
-
-*   [TODO](#todo)
+`Option`, `Result`, and `Either` types for TypeScript; Inspired by Rust.
 
 ## Install
 
@@ -114,7 +96,7 @@ function getLabel(uncertainDate: Either<Date, string>) {
 }
 ```
 
-### API Docs
+## API Docs
 
 [See full API Documentation here](docs/README.md).
 
@@ -131,6 +113,5 @@ A quick and dirty tech debt tracker before we move to Issues.
 *   \[ ] Write a **Contributing** guide
 *   \[ ] Complete testing section, add best practices
 *   \[ ] Describe scripts and usage, add best practices
-*   \[ ] Add typespec and generate docs
 *   \[ ] Describe security best practices, e.g. `npm doctor`, `npm audit`, `npm outdated`, `ignore-scripts` in `.npmrc`, etc.
 *   \[ ] Add "Why should I use this" section
