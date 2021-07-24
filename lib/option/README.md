@@ -1,47 +1,26 @@
-Original implementation: <https://doc.rust-lang.org/std/option/enum.Option.html>
-
 ## Table of contents
 
 *   [Introduction](#introduction)
-
 *   [Documentation](#documentation)
-
     *   [`isSome() => boolean`](#issome--boolean)
-
         *   [Examples](#examples)
         *   [A note on `null` and `undefined`](#a-note-on-null-and-undefined)
-
     *   [`isNone() => boolean`](#isnone--boolean)
-
         *   [Examples](#examples-1)
-
     *   [`unwrap() => T`](#unwrap--t)
-
         *   [Throws](#throws)
         *   [Examples](#examples-2)
-
     *   [`unwrapOr(optb: T) => T`](#unwraporoptb-t--t)
-
         *   [Examples](#examples-3)
-
     *   [`map(fn: (val: T) => U) => Option<U>`](#mapfn-val-t--u--optionu)
-
         *   [Examples](#examples-4)
-
     *   [`andThen(fn: (val: T) => Option<U>) => Option<U>`](#andthenfn-val-t--optionu--optionu)
-
         *   [Examples](#examples-5)
-
     *   [`or(optb: Option<T>) => Option<T>`](#oroptb-optiont--optiont)
-
         *   [Examples](#examples-6)
-
     *   [`and(optb: Option<T>) => Option<T>`](#andoptb-optiont--optiont)
-
         *   [Examples](#examples-7)
-
     *   [`match(p: MatchPattern<T, U>): U`](#matchp-matchpatternt-u-u)
-
         *   [Examples](#examples-8)
 
 ## Introduction
@@ -78,6 +57,8 @@ const message = result.match({
 console.log(message) // "Result: 0.6666666666666666"
 
 ```
+
+Original implementation: <https://doc.rust-lang.org/std/option/enum.Option.html>
 
 ## Documentation
 
