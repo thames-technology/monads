@@ -306,4 +306,10 @@ nullValues.forEach((value, index) => {
 
 objectValues.forEach((value, index) => {
   test(`Ok works with object value ${value} ${index}`, testOk, value, 'object');
+  test(
+    `Err works with object value ${value} ${index}`,
+    testErr,
+    value,
+    'object',
+  );
 });
