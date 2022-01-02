@@ -1,3 +1,8 @@
-export { Either, Left, Right, isLeft, isRight } from './either/either.ts';
-export { Option, Some, None, isSome, isNone } from './option/option.ts';
-export { Result, Ok, Err, isOk, isErr } from './result/result.ts';
+export type { Either } from "./either/either.ts";
+export { isLeft, isRight, Left, Right } from "./either/either.ts";
+
+export type { Option } from "./option/option.ts";
+export { isNone, isSome, None, Some } from "./option/option.ts";
+
+export type { Result } from "./result/result.ts";
+export { Err, isErr, isOk, Ok } from "./result/result.ts";
