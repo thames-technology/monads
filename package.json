@@ -1,6 +1,6 @@
 {
   "name": "@sniptt/monads",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Option, Result, and Either types for JavaScript; Inspired by Rust",
   "main": "build/index.js",
   "types": "build",
