@@ -12,6 +12,7 @@ import {
 import {
   bigintValues,
   booleanValues,
+  CustomException,
   functionValues,
   nullValues,
   numberValues,
@@ -82,6 +83,36 @@ const testSome = <T>(t: ExecutionContext, input: T, type: string) => {
   // Test match
   t.is(testMatch(some), 'some');
   t.is(testMatchNoneFunc(some), 'some');
+
+  // Test unwrapOrThrow
+  t.notThrows(
+    () => some.unwrapOrThrow(() => new Error('foo')),
+    'Should not throw',
+  );
+  t.notThrows(
+    () => some.or(Some('foo')).unwrapOrThrow(() => new Error('foo')),
+    'Should not throw on .or statement',
+  );
+  t.throws(
+    () => some.and(Some(undefined)).unwrapOrThrow(() => new Error('foo')),
+    { instanceOf: Error },
+    'Should throw on .and',
+  );
+
+  t.notThrows(
+    () => some.unwrapOrThrow(() => new CustomException('foo')),
+    'Should not throw CustomException on custom exception',
+  );
+  t.notThrows(
+    () => some.or(Some('foo')).unwrapOrThrow(() => new CustomException('foo')),
+    'Should not throw CustomException on .or statement',
+  );
+  t.throws(
+    () =>
+      some.and(Some(undefined)).unwrapOrThrow(() => new CustomException('foo')),
+    { instanceOf: CustomException },
+    'Should throw on custom exception (and)',
+  );
 };
 
 const testNone = (t: ExecutionContext, someAsNone?: Option<unknown>) => {
@@ -125,6 +156,39 @@ const testNone = (t: ExecutionContext, someAsNone?: Option<unknown>) => {
   // Test match
   t.is(testMatch(none), 'none');
   t.is(testMatchNoneFunc(none), 'none');
+
+  // Test unwrapOrThrow
+
+  // Test unwrapOrThrow
+  t.throws(
+    () => none.unwrapOrThrow(() => new Error('foo')),
+    { instanceOf: Error },
+    'Should throw on none',
+  );
+  t.notThrows(
+    () => none.or(Some('foo')).unwrapOrThrow(() => new Error('foo')),
+    'Should not throw on none .or statement',
+  );
+  t.throws(
+    () => none.and(Some('foo')).unwrapOrThrow(() => new Error('foo')),
+    { instanceOf: Error },
+    'Should throw on none .and statement',
+  );
+
+  t.throws(
+    () => none.unwrapOrThrow(() => new CustomException('foo')),
+    { instanceOf: Error },
+    'Should throw CustomException on none',
+  );
+  t.notThrows(
+    () => none.or(Some('foo')).unwrapOrThrow(() => new CustomException('foo')),
+    'Should not CustomException throw on none .or statement',
+  );
+  t.throws(
+    () => none.and(Some('foo')).unwrapOrThrow(() => new CustomException('foo')),
+    { instanceOf: Error },
+    'Should throw CustomException on none .and statement',
+  );
 };
 
 booleanValues.forEach((value, index) => {

@@ -43,3 +43,9 @@ export const objectValues: Array<object | null> = [
     new Number(),
   ]),
 ];
+
+export class CustomException extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}

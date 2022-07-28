@@ -18,6 +18,7 @@ export interface Option<T> {
   or<U>(optb: Option<U>): Option<T | U>;
   and<U>(optb: Option<U>): Option<U>;
   unwrapOr(def: T): T;
+  unwrapOrThrow(fn: () => Error): T | never;
   unwrap(): T | never;
 }
 
@@ -70,6 +71,9 @@ function some_constructor<T>(val: T): OptSome<T> {
     unwrapOr(_def: T): T {
       return val;
     },
+    unwrapOrThrow(_fn) {
+      return val;
+    },
     unwrap(): T {
       return val;
     },
@@ -112,6 +116,10 @@ function none_constructor<T>(): OptNone<T> {
       }
 
       return def;
+    },
+    unwrapOrThrow(fn: () => Error): T | never {
+      const err = fn();
+      throw err;
     },
     unwrap(): never {
       throw new ReferenceError('Trying to unwrap None.');
