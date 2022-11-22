@@ -141,6 +141,14 @@ export function Err<T, E>(err: E): ResErr<T, E> {
   };
 }
 
+export function ResultOf<T, E = Error>(fallible: () => T): Result<T, E> {
+  try {
+    return Ok(fallible());
+  } catch (err) {
+    return Err(err as E);
+  }
+}
+
 export function isOk<T, E>(val: Result<T, E>): val is ResOk<T> {
   return val.isOk();
 }

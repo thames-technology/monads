@@ -30,7 +30,7 @@
     "build": "rm -rf build deno && tsc && denoify && mv deno_build deno && npm run format",
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
-    "test": "nyc ava --fail-fast ./test/**/*.test.ts",
+    "test": "nyc ava --fail-fast --timeout=5m ./test/**/*.test.ts",
     "docs": "rm -rf ./docs && typedoc lib/index.ts --excludePrivate --excludeProtected --plugin typedoc-plugin-markdown --readme none --out ./docs",
     "preversion": "npm run format:check && npm run build && npm test",
     "postversion": "git push --follow-tags"

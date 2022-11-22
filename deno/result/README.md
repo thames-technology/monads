@@ -56,6 +56,13 @@ console.log(getIndex(["a", "b", "c"], "z")) // Err("Value not found")
 
 ```
 
+Since javascript uses exceptions for error handling, you can use the `ResultOf` constructor to conveniently wrap a fallible operation in the `Result` type.
+```typescript
+const array = null
+const result = ResultOf(() => array[0]) // will throw an error
+
+console.log(result.isErr()) // true
+```
 Original implementation: <https://doc.rust-lang.org/std/result/enum.Result.html>
 
 ## Documentation
