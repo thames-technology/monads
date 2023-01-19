@@ -141,7 +141,7 @@ export function Err<T, E>(err: E): ResErr<T, E> {
   };
 }
 
-export function ResultOf<T, E = Error>(fallible: () => T): Result<T, E> {
+export function ResultOf<T, E>(fallible: () => T): Result<T, E> {
   try {
     return Ok(fallible());
   } catch (err) {
