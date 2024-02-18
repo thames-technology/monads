@@ -252,7 +252,7 @@ console.log(y.unwrapErr()) // "123"
 
 ### `mapErr<U>(fn: (err: T) => U): Result<T, U>`
 
-Maps a `Result<T, E>` to `Result<T, E>` by applying a function to a contained `Err` value, leaving an `Ok` value untouched.
+Maps a `Result<T, E>` to `Result<T, U>` by applying a function to a contained `Err` value, leaving an `Ok` value untouched.
 
 #### Examples
 
