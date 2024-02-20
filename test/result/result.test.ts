@@ -6,6 +6,7 @@ import {
   isErr,
   isOk,
   Ok,
+  ResultOf,
   Result,
   ResultType,
 } from '../../lib/result/result';
@@ -28,6 +29,21 @@ const testMatch = (r: Result<unknown, unknown>): string => {
     err: (_) => 'err',
   });
 };
+
+test("ResultOf returns Ok variant for an operation that doesn't throw", (t) => {
+  t.is(testMatch(ResultOf(() => 1)), 'ok');
+});
+
+test('ResultOf returns the Err variant for an operation that throws', (t) => {
+  t.is(
+    testMatch(
+      ResultOf(() => {
+        throw new Error('error');
+      }),
+    ),
+    'err',
+  );
+});
 
 const testOk = <T>(t: ExecutionContext, input: T, type: string) => {
   const ok = Ok(input);
