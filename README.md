@@ -10,42 +10,32 @@
 
 ***
 
-<p align="center">👻 <b>Option, Result, and Either types for JavaScript</b></p>
+<p align="center">🦀 <b>Option, Result, and Either types for JavaScript</b></p>
 
 <p align="center">
   Inspired by <a href="https://doc.rust-lang.org/stable/std/option/" target="_blank">Rust</a>
 </p>
 
 <p align="center">
-  <b>Zero dependencies</b> 💪
+  <b>Zero dependencies</b> 🚀
 </p>
 
 ***
 
 ## Install
 
-### Node.js and the browser
-
 ```sh
 npm install @sniptt/monads
 ```
 
-### Deno
-
-```typescript
-import { Some } from 'https://deno.land/x/monads/mod.ts'
-
-Some('air').unwrapOr('baloon') // "air"
-None.unwrapOr('baloon') // "baloon"
-```
-
-## Usage
+## Getting started
 
 ### `Option<T>`
 
-#### [Full documentation](lib/option)
+> [!NOTE]
+> Full documentation here: [Option](docs/interfaces/Option.html)
 
-```typescript
+```ts
 import { Option, Some, None } from '@sniptt/monads';
 
 const divide = (numerator: number, denominator: number): Option<number> => {
@@ -70,9 +60,10 @@ console.log(message); // "Result: 0.6666666666666666"
 
 ### `Result<T, E>`
 
-#### [Full documentation](lib/result)
+> [!NOTE]
+> Full documentation here: [Result](docs/interfaces/Result.html)
 
-```typescript
+```ts
 import { Result, Ok, Err } from "@sniptt/monads";
 
 const getIndex = (values: string[], value: string): Result<number, string> => {
@@ -91,25 +82,6 @@ const values = ['a', 'b', 'c'];
 getIndex(values, 'b'); // Ok(1)
 getIndex(values, 'z'); // Err("Value not found")
 ```
-
-### `Either<L, R>`
-
-#### [Full documentation](lib/either)
-
-```typescript
-import { Either } from '@sniptt/monads';
-
-const getLabel = (uncertainDate: Either<Date, string>): string => {
-  return uncertainDate.match({
-    left: date => date.toLocaleDateString(),
-    right: text => `<abbr title="${text}">an uncertain date</abbr>`,
-  });
-};
-```
-
-## API Docs
-
-[Full API Documentation](docs/README.md).
 
 ## License
 
