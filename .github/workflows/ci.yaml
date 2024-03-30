@@ -1,22 +1,22 @@
-name: 'Pipeline'
+name: CI Pipeline
 
 on:
   push:
     branches:
-      - 'main'
+      - main
   pull_request:
     branches:
-      - 'main'
+      - main
 
 jobs:
   ci:
-    name: 'CI'
+    name: CI
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: ['18.x', '20.x']
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
         with:
           version: 8
