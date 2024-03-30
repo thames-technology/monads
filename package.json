@@ -29,6 +29,7 @@
   "bugs": "https://github.com/sniptt-official/monads/issues",
   "scripts": {
     "build": "rollup -c",
+    "docs": "typedoc --out docs src/index.ts --excludeNotDocumented",
     "format": "prettier --check '**/*.{ts,mjs,json}' '.github/**/*.{yml,yaml}'",
     "format:fix": "prettier --write '**/*.{ts,mjs,json}' '.github/**/*.{yml,yaml}'",
     "lint": "eslint src",
@@ -47,6 +48,7 @@
     "prettier": "3.2.5",
     "rollup": "^4.13.2",
     "ts-jest": "^29.1.2",
+    "typedoc": "^0.25.12",
     "typescript": "^5.4.3"
   }
 }
