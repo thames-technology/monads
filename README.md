@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://sniptt.com">
-    <img src=".github/assets/monads-social-cover.svg" alt="Monads Logo" />
+  <a href="https://thames-technology.github.io/monads">
+    <img src=".github/assets/monads-cover.png" alt="Monads Logo" />
   </a>
 </p>
 
@@ -35,7 +35,7 @@ npm install @sniptt/monads
 Option represents an optional value: every Option is either Some and contains a value, or None, and does not.
 
 > [!NOTE]
-> Full documentation here: [Option](https://sniptt-official.github.io/monads/interfaces/Option.html)
+> Full documentation here: [Option](https://thames-technology.github.io/monads/interfaces/Option.html)
 
 ```ts
 import { Option, Some, None } from '@sniptt/monads';
@@ -65,7 +65,7 @@ console.log(message); // "Result: 0.6666666666666666"
 Result represents a value that is either a success (Ok) or a failure (Err).
 
 > [!NOTE]
-> Full documentation here: [Result](https://sniptt-official.github.io/monads/interfaces/Result.html)
+> Full documentation here: [Result](https://thames-technology.github.io/monads/interfaces/Result.html)
 
 ```ts
 import { Result, Ok, Err } from '@sniptt/monads';
@@ -92,7 +92,7 @@ getIndex(values, 'z'); // Err("Value not found")
 Either represents a value that is either Left or Right. It is a powerful way to handle operations that can result in two distinctly different types of outcomes.
 
 > [!NOTE]
-> Full documentation here: [Either](https://sniptt-official.github.io/monads/interfaces/Either.html)
+> Full documentation here: [Either](https://thames-technology.github.io/monads/interfaces/Either.html)
 
 ```ts
 import { Either, Left, Right } from '@sniptt/monads';
