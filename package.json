@@ -1,7 +1,7 @@
 {
   "name": "@sniptt/monads",
   "version": "0.5.10",
-  "description": "Option, Result, and Either types for JavaScript; Inspired by Rust",
+  "description": "Option, Result, and Either types for JavaScript - Inspired by Rust",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -9,8 +9,9 @@
     "dist"
   ],
   "engines": {
-    "node": ">=14",
-    "npm": ">=7"
+    "node": ">=18",
+    "npm": ">=8",
+    "pnpm": ">=8"
   },
   "keywords": [
     "monads",
@@ -30,8 +31,8 @@
   "scripts": {
     "build": "rollup -c",
     "docs": "typedoc --out docs src/index.ts --excludeNotDocumented",
-    "format": "prettier --check '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml}'",
-    "format:fix": "prettier --write '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml}'",
+    "format": "prettier --check '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml,md}'",
+    "format:fix": "prettier --write '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml,md}'",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "jest",
