@@ -32,6 +32,8 @@ npm install @sniptt/monads
 
 ### The `Option<T>` type
 
+Option represents an optional value: every Option is either Some and contains a value, or None, and does not.
+
 > [!NOTE]
 > Full documentation here: [Option](https://sniptt-official.github.io/monads/interfaces/Option.html)
 
@@ -60,6 +62,8 @@ console.log(message); // "Result: 0.6666666666666666"
 
 ### The `Result<T, E>` type
 
+Result represents a value that is either a success (Ok) or a failure (Err).
+
 > [!NOTE]
 > Full documentation here: [Result](https://sniptt-official.github.io/monads/interfaces/Result.html)
 
@@ -85,6 +89,8 @@ getIndex(values, 'z'); // Err("Value not found")
 
 ### The `Either<L, R>` type
 
+Either represents a value that is either Left or Right. It is a powerful way to handle operations that can result in two distinctly different types of outcomes.
+
 > [!NOTE]
 > Full documentation here: [Either](https://sniptt-official.github.io/monads/interfaces/Either.html)
 
@@ -108,7 +114,3 @@ const message = result.match({
 
 console.log(message); // "Result: 0.6666666666666666"
 ```
-
-## License
-
-See [LICENSE](LICENSE)
