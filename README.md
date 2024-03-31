@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://thames-technology.github.io/monads">
-    <img src=".github/assets/monads-cover.png" alt="Monads Logo" />
+    <img src="https://raw.githubusercontent.com/thames-technology/monads/main/.github/assets/monads-cover.png" alt="Monads Logo" />
   </a>
 </p>
 
