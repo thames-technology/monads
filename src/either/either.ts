@@ -25,23 +25,224 @@ interface Match<L, R, U> {
 
 /**
  * The Either interface, representing a value that is either Left (usually an error or alternate value)
- * or Right (typically a success value).
+ * or Right (typically a success value). It is a powerful way to handle operations that can result in two
+ * distinctly different types of outcomes.
  */
 export interface Either<L extends NonUndefined, R extends NonUndefined> {
+  /**
+   * A symbol indicating whether the Either is Left or Right. Primarily for internal use.
+   */
   type: symbol;
+
+  /**
+   * Checks if the Either is a Left value.
+   *
+   * @returns true if the Either is Left, otherwise false.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Left('error').isLeft()); // true
+   * console.log(Right(42).isLeft()); // false
+   * ```
+   */
   isLeft(): boolean;
+
+  /**
+   * Checks if the Either is a Right value.
+   *
+   * @returns true if the Either is Right, otherwise false.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Right(42).isRight()); // true
+   * console.log(Left('error').isRight()); // false
+   * ```
+   */
   isRight(): boolean;
+
+  /**
+   * Converts the Either to an Option of its Left value.
+   *
+   * @returns An Option containing the Left value if present, otherwise None.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const leftOption = Left('error').left(); // Some('error')
+   * const rightOption = Right(42).left(); // None
+   * ```
+   */
   left(): Option<L>;
+
+  /**
+   * Converts the Either to an Option of its Right value.
+   *
+   * @returns An Option containing the Right value if present, otherwise None.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const leftOption = Left('error').right(); // None
+   * const rightOption = Right(42).right(); // Some(42)
+   * ```
+   */
   right(): Option<R>;
+
+  /**
+   * Unwraps the Either, yielding the contained value.
+   *
+   * Throws an error if the Either is not the expected type (Left or Right).
+   *
+   * @returns The contained value.
+   * @throws Error if the operation is invalid.
+   */
   unwrap(): L | R;
+
+  /**
+   * Unwraps the Either, yielding the Left value if present.
+   *
+   * Throws an error if the Either is a Right.
+   *
+   * @returns The Left value.
+   * @throws Error if the Either is Right.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Left('error').unwrapLeft()); // 'error'
+   * ```
+   */
   unwrapLeft(): L | never;
+
+  /**
+   * Unwraps the Either, yielding the Right value if present.
+   *
+   * Throws an error if the Either is a Left.
+   *
+   * @returns The Right value.
+   * @throws Error if the Either is Left.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Right(42).unwrapRight()); // 42
+   * ```
+   */
   unwrapRight(): R | never;
+
+  /**
+   * Returns the Left value if present, otherwise returns the provided default value.
+   *
+   * @param other The default value to return if the Either is Right.
+   * @returns The Left value or the default.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Left('error').unwrapLeftOr('default')); // 'error'
+   * console.log(Right(42).unwrapLeftOr('default')); // 'default'
+   * ```
+   */
   unwrapLeftOr(other: L): L;
+
+  /**
+   * Returns the Right value if present, otherwise returns the provided default value.
+   *
+   * @param other The default value to return if the Either is Left.
+   * @returns The Right value or the default.
+   *
+   * #### Example
+   *
+   * ```ts
+   * console.log(Right(42).unwrapRightOr(100)); // 42
+   * console.log(Left('error').unwrapRightOr(100)); // 100
+   * ```
+   */
   unwrapRightOr(other: R): R;
+
+  /**
+   * Performs a match operation on the Either, allowing for branching logic based on its state.
+   *
+   * @param fn An object containing functions for each case: Left and Right.
+   * @returns The result of applying the corresponding function based on the Either's state.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const either = Left('error');
+   * const result = either.match({
+   *   left: (err) => `Error: ${err}`,
+   *   right: (val) => `Success: ${val}`,
+   * });
+   * console.log(result); // "Error: error"
+   * ```
+   */
   match<U extends NonUndefined>(fn: Match<L, R, U>): U;
+
+  /**
+   * Maps an Either by applying a function to its Left value, leaving Right untouched.
+   *
+   * @param fn A function to apply to the Left value.
+   * @returns A new Either with the Left value transformed if it was Left, otherwise the original Right.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const either = Left('error');
+   * const mapped = either.mapLeft((err) => `Error: ${err}`);
+   * console.log(mapped.unwrapLeft()); // "Error: error"
+   * ```
+   */
   mapLeft<U extends NonUndefined>(fn: (val: L) => U): Either<U, R>;
+
+  /**
+   * Maps an Either by applying a function to its Right value, leaving Left untouched.
+   *
+   * @param fn A function to apply to the Right value.
+   * @returns A new Either with the Right value transformed if it was Right, otherwise the original Left.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const either = Right(42);
+   * const mapped = either.mapRight((val) => val.toString());
+   * console.log(mapped.unwrapRight()); // "42"
+   * ```
+   */
   mapRight<U extends NonUndefined>(fn: (val: R) => U): Either<L, U>;
+
+  /**
+   * Transforms the Either by applying a function to its Left value if present, chaining multiple operations.
+   *
+   * @param fn A function that takes the Left value and returns a new Either.
+   * @returns The Either returned by the function if the original was Left, otherwise the original Right.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const either = Left('initial error');
+   * const chained = either.leftAndThen((err) => Left(`Processed ${err}`));
+   * console.log(chained.unwrapLeft()); // "Processed initial error"
+   * ```
+   */
   leftAndThen<U extends NonUndefined>(fn: (val: L) => Either<U, R>): Either<U, R>;
+
+  /**
+   * Transforms the Either by applying a function to its Right value if present, chaining multiple operations.
+   *
+   * @param fn A function that takes the Right value and returns a new Either.
+   * @returns The Either returned by the function if the original was Right, otherwise the original Left.
+   *
+   * #### Examples
+   *
+   * ```ts
+   * const either = Right(42);
+   * const chained = either.rightAndThen((val) => Right(val.toString()));
+   * console.log(chained.unwrapRight()); // "42"
+   * ```
+   */
   rightAndThen<U extends NonUndefined>(fn: (val: R) => Either<L, U>): Either<L, U>;
 }
 

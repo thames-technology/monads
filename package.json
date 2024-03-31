@@ -30,8 +30,8 @@
   "scripts": {
     "build": "rollup -c",
     "docs": "typedoc --out docs src/index.ts --excludeNotDocumented",
-    "format": "prettier --check '**/*.{ts,mjs,json}' '.github/**/*.{yml,yaml}'",
-    "format:fix": "prettier --write '**/*.{ts,mjs,json}' '.github/**/*.{yml,yaml}'",
+    "format": "prettier --check '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml}'",
+    "format:fix": "prettier --write '**/*.{ts,mjs,json,md}' '.github/**/*.{yml,yaml}'",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "jest",

@@ -8,9 +8,9 @@
   <i>If you use this repo, star it ✨</i>
 </p>
 
-***
+---
 
-<h1 align="center">Option, Result, and Either types for JavaScript</h1>
+<h2 align="center">Option, Result, and Either types for JavaScript</h2>
 
 <p align="center">
   🦀 Inspired by <a href="https://doc.rust-lang.org/stable/std/option/" target="_blank">Rust</a>
@@ -20,7 +20,7 @@
   <b>Zero dependencies</b> • <b>Lightweight</b> • <b>Functional</b>
 </p>
 
-***
+---
 
 ## Install
 
@@ -30,10 +30,10 @@ npm install @sniptt/monads
 
 ## Getting started
 
-### `Option<T>`
+### The `Option<T>` type
 
 > [!NOTE]
-> Full documentation here: [Option](docs/interfaces/Option.html)
+> Full documentation here: [Option](https://sniptt-official.github.io/monads/interfaces/Option.html)
 
 ```ts
 import { Option, Some, None } from '@sniptt/monads';
@@ -51,20 +51,20 @@ const result = divide(2.0, 3.0);
 
 // Pattern match to retrieve the value
 const message = result.match({
-  some: res => `Result: ${res}`,
+  some: (res) => `Result: ${res}`,
   none: 'Cannot divide by 0',
 });
 
 console.log(message); // "Result: 0.6666666666666666"
 ```
 
-### `Result<T, E>`
+### The `Result<T, E>` type
 
 > [!NOTE]
-> Full documentation here: [Result](docs/interfaces/Result.html)
+> Full documentation here: [Result](https://sniptt-official.github.io/monads/interfaces/Result.html)
 
 ```ts
-import { Result, Ok, Err } from "@sniptt/monads";
+import { Result, Ok, Err } from '@sniptt/monads';
 
 const getIndex = (values: string[], value: string): Result<number, string> => {
   const index = values.indexOf(value);
@@ -81,6 +81,32 @@ const values = ['a', 'b', 'c'];
 
 getIndex(values, 'b'); // Ok(1)
 getIndex(values, 'z'); // Err("Value not found")
+```
+
+### The `Either<L, R>` type
+
+> [!NOTE]
+> Full documentation here: [Either](https://sniptt-official.github.io/monads/interfaces/Either.html)
+
+```ts
+import { Either, Left, Right } from '@sniptt/monads';
+
+const divide = (numerator: number, denominator: number): Either<string, number> => {
+  if (denominator === 0) {
+    return Left('Cannot divide by 0');
+  } else {
+    return Right(numerator / denominator);
+  }
+};
+
+const result = divide(2.0, 3.0);
+
+const message = result.match({
+  left: (err) => `Error: ${err}`,
+  right: (res) => `Result: ${res}`,
+});
+
+console.log(message); // "Result: 0.6666666666666666"
 ```
 
 ## License
