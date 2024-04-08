@@ -1,6 +1,6 @@
 {
   "name": "@thames/monads",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Option, Result, and Either types for JavaScript - Inspired by Rust",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
