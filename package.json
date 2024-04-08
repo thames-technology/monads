@@ -1,6 +1,6 @@
 {
-  "name": "@sniptt/monads",
-  "version": "0.5.10",
+  "name": "@thames/monads",
+  "version": "0.6.0",
   "description": "Option, Result, and Either types for JavaScript - Inspired by Rust",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -24,10 +24,10 @@
     "node",
     "node.js"
   ],
-  "author": "Sniptt <support@sniptt.com> (sniptt.com)",
+  "author": "Slavo Vojacek <slavo@thames.technology>",
   "license": "MIT",
-  "homepage": "https://github.com/sniptt-official/monads",
-  "bugs": "https://github.com/sniptt-official/monads/issues",
+  "homepage": "https://github.com/thames-technology/monads",
+  "bugs": "https://github.com/thames-technology/monads/issues",
   "scripts": {
     "build": "rollup -c",
     "docs": "typedoc --out docs src/index.ts --excludeNotDocumented",
