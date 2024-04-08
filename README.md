@@ -25,7 +25,7 @@
 ## Install
 
 ```sh
-npm install @sniptt/monads
+npm install @thames/monads
 ```
 
 ## Getting started
@@ -38,7 +38,7 @@ Option represents an optional value: every Option is either Some and contains a 
 > Full documentation here: [Option](https://thames-technology.github.io/monads/interfaces/Option.html)
 
 ```ts
-import { Option, Some, None } from '@sniptt/monads';
+import { Option, Some, None } from '@thames/monads';
 
 const divide = (numerator: number, denominator: number): Option<number> => {
   if (denominator === 0) {
@@ -68,7 +68,7 @@ Result represents a value that is either a success (Ok) or a failure (Err).
 > Full documentation here: [Result](https://thames-technology.github.io/monads/interfaces/Result.html)
 
 ```ts
-import { Result, Ok, Err } from '@sniptt/monads';
+import { Result, Ok, Err } from '@thames/monads';
 
 const getIndex = (values: string[], value: string): Result<number, string> => {
   const index = values.indexOf(value);
@@ -95,7 +95,7 @@ Either represents a value that is either Left or Right. It is a powerful way to 
 > Full documentation here: [Either](https://thames-technology.github.io/monads/interfaces/Either.html)
 
 ```ts
-import { Either, Left, Right } from '@sniptt/monads';
+import { Either, Left, Right } from '@thames/monads';
 
 const divide = (numerator: number, denominator: number): Either<string, number> => {
   if (denominator === 0) {
