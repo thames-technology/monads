@@ -3,7 +3,7 @@
 The `Either` type is symmetric and treats its variants the same way, without preference. For representing success or error, use [`Result<T, E>`](../result) instead.
 
 ```typescript
-import { Either } from '@sniptt/monads';
+import { Either } from "@sniptt/monads";
 
 const getLabel = (uncertainDate: Either<Date, string>): string => {
   return uncertainDate.match({
