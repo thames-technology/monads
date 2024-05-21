@@ -38,7 +38,7 @@ Option represents an optional value: every Option is either Some and contains a 
 > Full documentation here: [Option](https://thames-technology.github.io/monads/interfaces/Option.html)
 
 ```ts
-import { Option, Some, None } from '@thames/monads';
+import { Option, Some, None } from "@thames/monads";
 
 const divide = (numerator: number, denominator: number): Option<number> => {
   if (denominator === 0) {
@@ -54,7 +54,7 @@ const result = divide(2.0, 3.0);
 // Pattern match to retrieve the value
 const message = result.match({
   some: (res) => `Result: ${res}`,
-  none: 'Cannot divide by 0',
+  none: "Cannot divide by 0",
 });
 
 console.log(message); // "Result: 0.6666666666666666"
@@ -68,23 +68,23 @@ Result represents a value that is either a success (Ok) or a failure (Err).
 > Full documentation here: [Result](https://thames-technology.github.io/monads/interfaces/Result.html)
 
 ```ts
-import { Result, Ok, Err } from '@thames/monads';
+import { Result, Ok, Err } from "@thames/monads";
 
 const getIndex = (values: string[], value: string): Result<number, string> => {
   const index = values.indexOf(value);
 
   switch (index) {
     case -1:
-      return Err('Value not found');
+      return Err("Value not found");
     default:
       return Ok(index);
   }
 };
 
-const values = ['a', 'b', 'c'];
+const values = ["a", "b", "c"];
 
-getIndex(values, 'b'); // Ok(1)
-getIndex(values, 'z'); // Err("Value not found")
+getIndex(values, "b"); // Ok(1)
+getIndex(values, "z"); // Err("Value not found")
 ```
 
 ### The `Either<L, R>` type
@@ -95,11 +95,14 @@ Either represents a value that is either Left or Right. It is a powerful way to 
 > Full documentation here: [Either](https://thames-technology.github.io/monads/interfaces/Either.html)
 
 ```ts
-import { Either, Left, Right } from '@thames/monads';
+import { Either, Left, Right } from "@thames/monads";
 
-const divide = (numerator: number, denominator: number): Either<string, number> => {
+const divide = (
+  numerator: number,
+  denominator: number
+): Either<string, number> => {
   if (denominator === 0) {
-    return Left('Cannot divide by 0');
+    return Left("Cannot divide by 0");
   } else {
     return Right(numerator / denominator);
   }
