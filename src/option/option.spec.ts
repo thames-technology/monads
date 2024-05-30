@@ -1,132 +1,162 @@
-import { isNone, isSome, None, Option, OptionType, Some } from './option';
+import { isNone, isSome, None, Option, OptionType, Some } from "./option";
 
-describe('Option', () => {
-  describe('Some', () => {
-    const value = 'test';
+describe("Option", () => {
+  describe("Some", () => {
+    const value = "test";
     const someOption: Option<string> = Some(value);
 
-    test('type should return Some', () => {
+    test("type should return Some", () => {
       expect(someOption.type).toBe(OptionType.Some);
     });
 
-    test('isSome should return true', () => {
+    test("isSome should return true", () => {
       expect(someOption.isSome()).toBe(true);
     });
 
-    test('isNone should return false', () => {
+    test("isNone should return false", () => {
       expect(someOption.isNone()).toBe(false);
     });
 
-    test('match should execute some branch', () => {
+    test("match should execute some branch", () => {
       const result = someOption.match({
         some: (val) => `Some ${val}`,
-        none: 'None',
+        none: "None",
       });
       expect(result).toBe(`Some ${value}`);
     });
 
-    test('map should apply function and wrap result in Some', () => {
+    test("map should apply function and wrap result in Some", () => {
       const mapped = someOption.map((val) => val.length);
       expect(mapped.unwrap()).toBe(value.length);
     });
 
-    test('andThen should apply function returning Option', () => {
+    test("andThen should apply function returning Option", () => {
       const andThenResult = someOption.andThen((val) => Some(val.length));
       expect(andThenResult.unwrap()).toBe(value.length);
     });
 
-    test('or should return original Some if not None', () => {
-      const orResult = someOption.or(Some('other'));
+    test("or should return original Some if not None", () => {
+      const orResult = someOption.or(Some("other"));
       expect(orResult.unwrap()).toBe(value);
     });
 
-    test('and should return passed Option if original is Some', () => {
-      const andResult = someOption.and(Some('other'));
-      expect(andResult.unwrap()).toBe('other');
+    test("and should return passed Option if original is Some", () => {
+      const andResult = someOption.and(Some("other"));
+      expect(andResult.unwrap()).toBe("other");
     });
 
-    test('unwrapOr should return value', () => {
-      expect(someOption.unwrapOr('default')).toBe(value);
+    test("unwrapOr should return value", () => {
+      expect(someOption.unwrapOr("default")).toBe(value);
     });
 
-    test('unwrap should return value', () => {
+    test("unwrap should return value", () => {
       expect(someOption.unwrap()).toBe(value);
     });
   });
 
-  describe('None', () => {
-    test('type should return None', () => {
+  describe("None", () => {
+    test("type should return None", () => {
       expect(None.type).toBe(OptionType.None);
     });
 
-    test('isSome should return false', () => {
+    test("isSome should return false", () => {
       expect(None.isSome()).toBe(false);
     });
 
-    test('isNone should return true', () => {
+    test("isNone should return true", () => {
       expect(None.isNone()).toBe(true);
     });
 
-    test('match should execute none branch', () => {
+    test("match should execute none branch", () => {
       const result = None.match({
         some: (val) => `Some ${val}`,
-        none: () => 'None',
+        none: () => "None",
       });
-      expect(result).toBe('None');
+      expect(result).toBe("None");
     });
 
-    test('map should not apply function and return None', () => {
+    test("map should not apply function and return None", () => {
       const mapped = None.map((val: string) => val.length);
       expect(mapped).toStrictEqual(None);
     });
 
-    test('andThen should not apply function and return None', () => {
+    test("andThen should not apply function and return None", () => {
       const andThenResult = None.andThen((val: string) => Some(val.length));
       expect(andThenResult).toStrictEqual(None);
     });
 
-    test('or should return passed Option if original is None', () => {
-      const orResult = None.or(Some('other'));
-      expect(orResult.unwrap()).toBe('other');
+    test("or should return passed Option if original is None", () => {
+      const orResult = None.or(Some("other"));
+      expect(orResult.unwrap()).toBe("other");
     });
 
-    test('and should return None if original is None', () => {
-      const andResult = None.and(Some('other'));
+    test("and should return None if original is None", () => {
+      const andResult = None.and(Some("other"));
       expect(andResult).toStrictEqual(None);
     });
 
-    test('unwrapOr should return default value', () => {
-      expect(None.unwrapOr('default')).toBe('default');
+    test("unwrapOr should return default value", () => {
+      expect(None.unwrapOr("default")).toBe("default");
     });
 
-    test('unwrap should throw', () => {
+    test("unwrap should throw", () => {
       expect(() => None.unwrap()).toThrow();
     });
   });
 
-  describe('isSome', () => {
-    const some = Some('test');
+  describe("isSome", () => {
+    const some = Some("test");
     const none = None;
 
-    test('should return true for Some', () => {
+    test("should return true for Some", () => {
       expect(isSome(some)).toBe(true);
     });
 
-    test('should return false for None', () => {
+    test("should return false for None", () => {
       expect(isSome(none)).toBe(false);
     });
   });
 
-  describe('isNone', () => {
-    const some = Some('test');
+  describe("isNone", () => {
+    const some = Some("test");
     const none = None;
 
-    test('should return false for Some', () => {
+    test("should return false for Some", () => {
       expect(isNone(some)).toBe(false);
     });
 
-    test('should return true for None', () => {
+    test("should return true for None", () => {
       expect(isNone(none)).toBe(true);
+    });
+  });
+
+  describe("typeguards", () => {
+    const value = "success" as const;
+    const result: Option<typeof value> = Some(value);
+    type NonUndefined = {} | null; // eslint-disable-line @typescript-eslint/ban-types
+
+    type Expect<T extends true> = T;
+    type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
+      T
+    >() => T extends Y ? 1 : 2
+      ? true
+      : false;
+
+    test("isSome and isNone should serve as typeguards", () => {
+      if (result.isSome()) {
+        const x = result.unwrap();
+        type T = Expect<Equal<typeof x, typeof value>>; // this will only typecheck if typeof x is the same as typeof value
+      }
+      if (result.isNone()) {
+        const x = result.unwrap();
+        type T = Expect<Equal<typeof x, never>>; // this will only typecheck if typeof x is never
+      }
+    });
+    test("typeguardds should continue even with mapping", () => {
+      if (result.isSome()) {
+        const x = result.map((v) => "Invoked!" as const).unwrap();
+        type T = Expect<Equal<typeof x, "Invoked!">>;
+      }
     });
   });
 });

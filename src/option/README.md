@@ -10,7 +10,7 @@ You could consider using `Option` for:
 `Option`s are commonly paired with pattern matching to query the presence of a value and take action, always accounting for the `None` case.
 
 ```typescript
-import { Option, Some, None } from '@sniptt/monads';
+import { Option, Some, None } from "@sniptt/monads";
 
 function divide(numerator: number, denominator: number): Option<number> {
   if (denominator === 0) {
@@ -26,7 +26,7 @@ const result = divide(2.0, 3.0);
 // Pattern match to retrieve the value
 const message = result.match({
   some: (res) => `Result: ${res}`,
-  none: 'Cannot divide by 0',
+  none: "Cannot divide by 0",
 });
 
 console.log(message); // "Result: 0.6666666666666666"

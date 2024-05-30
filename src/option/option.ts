@@ -8,8 +8,8 @@ type NonUndefined = {} | null; // eslint-disable-line @typescript-eslint/ban-typ
  * Enum-like object to represent the type of an Option (Some or None).
  */
 export const OptionType = {
-  Some: Symbol(':some'),
-  None: Symbol(':none'),
+  Some: Symbol(":some"),
+  None: Symbol(":none"),
 };
 
 /**
@@ -43,7 +43,7 @@ export interface Option<T extends NonUndefined> {
    * console.log(None.isSome()); // false
    * ```
    */
-  isSome(): boolean;
+  isSome(): this is SomeOption<T>;
 
   /**
    * Determines if the Option is None.
@@ -57,7 +57,7 @@ export interface Option<T extends NonUndefined> {
    * console.log(None.isNone()); // true
    * ```
    */
-  isNone(): boolean;
+  isNone(): this is NoneOption<T>;
 
   /**
    * Performs a match operation on the Option, allowing for branching logic based on its state.
@@ -189,15 +189,36 @@ export interface Option<T extends NonUndefined> {
 /**
  * Implementation of Option representing a value (Some).
  */
-interface SomeOption<T extends NonUndefined> extends Option<T> {
+export interface SomeOption<T extends NonUndefined> extends Option<T> {
   unwrap(): T;
+
+  map<U extends NonUndefined>(fn: (val: T) => U): SomeOption<U>;
+
+  andThen<U extends NonUndefined>(fn: (val: T) => SomeOption<U>): SomeOption<U>;
+  andThen<U extends NonUndefined>(fn: (val: T) => NoneOption<U>): NoneOption<U>;
+  andThen<U extends NonUndefined>(fn: (val: T) => Option<U>): Option<U>;
+
+  or<U extends NonUndefined>(_optb: Option<U>): SomeOption<T>;
+
+  and<U extends NonUndefined>(optb: SomeOption<U>): SomeOption<U>;
+  and<U extends NonUndefined>(optb: NoneOption<U>): NoneOption<U>;
 }
 
 /**
  * Implementation of Option representing the absence of a value (None).
  */
-interface NoneOption<T extends NonUndefined> extends Option<T> {
+export interface NoneOption<T extends NonUndefined> extends Option<T> {
   unwrap(): never;
+
+  map<U extends NonUndefined>(_fn: (val: T) => U): NoneOption<U>;
+
+  andThen<U extends NonUndefined>(_fn: (val: T) => Option<U>): NoneOption<U>;
+
+  or<U extends NonUndefined>(optb: SomeOption<U>): SomeOption<U>;
+  or<U extends NonUndefined>(optb: NoneOption<U>): NoneOption<U>;
+  or<U extends NonUndefined>(optb: Option<U>): Option<U>;
+
+  and<U extends NonUndefined>(_optb: Option<U>): NoneOption<U>;
 }
 
 /**
@@ -210,11 +231,11 @@ class SomeImpl<T extends NonUndefined> implements SomeOption<T> {
     return OptionType.Some;
   }
 
-  isSome() {
+  isSome(): this is SomeOption<T> {
     return true;
   }
 
-  isNone() {
+  isNone(): this is NoneOption<T> {
     return false;
   }
 
@@ -222,18 +243,22 @@ class SomeImpl<T extends NonUndefined> implements SomeOption<T> {
     return fn.some(this.val);
   }
 
-  map<U extends NonUndefined>(fn: (val: T) => U): Option<U> {
+  map<U extends NonUndefined>(fn: (val: T) => U): SomeOption<U> {
     return Some(fn(this.val));
   }
 
+  andThen<U extends NonUndefined>(fn: (val: T) => SomeOption<U>): SomeOption<U>;
+  andThen<U extends NonUndefined>(fn: (val: T) => NoneOption<U>): NoneOption<U>;
   andThen<U extends NonUndefined>(fn: (val: T) => Option<U>): Option<U> {
     return fn(this.val);
   }
 
-  or<U extends NonUndefined>(_optb: Option<U>): Option<T> {
+  or<U extends NonUndefined>(_optb: Option<U>): SomeOption<T> {
     return this;
   }
 
+  and<U extends NonUndefined>(optb: SomeOption<U>): SomeOption<U>;
+  and<U extends NonUndefined>(optb: NoneOption<U>): NoneOption<U>;
   and<U extends NonUndefined>(optb: Option<U>): Option<U> {
     return optb;
   }
@@ -255,35 +280,37 @@ class NoneImpl<T extends NonUndefined> implements NoneOption<T> {
     return OptionType.None;
   }
 
-  isSome() {
+  isSome(): this is SomeOption<T> {
     return false;
   }
 
-  isNone() {
+  isNone(): this is NoneOption<T> {
     return true;
   }
 
   match<U>({ none }: Match<T, U>): U {
-    if (typeof none === 'function') {
+    if (typeof none === "function") {
       return (none as () => U)();
     }
 
     return none;
   }
 
-  map<U extends NonUndefined>(_fn: (val: T) => U): Option<U> {
+  map<U extends NonUndefined>(_fn: (val: T) => U): NoneOption<U> {
     return new NoneImpl<U>();
   }
 
-  andThen<U extends NonUndefined>(_fn: (val: T) => Option<U>): Option<U> {
+  andThen<U extends NonUndefined>(_fn: (val: T) => Option<U>): NoneOption<U> {
     return new NoneImpl<U>();
   }
 
+  or<U extends NonUndefined>(optb: SomeOption<U>): SomeOption<U>;
+  or<U extends NonUndefined>(optb: NoneOption<U>): NoneOption<U>;
   or<U extends NonUndefined>(optb: Option<U>): Option<U> {
     return optb;
   }
 
-  and<U extends NonUndefined>(_optb: Option<U>): Option<U> {
+  and<U extends NonUndefined>(_optb: Option<U>): NoneOption<U> {
     return new NoneImpl<U>();
   }
 
@@ -292,7 +319,7 @@ class NoneImpl<T extends NonUndefined> implements NoneOption<T> {
   }
 
   unwrap(): never {
-    throw new ReferenceError('Trying to unwrap None.');
+    throw new ReferenceError("Trying to unwrap None.");
   }
 }
 
@@ -310,7 +337,7 @@ class NoneImpl<T extends NonUndefined> implements NoneOption<T> {
  * console.log(option.unwrap()); // Outputs: 42
  * ```
  */
-export function Some<T extends NonUndefined>(val: T): Option<T> {
+export function Some<T extends NonUndefined>(val: T): SomeOption<T> {
   return new SomeImpl(val);
 }
 
@@ -343,7 +370,9 @@ export const None: Option<any> = new NoneImpl(); // eslint-disable-line @typescr
  * }
  * ```
  */
-export function isSome<T extends NonUndefined>(val: Option<T>): val is SomeOption<T> {
+export function isSome<T extends NonUndefined>(
+  val: Option<T>
+): val is SomeOption<T> {
   return val.isSome();
 }
 
@@ -363,6 +392,8 @@ export function isSome<T extends NonUndefined>(val: Option<T>): val is SomeOptio
  * }
  * ```
  */
-export function isNone<T extends NonUndefined>(val: Option<T>): val is NoneOption<T> {
+export function isNone<T extends NonUndefined>(
+  val: Option<T>
+): val is NoneOption<T> {
   return val.isNone();
 }

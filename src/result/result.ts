@@ -1,4 +1,4 @@
-import { None, Option, Some } from '../option/option';
+import { None, NoneOption, Option, Some, SomeOption } from "../option/option";
 
 /**
  * Type representing any value except 'undefined'.
@@ -10,8 +10,8 @@ type NonUndefined = {} | null; // eslint-disable-line @typescript-eslint/ban-typ
  * Enum-like object to represent the type of a Result (Ok or Err).
  */
 export const ResultType = {
-  Ok: Symbol(':ok'),
-  Err: Symbol(':err'),
+  Ok: Symbol(":ok"),
+  Err: Symbol(":err"),
 };
 
 /**
@@ -45,7 +45,7 @@ export interface Result<T extends NonUndefined, E extends NonUndefined> {
    * console.log(Err("error").isOk()); // false
    * ```
    */
-  isOk(): boolean;
+  isOk(): this is OkResult<T, E>;
 
   /**
    * Checks if the Result is an Err.
@@ -59,7 +59,7 @@ export interface Result<T extends NonUndefined, E extends NonUndefined> {
    * console.log(Err("error").isErr()); // true
    * ```
    */
-  isErr(): boolean;
+  isErr(): this is ErrResult<T, E>;
 
   /**
    * Converts the Result to an Option containing the success value, or None if Err.
@@ -229,54 +229,66 @@ export interface Result<T extends NonUndefined, E extends NonUndefined> {
 /**
  * Implementation of Result representing a successful value (Ok).
  */
-interface OkResult<T extends NonUndefined, E extends NonUndefined> extends Result<T, E> {
+interface OkResult<T extends NonUndefined, E extends NonUndefined>
+  extends Result<T, E> {
+  ok(): SomeOption<T>;
+  err(): NoneOption<E>;
   unwrap: () => T;
   unwrapErr: () => never;
+  map<U extends NonUndefined>(fn: (val: T) => U): OkResult<U, E>;
+  mapErr<U extends NonUndefined>(fn: (err: E) => U): OkResult<T, U>;
 }
 
 /**
  * Implementation of Result representing an error value (Err).
  */
-interface ErrResult<T extends NonUndefined, E extends NonUndefined> extends Result<T, E> {
+interface ErrResult<T extends NonUndefined, E extends NonUndefined>
+  extends Result<T, E> {
+  ok(): NoneOption<T>;
+  err(): SomeOption<E>;
   unwrap: () => never;
   unwrapErr: () => E;
+  map<U extends NonUndefined>(fn: (val: T) => U): ErrResult<U, E>;
+  mapErr<U extends NonUndefined>(fn: (err: E) => U): ErrResult<T, U>;
 }
 
 /**
  * Represents a Ok Result.
  */
-class OkImpl<T extends NonUndefined, E extends NonUndefined> implements OkResult<T, E> {
+class OkImpl<T extends NonUndefined, E extends NonUndefined>
+  implements OkResult<T, E>
+{
   constructor(private readonly val: T) {}
 
   get type() {
     return ResultType.Ok;
   }
 
-  isOk() {
+  isOk(): this is OkResult<T, E> {
     return true;
   }
 
-  isErr() {
+  isErr(): this is ErrResult<T, E> {
     return false;
   }
 
-  ok(): Option<T> {
+  ok(): SomeOption<T> {
     return Some(this.val);
   }
 
-  err(): Option<E> {
-    return None;
+  err(): NoneOption<E> {
+    return None as NoneOption<E>;
   }
 
   match<U extends NonUndefined>(matchObject: Match<T, E, U>): U {
     return matchObject.ok(this.val);
   }
 
-  map<U extends NonUndefined>(fn: (val: T) => U): Result<U, E> {
-    return Ok(fn(this.val));
+  map<U extends NonUndefined>(fn: (val: T) => U): OkResult<U, E> {
+    return Ok<U, E>(fn(this.val));
   }
 
-  mapErr<U extends NonUndefined>(_fn: (err: E) => U): Result<T, U> {
+  mapErr<U extends NonUndefined>(_fn: (err: E) => U): OkResult<T, U> {
     return Ok(this.val);
   }
 
@@ -293,7 +305,7 @@ class OkImpl<T extends NonUndefined, E extends NonUndefined> implements OkResult
   }
 
   unwrapErr(): never {
-    throw new ReferenceError('Cannot unwrap Err value of Result.Ok');
+    throw new ReferenceError("Cannot unwrap Err value of Result.Ok");
   }
 
   unwrapOr(_optb: T): T {
@@ -304,26 +316,28 @@ class OkImpl<T extends NonUndefined, E extends NonUndefined> implements OkResult
 /**
  * Represents an Err Result.
  */
-class ErrImpl<T extends NonUndefined, E extends NonUndefined> implements ErrResult<T, E> {
+class ErrImpl<T extends NonUndefined, E extends NonUndefined>
+  implements ErrResult<T, E>
+{
   constructor(private readonly val: E) {}
 
   get type() {
     return ResultType.Err;
   }
 
-  isOk() {
+  isOk(): this is OkResult<T, E> {
     return false;
   }
 
-  isErr() {
+  isErr(): this is ErrResult<T, E> {
     return true;
   }
 
-  ok(): Option<T> {
-    return None;
+  ok(): NoneOption<T> {
+    return None as NoneOption<T>;
   }
 
-  err(): Option<E> {
+  err(): SomeOption<E> {
     return Some(this.val);
   }
 
@@ -331,11 +345,11 @@ class ErrImpl<T extends NonUndefined, E extends NonUndefined> implements ErrResu
     return matchObject.err(this.val);
   }
 
-  map<U extends NonUndefined>(_fn: (val: T) => U): Result<U, E> {
+  map<U extends NonUndefined>(_fn: (val: T) => U): ErrResult<U, E> {
     return Err(this.val);
   }
 
-  mapErr<U extends NonUndefined>(fn: (err: E) => U): Result<T, U> {
+  mapErr<U extends NonUndefined>(fn: (err: E) => U): ErrResult<T, U> {
     return Err(fn(this.val));
   }
 
@@ -348,7 +362,7 @@ class ErrImpl<T extends NonUndefined, E extends NonUndefined> implements ErrResu
   }
 
   unwrap(): never {
-    throw new ReferenceError('Cannot unwrap Ok value of Result.Err');
+    throw new ReferenceError("Cannot unwrap Ok value of Result.Err");
   }
 
   unwrapErr(): E {
@@ -374,7 +388,9 @@ class ErrImpl<T extends NonUndefined, E extends NonUndefined> implements ErrResu
  * console.log(successResult.unwrap()); // Outputs: 42
  * ```
  */
-export function Ok<T extends NonUndefined, E extends NonUndefined = never>(val: T): Result<T, E> {
+export function Ok<T extends NonUndefined, E extends NonUndefined = never>(
+  val: T
+): OkResult<T, E> {
   return new OkImpl(val);
 }
 
@@ -392,7 +408,9 @@ export function Ok<T extends NonUndefined, E extends NonUndefined = never>(val: 
  * console.log(errorResult.unwrapErr()); // Outputs: Something went wrong
  * ```
  */
-export function Err<T extends NonUndefined, E extends NonUndefined>(val: E): Result<T, E> {
+export function Err<T extends NonUndefined, E extends NonUndefined>(
+  val: E
+): ErrResult<T, E> {
   return new ErrImpl(val);
 }
 
@@ -413,7 +431,7 @@ export function Err<T extends NonUndefined, E extends NonUndefined>(val: E): Res
  * ```
  */
 export function isOk<T extends NonUndefined, E extends NonUndefined>(
-  val: Result<T, E>,
+  val: Result<T, E>
 ): val is OkResult<T, never> {
   return val.isOk();
 }
@@ -435,7 +453,7 @@ export function isOk<T extends NonUndefined, E extends NonUndefined>(
  * ```
  */
 export function isErr<T extends NonUndefined, E extends NonUndefined>(
-  val: Result<T, E>,
+  val: Result<T, E>
 ): val is ErrResult<never, E> {
   return val.isErr();
 }
