@@ -186,6 +186,24 @@ export interface Option<T extends NonUndefined> {
   unwrap(): T | never;
 }
 
+export class OptionExt {
+  /**
+   * Construct an Option from a value which may be undefined.
+   *
+   * @param value May be either undefined to not undefined.
+   * @returns `Some(value)` if `value` is not undefined, otherwise `None`.
+   *
+   * #### Examples
+   * ```ts
+   * console.log(OptionExt.ofUndefinable(undefined).isNone()); // true
+   * console.log(OptionExt.ofUndefinable("x").isSome()); // true
+   * ```
+   */
+  static ofUndefinable<T extends NonUndefined>(value: T | undefined): Option<T> {
+    return value === undefined ? None : Some(value);
+  }
+}
+
 /**
  * Implementation of Option representing a value (Some).
  */
