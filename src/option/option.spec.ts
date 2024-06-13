@@ -1,6 +1,15 @@
-import { isNone, isSome, None, Option, OptionType, Some } from './option';
+import { isNone, isSome, None, Option, OptionExt, OptionType, Some } from './option';
 
 describe('Option', () => {
+  describe('OptionExt', () => {
+    test('OptionExt.ofUndefinable(undefined) should be None', () => {
+      expect(OptionExt.ofUndefinable(undefined).isNone()).toBe(true);
+    });
+    test('OptionExt.ofUndefinable("x") should be Some("x")', () => {
+      expect(OptionExt.ofUndefinable('x').isSome()).toBe(true);
+    });
+  });
+
   describe('Some', () => {
     const value = 'test';
     const someOption: Option<string> = Some(value);
