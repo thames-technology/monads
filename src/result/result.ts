@@ -102,7 +102,7 @@ export interface Result<T extends NonUndefined, E extends NonUndefined> {
    * console.log(Err("error").unwrap()); // throws Error
    * ```
    */
-  unwrap(): T | never;
+  unwrap(msg?: string): T | never;
 
   /**
    * Unwraps a Result, yielding the contained error value if Err, otherwise throws an error.
@@ -117,7 +117,7 @@ export interface Result<T extends NonUndefined, E extends NonUndefined> {
    * console.log(Ok("value").unwrapErr()); // throws Error
    * ```
    */
-  unwrapErr(): E | never;
+  unwrapErr(msg?: string): E | never;
 
   /**
    * Returns the contained success value if Ok, otherwise returns the provided default value.
@@ -288,12 +288,16 @@ class OkImpl<T extends NonUndefined, E extends NonUndefined> implements OkResult
     return Ok(this.val);
   }
 
-  unwrap(): T {
+  unwrap(_msg?: string): T {
     return this.val;
   }
 
-  unwrapErr(): never {
-    throw new ReferenceError('Cannot unwrap Err value of Result.Ok');
+  unwrapErr(msg?: string): never {
+    if (msg) {
+      throw new Error(msg);
+    } else {
+      throw new ReferenceError('Cannot unwrap Err value of Result.Ok');
+    }
   }
 
   unwrapOr(_optb: T): T {
@@ -347,11 +351,15 @@ class ErrImpl<T extends NonUndefined, E extends NonUndefined> implements ErrResu
     return fn(this.val);
   }
 
-  unwrap(): never {
-    throw new ReferenceError('Cannot unwrap Ok value of Result.Err');
+  unwrap(msg?: string): never {
+    if (msg) {
+      throw new Error(msg);
+    } else {
+      throw new ReferenceError('Cannot unwrap Ok value of Result.Err');
+    }
   }
 
-  unwrapErr(): E {
+  unwrapErr(_msg?: string): E {
     return this.val;
   }
 

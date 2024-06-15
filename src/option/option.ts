@@ -183,21 +183,21 @@ export interface Option<T extends NonUndefined> {
    * console.log(None.unwrap()); // throws Error
    * ```
    */
-  unwrap(): T | never;
+  unwrap(msg?: string): T | never;
 }
 
 /**
  * Implementation of Option representing a value (Some).
  */
 interface SomeOption<T extends NonUndefined> extends Option<T> {
-  unwrap(): T;
+  unwrap(msg?: string): T;
 }
 
 /**
  * Implementation of Option representing the absence of a value (None).
  */
 interface NoneOption<T extends NonUndefined> extends Option<T> {
-  unwrap(): never;
+  unwrap(msg?: string): never;
 }
 
 /**
@@ -242,7 +242,7 @@ class SomeImpl<T extends NonUndefined> implements SomeOption<T> {
     return this.val;
   }
 
-  unwrap(): T {
+  unwrap(_msg?: string): T {
     return this.val;
   }
 }
@@ -291,8 +291,12 @@ class NoneImpl<T extends NonUndefined> implements NoneOption<T> {
     return def;
   }
 
-  unwrap(): never {
-    throw new ReferenceError('Trying to unwrap None.');
+  unwrap(msg?: string): never {
+    if (msg) {
+      throw new Error(msg);
+    } else {
+      throw new ReferenceError('Trying to unwrap None.');
+    }
   }
 }
 
