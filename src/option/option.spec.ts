@@ -102,6 +102,12 @@ describe('Option', () => {
     test('unwrap should throw', () => {
       expect(() => None.unwrap()).toThrow();
     });
+
+    test('unwrap may throw with custom message', () => {
+      const msg = 'whoopsie';
+      expect(() => None.unwrap(msg)).toThrow(msg);
+      expect(() => None.unwrap()).not.toThrow(msg);
+    });
   });
 
   describe('isSome', () => {
