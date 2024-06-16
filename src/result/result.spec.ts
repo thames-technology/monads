@@ -1,3 +1,4 @@
+import type { Equals, Expect } from '../test_util/test_util.js';
 import { Err, isErr, isOk, Ok, Result, ResultType } from './result';
 
 describe('Result', () => {
@@ -154,6 +155,39 @@ describe('Result', () => {
 
     test('should return true for Err', () => {
       expect(isErr(err)).toBe(true);
+    });
+  });
+
+  describe('typeguards', () => {
+    const ok = Ok('success');
+    const err = Err('error');
+
+    test('isOk', () => {
+      if (ok.isOk()) {
+        type unwrapRes = Equals<'success', ReturnType<typeof ok.unwrap>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        type unwrapErrRes = Equals<never, ReturnType<typeof ok.unwrapErr>>;
+        type _unwrapErrRes = Expect<unwrapErrRes>;
+
+        const mappedOk = ok.map((val) => val.length);
+        type mappedUnwrapOkRes = Equals<number, ReturnType<typeof mappedOk.unwrap>>;
+        type _mappedUnwrapOkRes = Expect<mappedUnwrapOkRes>;
+      }
+    });
+
+    test('isErr', () => {
+      if (err.isErr()) {
+        type unwrapRes = Equals<'error', ReturnType<typeof err.unwrapErr>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        type unwrapErrRes = Equals<never, ReturnType<typeof err.unwrap>>;
+        type _unwrapErrRes = Expect<unwrapErrRes>;
+
+        const mappedErr = err.mapErr((val) => val.length);
+        type mappedUnwrapErrRes = Equals<number, ReturnType<typeof mappedErr.unwrapErr>>;
+        type _mappedUnwrapErrRes = Expect<mappedUnwrapErrRes>;
+      }
     });
   });
 });

@@ -1,4 +1,4 @@
-import { None, Option, Some } from '../option/option';
+import { None, NoneOption, Option, Some, SomeOption } from '../option/option';
 
 /**
  * Type representing any value except 'undefined'.
@@ -46,7 +46,7 @@ export interface Either<L extends NonUndefined, R extends NonUndefined> {
    * console.log(Right(42).isLeft()); // false
    * ```
    */
-  isLeft(): boolean;
+  isLeft(): this is LeftEither<L, R>;
 
   /**
    * Checks if the Either is a Right value.
@@ -60,7 +60,7 @@ export interface Either<L extends NonUndefined, R extends NonUndefined> {
    * console.log(Left('error').isRight()); // false
    * ```
    */
-  isRight(): boolean;
+  isRight(): this is RightEither<L, R>;
 
   /**
    * Converts the Either to an Option of its Left value.
@@ -247,6 +247,30 @@ export interface Either<L extends NonUndefined, R extends NonUndefined> {
 }
 
 /**
+ * Implementation of the Either interface for a Left value.
+ */
+export interface LeftEither<L extends NonUndefined, R extends NonUndefined> extends Either<L, R> {
+  unwrapLeft(): L;
+  unwrapRight(): never;
+  left(): SomeOption<L>;
+  right(): NoneOption<R>;
+  mapLeft<U extends NonUndefined>(fn: (val: L) => U): LeftEither<U, R>;
+  mapRight<U extends NonUndefined>(_fn: (val: R) => U): LeftEither<L, U>;
+}
+
+/**
+ * Implementation of the Either interface for a Right value.
+ */
+export interface RightEither<L extends NonUndefined, R extends NonUndefined> extends Either<L, R> {
+  unwrapLeft(): never;
+  unwrapRight(): R;
+  left(): NoneOption<L>;
+  right(): SomeOption<R>;
+  mapLeft<U extends NonUndefined>(_fn: (val: L) => U): RightEither<U, R>;
+  mapRight<U extends NonUndefined>(fn: (val: R) => U): RightEither<L, U>;
+}
+
+/**
  * Implements the Either interface for a Left value.
  */
 class LeftImpl<L extends NonUndefined, R extends NonUndefined> implements Either<L, R> {
@@ -256,20 +280,20 @@ class LeftImpl<L extends NonUndefined, R extends NonUndefined> implements Either
     return EitherType.Left;
   }
 
-  isLeft() {
+  isLeft(): this is LeftEither<L, R> {
     return true;
   }
 
-  isRight() {
+  isRight(): this is RightEither<L, R> {
     return false;
   }
 
-  left(): Option<L> {
+  left(): SomeOption<L> {
     return Some(this.val);
   }
 
-  right(): Option<R> {
-    return None;
+  right(): NoneOption<R> {
+    return None as NoneOption<R>;
   }
 
   unwrap(): L {
@@ -296,11 +320,11 @@ class LeftImpl<L extends NonUndefined, R extends NonUndefined> implements Either
     return matchObject.left(this.val);
   }
 
-  mapLeft<U extends NonUndefined>(fn: (val: L) => U): Either<U, R> {
+  mapLeft<U extends NonUndefined>(fn: (val: L) => U): LeftEither<U, R> {
     return Left(fn(this.val));
   }
 
-  mapRight<U extends NonUndefined>(_fn: (val: R) => U): Either<L, U> {
+  mapRight<U extends NonUndefined>(_fn: (val: R) => U): LeftEither<L, U> {
     return Left(this.val);
   }
 
@@ -323,19 +347,19 @@ class RightImpl<L extends NonUndefined, R extends NonUndefined> implements Eithe
     return EitherType.Right;
   }
 
-  isLeft() {
+  isLeft(): this is LeftEither<L, R> {
     return false;
   }
 
-  isRight() {
+  isRight(): this is RightEither<L, R> {
     return true;
   }
 
-  left(): Option<L> {
-    return None;
+  left(): NoneOption<L> {
+    return None as NoneOption<L>;
   }
 
-  right(): Option<R> {
+  right(): SomeOption<R> {
     return Some(this.val);
   }
 
@@ -363,11 +387,11 @@ class RightImpl<L extends NonUndefined, R extends NonUndefined> implements Eithe
     return matchObject.right(this.val);
   }
 
-  mapLeft<U extends NonUndefined>(_fn: (val: L) => U): Either<U, R> {
+  mapLeft<U extends NonUndefined>(_fn: (val: L) => U): RightEither<U, R> {
     return Right(this.val);
   }
 
-  mapRight<U extends NonUndefined>(fn: (val: R) => U): Either<L, U> {
+  mapRight<U extends NonUndefined>(fn: (val: R) => U): RightEither<L, U> {
     return Right(fn(this.val));
   }
 
@@ -383,7 +407,9 @@ class RightImpl<L extends NonUndefined, R extends NonUndefined> implements Eithe
 /**
  * Factory function for creating a Left instance of Either.
  */
-export function Left<L extends NonUndefined, R extends NonUndefined = never>(val: L): Either<L, R> {
+export function Left<L extends NonUndefined, R extends NonUndefined = never>(
+  val: L,
+): LeftEither<L, R> {
   return new LeftImpl(val);
 }
 
@@ -392,24 +418,28 @@ export function Left<L extends NonUndefined, R extends NonUndefined = never>(val
  */
 export function Right<R extends NonUndefined, L extends NonUndefined = never>(
   val: R,
-): Either<L, R> {
+): RightEither<L, R> {
   return new RightImpl(val);
 }
 
 /**
  * Type guard for checking if an Either is a Left.
+ *
+ * @deprecated Use `Either.isLeft` instead.
  */
 export function isLeft<L extends NonUndefined, R extends NonUndefined>(
   val: Either<L, R>,
-): val is LeftImpl<L, R> {
+): val is LeftEither<L, R> {
   return val.isLeft();
 }
 
 /**
  * Type guard for checking if an Either is a Right.
+ *
+ * @deprecated Use `Either.isRight` instead.
  */
 export function isRight<L extends NonUndefined, R extends NonUndefined>(
   val: Either<L, R>,
-): val is RightImpl<L, R> {
+): val is RightEither<L, R> {
   return val.isRight();
 }
