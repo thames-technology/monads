@@ -358,6 +358,7 @@ export const None: NoneOption<any> = new NoneImpl(); // eslint-disable-line @typ
  * Type guard to check if an Option is a Some value.
  * This function is used to narrow down the type of an Option to SomeOption in TypeScript's type system.
  *
+ * @deprecated Use `Option.isSome` instead.
  * @param val The Option to be checked.
  * @returns true if the provided Option is a SomeOption, false otherwise.
  *
@@ -378,6 +379,7 @@ export function isSome<T extends NonUndefined>(val: Option<T>): val is SomeOptio
  * Type guard to check if an Option is a None value.
  * This function is used to narrow down the type of an Option to NoneOption in TypeScript's type system.
  *
+ * @deprecated Use `Option.isNone` instead.
  * @param val The Option to be checked.
  * @returns true if the provided Option is a NoneOption, false otherwise.
  *

@@ -424,6 +424,8 @@ export function Right<R extends NonUndefined, L extends NonUndefined = never>(
 
 /**
  * Type guard for checking if an Either is a Left.
+ *
+ * @deprecated Use `Either.isLeft` instead.
  */
 export function isLeft<L extends NonUndefined, R extends NonUndefined>(
   val: Either<L, R>,
@@ -433,6 +435,8 @@ export function isLeft<L extends NonUndefined, R extends NonUndefined>(
 
 /**
  * Type guard for checking if an Either is a Right.
+ *
+ * @deprecated Use `Either.isRight` instead.
  */
 export function isRight<L extends NonUndefined, R extends NonUndefined>(
   val: Either<L, R>,
