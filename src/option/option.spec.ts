@@ -1,3 +1,4 @@
+import type { Equals, Expect } from '../test_util/test_util.js';
 import { isNone, isSome, None, Option, OptionType, Some } from './option';
 
 describe('Option', () => {
@@ -127,6 +128,33 @@ describe('Option', () => {
 
     test('should return true for None', () => {
       expect(isNone(none)).toBe(true);
+    });
+  });
+
+  describe('typeguards', () => {
+    const some = Some('foo');
+    const none = None;
+
+    test('isSome', () => {
+      if (some.isSome()) {
+        type unwrapRes = Equals<'foo', ReturnType<typeof some.unwrap>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        const mappedSome = some.map((val) => val.length);
+        type mappedUnwrapRes = Equals<number, ReturnType<typeof mappedSome.unwrap>>;
+        type _mappedUnwrapRes = Expect<mappedUnwrapRes>;
+      }
+    });
+
+    test('isNone', () => {
+      if (none.isNone()) {
+        type unwrapRes = Equals<never, ReturnType<typeof none.unwrap>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        const mappedNone = none.map((val) => val.length);
+        type mappedUnwrapRes = Equals<never, ReturnType<typeof mappedNone.unwrap>>;
+        type _mappedUnwrapRes = Expect<mappedUnwrapRes>;
+      }
     });
   });
 });

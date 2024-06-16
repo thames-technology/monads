@@ -1,3 +1,4 @@
+import type { Equals, Expect } from '../test_util/test_util.js';
 import { EitherType, isLeft, isRight, Left, Right } from './either';
 
 describe('Either', () => {
@@ -170,6 +171,53 @@ describe('Either', () => {
 
     test('should return true for Right', () => {
       expect(isRight(right)).toBe(true);
+    });
+  });
+
+  describe('typeguards', () => {
+    const left = Left('error');
+    const right = Right('success');
+
+    test('isLeft', () => {
+      if (left.isLeft()) {
+        type unwrapRes = Equals<'error', ReturnType<typeof left.unwrap>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        type unwrapLeftRes = Equals<'error', ReturnType<typeof left.unwrapLeft>>;
+        type _unwrapLeftRes = Expect<unwrapLeftRes>;
+
+        type unwrapRightRes = Equals<never, ReturnType<typeof left.unwrapRight>>;
+        type _unwrapRightRes = Expect<unwrapRightRes>;
+
+        const mappedLeft = left.mapLeft((val) => val.length);
+        type mappedUnwrapLeftRes = Equals<number, ReturnType<typeof mappedLeft.unwrap>>;
+        type _mappedUnwrapLeftRes = Expect<mappedUnwrapLeftRes>;
+
+        const mappedRight = left.mapRight(() => 42);
+        type mappedUnwrapRightRes = Equals<'error' | number, ReturnType<typeof mappedRight.unwrap>>;
+        type _mappedUnwrapRightRes = Expect<mappedUnwrapRightRes>;
+      }
+    });
+
+    test('isRight', () => {
+      if (right.isRight()) {
+        type unwrapRes = Equals<'success', ReturnType<typeof right.unwrapRight>>;
+        type _unwrapRes = Expect<unwrapRes>;
+
+        type unwrapLeftRes = Equals<never, ReturnType<typeof right.unwrapLeft>>;
+        type _unwrapLeftRes = Expect<unwrapLeftRes>;
+
+        type unwrapRightRes = Equals<'success', ReturnType<typeof right.unwrap>>;
+        type _unwrapRightRes = Expect<unwrapRightRes>;
+
+        const mappedLeft = right.mapLeft(() => 42);
+        type mappedUnwrapLeftRes = Equals<'success' | number, ReturnType<typeof mappedLeft.unwrap>>;
+        type _mappedUnwrapLeftRes = Expect<mappedUnwrapLeftRes>;
+
+        const mappedRight = right.mapRight((val) => val.length);
+        type mappedUnwrapRightRes = Equals<number, ReturnType<typeof mappedRight.unwrap>>;
+        type _mappedUnwrapRightRes = Expect<mappedUnwrapRightRes>;
+      }
     });
   });
 });

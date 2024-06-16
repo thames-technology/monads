@@ -5,7 +5,7 @@ You could consider using `Result` for:
 - Return value whenever errors are expected and recoverable
 
 ```typescript
-import { Result, Ok, Err } from '@sniptt/monads';
+import { Result, Ok, Err } from '@thames/monads';
 
 function getIndex(values: string[], value: string): Result<number, string> {
   const index = values.indexOf(value);
