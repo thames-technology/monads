@@ -86,7 +86,7 @@ export interface Option<T extends NonUndefined> {
    * console.log(matchResultNone); // Outputs: "There is no value."
    * ```
    */
-  match<U extends NonUndefined>(fn: Match<T, U>): U;
+  match<U extends NonUndefined | void>(fn: Match<T, U>): U;
 
   /**
    * Applies a function to the contained value (if any), or returns a default if None.

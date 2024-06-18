@@ -179,7 +179,7 @@ export interface Either<L extends NonUndefined, R extends NonUndefined> {
    * console.log(result); // "Error: error"
    * ```
    */
-  match<U extends NonUndefined>(fn: Match<L, R, U>): U;
+  match<U extends NonUndefined | void>(fn: Match<L, R, U>): U;
 
   /**
    * Maps an Either by applying a function to its Left value, leaving Right untouched.
@@ -316,7 +316,7 @@ class LeftImpl<L extends NonUndefined, R extends NonUndefined> implements Either
     return other;
   }
 
-  match<U extends NonUndefined>(matchObject: Match<L, R, U>): U {
+  match<U extends NonUndefined | void>(matchObject: Match<L, R, U>): U {
     return matchObject.left(this.val);
   }
 
@@ -383,7 +383,7 @@ class RightImpl<L extends NonUndefined, R extends NonUndefined> implements Eithe
     return this.val;
   }
 
-  match<U extends NonUndefined>(matchObject: Match<L, R, U>): U {
+  match<U extends NonUndefined | void>(matchObject: Match<L, R, U>): U {
     return matchObject.right(this.val);
   }
 
