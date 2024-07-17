@@ -16,7 +16,7 @@ importers:
         version: 11.1.6(rollup@4.18.1)(tslib@2.6.3)(typescript@5.4.5)
       '@thames/eslint-config':
         specifier: ^0.0.4
-        version: 0.0.4(prettier@3.3.2)(typescript@5.4.5)
+        version: 0.0.4(prettier@3.3.3)(typescript@5.4.5)
       '@thames/prettier-config':
         specifier: ^0.0.4
         version: 0.0.4
@@ -30,8 +30,8 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.14.2)
       prettier:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       rollup:
         specifier: ^4.18.0
         version: 4.18.1
@@ -1473,8 +1473,8 @@ packages:
     resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
     engines: {node: '>=6.0.0'}
 
-  prettier@3.3.2:
-    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2319,11 +2319,11 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@thames/eslint-config@0.0.4(prettier@3.3.2)(typescript@5.4.5)':
+  '@thames/eslint-config@0.0.4(prettier@3.3.3)(typescript@5.4.5)':
     dependencies:
       eslint: 8.57.0
       eslint-config-prettier: 9.1.0(eslint@8.57.0)
-      eslint-plugin-prettier: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2)
+      eslint-plugin-prettier: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.3)
       eslint-plugin-simple-import-sort: 12.1.0(eslint@8.57.0)
       typescript-eslint: 7.13.0(eslint@8.57.0)(typescript@5.4.5)
     transitivePeerDependencies:
@@ -2721,10 +2721,10 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2):
+  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.3):
     dependencies:
       eslint: 8.57.0
-      prettier: 3.3.2
+      prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
     optionalDependencies:
@@ -3516,7 +3516,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier@3.3.2: {}
+  prettier@3.3.3: {}
 
   pretty-format@29.7.0:
     dependencies:
