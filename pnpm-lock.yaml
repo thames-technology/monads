@@ -22,7 +22,7 @@ importers:
         version: 0.0.4
       '@tsconfig/node20':
         specifier: ^20.1.4
-        version: 20.1.5
+        version: 20.1.6
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.14
@@ -547,8 +547,8 @@ packages:
   '@thames/prettier-config@0.0.4':
     resolution: {integrity: sha512-R0fYf+E0hIfgr9nVTiVUIUp5JrkrBxxV9ZHVRwDZiyTxmNwDHENcQfyx4podPvzqbKPOuQsUyKz/ZfnaiVMkWQ==}
 
-  '@tsconfig/node20@20.1.5':
-    resolution: {integrity: sha512-Vm8e3WxDTqMGPU4GATF9keQAIy1Drd7bPwlgzKJnZtoOsTm1tduUTbDjg0W5qERvGuxPI2h9RbMufH0YdfBylA==}
+  '@tsconfig/node20@20.1.6':
+    resolution: {integrity: sha512-sz+Hqx9zwZDpZIV871WSbUzSqNIsXzghZydypnfgzPKLltVJfkINfUeTct31n/tTSa9ZE1ZOfKdRre1uHHquYQ==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -2480,7 +2480,7 @@ snapshots:
 
   '@thames/prettier-config@0.0.4': {}
 
-  '@tsconfig/node20@20.1.5': {}
+  '@tsconfig/node20@20.1.6': {}
 
   '@types/babel__core@7.20.5':
     dependencies:
